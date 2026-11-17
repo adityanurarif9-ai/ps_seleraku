@@ -18,6 +18,9 @@
 </nav>
 @endauth
 </div></header>
+@if(session('session_notice'))
+<div class="shell"><p class="error" role="status">{{ session('session_notice') }}</p></div>
+@endif
 @yield('content')
 </body>
 </html>

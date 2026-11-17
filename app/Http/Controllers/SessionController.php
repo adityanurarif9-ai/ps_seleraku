@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
 class SessionController extends Controller
@@ -23,20 +25,37 @@ class SessionController extends Controller
                 'cf-turnstile-response.required' => 'Selesaikan verifikasi Cloudflare terlebih dahulu.',
             ]);
 
+            if (! $siteKey || ! $secret) {
+                throw ValidationException::withMessages([
+                    'cf-turnstile-response' => 'Konfigurasi verifikasi Cloudflare belum lengkap.',
+                ]);
+            }
+
             try {
-                $verified = $siteKey && $secret && Http::asForm()->timeout(5)
+                $verification = Http::asForm()
+                    ->connectTimeout(6)
+                    ->timeout(12)
+                    ->retry([250], when: fn ($error) => $error instanceof ConnectionException, throw: false)
                     ->post('https://challenges.cloudflare.com/turnstile/v0/siteverify', [
                         'secret' => $secret,
                         'response' => $request->input('cf-turnstile-response'),
-                    ])->json('success') === true;
-            } catch (\Illuminate\Http\Client\ConnectionException) {
-                $verified = false;
+                        'idempotency_key' => (string) Str::uuid(),
+                    ]);
+            } catch (ConnectionException) {
+                throw ValidationException::withMessages([
+                    'cf-turnstile-response' => 'Server belum bisa menghubungi Cloudflare. Coba masuk lagi.',
+                ]);
             }
 
-            if (! $verified) {
-                throw ValidationException::withMessages([
-                    'cf-turnstile-response' => 'Verifikasi Cloudflare gagal. Coba lagi.',
-                ]);
+            if (! $verification->successful() || $verification->json('success') !== true) {
+                $codes = $verification->json('error-codes', []);
+                $message = match (true) {
+                    $verification->serverError() => 'Layanan Cloudflare sedang bermasalah. Coba masuk lagi.',
+                    is_array($codes) && in_array('timeout-or-duplicate', $codes, true) => 'Verifikasi Cloudflare kedaluwarsa atau sudah dipakai. Coba masuk lagi.',
+                    default => 'Token verifikasi Cloudflare ditolak. Coba masuk lagi.',
+                };
+
+                throw ValidationException::withMessages(['cf-turnstile-response' => $message]);
             }
         }
 
