@@ -5,6 +5,8 @@ use App\Models\CatalogItem;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
+    Route::get('/auth/google', [\App\Http\Controllers\GoogleLoginController::class, 'redirect'])->name('google.redirect');
+    Route::get('/auth/google/callback', [\App\Http\Controllers\GoogleLoginController::class, 'callback'])->name('google.callback');
     Route::view('/login', 'login')->name('login');
     Route::post('/login', [SessionController::class, 'store'])->middleware('throttle:10,1');
 });

@@ -8,6 +8,7 @@ use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
@@ -51,7 +52,8 @@ class SessionController extends Controller
                         'response' => $request->input('cf-turnstile-response'),
                         'idempotency_key' => (string) Str::uuid(),
                     ]);
-            } catch (ConnectionException) {
+            } catch (ConnectionException $exception) {
+                Log::warning('Turnstile connection failed', ['error' => $exception->getCode()]);
                 throw ValidationException::withMessages([
                     'cf-turnstile-response' => 'Server belum bisa menghubungi Cloudflare. Coba masuk lagi.',
                 ]);
@@ -59,6 +61,7 @@ class SessionController extends Controller
 
             if (! $verification->successful() || $verification->json('success') !== true) {
                 $codes = $verification->json('error-codes', []);
+                Log::warning('Turnstile validation rejected', ['status' => $verification->status(), 'codes' => $codes]);
                 $message = match (true) {
                     $verification->serverError() => 'Layanan Cloudflare sedang bermasalah. Coba masuk lagi.',
                     is_array($codes) && in_array('timeout-or-duplicate', $codes, true) => 'Verifikasi Cloudflare kedaluwarsa atau sudah dipakai. Coba masuk lagi.',
@@ -69,7 +72,7 @@ class SessionController extends Controller
             }
         }
 
-        if (! Auth::attempt($credentials)) {
+        if (! Auth::attempt($credentials, $request->boolean('remember'))) {
             throw ValidationException::withMessages(['email' => 'Email atau kata sandi salah.']);
         }
 

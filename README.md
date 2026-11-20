@@ -18,3 +18,20 @@ Demo PSAS dengan Laravel, Filament, dan database MySQL Laragon. Katalog perlu lo
 Database yang dipakai adalah `ps_seleraku` di `127.0.0.1:3306`. Untuk instalasi baru, buat database itu, salin `.env.example` menjadi `.env`, gunakan PHP 8.3 atau lebih baru dengan ekstensi intl, zip, dan pdo_mysql, lalu jalankan `composer install`, `php artisan key:generate`, `php artisan migrate --seed`, dan `php artisan filament:assets`.
 
 Untuk demo HTTPS dari HP, setelah web berjalan gunakan `cloudflared tunnel --url http://127.0.0.1:8765`. Quick Tunnel memberikan tautan sementara. Untuk mengaktifkan pemeriksaan Turnstile di login, isi `TURNSTILE_SITE_KEY` dan `TURNSTILE_SECRET_KEY` di `.env`.
+
+## Memperbarui proyek setelah git pull
+
+Gunakan PHP 8.3+ dari Laragon. Simpan pekerjaan lokal terlebih dahulu jika Git meminta, lalu jalankan di folder proyek:
+
+~~~powershell
+git pull --ff-only origin main
+composer install
+php artisan migrate
+php artisan optimize:clear
+php artisan filament:assets
+php artisan serve
+~~~
+
+Buka http://127.0.0.1:8000/login dan lakukan hard refresh (Ctrl+F5). Desain login menggunakan aset di public/login.css, public/login.js, dan logo yang sudah disertakan.
+
+File .env hanya berlaku di komputer masing-masing. Konfigurasi database Laragon perlu disesuaikan secara lokal. Untuk login Google, isi GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, dan GOOGLE_REDIRECT_URI sesuai .env.example. Daftarkan callback http://127.0.0.1:8000/auth/google/callback di Google OAuth. Untuk Turnstile, isi TURNSTILE_SITE_KEY dan TURNSTILE_SECRET_KEY dengan pasangan kunci yang sesuai hostname. Simpan secret hanya di .env, jangan di .env.example atau GitHub.
