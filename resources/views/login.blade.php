@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#0a0d25">
     <title>Masuk · PS Seleraku</title>
-    <link rel="stylesheet" href="{{ asset('login.css') }}?v=2">
-    <script src="{{ asset('login.js') }}?v=2" defer></script>
+    <link rel="stylesheet" href="{{ asset('login.css') }}?v=clean-1">
+    <script src="{{ asset('login.js') }}?v=3" defer></script>
     @if(config('services.turnstile.site_key'))
         <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onTurnstileLoad&amp;render=explicit" defer></script>
     @endif

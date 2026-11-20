@@ -19,9 +19,21 @@ window.onTurnstileSuccess = () => {
     clearTimeout(verificationTimer);
     showVerification('Verifikasi berhasil. Kamu bisa masuk.', true);
 };
-window.onTurnstileError = () => {
+window.onTurnstileError = (errorCode) => {
     clearTimeout(verificationTimer);
-    showVerification('Cloudflare gagal dimuat. Periksa koneksi atau coba buka di Chrome / Edge.', false, true);
+    const code = String(errorCode ?? '');
+    let message = 'Verifikasi Cloudflare gagal. Periksa koneksi dan coba lagi.';
+    if (code === '110200') {
+        message = 'Alamat situs ini belum diizinkan. Tambahkan ' + location.hostname + ' di Hostname Management widget Cloudflare, lalu simpan.';
+    } else if (['110100', '110110', '400020', '400070'].includes(code)) {
+        message = 'Site Key Cloudflare tidak valid atau tidak aktif. Periksa pengaturan widget dan Site Key aplikasi.';
+    } else if (code === '200500') {
+        message = 'Browser tidak dapat memuat Cloudflare. Periksa apakah challenges.cloudflare.com diblokir oleh ekstensi atau jaringan.';
+    } else if (code === '200100' || code === '110600') {
+        message = 'Periksa tanggal dan waktu perangkat, lalu muat ulang halaman untuk memperbarui verifikasi.';
+    }
+    if (/^\d+$/.test(code)) message += ' (Kode: ' + code + ')';
+    showVerification(message, false, true);
     return true;
 };
 window.onTurnstileExpired = () => {

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>@yield('title') · PS Seleraku</title>
-<link rel="stylesheet" href="{{ asset('seleraku.css') }}">
+<link rel="stylesheet" href="{{ asset('seleraku.css') }}?v=poppins-1">
 <script src="{{ asset('seleraku.js') }}" defer></script>
 @stack('head')
 </head>

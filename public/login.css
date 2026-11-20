@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
 
 :root {
-    font-family: Inter, Arial, sans-serif;
+    font-family: Poppins, Arial, sans-serif;
     color: #172033;
     background: #0a0d25;
     font-synthesis: none;
@@ -33,13 +33,13 @@ button { cursor: pointer; }
 }
 .intro-content { max-width: 510px; padding-block: 65px; }
 .brand { display: inline-block; margin-bottom: 30px; }
-.brand img { display: block; width: 248px; height: auto; max-height: 105px; object-fit: contain; object-position: left center; filter: drop-shadow(0 3px 12px #00dfdf1f); }
+.brand img { display: block; width: 248px; height: auto; max-height: 105px; object-fit: contain; object-position: left center; filter: none; }
 h1 { font-size: clamp(34px, 4.1vw, 65px); font-weight: 900; line-height: 1.06; letter-spacing: -.04em; margin: 0 0 24px; }
 h1 span { color: #326bff; }
 .intro p { margin: 0; color: #c3c7d2; font-size: 15px; line-height: 1.85; max-width: 390px; }
 .intro-footer { position: absolute; left: clamp(32px, 6.5vw, 112px); bottom: 30px; color: #b3bac9; font-size: 10px; letter-spacing: .16em; }
 .form-side { display: grid; align-items: center; justify-items: center; padding: 48px 30px; background: #0a0d25; }
-.login-card { width: 100%; max-width: 402px; background: #fff; padding: 38px 34px; border-radius: 14px; box-shadow: 0 24px 65px #0004; }
+.login-card { width: 100%; max-width: 402px; background: #fff; padding: 38px 34px; border-radius: 14px; box-shadow: none; }
 h2 { font-size: 23px; line-height: 1.2; letter-spacing: -.04em; font-weight: 800; margin: 0 0 10px; }
 .subtitle { color: #7b8395; font-size: 12px; line-height: 1.65; margin: 0 0 27px; }
 .login-form { display: flex; flex-direction: column; }
@@ -63,7 +63,7 @@ input::placeholder { color: #969eaf; }
 .login-form .remember { display: flex; align-items: center; gap: 8px; margin: 16px 0 20px; font-size: 11px; letter-spacing: 0; font-weight: 400; }
 .remember input { width: 15px; height: 15px; margin: 0; accent-color: #ff245c; flex-shrink: 0; }
 .verification { margin-bottom: 20px; min-width: 0; width: 100%; }
-.submit { border: 0; background: #ff245c; color: #fff; border-radius: 8px; min-height: 47px; padding: 13px; font-size: 11px; font-weight: 800; letter-spacing: .05em; box-shadow: 0 5px 13px #ff245c42; }
+.submit { border: 0; background: #ff245c; color: #fff; border-radius: 8px; min-height: 47px; padding: 13px; font-size: 11px; font-weight: 800; letter-spacing: .05em; box-shadow: none; }
 .submit:hover { background: #e9184e; }
 .divider { display: flex; gap: 13px; align-items: center; margin: 25px 0 19px; color: #8a93a4; font-size: 9px; letter-spacing: .04em; }
 .divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: #e9ebf0; }
@@ -120,7 +120,7 @@ input::placeholder { color: #969eaf; }
 .demo { margin-top: 21px; padding-top: 15px; border-top: 1px solid #eceef3; }
 .demo summary { cursor: pointer; color: #7b8395; font-size: 10px; text-align: center; }
 .demo-buttons { margin-top: 12px; }
-dialog { width: min(410px, calc(100% - 36px)); border: 0; border-radius: 14px; padding: 30px; color: #172033; box-shadow: 0 18px 70px #0005; }
+dialog { width: min(410px, calc(100% - 36px)); border: 0; border-radius: 14px; padding: 30px; color: #172033; box-shadow: none; }
 dialog::backdrop { background: #080d28bb; backdrop-filter: blur(5px); }
 dialog h2 { font-size: 22px; }
 dialog p { color: #667085; font-size: 13px; line-height: 1.8; margin: 14px 0 22px; }
@@ -131,3 +131,7 @@ dialog .submit, dialog .google-button { width: 100%; }
     .intro { min-height: 310px; }
 }
 button.google-button { width: 100%; cursor: pointer; }
+/* Solid buttons and quieter card borders. */
+.login-card { border: 1px solid #e4e7ed; }
+.submit { background: #284c85; box-shadow: none; }
+.submit:hover { background: #203e70; }

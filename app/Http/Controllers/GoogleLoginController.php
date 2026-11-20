@@ -64,6 +64,6 @@ class GoogleLoginController extends Controller
         Auth::login($user, remember: true);
         $request->session()->regenerate();
 
-        return redirect()->intended(route('catalog'));
+        return redirect()->intended(route('home-page'));
     }
 };

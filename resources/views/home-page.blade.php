@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Home Page · PS Seleraku</title>
-    <link rel="stylesheet" href="{{ asset('seleraku-pages.css') }}">
-    <script src="{{ asset('seleraku-pages.js') }}" defer></script>
+    <link rel="stylesheet" href="{{ asset('seleraku-pages.css') }}?v=welcome-5">
+    <script src="{{ asset('seleraku-pages.js') }}?v=console-motion-4" defer></script>
 </head>
 <body class="ps-page-body">
 @include('partials.ps-navbar', ['activePage' => 'home-page'])
@@ -35,13 +35,16 @@
                 </a>
             </div>
 
-            <h1 class="ps-hero-title">
-                RENTAL <span class="ps-text-ps4">PS4</span> &amp; <span class="ps-text-ps5">PS5</span>
-            </h1>
-
+            <h1 class="ps-hero-title ps-welcome-title"><span>Selamat datang di</span><strong>PS Seleraku<span class="ps-title-dot">.</span></strong></h1>
+            <p class="ps-welcome-copy">Pilih konsol favoritmu, ajak teman, dan nikmati waktu main bersama.<br class="ps-desktop-break"> Dari satu pertandingan sampai petualangan yang belum selesai.</p>
+            <div class="ps-console-lineup" aria-label="Pilihan konsol">
+                <a href="{{ route('page-ke2') }}#unit-catalog" class="ps-lineup-item"><span class="ps-lineup-number">01</span><span><small>PLAYSTATION</small><strong>PS4</strong></span><span aria-hidden="true">↗</span></a>
+                <a href="{{ route('page-ke2') }}#unit-catalog" class="ps-lineup-item"><span class="ps-lineup-number">02</span><span><small>PLAYSTATION</small><strong>PS5</strong></span><span aria-hidden="true">↗</span></a>
+                <a href="{{ route('catalog') }}#konsol" class="ps-lineup-item"><span class="ps-lineup-number">03</span><span><small>NINTENDO</small><strong>Switch</strong></span><span aria-hidden="true">↗</span></a>
+            </div>
             <div class="ps-hero-pill">
                 <span class="ps-dot-red" aria-hidden="true"></span>
-                RENTAL PLAYSTATION TERPERCAYA
+                PILIH KONSOL, AJAK TEMAN MAIN
             </div>
 
             <div class="ps-hero-divider" aria-hidden="true"></div>

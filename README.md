@@ -8,7 +8,7 @@ Demo PSAS dengan Laravel, Filament, dan database MySQL Laragon. Katalog perlu lo
 
 1. Buka Laragon dan klik **Start All** jika MySQL belum aktif.
 2. Klik dua kali **Jalankan Demo.bat**.
-3. Buka http://127.0.0.1:8765. Pilih tombol **Pemain** atau **Admin**, lalu klik **Masuk**.
+3. Buka http://127.0.0.1:8000. Pilih tombol **Pemain** atau **Admin**, lalu klik **Masuk**.
 
 | Akun | Email | Kata sandi demo |
 | --- | --- | --- |
@@ -17,7 +17,7 @@ Demo PSAS dengan Laravel, Filament, dan database MySQL Laragon. Katalog perlu lo
 
 Database yang dipakai adalah `ps_seleraku` di `127.0.0.1:3306`. Untuk instalasi baru, buat database itu, salin `.env.example` menjadi `.env`, gunakan PHP 8.3 atau lebih baru dengan ekstensi intl, zip, dan pdo_mysql, lalu jalankan `composer install`, `php artisan key:generate`, `php artisan migrate --seed`, dan `php artisan filament:assets`.
 
-Untuk demo HTTPS dari HP, setelah web berjalan gunakan `cloudflared tunnel --url http://127.0.0.1:8765`. Quick Tunnel memberikan tautan sementara. Untuk mengaktifkan pemeriksaan Turnstile di login, isi `TURNSTILE_SITE_KEY` dan `TURNSTILE_SECRET_KEY` di `.env`.
+Untuk demo HTTPS dari HP, setelah web berjalan gunakan `cloudflared tunnel --url http://127.0.0.1:8000`. Quick Tunnel memberikan tautan sementara. Untuk mengaktifkan pemeriksaan Turnstile di login, isi `TURNSTILE_SITE_KEY` dan `TURNSTILE_SECRET_KEY` di `.env`.
 
 ## Memperbarui proyek setelah git pull
 

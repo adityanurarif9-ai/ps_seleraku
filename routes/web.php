@@ -21,8 +21,8 @@ Route::middleware('auth')->group(function () {
         ]);
     };
 
-    Route::get('/', $renderCatalog)->name('catalog');
-    Route::get('/catalog', $renderCatalog);
+    Route::redirect('/', '/home-page');
+    Route::get('/catalog', $renderCatalog)->name('catalog');
 
     Route::view('/home-page', 'home-page')->name('home-page');
     Route::view('/home page', 'home-page');
