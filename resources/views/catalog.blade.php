@@ -5,7 +5,16 @@
 <section class="art hero"><p class="tag">RENTAL KONSOL &amp; KEDAI</p><h1>Waktunya <em>mabar.</em></h1><p>Halo, {{ auth()->user()->name }}! Pilih konsol dan camilan teman mainmu.</p><a class="primary" href="#konsol">Lihat konsol ↓</a></section>
 <section class="section" id="konsol"><h2>Pilih konsolmu</h2><div class="cards">
 @forelse($consoles as $item)
-<article class="card"><div class="console-art" aria-hidden="true">✚ <span>••</span></div><p class="stock">{{ $item->stock ? $item->stock.' unit tersedia' : 'Tidak tersedia' }}</p><h3>{{ $item->name }}</h3><p class="price">Rp{{ number_format($item->price, 0, ',', '.') }} <small>/ jam</small></p>
+@php
+    $consoleImage = match (true) {
+        str_contains(strtolower($item->name), '5') => 'images/paket-ps5.png',
+        str_contains(strtolower($item->name), '4') => 'images/paket-ps4.png',
+        str_contains(strtolower($item->name), '3') => 'images/ps3-unit.png',
+        str_contains(strtolower($item->name), 'switch') || str_contains(strtolower($item->name), 'nintendo') => 'images/nintendo-unit.png',
+        default => 'images/paket-mingguan.png',
+    };
+@endphp
+<article class="card"><div class="console-art" aria-hidden="true"><img src="{{ asset($consoleImage) }}" alt=""></div><p class="stock">{{ $item->stock ? $item->stock.' unit tersedia' : 'Tidak tersedia' }}</p><h3>{{ $item->name }}</h3><p class="price">Rp{{ number_format($item->price, 0, ',', '.') }} <small>/ jam</small></p>
 @if($item->stock)<button class="quiet" type="button" data-unit="{{ $item->id }}">Hitung tarif ↗</button>@endif
 </article>
 @empty <p>Belum ada konsol.</p> @endforelse

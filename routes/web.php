@@ -10,14 +10,23 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', function () {
+    $renderCatalog = function () {
         $items = CatalogItem::query()->orderBy('id')->get();
 
         return view('catalog', [
             'consoles' => $items->where('category', 'Konsol'),
             'menu' => $items->where('category', '!=', 'Konsol'),
         ]);
-    })->name('catalog');
+    };
+
+    Route::get('/', $renderCatalog)->name('catalog');
+    Route::get('/catalog', $renderCatalog);
+
+    Route::view('/home-page', 'home-page')->name('home-page');
+    Route::view('/home page', 'home-page');
+
+    Route::view('/page-ke2', 'page-ke2')->name('page-ke2');
+    Route::view('/page ke2', 'page-ke2');
 
     Route::post('/logout', [SessionController::class, 'destroy'])->name('logout');
 });

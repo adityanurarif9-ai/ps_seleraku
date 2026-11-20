@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use Database\Seeders\DatabaseSeeder;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,10 +15,18 @@ class SessionController extends Controller
 {
     public function store(Request $request)
     {
+        $request->merge([
+            'email' => strtolower(trim((string) $request->input('email'))),
+        ]);
+
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required', 'string', 'max:255'],
         ]);
+
+        if (config('app.demo_accounts') && User::query()->count() === 0) {
+            app(DatabaseSeeder::class)->run();
+        }
 
         $siteKey = config('services.turnstile.site_key');
         $secret = config('services.turnstile.secret');
@@ -65,7 +75,7 @@ class SessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('catalog'));
+        return redirect()->intended(route('home-page'));
     }
 
     public function destroy(Request $request)
