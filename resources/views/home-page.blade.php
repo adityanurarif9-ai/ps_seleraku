@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Home Page · PS Seleraku</title>
-    <link rel="stylesheet" href="{{ asset('seleraku-pages.css') }}?v=welcome-5">
+    <link rel="stylesheet" href="{{ asset('seleraku-pages.css') }}?v=footer-figma-2">
     <script src="{{ asset('seleraku-pages.js') }}?v=console-motion-4" defer></script>
 </head>
 <body class="ps-page-body">

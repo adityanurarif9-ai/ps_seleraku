@@ -69,7 +69,11 @@ class ExampleTest extends TestCase
             ->assertSee('PAKET PS4 REGULER')
             ->assertSee('PAKET PS5 NEXT-GEN')
             ->assertSee('PAKET WEEKEND')
-            ->assertSee('PAKET MINGGUAN PRO');
+            ->assertSee('PAKET MINGGUAN PRO')
+            ->assertSee('Operasional: Buka 24 Jam Non-Stop')
+            ->assertSee('Follow kami di')
+            ->assertSee('Temukan Lokasi Kami')
+            ->assertSee('Lihat di Google Maps');
 
         $this->get('/home page')->assertOk();
 
@@ -79,7 +83,10 @@ class ExampleTest extends TestCase
             ->assertSee('PS3 01')
             ->assertSee('Nintendo 01')
             ->assertSee('PS5 Disc Edition Ultra')
-            ->assertSee('PS4 Pro 1TB 4K Enhanced');
+            ->assertSee('PS4 Pro 1TB 4K Enhanced')
+            ->assertSee('Follow kami di')
+            ->assertSee('Temukan Lokasi Kami')
+            ->assertSee('Lihat di Google Maps');
 
         $this->get('/page ke2')->assertOk();
 

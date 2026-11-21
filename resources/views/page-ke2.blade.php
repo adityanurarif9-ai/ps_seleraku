@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Page Ke2 · Unit &amp; Game · PS Seleraku</title>
-    <link rel="stylesheet" href="{{ asset('seleraku-pages.css') }}?v=clean-blue-2">
+    <link rel="stylesheet" href="{{ asset('seleraku-pages.css') }}?v=footer-figma-2">
     <script src="{{ asset('seleraku-pages.js') }}" defer></script>
 </head>
 <body class="ps-page-body">
