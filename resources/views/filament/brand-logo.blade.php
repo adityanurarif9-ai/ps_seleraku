@@ -1,0 +1,1 @@
+<div class="ps-admin-logo"><img src="{{ asset('logo-ps-seleraku-transparent.png') }}" alt="PS Seleraku ? Admin" width="230" height="55"></div>

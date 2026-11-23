@@ -90,7 +90,7 @@ class ExampleTest extends TestCase
 
         $this->get('/page ke2')->assertOk();
 
-        $this->get('/admin/catalog-items')->assertForbidden();
+        $this->get('/admin/catalog-items')->assertRedirect(url('/admin/login'));
 
         $this->post(route('logout'))
             ->assertRedirect(route('login'));
@@ -102,7 +102,7 @@ class ExampleTest extends TestCase
         $this->post('/login', [
             'email' => 'admin@psseleraku.test',
             'password' => 'Seleraku!2026',
-        ])->assertRedirect(route('home-page'));
+        ])->assertRedirect(url('/admin'));
 
         $this->assertAuthenticatedAs(User::where('email', 'admin@psseleraku.test')->first());
 

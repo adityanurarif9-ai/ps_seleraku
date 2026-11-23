@@ -1,0 +1,22 @@
+FROM dunglas/frankenphp:1-php8.4-alpine AS base
+WORKDIR /app
+RUN install-php-extensions pdo_mysql intl zip bcmath mbstring opcache
+RUN cp "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
+
+FROM base AS dependencies
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+COPY composer.json composer.lock ./
+RUN composer install --no-dev --no-scripts --no-interaction --no-progress --prefer-dist
+COPY . .
+RUN composer dump-autoload --no-dev --classmap-authoritative --no-scripts \
+    && php artisan package:discover --ansi \
+    && php artisan filament:assets
+
+FROM base AS runtime
+COPY --from=dependencies /app /app
+COPY Caddyfile /etc/caddy/Caddyfile
+RUN mkdir -p /app/storage/framework/cache/data /app/storage/framework/sessions /app/storage/framework/views /app/storage/logs \
+    && chmod -R 775 /app/storage /app/bootstrap/cache
+ENV PORT=80
+EXPOSE 80
+CMD ["frankenphp", "run", "--config", "/etc/caddy/Caddyfile"]

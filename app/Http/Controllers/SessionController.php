@@ -78,7 +78,7 @@ class SessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('home-page'));
+        return redirect()->intended(auth()->user()->is_admin ? url('/admin') : route('home-page'));
     }
 
     public function destroy(Request $request)

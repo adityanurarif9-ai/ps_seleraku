@@ -16,7 +16,7 @@
 <a class="{{ request()->routeIs('catalog') ? 'active-nav' : '' }}" href="{{ route('catalog') }}">Katalog &amp; Kedai</a>
 <a class="{{ request()->routeIs('home-page') ? 'active-nav' : '' }}" href="{{ route('home-page') }}">Home Page</a>
 <a class="{{ request()->routeIs('page-ke2') ? 'active-nav' : '' }}" href="{{ route('page-ke2') }}">Unit PS (Page Ke2)</a>
-@if(auth()->user()->is_admin)<a href="{{ url('/admin/catalog-items') }}">Panel admin ↗</a>@endif
+@if(auth()->user()->is_admin)<a href="{{ url('/admin') }}">Panel admin ↗</a>@endif
 <form action="{{ route('logout') }}" method="post">@csrf<button class="quiet">Keluar</button></form>
 </nav>
 @endauth

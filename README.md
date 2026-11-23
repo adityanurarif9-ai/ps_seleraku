@@ -35,3 +35,22 @@ php artisan serve
 Buka http://127.0.0.1:8000/login dan lakukan hard refresh (Ctrl+F5). Desain login menggunakan aset di public/login.css, public/login.js, dan logo yang sudah disertakan.
 
 File .env hanya berlaku di komputer masing-masing. Konfigurasi database Laragon perlu disesuaikan secara lokal. Untuk login Google, isi GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, dan GOOGLE_REDIRECT_URI sesuai .env.example. Daftarkan callback http://127.0.0.1:8000/auth/google/callback di Google OAuth. Untuk Turnstile, isi TURNSTILE_SITE_KEY dan TURNSTILE_SECRET_KEY dengan pasangan kunci yang sesuai hostname. Simpan secret hanya di .env, jangan di .env.example atau GitHub.
+
+
+## Admin dan waktu main
+
+Buka /admin/login untuk masuk sebagai pengelola. Dashboard dan pengelolaan katalog hanya tersedia untuk akun dengan is_admin=true.
+Menu Sesi main (/admin/play-sessions) menyediakan mulai sesi, jeda, lanjutkan, tambah menit, akhiri, dan riwayat.
+Sisa waktu dihitung dari waktu server dan disimpan di database. Refresh atau browser tertutup tidak mengulang timer.
+Sesi dijeda tetap memakai kapasitas konsol. Sesi yang habis waktunya otomatis tidak dihitung sebagai unit terpakai.
+Timer hanya mengelola pencatatan waktu; tidak mematikan perangkat PlayStation secara fisik.
+Estimasi biaya mengikuti tarif saat sesi dibuat dan total durasi pesanan, bukan bukti pembayaran.
+
+## Hosting produksi
+
+Target: https://ps.flexboxstudio.site, proyek Vercel ps-seleraku, database TiDB melalui TLS.
+Dockerfile.vercel menggunakan FrankenPHP; web root /app/public. Session dan cache menggunakan database eksternal.
+File .env.production.local hanya untuk konfigurasi privat operator dan tidak boleh di-commit atau masuk image.
+Jalankan migration sebelum deployment memakai kredensial database target. Jangan menjalankan migrate:fresh pada produksi.
+Daftarkan https://ps.flexboxstudio.site/auth/google/callback pada OAuth Client Google.
+Daftarkan hostname ps.flexboxstudio.site pada Turnstile. Kredensial demo lokal tidak otomatis dibuat di produksi.

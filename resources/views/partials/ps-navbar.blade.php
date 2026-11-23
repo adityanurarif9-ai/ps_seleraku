@@ -49,7 +49,7 @@
                         <a class="ps-dropdown-item" href="{{ route('home-page') }}">Home Page <span>→</span></a>
                         <a class="ps-dropdown-item" href="{{ route('page-ke2') }}">Unit PS (Page Ke2) <span>→</span></a>
                         @if(auth()->user()?->is_admin)
-                            <a class="ps-dropdown-item" href="{{ url('/admin/catalog-items') }}">Panel Admin <span>↗</span></a>
+                            <a class="ps-dropdown-item" href="{{ url('/admin') }}">Panel Admin <span>↗</span></a>
                         @endif
                         <form action="{{ route('logout') }}" method="post">
                             @csrf

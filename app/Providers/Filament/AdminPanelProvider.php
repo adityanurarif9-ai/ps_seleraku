@@ -2,13 +2,20 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Auth\AdminLogin;
+use App\Filament\Pages\Dashboard;
 use App\Filament\Resources\CatalogItemResource;
-use Filament\Http\Middleware\Authenticate;
+use App\Filament\Resources\PlaySessionResource;
+use App\Filament\Widgets\CatalogOverview;
+use App\Filament\Widgets\LowStockItems;
+use App\Http\Middleware\AuthenticateAdmin;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use Filament\View\PanelsRenderHook;
+use Illuminate\Support\HtmlString;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -18,11 +25,20 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
+            ->login(AdminLogin::class)
+            ->darkMode(false)
             ->brandName('PS Seleraku Admin')
-            ->homeUrl(fn () => route('catalog'))
-            ->colors(['primary' => Color::Orange])
-            ->resources([CatalogItemResource::class])
+            ->brandLogo(fn () => new HtmlString(view('filament.brand-logo')->render()))
+            ->brandLogoHeight('3rem')
+            ->font('Poppins')
+            ->renderHook(PanelsRenderHook::HEAD_END, fn () => new HtmlString('<link rel="stylesheet" href="'.asset('admin.css').'?v='.filemtime(public_path('admin.css')).'">'))
+            ->renderHook(PanelsRenderHook::AUTH_LOGIN_FORM_AFTER, fn () => view('filament.admin-login-note'), scopes: AdminLogin::class)
+            ->homeUrl(fn () => Dashboard::getUrl())
+            ->colors(['primary' => Color::Blue])
+            ->pages([Dashboard::class])
+            ->widgets([CatalogOverview::class, LowStockItems::class])
+            ->resources([CatalogItemResource::class, PlaySessionResource::class])
             ->middleware(['web', DisableBladeIconComponents::class, DispatchServingFilamentEvent::class])
-            ->authMiddleware([Authenticate::class], isPersistent: true);
+            ->authMiddleware([AuthenticateAdmin::class], isPersistent: true);
     }
 }

@@ -1,0 +1,27 @@
+/* PS Seleraku admin: scoped to the Filament panel. */
+:root { --ps-admin-navy: #12284c; }
+.fi-body { background: #f4f7fb; }
+.fi-simple-layout { background: #edf2f9; min-height: 100svh; }
+.fi-simple-main { border: 1px solid #dce4ef; border-radius: 18px; background: #fff; box-shadow: 0 16px 48px rgba(24,46,83,.07); padding: 38px; }
+.ps-admin-logo { display: flex; align-items: center; justify-content: center; height: 100%; padding: 0; border-radius: 0; background: transparent; }
+.ps-admin-logo img { height: 100%; width: auto; max-width: 100%; object-fit: contain; }
+.fi-simple-header .fi-logo { height: 72px !important; margin-bottom: 10px; }
+.fi-simple-header-heading { color: #142c51; font-size: 25px; font-weight: 700; letter-spacing: -.035em; }
+.fi-simple-header-subheading { max-width: 32ch; margin-inline: auto; color: #67778d; font-size: 13px; line-height: 1.8; }
+.fi-input-wrp { border-radius: 8px; background: #fbfcfe; }
+.fi-btn { border-radius: 8px; }
+.fi-topbar { border-bottom: 1px solid #dfe6ef; box-shadow: none; }
+.fi-sidebar { border-right: 1px solid #dfe6ef; background: #fff; }
+.fi-sidebar-header { box-shadow: none; }
+.fi-sidebar-item { border-radius: 8px; }
+.fi-header-heading { color: #142c51; letter-spacing: -.035em; }
+.fi-header-subheading { color: #63748a; }
+.fi-section { border-radius: 12px; box-shadow: none; border: 1px solid #dfe6ef; }
+.fi-wi-stats-overview-stat { border: 1px solid #dfe6ef; border-radius: 12px; box-shadow: none; }
+.fi-wi-stats-overview-stat-value { color: #163665; letter-spacing: -.04em; }
+.fi-ta-ctn { border: 1px solid #dfe6ef; border-radius: 12px; box-shadow: none; }
+.ps-admin-login-note { margin-top: 22px; padding-top: 18px; border-top: 1px solid #e6ebf3; text-align: center; color: #78879a; font-size: 11px; line-height: 1.7; }
+@media(max-width:640px) {
+    .fi-simple-main { padding: 28px 22px; border-radius: 14px; }
+    .fi-simple-header-heading { font-size: 23px; }
+}
