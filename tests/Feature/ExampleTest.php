@@ -19,6 +19,8 @@ class ExampleTest extends TestCase
         $this->get('/')->assertRedirect(route('login'));
         $this->get('/home-page')->assertRedirect(route('login'));
         $this->get('/page-ke2')->assertRedirect(route('login'));
+        $this->get('/sewa-harian')->assertRedirect(route('login'));
+        $this->get('/menu-fnb')->assertRedirect(route('login'));
         $this->get('/home page')->assertRedirect(route('login'));
         $this->get('/page ke2')->assertRedirect(route('login'));
     }
@@ -55,15 +57,13 @@ class ExampleTest extends TestCase
         $login->assertRedirect(route('home-page'));
         $this->assertAuthenticated();
 
-        $this->get(route('catalog'))
-            ->assertOk()
-            ->assertSee('Katalog')
-            ->assertSee('Home Page')
-            ->assertSee('Unit PS (Page Ke2)')
-            ->assertDontSee('Panel admin');
+        $this->get('/catalog')->assertNotFound();
 
         $this->get(route('home-page'))
             ->assertOk()
+            ->assertSee('Home Page')
+            ->assertSee('Unit PS (Page Ke2)')
+            ->assertDontSee('Panel Admin')
             ->assertSee('KENALAN DENGAN')
             ->assertSee('PILIHAN PAKET RENTAL TERBAIK')
             ->assertSee('PAKET PS4 REGULER')
@@ -90,6 +90,23 @@ class ExampleTest extends TestCase
 
         $this->get('/page ke2')->assertOk();
 
+        $this->get(route('sewa-harian'))
+            ->assertOk()
+            ->assertSee('PlayStation 5 (PS5 01)')
+            ->assertSee('Rp 150.000')
+            ->assertSee('Nintendo Switch (Nintendo 01)')
+            ->assertSee('Sewa Harian')
+            ->assertSee('Follow kami di');
+
+        $this->get(route('menu-fnb'))
+            ->assertOk()
+            ->assertSee('Menu Camilan & Minuman Barista')
+            ->assertSee('Indomie Goreng Double + Telur Kornet')
+            ->assertSee('Kentang Goreng Truffle Crinkle')
+            ->assertSee('Kopi Susu Gula Aren Barista')
+            ->assertSee('Peralatan Higienis & Controller Friendly')
+            ->assertSee('Panggil Kru Lounge');
+
         $this->get('/admin/catalog-items')->assertRedirect(url('/admin/login'));
 
         $this->post(route('logout'))
@@ -106,11 +123,9 @@ class ExampleTest extends TestCase
 
         $this->assertAuthenticatedAs(User::where('email', 'admin@psseleraku.test')->first());
 
-        $this->get(route('catalog'))
-            ->assertOk()
-            ->assertSee('Panel admin');
-
+        $this->get('/admin')->assertOk()->assertSee('Dashboard PS Seleraku');
         $this->get('/admin/catalog-items')->assertOk();
+        $this->get(route('home-page'))->assertOk()->assertSee('Panel Admin');
 
         $this->post(route('logout'))->assertRedirect(route('login'));
         $this->assertGuest();

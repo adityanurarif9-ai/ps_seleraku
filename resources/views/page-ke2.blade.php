@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Page Ke2 · Unit &amp; Game · PS Seleraku</title>
-    <link rel="stylesheet" href="{{ asset('seleraku-pages.css') }}?v=footer-figma-2">
-    <script src="{{ asset('seleraku-pages.js') }}" defer></script>
+    <link rel="stylesheet" href="{{ asset('seleraku-pages.css') }}?v=logo-sync-1">
+    <script src="{{ asset('seleraku-pages.js') }}?v=desktop-3-4-2" defer></script>
 </head>
 <body class="ps-page-body">
 @include('partials.ps-navbar', ['activePage' => 'page-ke2'])
@@ -26,13 +26,28 @@
     <!-- Unit Catalog & Filter Section -->
     <section id="unit-catalog" class="ps-catalog-section">
         <div class="ps-container">
-            <h2 class="ps-catalog-title">
-                <span class="cyan">PILIH PLAYSTATION</span>
-                <span class="white">FAVORITMU.</span>
-            </h2>
-            <p class="ps-catalog-desc">
-                Pilih konsol yang ingin kamu gunakan dan nikmati pengalaman bermain bersama teman dengan perangkat terawat, ruangan ber-AC dingin, display 4K HDR, dan koleksi game terlengkap terinstal siap main.
-            </p>
+            <div class="ps-daily-head">
+                <div>
+                    <h2 class="ps-catalog-title">
+                        <span class="cyan">PILIH PLAYSTATION</span>
+                        <span class="white">FAVORITMU.</span>
+                    </h2>
+                    <p class="ps-catalog-desc">
+                        Pilih konsol yang ingin kamu gunakan dan nikmati pengalaman bermain bersama teman dengan perangkat terawat, ruangan ber-AC dingin, display 4K HDR, dan koleksi game terlengkap terinstal siap main.
+                    </p>
+                </div>
+
+                <nav class="ps-mode-switcher" aria-label="Mode Tarif Sewa">
+                    <a href="{{ route('page-ke2') }}" class="ps-mode-tab is-active" aria-current="page">
+                        <span>Main di Lounge</span>
+                        <small>Per Jam</small>
+                    </a>
+                    <a href="{{ route('sewa-harian') }}" class="ps-mode-tab">
+                        <span>Sewa Harian</span>
+                        <small>Bawa Pulang</small>
+                    </a>
+                </nav>
+            </div>
 
             <!-- Filter Panel -->
             <div class="ps-filter-panel">

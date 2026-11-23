@@ -179,6 +179,105 @@
         { id: 'switch-pack', title: 'Mario Kart 8 Deluxe + Zelda TOTK + Smash Bros', sub: 'Nintendo Switch Exclusive • 1-4 Pemain • Switch OLED' },
     ];
 
+    BOOKING_ITEMS.push(
+        {
+            group: 'SEWA HARIAN — BAWA PULANG',
+            id: 'daily-ps5-01',
+            title: 'PlayStation 5 (PS5 01)',
+            sub: '2 Stik DualSense • Kabel HDMI 4K • 5 Game Populer • Rp 150.000/hari',
+            hourlyRate: 25000,
+            hours12Rate: 100000,
+            dailyRate: 150000,
+            defaultService: 'express',
+            defaultDuration: '1d',
+            isVipUnit: false,
+        },
+        {
+            group: 'SEWA HARIAN — BAWA PULANG',
+            id: 'daily-ps5-02',
+            title: 'PlayStation 5 (PS5 02)',
+            sub: '2 DualSense • EA FC 24 + God of War Ragnarok • Rp 150.000/hari',
+            hourlyRate: 25000,
+            hours12Rate: 100000,
+            dailyRate: 150000,
+            defaultService: 'express',
+            defaultDuration: '1d',
+            isVipUnit: false,
+        },
+        {
+            group: 'SEWA HARIAN — BAWA PULANG',
+            id: 'daily-ps4-01',
+            title: 'PlayStation 4 (PS4 01)',
+            sub: 'PS4 Pro 1TB • 2 DualShock 4 • PES Update Terbaru • Rp 90.000/hari',
+            hourlyRate: 15000,
+            hours12Rate: 60000,
+            dailyRate: 90000,
+            defaultService: 'express',
+            defaultDuration: '1d',
+            isVipUnit: false,
+        },
+        {
+            group: 'SEWA HARIAN — BAWA PULANG',
+            id: 'daily-ps4-02',
+            title: 'PlayStation 4 (PS4 02)',
+            sub: 'PS4 Slim 1TB • Jadwal Berikutnya Ready • Rp 90.000/hari',
+            hourlyRate: 15000,
+            hours12Rate: 60000,
+            dailyRate: 90000,
+            defaultService: 'express',
+            defaultDuration: '1d',
+            isVipUnit: false,
+        },
+        {
+            group: 'SEWA HARIAN — BAWA PULANG',
+            id: 'daily-ps3-01',
+            title: 'PlayStation 3 (PS3 01)',
+            sub: 'PS3 Super Slim 500GB • 40+ Game Retro & PES • Rp 50.000/hari',
+            hourlyRate: 10000,
+            hours12Rate: 35000,
+            dailyRate: 50000,
+            defaultService: 'express',
+            defaultDuration: '1d',
+            isVipUnit: false,
+        },
+        {
+            group: 'SEWA HARIAN — BAWA PULANG',
+            id: 'daily-ps3-02',
+            title: 'PlayStation 3 (PS3 02)',
+            sub: 'PS3 Slim 500GB • 2 Stik Wireless Plug & Play • Rp 50.000/hari',
+            hourlyRate: 10000,
+            hours12Rate: 35000,
+            dailyRate: 50000,
+            defaultService: 'express',
+            defaultDuration: '1d',
+            isVipUnit: false,
+        },
+        {
+            group: 'SEWA HARIAN — BAWA PULANG',
+            id: 'daily-nintendo-01',
+            title: 'Nintendo Switch (Nintendo 01)',
+            sub: 'Switch OLED 64GB • Dock + 2 Joy-Con • Rp 120.000/hari',
+            hourlyRate: 20000,
+            hours12Rate: 80000,
+            dailyRate: 120000,
+            defaultService: 'express',
+            defaultDuration: '1d',
+            isVipUnit: false,
+        },
+        {
+            group: 'SEWA HARIAN — BAWA PULANG',
+            id: 'daily-nintendo-02',
+            title: 'Nintendo Switch (Nintendo 02)',
+            sub: 'Switch V2 + Carry Case • Smash Bros & Animal Crossing • Rp 110.000/hari',
+            hourlyRate: 20000,
+            hours12Rate: 75000,
+            dailyRate: 110000,
+            defaultService: 'express',
+            defaultDuration: '1d',
+            isVipUnit: false,
+        }
+    );
+
     // ==================== BOOKING MODAL STATE & RENDERER ====================
     const bookingModal = document.querySelector('#ps-booking-modal');
     const bookingForm = document.querySelector('#ps-booking-form');
@@ -610,10 +709,17 @@
                 const matchesPlatform = activePlatform === 'all' || platform === activePlatform;
                 const matchesSearch = !q || searchText.includes(q);
                 const matchesStatus = statusFilter === 'all' || status === statusFilter;
+                const isDailyMode = card.dataset.priceMode === 'daily' || priceSelect?.dataset.priceMode === 'daily';
                 let matchesPrice = true;
-                if (priceFilter === 'budget') matchesPrice = rate <= 15000;
-                else if (priceFilter === 'mid') matchesPrice = rate > 15000 && rate <= 25000;
-                else if (priceFilter === 'vip') matchesPrice = rate > 25000;
+                if (isDailyMode) {
+                    if (priceFilter === 'budget') matchesPrice = rate <= 60000;
+                    else if (priceFilter === 'mid') matchesPrice = rate > 60000 && rate <= 130000;
+                    else if (priceFilter === 'vip') matchesPrice = rate > 130000;
+                } else {
+                    if (priceFilter === 'budget') matchesPrice = rate <= 15000;
+                    else if (priceFilter === 'mid') matchesPrice = rate > 15000 && rate <= 25000;
+                    else if (priceFilter === 'vip') matchesPrice = rate > 25000;
+                }
 
                 const visible = matchesPlatform && matchesSearch && matchesStatus && matchesPrice;
                 card.hidden = !visible;
@@ -663,5 +769,191 @@
         });
 
         applyUnitFilters();
+    }
+
+    // ==================== LOUNGE F&B MENU (DESKTOP - 4) ====================
+    const fnbCards = Array.from(document.querySelectorAll('[data-fnb-card]'));
+    if (fnbCards.length > 0) {
+        const fnbSearch = document.querySelector('#fnb-search');
+        const fnbSearchClear = document.querySelector('#fnb-search-clear');
+        const fnbCatButtons = document.querySelectorAll('[data-fnb-filter]');
+        const fnbCountEl = document.querySelector('#fnb-count');
+        const fnbEmptyEl = document.querySelector('#fnb-empty');
+        const fnbResetBtn = document.querySelector('#fnb-reset-filters');
+
+        const fnbOrderBar = document.querySelector('#fnb-order-bar');
+        const fnbOrderCountEl = document.querySelector('#fnb-order-count');
+        const fnbOrderSummaryEl = document.querySelector('#fnb-order-summary');
+        const fnbOrderPreviewEl = document.querySelector('#fnb-order-items-preview');
+        const fnbOrderTotalEl = document.querySelector('#fnb-order-total');
+        const fnbTableSelect = document.querySelector('#fnb-table-select');
+        const fnbOrderClearBtn = document.querySelector('#fnb-order-clear');
+        const fnbOrderSubmitBtn = document.querySelector('#fnb-order-submit');
+        const fnbCallCrewBtn = document.querySelector('#fnb-call-crew-btn');
+
+        let activeFnbCategory = 'all';
+        const fnbCart = new Map();
+
+        const applyFnbFilters = () => {
+            const q = (fnbSearch?.value || '').trim().toLowerCase();
+            if (fnbSearchClear) {
+                fnbSearchClear.hidden = q.length === 0;
+            }
+
+            let visibleCount = 0;
+            fnbCards.forEach((card) => {
+                const cats = (card.dataset.fnbCategories || '').split(/\s+/).filter(Boolean);
+                const searchText = (card.dataset.fnbSearch || '').toLowerCase();
+                const matchesCat = activeFnbCategory === 'all' || cats.includes(activeFnbCategory);
+                const matchesQuery = !q || searchText.includes(q);
+                const visible = matchesCat && matchesQuery;
+
+                card.hidden = !visible;
+                card.style.display = visible ? '' : 'none';
+                if (visible) visibleCount++;
+            });
+
+            if (fnbCountEl) {
+                fnbCountEl.textContent = `${visibleCount} Pilihan Tersedia`;
+            }
+            if (fnbEmptyEl) {
+                fnbEmptyEl.hidden = visibleCount > 0;
+            }
+        };
+
+        const syncFnbCartUI = () => {
+            let totalItems = 0;
+            let totalAmount = 0;
+            const summaryLines = [];
+
+            fnbCards.forEach((card) => {
+                const id = card.dataset.fnbId || '';
+                const name = card.dataset.fnbName || 'Menu';
+                const price = Number(card.dataset.fnbPrice || 0);
+                const qty = fnbCart.get(id) || 0;
+
+                const addBtn = card.querySelector(`[data-fnb-add="${id}"]`);
+                const stepper = card.querySelector(`[data-fnb-stepper="${id}"]`);
+                const qtyEl = card.querySelector(`[data-fnb-qty="${id}"]`);
+
+                if (addBtn) addBtn.hidden = qty > 0;
+                if (stepper) stepper.hidden = qty === 0;
+                if (qtyEl) qtyEl.textContent = String(qty);
+
+                if (qty > 0) {
+                    totalItems += qty;
+                    totalAmount += qty * price;
+                    summaryLines.push(`${qty}x ${name}`);
+                }
+            });
+
+            if (fnbOrderBar) {
+                fnbOrderBar.hidden = totalItems === 0;
+            }
+            if (fnbOrderCountEl) {
+                fnbOrderCountEl.textContent = `${totalItems} Item`;
+            }
+            if (fnbOrderSummaryEl) {
+                fnbOrderSummaryEl.textContent = `${totalItems} Menu Dipilih untuk Diantar ke Meja`;
+            }
+            if (fnbOrderPreviewEl) {
+                fnbOrderPreviewEl.textContent = summaryLines.join(' • ');
+            }
+            if (fnbOrderTotalEl) {
+                fnbOrderTotalEl.textContent = formatRp(totalAmount);
+            }
+        };
+
+        fnbCatButtons.forEach((btn) => {
+            btn.addEventListener('click', () => {
+                activeFnbCategory = btn.dataset.fnbFilter || 'all';
+                fnbCatButtons.forEach((other) => other.classList.toggle('is-active', other === btn));
+                applyFnbFilters();
+            });
+        });
+
+        ['input', 'search', 'keyup', 'change'].forEach((evt) => {
+            fnbSearch?.addEventListener(evt, applyFnbFilters);
+        });
+        fnbSearchClear?.addEventListener('click', () => {
+            if (fnbSearch) {
+                fnbSearch.value = '';
+                fnbSearch.focus();
+            }
+            applyFnbFilters();
+        });
+        fnbResetBtn?.addEventListener('click', () => {
+            activeFnbCategory = 'all';
+            fnbCatButtons.forEach((b) => b.classList.toggle('is-active', b.dataset.fnbFilter === 'all'));
+            if (fnbSearch) fnbSearch.value = '';
+            applyFnbFilters();
+        });
+
+        fnbCards.forEach((card) => {
+            const id = card.dataset.fnbId || '';
+            card.querySelector(`[data-fnb-add="${id}"]`)?.addEventListener('click', () => {
+                fnbCart.set(id, 1);
+                syncFnbCartUI();
+            });
+            card.querySelector(`[data-fnb-inc="${id}"]`)?.addEventListener('click', () => {
+                const next = Math.min(20, (fnbCart.get(id) || 0) + 1);
+                fnbCart.set(id, next);
+                syncFnbCartUI();
+            });
+            card.querySelector(`[data-fnb-dec="${id}"]`)?.addEventListener('click', () => {
+                const next = Math.max(0, (fnbCart.get(id) || 0) - 1);
+                if (next === 0) fnbCart.delete(id);
+                else fnbCart.set(id, next);
+                syncFnbCartUI();
+            });
+        });
+
+        fnbOrderClearBtn?.addEventListener('click', () => {
+            fnbCart.clear();
+            syncFnbCartUI();
+        });
+
+        fnbOrderSubmitBtn?.addEventListener('click', () => {
+            if (fnbCart.size === 0) return;
+            const tableName = fnbTableSelect?.value || 'Sofa Lounge Utama';
+            let total = 0;
+            const orderedItems = [];
+
+            fnbCards.forEach((card) => {
+                const id = card.dataset.fnbId || '';
+                const qty = fnbCart.get(id) || 0;
+                if (qty > 0) {
+                    const price = Number(card.dataset.fnbPrice || 0);
+                    total += qty * price;
+                    orderedItems.push(`${qty}x ${card.dataset.fnbName || id}`);
+                }
+            });
+
+            const existing = JSON.parse(localStorage.getItem('ps_seleraku_fnb_orders') || '[]');
+            existing.unshift({
+                table: tableName,
+                items: orderedItems,
+                total: formatRp(total),
+                createdAt: new Date().toISOString(),
+            });
+            localStorage.setItem('ps_seleraku_fnb_orders', JSON.stringify(existing.slice(0, 10)));
+
+            fnbCart.clear();
+            syncFnbCartUI();
+            showToast(
+                'Pesanan F&B Dikirim ke Dapur!',
+                `${orderedItems.join(', ')} -> Diantar ke ${tableName} • Total ${formatRp(total)}`
+            );
+        });
+
+        fnbCallCrewBtn?.addEventListener('click', () => {
+            showToast(
+                'Kru Lounge Segera Hadir!',
+                'Permintaan bantuan waiter Anda telah diteruskan. Kru kami segera menuju meja Anda.'
+            );
+        });
+
+        applyFnbFilters();
+        syncFnbCartUI();
     }
 })();

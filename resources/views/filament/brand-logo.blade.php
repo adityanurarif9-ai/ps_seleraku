@@ -1,1 +1,1 @@
-<div class="ps-admin-logo"><img src="{{ asset('logo-ps-seleraku-transparent.png') }}" alt="PS Seleraku ? Admin" width="230" height="55"></div>
+<div class="ps-admin-logo"><img src="{{ asset('logo-ps-seleraku-transparent.png') }}" alt="PS SELERAKU — Rental Konsol" width="2172" height="724"></div>

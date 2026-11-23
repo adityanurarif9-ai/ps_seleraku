@@ -16,7 +16,7 @@
         <section class="intro" aria-labelledby="intro-title">
             <div class="intro-content">
                 <a class="brand" href="{{ route('login') }}" aria-label="PS Seleraku">
-                    <img src="{{ asset('logo-ps-seleraku-transparent.png') }}" alt="PS Seleraku — Rental Konsol" width="1536" height="1024">
+                    <img src="{{ asset('logo-ps-seleraku-transparent.png') }}" alt="PS SELERAKU — Rental Konsol" width="2172" height="724">
                 </a>
                 <h1 id="intro-title">ELEVATE YOUR<br> <span>GAMING</span><br> EXPERIENCE</h1>
                 <p>Masuk ke akunmu sekarang dan nikmati pengalaman rental PlayStation terbaik dengan fasilitas higienis prima, dan harga kompetitif.</p>

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Home Page · PS Seleraku</title>
-    <link rel="stylesheet" href="{{ asset('seleraku-pages.css') }}?v=footer-figma-2">
+    <link rel="stylesheet" href="{{ asset('seleraku-pages.css') }}?v=logo-sync-1">
     <script src="{{ asset('seleraku-pages.js') }}?v=console-motion-4" defer></script>
 </head>
 <body class="ps-page-body">
@@ -40,7 +40,7 @@
             <div class="ps-console-lineup" aria-label="Pilihan konsol">
                 <a href="{{ route('page-ke2') }}#unit-catalog" class="ps-lineup-item"><span class="ps-lineup-number">01</span><span><small>PLAYSTATION</small><strong>PS4</strong></span><span aria-hidden="true">↗</span></a>
                 <a href="{{ route('page-ke2') }}#unit-catalog" class="ps-lineup-item"><span class="ps-lineup-number">02</span><span><small>PLAYSTATION</small><strong>PS5</strong></span><span aria-hidden="true">↗</span></a>
-                <a href="{{ route('catalog') }}#konsol" class="ps-lineup-item"><span class="ps-lineup-number">03</span><span><small>NINTENDO</small><strong>Switch</strong></span><span aria-hidden="true">↗</span></a>
+                <a href="{{ route('page-ke2') }}#unit-catalog" class="ps-lineup-item"><span class="ps-lineup-number">03</span><span><small>NINTENDO</small><strong>Switch</strong></span><span aria-hidden="true">↗</span></a>
             </div>
             <div class="ps-hero-pill">
                 <span class="ps-dot-red" aria-hidden="true"></span>

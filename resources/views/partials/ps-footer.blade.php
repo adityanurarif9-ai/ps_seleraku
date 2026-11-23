@@ -54,8 +54,8 @@
                     <h4>Eksplorasi</h4>
                     <ul class="ps-footer-list">
                         <li><a href="{{ route('page-ke2') }}">Katalog Unit &amp; Game</a></li>
-                        <li><a href="{{ route('home-page') }}#paket">Paket Harian &amp; Mingguan</a></li>
-                        <li><a href="{{ route('catalog') }}#menu">Lounge F&amp;B Menu</a></li>
+                        <li><a href="{{ route('sewa-harian') }}">Paket Harian &amp; Mingguan</a></li>
+                        <li><a href="{{ route('menu-fnb') }}">Lounge F&amp;B Menu</a></li>
                         <li><a href="{{ route('page-ke2') }}#unit-catalog">Reservasi Station Online</a></li>
                     </ul>
                 </div>
