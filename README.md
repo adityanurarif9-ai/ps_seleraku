@@ -66,3 +66,10 @@ Riwayat dan rincian tarif tetap tersimpan. Biaya merupakan rincian durasi, bukan
 Sewa harian mengikuti daily_price di katalog admin. Tarif tambahan menit dihitung proporsional dari tarif yang dikunci saat reservasi dibuat.
 Sesi yang dijeda tetap memakai kapasitas; admin perlu menyelesaikan atau melanjutkannya sebelum memulai pemakaian unit lain yang bentrok.
 Pengujian memakai SQLite in-memory, tidak menghapus data Laragon atau produksi.
+
+
+## Pendaftaran dan Google
+
+/register menyediakan pendaftaran pemain dengan nama, email unik, kata sandi minimal 8 karakter dan konfirmasinya. Cloudflare diperiksa pada server sebelum akun dibuat. Akun manual tidak otomatis ditandai sebagai email terverifikasi.
+Login Google memakai state satu kali dengan masa berlaku 10 menit, maksimal 5 tab, dan tetap menjalankan validasi Socialite. Email yang sudah memiliki akun manual memerlukan konfirmasi kata sandi melalui /auth/google/link sebelum Google dihubungkan; tidak ada penggabungan otomatis berdasarkan email. Permintaan konfirmasi berlaku 5 menit.
+Koneksi Google memiliki batas waktu; kegagalan dibedakan menjadi sesi, koneksi, dan penolakan provider. Log hanya mencatat jenis/status error, tanpa token, kode OAuth atau client secret.

@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#0a0d25">
     <title>Masuk · PS Seleraku</title>
-    <link rel="stylesheet" href="{{ asset('login.css') }}?v=clean-1">
-    <script src="{{ asset('login.js') }}?v=3" defer></script>
+    <link rel="stylesheet" href="{{ asset('login.css') }}?v=auth-2">
+    <script src="{{ asset('login.js') }}?v=auth-2" defer></script>
     @if(config('services.turnstile.site_key'))
         <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onTurnstileLoad&amp;render=explicit" defer></script>
     @endif
@@ -61,7 +61,7 @@
                 @else
                     <button class="google-button" type="button" data-open-dialog="google-help"><span class="google-icon" aria-hidden="true">G</span> Masuk dengan Google</button>
                 @endif
-                <p class="signup">Belum punya akun? <button type="button" data-open-dialog="register-help">Daftar Disini</button></p>
+                <p class="signup">Belum punya akun? <a href="{{ route('register') }}">Daftar di sini</a></p>
                 @if(config('app.demo_accounts'))
                     <details class="demo" open>
                         <summary>Coba akun demo</summary>
@@ -78,12 +78,6 @@
         <h2>Lupa kata sandi?</h2>
         <p>Untuk akun lokal, hubungi admin PS Seleraku agar dibantu mengakses akun. Jika mendaftar dengan Google, gunakan tombol Masuk dengan Google.</p>
         <button type="button" class="submit" data-close-dialog>KEMBALI KE LOGIN</button>
-    </dialog>
-    <dialog id="register-help">
-        <h2>Daftar PS Seleraku</h2>
-        <p>Gunakan akun Google untuk membuat akun pemain saat login pertama. Pendaftaran Google tersedia setelah OAuth Google diaktifkan oleh admin.</p>
-        <a class="google-button" href="{{ route('google.redirect') }}"><span class="google-icon" aria-hidden="true">G</span> Lanjutkan dengan Google</a>
-        <button type="button" class="text-button dialog-close" data-close-dialog>Kembali</button>
     </dialog>
     <dialog id="google-help">
         <h2>Login Google belum aktif</h2>

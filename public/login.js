@@ -1,7 +1,8 @@
 const form = document.querySelector('.login-form');
 const password = document.querySelector('#password');
 const toggle = document.querySelector('.password-toggle');
-const submit = document.querySelector('.submit');
+const submit = form.querySelector('[type="submit"]');
+const submitLabel = form.dataset.submitLabel || submit.textContent;
 const status = document.querySelector('#verification-status');
 const retry = document.querySelector('#verification-retry');
 const widget = document.querySelector('#turnstile-widget');
@@ -17,7 +18,7 @@ function showVerification(message, verified, canRetry = false) {
 
 window.onTurnstileSuccess = () => {
     clearTimeout(verificationTimer);
-    showVerification('Verifikasi berhasil. Kamu bisa masuk.', true);
+    showVerification('Verifikasi berhasil. Kamu bisa melanjutkan.', true);
 };
 window.onTurnstileError = (errorCode) => {
     clearTimeout(verificationTimer);
@@ -37,7 +38,7 @@ window.onTurnstileError = (errorCode) => {
     return true;
 };
 window.onTurnstileExpired = () => {
-    showVerification('Verifikasi kedaluwarsa. Verifikasi ulang untuk masuk.', false, true);
+    showVerification('Verifikasi kedaluwarsa. Verifikasi ulang untuk melanjutkan.', false, true);
 };
 window.onTurnstileLoad = () => {
     if (!widget) return;
@@ -79,7 +80,7 @@ form.addEventListener('submit', event => {
 });
 window.addEventListener('pageshow', event => {
     if (!event.persisted) return;
-    submit.textContent = 'MASUK SEKARANG';
+    submit.textContent = submitLabel;
     if (widget && window.turnstile) {
         showVerification('Memperbarui verifikasi…', false);
         window.turnstile.reset();
@@ -87,7 +88,7 @@ window.addEventListener('pageshow', event => {
         submit.disabled = false;
     }
 });
-toggle.addEventListener('click', () => {
+toggle?.addEventListener('click', () => {
     const visible = password.type === 'password';
     password.type = visible ? 'text' : 'password';
     toggle.setAttribute('aria-pressed', String(visible));

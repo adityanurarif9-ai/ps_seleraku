@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GoogleLoginController;
+use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\RentalReservationController;
 use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Route;
@@ -10,8 +11,12 @@ Route::redirect('/login/admin', '/admin/login');
 Route::middleware('guest')->group(function () {
     Route::get('/auth/google', [GoogleLoginController::class, 'redirect'])->name('google.redirect');
     Route::get('/auth/google/callback', [GoogleLoginController::class, 'callback'])->name('google.callback');
+    Route::view('/register', 'register')->name('register');
+    Route::post('/register', [RegistrationController::class, 'store'])->middleware('throttle:5,1,register-');
+    Route::get('/auth/google/link', [GoogleLoginController::class, 'linkForm'])->name('google.link');
+    Route::post('/auth/google/link', [GoogleLoginController::class, 'link'])->middleware('throttle:5,1,google-link-');
     Route::view('/login', 'login')->name('login');
-    Route::post('/login', [SessionController::class, 'store'])->middleware('throttle:10,1');
+    Route::post('/login', [SessionController::class, 'store'])->middleware('throttle:10,1,login-');
 });
 
 Route::middleware('auth')->group(function () {

@@ -135,3 +135,8 @@ button.google-button { width: 100%; cursor: pointer; }
 .login-card { border: 1px solid #e4e7ed; }
 .submit { background: #284c85; box-shadow: none; }
 .submit:hover { background: #203e70; }
+
+.signup a { color: #285aff; font-weight: 600; text-decoration: none; }
+.signup a:hover { text-decoration: underline; }
+.field-help { margin: 7px 0 20px; font-size: 11px; color: #667085; line-height: 1.6; }
+.login-form .submit { margin-top: 4px; }
