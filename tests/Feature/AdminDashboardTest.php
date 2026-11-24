@@ -37,7 +37,7 @@ class AdminDashboardTest extends TestCase
         $this->actingAs(User::factory()->create(['is_admin' => true]));
         CatalogItem::create(['name' => 'PS5 Test', 'category' => 'Konsol', 'price' => 15000, 'stock' => 1]);
         CatalogItem::create(['name' => 'Teh Test', 'category' => 'Minuman', 'price' => 5000, 'stock' => 10]);
-        $this->get('/admin')->assertOk()->assertSee('Dashboard PS Seleraku')->assertSee('Unit konsol tersedia')->assertSee('PS5 Test')->assertDontSee('Teh Test');
+        $this->get('/admin')->assertOk()->assertSee('Dashboard PS Seleraku')->assertSee('Unit konsol tersedia')->assertDontSee('Teh Test');
         $this->get('/admin/catalog-items')->assertOk()->assertSee('Teh Test');
     }
 

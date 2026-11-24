@@ -549,6 +549,8 @@
     const openBookingModal = ({ itemId = '', serviceId = '' } = {}) => {
         const target = new URL(document.body.dataset.reservationUrl || '/reservasi/baru', location.origin);
         const key = String(itemId).toLowerCase();
+        const catalogId = key.match(/^(?:paket-)?catalog-(\d+)$/)?.[1];
+        if (catalogId) target.searchParams.set('catalog_item_id', catalogId);
         const platform = key.includes('nintendo') ? 'nintendo' : key.includes('ps3') ? 'ps3' : key.includes('ps4') ? 'ps4' : key.includes('ps5') ? 'ps5' : '';
         if (platform) target.searchParams.set('platform', platform);
         if (location.pathname.includes('sewa') || key.startsWith('paket-') || serviceId === 'express') target.searchParams.set('mode', 'daily');
@@ -597,7 +599,7 @@
             if (detailSpecs) detailSpecs.textContent = btn.dataset.specs || '';
             if (detailRate) detailRate.textContent = `${formatRp(btn.dataset.rate || 0)} / jam`;
             if (detailGames) {
-                detailGames.innerHTML = games.map((g) => `<span class="ps-detail-tag">${g}</span>`).join('');
+                detailGames.replaceChildren(...games.map(g => { const tag=document.createElement('span'); tag.className='ps-detail-tag'; tag.textContent=g; return tag; }));
             }
             detailModal.removeAttribute('hidden');
         });
@@ -858,11 +860,12 @@
         fnbCards.forEach((card) => {
             const id = card.dataset.fnbId || '';
             card.querySelector(`[data-fnb-add="${id}"]`)?.addEventListener('click', () => {
+                if (Number(card.querySelector('[data-stock]')?.dataset.stock || 0) < 1) return;
                 fnbCart.set(id, 1);
                 syncFnbCartUI();
             });
             card.querySelector(`[data-fnb-inc="${id}"]`)?.addEventListener('click', () => {
-                const next = Math.min(20, (fnbCart.get(id) || 0) + 1);
+                const next = Math.min(Number(card.querySelector('[data-stock]')?.dataset.stock || 0), 20, (fnbCart.get(id) || 0) + 1);
                 fnbCart.set(id, next);
                 syncFnbCartUI();
             });

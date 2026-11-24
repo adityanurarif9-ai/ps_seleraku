@@ -5,6 +5,7 @@ namespace App\Filament\Widgets;
 use App\Filament\Resources\CatalogItemResource;
 use App\Models\CatalogItem;
 use App\Models\User;
+use App\Services\RentalAvailability;
 use Filament\Widgets\StatsOverviewWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 
@@ -22,9 +23,9 @@ class CatalogOverview extends StatsOverviewWidget
     protected function getStats(): array
     {
         return [
-            Stat::make('Unit konsol tersedia', CatalogItem::where('category', 'Konsol')->sum('stock'))
-                ->description('Jumlah stok konsol dalam katalog')->color('primary')->url(CatalogItemResource::getUrl()),
-            Stat::make('Menu kedai', CatalogItem::where('category', '!=', 'Konsol')->count())
+            Stat::make('Unit konsol tersedia', CatalogItem::where('category', 'Konsol')->where('is_visible', true)->get()->sum(fn ($item) => app(RentalAvailability::class)->available($item, now(), now()->addHour())))
+                ->description('Kapasitas bebas untuk 1 jam ke depan')->color('primary')->url(CatalogItemResource::getUrl()),
+            Stat::make('Menu kedai', CatalogItem::where('category', '!=', 'Konsol')->where('is_visible', true)->count())
                 ->description('Jenis makanan, minuman, dan camilan')->color('primary')->url(CatalogItemResource::getUrl()),
             Stat::make('Akun pemain', User::where('is_admin', false)->count())
                 ->description('Pemain yang terdaftar di website')->color('primary'),

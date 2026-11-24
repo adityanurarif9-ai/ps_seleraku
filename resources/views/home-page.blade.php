@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Home Page · PS Seleraku</title>
     <link rel="stylesheet" href="{{ asset('seleraku-pages.css') }}?v=logo-sync-1">
-    <script src="{{ asset('seleraku-pages.js') }}?v=reservations-1?v=console-motion-4" defer></script>
+    <script src="{{ asset('seleraku-pages.js') }}?v=catalog-sync-2" defer></script>
 </head>
 <body class="ps-page-body" data-reservation-url="{{ route('reservations.create') }}">
 @include('partials.ps-navbar', ['activePage' => 'home-page'])
@@ -163,98 +163,6 @@
                 <p>Pilih konsol impian Anda dengan paket harian, weekend, maupun mingguan bergaransi resmi.</p>
             </div>
 
-            @php
-                $packages = [
-                    [
-                        'id' => 'paket-ps4-reguler',
-                        'image' => 'images/paket-ps4.png',
-                        'pill' => 'ENTRY PRO',
-                        'pillClass' => 'pill-cyan',
-                        'featured' => false,
-                        'ribbon' => null,
-                        'name' => 'PAKET PS4 REGULER',
-                        'desc' => 'Cocok untuk mabar seru bareng teman di rumah atau kos.',
-                        'price' => 'Rp 70.000',
-                        'rawPrice' => 70000,
-                        'unit' => '/ Hari',
-                        'unitType' => 'Hari',
-                        'btnClass' => '',
-                        'features' => [
-                            '1 Unit Konsol PS4 Slim / Pro',
-                            '2 Wireless DualShock 4 Controller',
-                            'Kabel HDMI & Kabel Daya Lengkap',
-                            '10+ Game Terinstall Populer',
-                            'Free Pengantaran Radius 5km',
-                        ],
-                    ],
-                    [
-                        'id' => 'paket-ps5-nextgen',
-                        'image' => 'images/paket-ps5.png',
-                        'pill' => 'NEXT-GEN ULTRA',
-                        'pillClass' => 'pill-cyan',
-                        'featured' => true,
-                        'ribbon' => 'BEST SELLER',
-                        'name' => 'PAKET PS5 NEXT-GEN',
-                        'desc' => 'Grafis 4K 120Hz & haptic feedback imersif tanpa tanding.',
-                        'price' => 'Rp 150.000',
-                        'rawPrice' => 150000,
-                        'unit' => '/ Hari',
-                        'unitType' => 'Hari',
-                        'btnClass' => '',
-                        'features' => [
-                            '1 Unit PS5 Disc / Digital Ultra HD',
-                            '2 Wireless DualSense Controller',
-                            'Kabel Ultra High Speed HDMI',
-                            '15+ Game Terbaru (FC 24, Spiderman 2)',
-                            'Akun PS Plus Deluxe Aktif',
-                        ],
-                    ],
-                    [
-                        'id' => 'paket-weekend',
-                        'image' => 'images/paket-weekend.png',
-                        'pill' => 'WEEKEND PASS',
-                        'pillClass' => 'pill-purple',
-                        'featured' => false,
-                        'ribbon' => null,
-                        'name' => 'PAKET WEEKEND',
-                        'desc' => 'Main maraton dari Jumat sore hingga Senin pagi tenang.',
-                        'price' => 'Rp 200.000',
-                        'rawPrice' => 200000,
-                        'unit' => '/ 3 Hari',
-                        'unitType' => 'Paket (3 Hari)',
-                        'btnClass' => 'is-lavender',
-                        'features' => [
-                            'Pilihan Unit Bebas: PS4 / PS5',
-                            'Durasi 72 Jam Penuh Non-Stop',
-                            '2 Stik Original Responsif',
-                            'Free Delivery & Setup Langsung',
-                            'Bonus Exclusive Snack Gamer Pack',
-                        ],
-                    ],
-                    [
-                        'id' => 'paket-mingguan-pro',
-                        'image' => 'images/paket-mingguan.png',
-                        'pill' => 'HEMAT 30%',
-                        'pillClass' => 'pill-mint',
-                        'featured' => false,
-                        'ribbon' => null,
-                        'name' => 'PAKET MINGGUAN PRO',
-                        'desc' => 'Solusi sepuasnya untuk tamatin game story panjang.',
-                        'price' => 'Rp 450.000',
-                        'rawPrice' => 450000,
-                        'unit' => '/ 7 Hari',
-                        'unitType' => 'Paket (7 Hari)',
-                        'btnClass' => '',
-                        'features' => [
-                            'Unit Konsol PS4 / PS5 Full Set',
-                            'Bebas Tukar Judul Game 2x Selama Sewa',
-                            'Maintenance Garansi Tukar Cepat 24 Jam',
-                            'Free Antar Jemput All-Area Radius 15km',
-                            'Support Online & VIP Priority CS',
-                        ],
-                    ],
-                ];
-            @endphp
 
             <div class="ps-pricing-grid">
                 @foreach($packages as $pkg)

@@ -73,3 +73,10 @@ Pengujian memakai SQLite in-memory, tidak menghapus data Laragon atau produksi.
 /register menyediakan pendaftaran pemain dengan nama, email unik, kata sandi minimal 8 karakter dan konfirmasinya. Cloudflare diperiksa pada server sebelum akun dibuat. Akun manual tidak otomatis ditandai sebagai email terverifikasi.
 Login Google memakai state satu kali dengan masa berlaku 10 menit, maksimal 5 tab, dan tetap menjalankan validasi Socialite. Email yang sudah memiliki akun manual memerlukan konfirmasi kata sandi melalui /auth/google/link sebelum Google dihubungkan; tidak ada penggabungan otomatis berdasarkan email. Permintaan konfirmasi berlaku 5 menit.
 Koneksi Google memiliki batas waktu; kegagalan dibedakan menjadi sesi, koneksi, dan penolakan provider. Log hanya mencatat jenis/status error, tanpa token, kode OAuth atau client secret.
+
+
+## Katalog admin dan website
+
+Kartu konsol, tarif per jam/harian, pilihan sewa di beranda, menu kedai, gambar, deskripsi dan game memakai catalog_items. Ubah melalui /admin/catalog-items; muat ulang website untuk melihat perubahan. Menonaktifkan Tampilkan di website juga menutup reservasi baru untuk item tersebut.
+Stok konsol adalah kapasitas total. Label tersedia menghitung sesi berjalan/dijeda dan reservasi terkonfirmasi untuk 1 jam (lounge) atau 24 jam (harian) ke depan; formulir memeriksa rentang jadwal pilihan pengguna. Katalog tidak lagi menampilkan unit VIP, maintenance atau jam selesai contoh.
+Migrasi mempertahankan harga dan stok lama, menambahkan metadata konsol, dan memasukkan menu yang sebelumnya hanya ada di halaman. Menu baru memiliki stok awal nol; admin perlu mengisi stok nyata. Pengelolaan katalog ini tidak mengubah pencatatan pesanan F&B lokal menjadi pemrosesan pesanan server.

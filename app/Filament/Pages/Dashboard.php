@@ -19,7 +19,7 @@ class Dashboard extends BaseDashboard
 
     public function getSubheading(): ?string
     {
-        return 'Pantau stok dan kelola katalog konsol serta kedai dari satu tempat.';
+        return 'Kelola katalog yang tampil di website, pantau reservasi, dan atur waktu main.';
     }
 
     protected function getHeaderActions(): array

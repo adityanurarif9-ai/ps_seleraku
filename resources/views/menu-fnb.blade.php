@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('seleraku-pages.css?v=logo-sync-1') }}">
-    <script src="{{ asset('seleraku-pages.js?v=reservations-1') }}" defer></script>
+    <script src="{{ asset('seleraku-pages.js') }}?v=catalog-sync-2" defer></script>
 </head>
 <body class="ps-page-body" data-reservation-url="{{ route('reservations.create') }}">
     @include('partials.ps-navbar', ['activePage' => 'menu-fnb'])
@@ -75,7 +75,7 @@
                 <div class="ps-fnb-subbar">
                     <div class="ps-fnb-subbar-left">
                         <h3>Katalog Pilihan Meja VIP</h3>
-                        <span id="fnb-count" class="ps-fnb-count-badge">6 Pilihan Tersedia</span>
+                        <span id="fnb-count" class="ps-fnb-count-badge">{{ count($fnbItems) }} pilihan menu</span>
                     </div>
                     <div class="ps-fnb-subbar-right">
                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.2" aria-hidden="true">
@@ -86,88 +86,6 @@
                     </div>
                 </div>
 
-                @php
-                    $fnbItems = [
-                        [
-                            'id' => 'fnb-indomie',
-                            'name' => 'Indomie Goreng Double + Telur Kornet',
-                            'categories' => 'makanan-berat combo',
-                            'badge' => 'Favorit Gamers',
-                            'badgeClass' => 'is-crimson',
-                            'rating' => '4.9',
-                            'image' => 'images/fnb-indomie.jpg',
-                            'desc' => 'Mi goreng jumbo dobel porsi dengan telur mata sapi setengah matang, kornet tumis gurih, dan taburan bawang renyah.',
-                            'price' => 18000,
-                            'priceText' => 'Rp 18.000',
-                            'search' => 'indomie goreng double telur kornet mi mie gamers favorit makanan berat combo',
-                        ],
-                        [
-                            'id' => 'fnb-kentang',
-                            'name' => 'Kentang Goreng Truffle Crinkle',
-                            'categories' => 'camilan',
-                            'badge' => 'Gorengan Premium',
-                            'badgeClass' => 'is-blue',
-                            'rating' => null,
-                            'image' => 'images/fnb-kentang.jpg',
-                            'desc' => 'Kentang crinkle renyah dengan semprotan minyak truffle asli, taburan keju parmesan gurih dan garlic dip.',
-                            'price' => 15000,
-                            'priceText' => 'Rp 15.000',
-                            'search' => 'kentang goreng truffle crinkle fries keju parmesan garlic dip camilan snack',
-                        ],
-                        [
-                            'id' => 'fnb-nasgor',
-                            'name' => 'Nasi Goreng Spesial Seleraku',
-                            'categories' => 'makanan-berat',
-                            'badge' => 'Paling Mengenyangkan',
-                            'badgeClass' => 'is-dark',
-                            'rating' => null,
-                            'image' => 'images/fnb-nasgor.jpg',
-                            'desc' => 'Nasi goreng rempah istimewa dengan suwiran ayam, sosis sapi panggang, telur dadar iris, dan kerupuk udang renyah.',
-                            'price' => 28000,
-                            'priceText' => 'Rp 28.000',
-                            'search' => 'nasi goreng spesial seleraku ayam sosis telur kerupuk makanan berat',
-                        ],
-                        [
-                            'id' => 'fnb-chicken',
-                            'name' => 'Chicken Popcorn Spicy Mayo',
-                            'categories' => 'camilan combo',
-                            'badge' => 'Pedas Gurih',
-                            'badgeClass' => 'is-crimson',
-                            'rating' => null,
-                            'image' => 'images/fnb-chicken.jpg',
-                            'desc' => 'Daging paha ayam tanpa tulang renyah berbalut bumbu rahasia dengan cocolan saus spicy mayo pedas manis nagih.',
-                            'price' => 22000,
-                            'priceText' => 'Rp 22.000',
-                            'search' => 'chicken popcorn spicy mayo ayam goreng renyah camilan pedas gurih combo',
-                        ],
-                        [
-                            'id' => 'fnb-kopi',
-                            'name' => 'Kopi Susu Gula Aren Barista',
-                            'categories' => 'minuman combo',
-                            'badge' => 'Fresh Brew Barista',
-                            'badgeClass' => 'is-teal',
-                            'rating' => null,
-                            'image' => 'images/fnb-kopi.jpg',
-                            'desc' => 'Double shot espresso arabika pilihan dipadukan susu segar pasteurisasi dan legitnya sirup gula aren organik.',
-                            'price' => 16000,
-                            'priceText' => 'Rp 16.000',
-                            'search' => 'kopi susu gula aren barista es espresso arabika minuman dingin combo',
-                        ],
-                        [
-                            'id' => 'fnb-esteh',
-                            'name' => 'Es Teh Manis Jumbo Lemonade',
-                            'categories' => 'minuman combo',
-                            'badge' => 'Pelepas Dahaga',
-                            'badgeClass' => 'is-emerald',
-                            'rating' => null,
-                            'image' => 'images/fnb-esteh.jpg',
-                            'desc' => 'Seduhan teh melati wangi khas porsi disajikan dalam gelas jumbo 700ml dengan perasan jeruk lemon asli yang segar.',
-                            'price' => 14000,
-                            'priceText' => 'Rp 14.000',
-                            'search' => 'es teh manis jumbo lemonade lemon melati segar minuman dingin combo',
-                        ],
-                    ];
-                @endphp
 
                 <!-- 3-COLUMN MENU GRID -->
                 <div class="ps-fnb-grid">
@@ -194,7 +112,7 @@
 
                             <div class="ps-fnb-body">
                                 <h3 class="ps-fnb-card-title">{{ $item['name'] }}</h3>
-                                <p class="ps-fnb-card-desc">{{ $item['desc'] }}</p>
+                                <p class="ps-fnb-card-desc">{{ $item['desc'] }}</p><p class="ps-fnb-card-desc">Stok: {{ $item['stock'] }}</p>
 
                                 <div class="ps-fnb-card-foot">
                                     <div>
@@ -206,10 +124,10 @@
                                         <button
                                             type="button"
                                             class="ps-fnb-add-btn"
-                                            data-fnb-add="{{ $item['id'] }}"
+                                            data-fnb-add="{{ $item['id'] }}" data-stock="{{ $item['stock'] }}" @disabled($item['stock']===0)
                                             aria-label="Tambah {{ $item['name'] }}"
                                         >
-                                            + Tambah
+                                            {{ $item['stock'] > 0 ? '+ Tambah' : 'Habis' }}
                                         </button>
 
                                         <div class="ps-fnb-stepper" data-fnb-stepper="{{ $item['id'] }}" hidden>
@@ -223,7 +141,7 @@
                         </article>
                     @endforeach
 
-                    <div id="fnb-empty" class="ps-empty-state" hidden>
+                    <div id="fnb-empty" class="ps-empty-state" @if(count($fnbItems)>0) hidden @endif>
                         <h3>Menu Tidak Ditemukan</h3>
                         <p>Tidak ada camilan atau minuman yang cocok dengan filter atau kata kunci Anda.</p>
                         <button type="button" id="fnb-reset-filters" class="ps-btn-primary">Tampilkan Semua Menu</button>

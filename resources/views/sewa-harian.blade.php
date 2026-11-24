@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('seleraku-pages.css?v=logo-sync-1') }}">
-    <script src="{{ asset('seleraku-pages.js?v=reservations-1') }}" defer></script>
+    <script src="{{ asset('seleraku-pages.js') }}?v=catalog-sync-2" defer></script>
 </head>
 <body class="ps-page-body" data-reservation-url="{{ route('reservations.create') }}">
     @include('partials.ps-navbar', ['activePage' => 'sewa-harian'])
@@ -103,180 +103,16 @@
                                 <rect x="3" y="14" width="7" height="7" rx="1"/>
                                 <rect x="14" y="14" width="7" height="7" rx="1"/>
                             </svg>
-                            <span id="p2-count">Menampilkan 8 Unit Konsol (5 Siap Pakai)</span>
+                            <span id="p2-count">Ketersediaan untuk 24 jam ke depan · Muat ulang untuk memperbarui</span>
                         </div>
                         <div class="ps-daily-legend" aria-label="Legenda Status Unit">
                             <span><i class="ps-dot-indicator is-green"></i> Hijau: Siap Main</span>
                             <span><i class="ps-dot-indicator is-red"></i> Merah: Sedang Disewa</span>
-                            <span><i class="ps-dot-indicator is-slate"></i> Abu: Maintenance</span>
+                            <span><i class="ps-dot-indicator is-slate"></i> Pilih jadwal untuk memastikan unit</span>
                         </div>
                     </div>
                 </div>
 
-                @php
-                    $dailyUnits = [
-                        [
-                            'itemId' => 'daily-ps5-01',
-                            'tag' => 'PS5 01',
-                            'platformKey' => 'ps5',
-                            'statusKey' => 'available',
-                            'statusLabel' => 'Tersedia',
-                            'statusClass' => 'is-available',
-                            'rate' => 150000,
-                            'rateText' => 'Rp 150.000',
-                            'image' => 'images/daily-ps5-01.jpg',
-                            'imgBadge' => '4K HDR',
-                            'overlayNote' => null,
-                            'name' => 'PlayStation 5 (PS5 01)',
-                            'desc' => '2 Stik DualSense Wireless • 5 Game Terpopuler • Kabel HDMI Ultra High Speed.',
-                            'chips' => ['2 DualSense', 'Ultra Fast SSD'],
-                            'ctaText' => 'Sewa Harian',
-                            'ctaIcon' => 'bag',
-                            'defaultSchedule' => 'now',
-                            'searchText' => 'ps5 01 playstation 5 dualsense 4k hdr ultra fast ssd spider-man fc24 harian',
-                        ],
-                        [
-                            'itemId' => 'daily-ps5-02',
-                            'tag' => 'PS5 02',
-                            'platformKey' => 'ps5',
-                            'statusKey' => 'in-use',
-                            'statusLabel' => 'Sedang Disewa',
-                            'statusClass' => 'is-rented',
-                            'rate' => 150000,
-                            'rateText' => 'Rp 150.000',
-                            'image' => 'images/daily-ps5-02.jpg',
-                            'imgBadge' => null,
-                            'overlayNote' => 'Kembali 26 Okt',
-                            'name' => 'PlayStation 5 (PS5 02)',
-                            'desc' => '2 Stik DualSense Wireless + FIFA / EA FC 24 + God of War Ragnarok.',
-                            'chips' => ['EA FC 24 Installed', '4K HDR'],
-                            'ctaText' => 'Sedang Disewa',
-                            'ctaIcon' => 'lock',
-                            'defaultSchedule' => 'tomorrow-09',
-                            'searchText' => 'ps5 02 playstation 5 slim ea fc 24 fifa god of war ragnarok 4k hdr',
-                        ],
-                        [
-                            'itemId' => 'daily-ps4-01',
-                            'tag' => 'PS4 01',
-                            'platformKey' => 'ps4',
-                            'statusKey' => 'available',
-                            'statusLabel' => 'Tersedia',
-                            'statusClass' => 'is-available',
-                            'rate' => 90000,
-                            'rateText' => 'Rp 90.000',
-                            'image' => 'images/daily-ps4-01.jpg',
-                            'imgBadge' => '1TB Pro',
-                            'overlayNote' => null,
-                            'name' => 'PlayStation 4 (PS4 01)',
-                            'desc' => 'PS4 Pro 1TB • 2 DualShock 4 Wireless • PES / eFootball update terbaru.',
-                            'chips' => ['PES 2024 Upd', 'DualShock 4'],
-                            'ctaText' => 'Sewa Harian',
-                            'ctaIcon' => 'bag',
-                            'defaultSchedule' => 'now',
-                            'searchText' => 'ps4 01 playstation 4 pro 1tb pes efootball dualshock 4',
-                        ],
-                        [
-                            'itemId' => 'daily-ps4-02',
-                            'tag' => 'PS4 02',
-                            'platformKey' => 'ps4',
-                            'statusKey' => 'maintenance',
-                            'statusLabel' => 'Maintenance',
-                            'statusClass' => 'is-maintenance',
-                            'rate' => 90000,
-                            'rateText' => 'Rp 90.000',
-                            'image' => 'images/daily-ps4-02.jpg',
-                            'imgBadge' => null,
-                            'overlayNote' => 'Pengecekan Rutin',
-                            'name' => 'PlayStation 4 (PS4 02)',
-                            'desc' => 'Sedang pembaruan firmware & pengecekan hardware stik berkala.',
-                            'chips' => ['Update Sistem', 'Kalibrasi Stik'],
-                            'ctaText' => 'Maintenance',
-                            'ctaIcon' => 'wrench',
-                            'defaultSchedule' => 'tomorrow-09',
-                            'searchText' => 'ps4 02 playstation 4 slim maintenance update sistem kalibrasi stik',
-                        ],
-                        [
-                            'itemId' => 'daily-ps3-01',
-                            'tag' => 'PS3 01',
-                            'platformKey' => 'ps3',
-                            'statusKey' => 'available',
-                            'statusLabel' => 'Tersedia',
-                            'statusClass' => 'is-available',
-                            'rate' => 50000,
-                            'rateText' => 'Rp 50.000',
-                            'image' => 'images/daily-ps3-01.jpg',
-                            'imgBadge' => '40+ Game Retro',
-                            'overlayNote' => null,
-                            'name' => 'PlayStation 3 (PS3 01)',
-                            'desc' => 'PS3 Super Slim 500GB • 2 Stik DualShock 3 • 40+ Game Nostalgia (GTA V, Naruto, PES).',
-                            'chips' => ['GTA V', 'PES Gembox'],
-                            'ctaText' => 'Sewa Harian',
-                            'ctaIcon' => 'bag',
-                            'defaultSchedule' => 'now',
-                            'searchText' => 'ps3 01 playstation 3 super slim gta v naruto pes gembox retro',
-                        ],
-                        [
-                            'itemId' => 'daily-ps3-02',
-                            'tag' => 'PS3 02',
-                            'platformKey' => 'ps3',
-                            'statusKey' => 'available',
-                            'statusLabel' => 'Tersedia',
-                            'statusClass' => 'is-available',
-                            'rate' => 50000,
-                            'rateText' => 'Rp 50.000',
-                            'image' => 'images/ps3-unit.png',
-                            'imgBadge' => '500GB Slim',
-                            'overlayNote' => null,
-                            'name' => 'PlayStation 3 (PS3 02)',
-                            'desc' => 'PS3 Slim 500GB • 2 Stik Wireless • Full Game Siap Main plug & play.',
-                            'chips' => ['Plug & Play', 'Full HDD Games'],
-                            'ctaText' => 'Sewa Harian',
-                            'ctaIcon' => 'bag',
-                            'defaultSchedule' => 'now',
-                            'searchText' => 'ps3 02 playstation 3 slim 500gb plug play full hdd games',
-                        ],
-                        [
-                            'itemId' => 'daily-nintendo-01',
-                            'tag' => 'NINTENDO 01',
-                            'platformKey' => 'nintendo',
-                            'statusKey' => 'available',
-                            'statusLabel' => 'Tersedia',
-                            'statusClass' => 'is-available',
-                            'rate' => 120000,
-                            'rateText' => 'Rp 120.000',
-                            'image' => 'images/nintendo-unit.png',
-                            'imgBadge' => 'OLED Screen',
-                            'overlayNote' => null,
-                            'name' => 'Nintendo Switch (Nintendo 01)',
-                            'desc' => 'Nintendo Switch OLED 64GB • Dock + 2 Joy-Con • Mario Kart 8 Deluxe & Zelda BOTW.',
-                            'chips' => ['Mario Kart 8', 'Zelda BOTW'],
-                            'ctaText' => 'Sewa Harian',
-                            'ctaIcon' => 'bag',
-                            'defaultSchedule' => 'now',
-                            'searchText' => 'nintendo 01 switch oled mario kart 8 zelda botw joy-con dock',
-                        ],
-                        [
-                            'itemId' => 'daily-nintendo-02',
-                            'tag' => 'NINTENDO 02',
-                            'platformKey' => 'nintendo',
-                            'statusKey' => 'in-use',
-                            'statusLabel' => 'Sedang Disewa',
-                            'statusClass' => 'is-rented',
-                            'rate' => 110000,
-                            'rateText' => 'Rp 110.000',
-                            'image' => 'images/daily-nintendo-02.jpg',
-                            'imgBadge' => null,
-                            'overlayNote' => 'Kembali 27 Okt',
-                            'name' => 'Nintendo Switch (Nintendo 02)',
-                            'desc' => 'Nintendo Switch V2 Battery Improved • Carry Case • Smash Bros & Animal Crossing.',
-                            'chips' => ['Smash Bros', 'Carry Case'],
-                            'ctaText' => 'Sedang Disewa',
-                            'ctaIcon' => 'lock',
-                            'defaultSchedule' => 'tomorrow-09',
-                            'searchText' => 'nintendo 02 switch v2 smash bros animal crossing carry case',
-                        ],
-                    ];
-                @endphp
 
                 <!-- GRID 4 KOLOM (DESKTOP - 3) -->
                 <div class="ps-daily-grid">
@@ -358,7 +194,7 @@
                         </article>
                     @endforeach
 
-                    <div id="p2-empty" class="ps-empty-state" hidden>
+                    <div id="p2-empty" class="ps-empty-state" @if(count($dailyUnits)>0) hidden @endif>
                         <h3>Tidak Ada Unit Harian yang Cocok</h3>
                         <p>Coba ubah kata kunci pencarian atau reset filter untuk melihat kembali semua unit sewa harian.</p>
                         <button type="button" id="p2-reset-filters" class="ps-btn-primary">Reset Semua Filter</button>

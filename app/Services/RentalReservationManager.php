@@ -33,7 +33,7 @@ class RentalReservationManager
             throw ValidationException::withMessages(['duration' => 'Pilih durasi yang tersedia. Harian maksimal 7 hari.']);
         }
         $item = CatalogItem::findOrFail($data['catalog_item_id']);
-        if ($item->category !== 'Konsol' || ($data['mode'] === 'daily' && $item->daily_price === null)) {
+        if (! $item->is_visible || $item->category !== 'Konsol' || ($data['mode'] === 'daily' && $item->daily_price === null)) {
             throw ValidationException::withMessages(['catalog_item_id' => 'Konsol atau tarif untuk mode sewa ini belum tersedia.']);
         }
         $rate = $data['mode'] === 'daily' ? $item->daily_price : $item->price;

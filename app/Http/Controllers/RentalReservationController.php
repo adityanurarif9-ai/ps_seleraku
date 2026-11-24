@@ -26,9 +26,9 @@ class RentalReservationController extends Controller
 
     public function create(Request $request)
     {
-        $items = CatalogItem::where('category', 'Konsol')->orderBy('name')->get();
+        $items = CatalogItem::where('category', 'Konsol')->where('is_visible', true)->orderBy('name')->get();
         $platform = $request->query('platform', '');
-        $selected = $items->first(fn ($i) => match ($platform) {
+        $selected = $items->firstWhere('id', (int) $request->query('catalog_item_id')) ?? $items->first(fn ($i) => match ($platform) {
             'ps5' => str_contains($i->name, '5'),'ps4' => str_contains($i->name, '4'),'ps3' => str_contains($i->name, '3'),'nintendo' => str_contains(strtolower($i->name), 'nintendo'),default => false
         });
 
@@ -75,8 +75,8 @@ class RentalReservationController extends Controller
     public function extend(Request $request, RentalReservation $reservation, RentalReservationManager $manager)
     {
         $data = $request->validate(['minutes' => 'required|integer|in:15,30,60,120']);
-        $manager->requestExtension($reservation,(int) $data['minutes']);
+        $manager->requestExtension($reservation, (int) $data['minutes']);
 
-        return back()->with('success','Permintaan tambahan waktu dikirim ke admin. Timer berubah setelah disetujui.');
+        return back()->with('success', 'Permintaan tambahan waktu dikirim ke admin. Timer berubah setelah disetujui.');
     }
 }

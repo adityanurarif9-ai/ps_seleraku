@@ -13,7 +13,7 @@ class RentalAvailability
     // Endpoints are half-open: a rental ending at 11:00 permits another at 11:00.
     public function available(CatalogItem $item, CarbonInterface $from, CarbonInterface $to, ?int $excludeReservation = null, ?int $excludeSession = null): int
     {
-        if ($item->category !== 'Konsol' || $to <= $from) {
+        if (! $item->is_visible || $item->category !== 'Konsol' || $to <= $from) {
             return 0;
         }
         $events = [];
