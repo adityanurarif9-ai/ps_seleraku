@@ -37,8 +37,8 @@ return json_decode(<<<'JSON'
     "loading.js": "optimized/loading.7d0ea9e8ac.js",
     "rentals.js": "optimized/rentals.a5cef3a857.js",
     "seleraku-pages.js": "optimized/seleraku-pages.9ffba621f3.js",
-    "login.css": "optimized/login.226330da16.css",
-    "pwa.css": "optimized/pwa.707013bfcc.css",
+    "login.css": "optimized/login.50b91669be.css",
+    "pwa.css": "optimized/pwa.289d921e7e.css",
     "rentals.css": "optimized/rentals.6875374d76.css",
     "seleraku-pages.css": "optimized/seleraku-pages.ed899a6f20.css"
   },
@@ -48,8 +48,8 @@ return json_decode(<<<'JSON'
     "loading.js": "a210e6e383a1b76655e273c4e2b4d8a6be27d16ab34103dd6f284201a0929cef",
     "rentals.js": "1d93a8de616a34749af780b8ffc482235ec38410f03d7e35c17bbb55238d88d7",
     "seleraku-pages.js": "e2b62e3330cbc62176b87d45869755974ec97e232779a28fdddccf51d4abf588",
-    "login.css": "8ffb560c62f751b78b214b1e78e7956d64fba0a9f342dc2af4ec53b1fddc2f59",
-    "pwa.css": "b7776e07a569248163a1a0e36b01598cda4e33ae005e04d2db638a1cf6b06952",
+    "login.css": "824ce605a2e5e206a333f3bd24ca6bacc129bd65f5b2ec2b0a3188a95c4a3edd",
+    "pwa.css": "70693e1ee2d7b5eb5db80d7f44d773cefa6dffc0f7a1dfbb3e26326ae960efa1",
     "rentals.css": "3ff5c433d0d63a73eea4efcfea940b5fa61024114d15b08a9766289915bf3e90",
     "seleraku-pages.css": "b29491ff4570452c3eac22dabc149d4af583c29cb64792a50e766160329f192c"
   },

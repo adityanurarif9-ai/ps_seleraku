@@ -1,2 +1,2 @@
-<div class="app-splash" role="status" aria-live="polite"><div><img src="{{ \App\Support\SiteAsset::url('logo-ps-seleraku-transparent.png') }}" alt="PS Seleraku" width="2172" height="724" decoding="async"><span class="app-splash-spinner" aria-hidden="true"></span><p>Menyiapkan waktu mainmu…</p></div></div>
+<div class="app-splash" role="status" aria-live="polite"><div><img src="{{ \App\Support\SiteAsset::url('logo-ps-seleraku-transparent.png') }}" alt="PS Seleraku" width="2172" height="724" decoding="async" loading="lazy"><span class="app-splash-spinner" aria-hidden="true"></span><p>Menyiapkan waktu mainmu…</p></div></div>
 <div class="page-loading" role="progressbar" aria-label="Memuat halaman" hidden></div>
