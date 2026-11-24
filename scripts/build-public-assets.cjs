@@ -23,6 +23,7 @@ const hash = value => crypto.createHash('sha256').update(value).digest('hex');
     files['logo-ps-seleraku-transparent.png'] = await image('logo-ps-seleraku-transparent.png', 'brand-logo-640', 640, 90);
     files['icons/brand-v2-192.png'] = await image('icons/brand-v2-192.png', 'brand-icon-96', 96, 88);
     files['hero.png'] = await image('hero.png', 'hero-1280', 1280, 80);
+    const brand = { small: await image('logo-ps-seleraku-transparent.png', 'brand-logo-320', 320, 84) };
     const login = {
         desktop: await image('login-console.jpg', 'login-desktop-1280', 1280, 78),
         mobile: await image('login-console.jpg', 'login-mobile-640', 640, 76),
@@ -44,7 +45,7 @@ const hash = value => crypto.createHash('sha256').update(value).digest('hex');
         files[name] = output;
         fs.writeFileSync('public/' + output, code);
     }
-    const data = JSON.stringify({ files, source_hashes, login }, null, 2);
+    const data = JSON.stringify({ files, source_hashes, login, brand }, null, 2);
     fs.writeFileSync('config/performance-assets.php', `<?php\n\nreturn json_decode(<<<'JSON'\n${data}\nJSON, true);\n`);
     console.log(`Built ${Object.keys(files).length} optimized public assets.`);
 })().catch(error => { console.error(error.message); process.exitCode = 1; });

@@ -6,9 +6,8 @@
     <meta name="theme-color" content="#0a0d25">
     <title>Daftar · PS Seleraku</title>
 @include('partials.performance-head', ['authPage'=>true])
-    <link rel="stylesheet" href="{{ \App\Support\SiteAsset::url('login.css') }}?v=performance-1">
     <script src="{{ \App\Support\SiteAsset::url('login.js') }}?v=performance-1" defer></script>
-@include('partials.pwa-head')
+@include('partials.pwa-head', ['authPage'=>true])
 </head>
 <body>
 @include('partials.pwa-loading')
@@ -16,7 +15,7 @@
         <section class="intro" aria-labelledby="intro-title">
             <div class="intro-content">
                 <a class="brand" href="{{ route('login') }}" aria-label="PS Seleraku">
-                    <img src="{{ \App\Support\SiteAsset::url('logo-ps-seleraku-transparent.png') }}" alt="PS SELERAKU — Rental Konsol" width="2172" height="724" decoding="async">
+                    <img srcset="{{ asset(config('performance-assets.brand.small')) }} 320w, {{ \App\Support\SiteAsset::url('logo-ps-seleraku-transparent.png') }} 640w" sizes="(max-width: 700px) 158px, 248px" src="{{ \App\Support\SiteAsset::url('logo-ps-seleraku-transparent.png') }}" alt="PS SELERAKU — Rental Konsol" width="2172" height="724" decoding="async">
                 </a>
                 <h1 id="intro-title">ELEVATE YOUR <br> <span>GAMING</span> <br> EXPERIENCE</h1>
                 <p>Buat jadwal mainmu, pesan konsol favorit, dan pantau waktu rental dalam satu akun.</p>

@@ -34,12 +34,6 @@
     });
     document.addEventListener('submit', event => {
         queueMicrotask(() => {
-            if (event.defaultPrevented || event.target.hasAttribute('wire:submit')) return;
-            begin(event.submitter || event.target.querySelector('[type="submit"]'));
-        });
-    });
-    document.addEventListener('submit', event => {
-        queueMicrotask(() => {
             if (event.defaultPrevented) return;
             const form = event.target;
             if (form.hasAttribute('wire:submit') || (form.target && form.target !== '_self')) return;

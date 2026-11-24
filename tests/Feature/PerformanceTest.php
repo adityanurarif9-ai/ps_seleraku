@@ -28,6 +28,8 @@ class PerformanceTest extends TestCase
     {
         $this->app->instance('env', 'production');
         $this->assertStringContainsString('/optimized/login.', SiteAsset::url('login.js'));
+        $this->get('/')->assertOk()->assertSee('<style>', false)->assertDontSee('rel="stylesheet"', false)->assertSee('srcset=', false);
+        $this->assertStringContainsString('font-family:Poppins', SiteAsset::styles('fonts/poppins-v24.css'));
         $this->assertSame('https://example.com/custom.jpg', SiteAsset::url('https://example.com/custom.jpg'));
     }
 }

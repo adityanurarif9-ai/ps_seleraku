@@ -5,7 +5,9 @@
 <meta name="apple-mobile-web-app-title" content="PS Seleraku">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="theme-color" content="#0a0d25">
+@unless($authPage ?? false)
 <link rel="stylesheet" href="{{ \App\Support\SiteAsset::url('pwa.css') }}?v=brand-2">
+@endunless
 <script src="{{ \App\Support\SiteAsset::url('pwa.js') }}?v=brand-2" defer></script>
 <script>
 (() => {
