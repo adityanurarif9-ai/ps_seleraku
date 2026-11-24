@@ -546,22 +546,13 @@
         });
     });
 
-    const openBookingModal = ({ itemId, title, subtitle, serviceId, durationId, scheduleId }) => {
-        if (!bookingModal) return;
-        if (itemId && BOOKING_ITEMS.some((x) => x.id === itemId)) {
-            state.itemId = itemId;
-        }
-        const chosen = getSelectedItem();
-        state.serviceId = serviceId || chosen.defaultService || 'express';
-        state.durationId = durationId || chosen.defaultDuration || (getSelectedService().mode === 'onsite' ? '2h' : '1d');
-        state.scheduleId = scheduleId || 'now';
-
-        if (bookingTitleEl) bookingTitleEl.textContent = title || 'Reservasi Rental';
-        if (bookingSubtitleEl) bookingSubtitleEl.textContent = subtitle || 'Klik setiap kolom untuk memilih opsi lengkap.';
-
-        closeAllCustomDropdowns();
-        renderBookingUI();
-        bookingModal.removeAttribute('hidden');
+    const openBookingModal = ({ itemId = '', serviceId = '' } = {}) => {
+        const target = new URL(document.body.dataset.reservationUrl || '/reservasi/baru', location.origin);
+        const key = String(itemId).toLowerCase();
+        const platform = key.includes('nintendo') ? 'nintendo' : key.includes('ps3') ? 'ps3' : key.includes('ps4') ? 'ps4' : key.includes('ps5') ? 'ps5' : '';
+        if (platform) target.searchParams.set('platform', platform);
+        if (location.pathname.includes('sewa') || key.startsWith('paket-') || serviceId === 'express') target.searchParams.set('mode', 'daily');
+        location.assign(target.href);
     };
 
     document.querySelectorAll('[data-open-booking]').forEach((btn) => {
@@ -577,34 +568,9 @@
         });
     });
 
-    if (bookingForm) {
-        bookingForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const item = getSelectedItem();
-            const service = getSelectedService();
-            const dur = getSelectedDuration();
-            const sch = getSelectedSchedule();
-            const games = GAMES_CATALOG.filter((g) => state.gameIds.includes(g.id)).map((g) => g.title.split(' (')[0]);
-            const totalText = formatRp(calculateTotal());
-
-            const bookings = JSON.parse(localStorage.getItem('ps_seleraku_bookings') || '[]');
-            bookings.unshift({
-                item: item.title,
-                service: service.title,
-                duration: dur.title,
-                schedule: sch.title,
-                games,
-                total: totalText,
-                createdAt: new Date().toISOString(),
-            });
-            localStorage.setItem('ps_seleraku_bookings', JSON.stringify(bookings.slice(0, 10)));
-            closeAllModals();
-            showToast(
-                'Pesanan Berhasil Dicatat!',
-                `${item.title} (${dur.title}) • ${service.title.split(' (')[0]} • Jadwal: ${sch.title.split(' (')[0]} • Estimasi ${totalText}`
-            );
-        });
-    }
+    if (bookingForm) bookingForm.addEventListener('submit', event => {
+        event.preventDefault(); openBookingModal({ itemId: state.itemId, serviceId: state.serviceId });
+    });
 
     // ==================== UNIT DETAIL MODAL (PAGE KE2) ====================
     const detailModal = document.querySelector('#ps-detail-modal');

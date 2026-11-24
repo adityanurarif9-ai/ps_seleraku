@@ -4,6 +4,7 @@ namespace App\Filament\Pages;
 
 use App\Filament\Resources\CatalogItemResource;
 use App\Filament\Resources\PlaySessionResource;
+use App\Filament\Resources\RentalReservationResource;
 use Filament\Actions\Action;
 use Filament\Pages\Dashboard as BaseDashboard;
 
@@ -24,6 +25,7 @@ class Dashboard extends BaseDashboard
     protected function getHeaderActions(): array
     {
         return [
+            Action::make('reservations')->label('Reservasi pengguna')->url(RentalReservationResource::getUrl()),
             Action::make('sessions')->label('Atur waktu main')->url(PlaySessionResource::getUrl()),
             Action::make('catalog')->label('Kelola katalog')->url(CatalogItemResource::getUrl()),
             Action::make('website')->label('Lihat website')->color('gray')->url(route('home-page')),

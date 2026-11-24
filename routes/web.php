@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GoogleLoginController;
+use App\Http\Controllers\RentalReservationController;
 use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,15 @@ Route::middleware('auth')->group(function () {
 
     Route::view('/menu-fnb', 'menu-fnb')->name('menu-fnb');
     Route::view('/menu fnb', 'menu-fnb');
+
+    Route::get('/rental-saya', [RentalReservationController::class, 'index'])->name('reservations.index');
+    Route::get('/reservasi/baru', [RentalReservationController::class, 'create'])->name('reservations.create');
+    Route::get('/reservasi/ketersediaan', [RentalReservationController::class, 'availability'])->middleware('throttle:60,1,rental-availability-')->name('reservations.availability');
+    Route::post('/reservasi', [RentalReservationController::class, 'store'])->middleware('throttle:10,1,rental-create-')->name('reservations.store');
+    Route::get('/reservasi/{reservation}', [RentalReservationController::class, 'show'])->name('reservations.show');
+    Route::get('/reservasi/{reservation}/status', [RentalReservationController::class, 'status'])->middleware('throttle:60,1,rental-status-')->name('reservations.status');
+    Route::post('/reservasi/{reservation}/batal', [RentalReservationController::class, 'cancel'])->name('reservations.cancel');
+    Route::post('/reservasi/{reservation}/tambah-waktu', [RentalReservationController::class, 'extend'])->middleware('throttle:10,1,rental-extension-')->name('reservations.extend');
 
     Route::post('/logout', [SessionController::class, 'destroy'])->name('logout');
 });

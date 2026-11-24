@@ -29,7 +29,8 @@ class DatabaseSeeder extends Seeder
             ['Kentang Goreng', 'Camilan', 8000, 8],
             ['Keripik', 'Camilan', 5000, 10],
         ] as [$name, $category, $price, $stock]) {
-            CatalogItem::firstOrCreate(compact('name', 'category'), compact('price', 'stock'));
+            $daily_price = ['PlayStation 5' => 150000, 'PlayStation 4' => 90000, 'PlayStation 3' => 50000, 'Nintendo Switch' => 120000][$name] ?? null;
+            CatalogItem::firstOrCreate(compact('name', 'category'), compact('price', 'stock', 'daily_price'));
         }
     }
-};
+}

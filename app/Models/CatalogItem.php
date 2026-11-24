@@ -13,10 +13,10 @@ class CatalogItem extends Model
         'Camilan' => 'Camilan',
     ];
 
-    protected $fillable = ['name', 'category', 'price', 'stock'];
+    protected $fillable = ['name', 'category', 'price', 'stock', 'daily_price'];
 
     protected function casts(): array
     {
-        return ['price' => 'integer', 'stock' => 'integer'];
+        return ['price' => 'integer', 'stock' => 'integer', 'daily_price' => 'integer'];
     }
 }

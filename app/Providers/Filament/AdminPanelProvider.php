@@ -6,6 +6,8 @@ use App\Filament\Auth\AdminLogin;
 use App\Filament\Pages\Dashboard;
 use App\Filament\Resources\CatalogItemResource;
 use App\Filament\Resources\PlaySessionResource;
+use App\Filament\Resources\RentalExtensionRequestResource;
+use App\Filament\Resources\RentalReservationResource;
 use App\Filament\Widgets\CatalogOverview;
 use App\Filament\Widgets\LowStockItems;
 use App\Http\Middleware\AuthenticateAdmin;
@@ -37,7 +39,7 @@ class AdminPanelProvider extends PanelProvider
             ->colors(['primary' => Color::Blue])
             ->pages([Dashboard::class])
             ->widgets([CatalogOverview::class, LowStockItems::class])
-            ->resources([CatalogItemResource::class, PlaySessionResource::class])
+            ->resources([CatalogItemResource::class, PlaySessionResource::class, RentalReservationResource::class, RentalExtensionRequestResource::class])
             ->middleware(['web', DisableBladeIconComponents::class, DispatchServingFilamentEvent::class])
             ->authMiddleware([AuthenticateAdmin::class], isPersistent: true);
     }

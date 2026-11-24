@@ -9,9 +9,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('seleraku-pages.css?v=logo-sync-1') }}">
-    <script src="{{ asset('seleraku-pages.js?v=desktop-3-4-2') }}" defer></script>
+    <script src="{{ asset('seleraku-pages.js?v=reservations-1') }}" defer></script>
 </head>
-<body class="ps-page-body">
+<body class="ps-page-body" data-reservation-url="{{ route('reservations.create') }}">
     @include('partials.ps-navbar', ['activePage' => 'menu-fnb'])
 
     <main>

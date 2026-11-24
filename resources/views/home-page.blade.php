@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Home Page · PS Seleraku</title>
     <link rel="stylesheet" href="{{ asset('seleraku-pages.css') }}?v=logo-sync-1">
-    <script src="{{ asset('seleraku-pages.js') }}?v=console-motion-4" defer></script>
+    <script src="{{ asset('seleraku-pages.js') }}?v=reservations-1?v=console-motion-4" defer></script>
 </head>
-<body class="ps-page-body">
+<body class="ps-page-body" data-reservation-url="{{ route('reservations.create') }}">
 @include('partials.ps-navbar', ['activePage' => 'home-page'])
 
 <main>

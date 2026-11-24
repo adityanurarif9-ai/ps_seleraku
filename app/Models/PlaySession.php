@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class PlaySession extends Model
 {
@@ -17,6 +18,11 @@ class PlaySession extends Model
     public function catalogItem(): BelongsTo
     {
         return $this->belongsTo(CatalogItem::class);
+    }
+
+    public function rentalReservation(): HasOne
+    {
+        return $this->hasOne(RentalReservation::class);
     }
 
     public function remaining(): int
@@ -38,6 +44,6 @@ class PlaySession extends Model
 
     public function estimatedPrice(): int
     {
-        return (int) round($this->total_seconds * $this->hourly_rate / 3600);
+        return $this->rentalReservation?->total_price ?? (int) round($this->total_seconds * $this->hourly_rate / 3600);
     }
 }

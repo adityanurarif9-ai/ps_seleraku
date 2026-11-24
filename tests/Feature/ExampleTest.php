@@ -4,13 +4,17 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Database\Seeders\DatabaseSeeder;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ExampleTest extends TestCase
 {
+    use RefreshDatabase;
+
     protected function setUp(): void
     {
         parent::setUp();
+        config(['services.turnstile.site_key' => null, 'services.turnstile.secret' => null]);
         $this->seed(DatabaseSeeder::class);
     }
 
@@ -31,8 +35,8 @@ class ExampleTest extends TestCase
 
         $response->assertStatus(200)
             ->assertSee('Masuk ke akunmu')
-            ->assertSee('Pemain')
-            ->assertSee('Admin');
+            ->assertSee('Akun pemain')
+            ->assertSee('Akun admin');
     }
 
     public function test_login_fails_with_invalid_credentials(): void

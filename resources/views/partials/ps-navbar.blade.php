@@ -6,6 +6,7 @@
 
         <div class="ps-nav-right">
             <nav class="ps-nav-links" aria-label="Navigasi Utama">
+                <a class="ps-nav-link {{ $activePage === 'rentals' ? 'is-active' : '' }}" href="{{ route('reservations.index') }}">RENTAL SAYA</a>
                 <a class="ps-nav-link {{ $activePage === 'home-page' ? 'is-active' : '' }}" href="{{ route('home-page') }}">BERANDA</a>
                 <a class="ps-nav-link" href="{{ route('home-page') }}#tentang">TENTANG</a>
                 <a class="ps-nav-link" href="{{ route('home-page') }}#paket">PAKET</a>
@@ -15,7 +16,7 @@
             </nav>
 
             @if($activePage === 'home-page')
-                <a class="ps-nav-cta" href="{{ route('page-ke2') }}#unit-catalog">PESAN SEKARANG</a>
+                <a class="ps-nav-cta" href="{{ route('reservations.create') }}">PESAN SEKARANG</a>
             @else
                 <button class="ps-nav-cta" type="button" data-open-booking data-item-id="ps5-vip-01" data-title="Reservasi Unit PlayStation" data-subtitle="Pilih unit, layanan, durasi, jadwal, dan game favorit Anda.">PESAN SEKARANG</button>
             @endif
@@ -29,6 +30,8 @@
                 </button>
                 <div id="ps-account-menu" class="ps-account-dropdown" hidden>
                     @auth
+                        <a class="ps-dropdown-item" href="{{ route('reservations.index') }}">Rental Saya <span>→</span></a>
+                        <a class="ps-dropdown-item" href="{{ route('reservations.create') }}">Reservasi Baru <span>↗</span></a>
                         <div class="ps-account-meta">
                             <strong>{{ auth()->user()?->name }}</strong>
                             <span>{{ auth()->user()?->email }}</span>
@@ -61,6 +64,7 @@
     </div>
 
     <div id="ps-mobile-drawer" class="ps-mobile-drawer">
+        <a class="ps-nav-link" href="{{ route('reservations.index') }}">RENTAL SAYA</a>
         <a class="ps-nav-link {{ $activePage === 'home-page' ? 'is-active' : '' }}" href="{{ route('home-page') }}">BERANDA</a>
         <a class="ps-nav-link" href="{{ route('home-page') }}#tentang">TENTANG</a>
         <a class="ps-nav-link" href="{{ route('home-page') }}#paket">PAKET</a>

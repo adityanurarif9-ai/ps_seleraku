@@ -28,6 +28,6 @@ return Application::configure(basePath: dirname(__DIR__))
                 return redirect()->route('login', status: 303)->with('session_notice', 'Sesi sudah berakhir. Silakan masuk kembali.');
             }
 
-            return redirect()->route('catalog', status: 303)->with('session_notice', 'Halaman sudah diperbarui. Klik Keluar sekali lagi.');
+            return redirect()->route('home-page', status: 303)->with('session_notice', 'Halaman sudah diperbarui. Klik Keluar sekali lagi.');
         });
     })->create();

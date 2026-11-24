@@ -33,6 +33,7 @@ class CatalogItemResource extends Resource
                 ->unique(ignoreRecord: true, modifyRuleUsing: fn (Unique $rule, Get $get) => $rule->where('category', $get('category'))),
             Select::make('category')->label('Kategori')->options(CatalogItem::CATEGORIES)->required(),
             TextInput::make('price')->label('Harga / tarif per jam')->integer()->minValue(0)->maxValue(100000000)->prefix('Rp')->required(),
+            TextInput::make('daily_price')->label('Tarif harian / 24 jam')->integer()->minValue(0)->maxValue(100000000)->prefix('Rp')->helperText('Kosongkan jika konsol tidak tersedia untuk sewa harian.'),
             TextInput::make('stock')->label('Stok / unit tersedia')->integer()->minValue(0)->maxValue(100000)->required(),
         ]);
     }

@@ -54,3 +54,15 @@ File .env.production.local hanya untuk konfigurasi privat operator dan tidak bol
 Jalankan migration sebelum deployment memakai kredensial database target. Jangan menjalankan migrate:fresh pada produksi.
 Daftarkan https://ps.flexboxstudio.site/auth/google/callback pada OAuth Client Google.
 Daftarkan hostname ps.flexboxstudio.site pada Turnstile. Kredensial demo lokal tidak otomatis dibuat di produksi.
+
+
+## Reservasi pelanggan
+
+Pelanggan membuka /reservasi/baru, memilih konsol, cara sewa, durasi dan jadwal WIB. Formulir menampilkan tarif server serta kapasitas yang tersedia untuk seluruh rentang waktu.
+Permintaan tersimpan sebagai menunggu konfirmasi. Permintaan belum mengunci stok sampai admin mengonfirmasi di menu Reservasi pengguna.
+Admin memulai sesi paling awal 15 menit sebelum jadwal. Sesi ini tertaut ke pemilik reservasi dan tampil di /rental-saya.
+Permintaan tambah waktu tersedia saat sesi aktif. Admin menyetujui atau menolak melalui menu Permintaan tambah waktu. Persetujuan memeriksa ulang benturan reservasi.
+Riwayat dan rincian tarif tetap tersimpan. Biaya merupakan rincian durasi, bukan status pembayaran. Tidak ada integrasi pembayaran otomatis.
+Sewa harian mengikuti daily_price di katalog admin. Tarif tambahan menit dihitung proporsional dari tarif yang dikunci saat reservasi dibuat.
+Sesi yang dijeda tetap memakai kapasitas; admin perlu menyelesaikan atau melanjutkannya sebelum memulai pemakaian unit lain yang bentrok.
+Pengujian memakai SQLite in-memory, tidak menghapus data Laragon atau produksi.
