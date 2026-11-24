@@ -2,12 +2,13 @@
 <html lang="id">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#0a0d25">
     <title>Hubungkan Google · PS Seleraku</title>
-    <link rel="stylesheet" href="{{ asset('login.css') }}?v=auth-2">
+    <link rel="stylesheet" href="{{ asset('login.css') }}?v=mobile-app-1">
     <script src="{{ asset('login.js') }}?v=auth-2" defer></script>
 
+@include('partials.pwa-head')
 </head>
 <body>
     <main class="login-page">
@@ -16,7 +17,7 @@
                 <a class="brand" href="{{ route('login') }}" aria-label="PS Seleraku">
                     <img src="{{ asset('logo-ps-seleraku-transparent.png') }}" alt="PS SELERAKU — Rental Konsol" width="2172" height="724">
                 </a>
-                <h1 id="intro-title">ELEVATE YOUR<br> <span>GAMING</span><br> EXPERIENCE</h1>
+                <h1 id="intro-title">ELEVATE YOUR <br> <span>GAMING</span> <br> EXPERIENCE</h1>
                 <p>Buat jadwal mainmu, pesan konsol favorit, dan pantau waktu rental dalam satu akun.</p>
             </div>
         </section>

@@ -2,14 +2,15 @@
 <html lang="id">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#0a0d25">
     <title>Daftar · PS Seleraku</title>
-    <link rel="stylesheet" href="{{ asset('login.css') }}?v=auth-2">
+    <link rel="stylesheet" href="{{ asset('login.css') }}?v=mobile-app-1">
     <script src="{{ asset('login.js') }}?v=auth-2" defer></script>
     @if(config('services.turnstile.site_key'))
         <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onTurnstileLoad&amp;render=explicit" defer></script>
     @endif
+@include('partials.pwa-head')
 </head>
 <body>
     <main class="login-page">
@@ -18,11 +19,13 @@
                 <a class="brand" href="{{ route('login') }}" aria-label="PS Seleraku">
                     <img src="{{ asset('logo-ps-seleraku-transparent.png') }}" alt="PS SELERAKU — Rental Konsol" width="2172" height="724">
                 </a>
-                <h1 id="intro-title">ELEVATE YOUR<br> <span>GAMING</span><br> EXPERIENCE</h1>
+                <h1 id="intro-title">ELEVATE YOUR <br> <span>GAMING</span> <br> EXPERIENCE</h1>
                 <p>Buat jadwal mainmu, pesan konsol favorit, dan pantau waktu rental dalam satu akun.</p>
             </div>
         </section>
         <section class="form-side" aria-labelledby="login-title">
+            <div class="auth-stack">
+            @include('partials.install-app')
             <div class="login-card">
                 <h2 id="login-title">BUAT AKUN</h2>
                 <p class="subtitle">Daftar untuk memesan konsol dan memantau waktu mainmu.</p>
@@ -62,6 +65,7 @@
                 @endif
                 <p class="signup">Sudah punya akun? <a href="{{ route('login') }}">Masuk di sini</a></p>
 
+            </div>
             </div>
         </section>
     </main>

@@ -1,0 +1,57 @@
+[hidden] { display: none !important; }
+.auth-stack { width: 100%; max-width: 402px; display: grid; gap: 14px; min-width: 0; }
+.install-app { display: grid; grid-template-columns: 44px minmax(0,1fr) auto; gap: 12px; align-items: center; padding: 14px; color: #dfe8f8; background: #111a32; border: 1px solid #303d58; border-radius: 12px; }
+.install-app img { border-radius: 10px; }
+.install-app strong { display: block; font-size: 11px; line-height: 1.5; font-weight: 600; }
+.install-app p { margin: 3px 0 0; font-size: 10px; line-height: 1.5; color: #aebcd2; }
+.install-app button { min-height: 44px; padding: 10px 13px; border: 1px solid #5f82ba; border-radius: 8px; background: #294d85; color: #fff; font: inherit; font-size: 11px; font-weight: 600; cursor: pointer; }
+.install-app button:hover { background: #365f9f; }
+.install-guide { width: min(420px,calc(100% - 32px)); max-height: calc(100svh - 48px); overflow-y: auto; border: 1px solid #dfe5ef; border-radius: 16px; padding: 24px; background: #fff; color: #172033; font-family: Poppins,Arial,sans-serif; }
+.install-guide::backdrop { background: #070e25bd; }
+.install-guide-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; }
+.install-guide img { border-radius: 12px; }
+.install-guide-top button { min-width: 44px; min-height: 44px; border: 0; border-radius: 8px; background: #f0f3f8; color: #3a4960; font-size: 25px; cursor: pointer; }
+.install-guide h2 { margin: 0 0 12px; font-size: 23px; line-height: 1.3; letter-spacing: -.03em; }
+.install-guide p,.install-guide li { font-size: 13px; line-height: 1.8; color: #59667b; }
+.install-guide p { margin: 0 0 20px; }
+.install-guide ol { padding-left: 22px; margin: 0 0 24px; }
+.install-guide li { padding-left: 6px; margin-bottom: 12px; }
+.install-guide .install-guide-note { padding-top: 16px; border-top: 1px solid #e4e9f1; font-size: 11px; }
+.install-guide-done { width: 100%; min-height: 48px; padding: 12px; border: 0; border-radius: 8px; background: #284c85; color: #fff; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; }
+.install-guide :focus-visible,.install-app :focus-visible { outline: 3px solid #749de6; outline-offset: 3px; }
+.ps-page-body { padding-bottom: env(safe-area-inset-bottom,0px); }
+.ps-header { padding-top: env(safe-area-inset-top,0px); }
+@media(min-width:1500px) { .auth-stack { max-width: 450px; } }
+@media(max-width:700px) {
+    .login-page { min-height: 100svh; }
+    .login-page .intro { min-height: 0; padding: max(24px,env(safe-area-inset-top,0px)) max(22px,env(safe-area-inset-left,0px)) 22px; }
+    .intro-content { width: 100%; }
+    .login-page .brand { margin-bottom: 14px; }
+    .login-page .brand img { width: 158px; max-height: 55px; }
+    .login-page h1 { font-size: clamp(25px,7.2vw,33px); line-height: 1.14; max-width: 360px; margin: 0; letter-spacing: -.035em; }
+    .login-page .intro p { display: none; }
+    .login-page .form-side { display: block; padding: 0 max(16px,env(safe-area-inset-left,0px)) max(28px,env(safe-area-inset-bottom,0px)); }
+    .auth-stack { max-width: 480px; margin-inline: auto; }
+    .login-page .login-card { max-width: none; padding: 27px 22px; border-radius: 14px; }
+    .login-card h2 { font-size: 24px; }
+    .login-card .subtitle { font-size: 13px; margin-bottom: 24px; }
+    .login-form > label,.password-label label { font-size: 11px; }
+    .login-form input,.password-field input { min-height: 50px; font-size: 16px; }
+    .login-form > input { margin-bottom: 18px; }
+    .password-label { margin-bottom: 6px; }
+    .login-card .text-button { min-height: 44px; font-size: 10px; }
+    .login-form .remember { min-height: 44px; margin: 10px 0; font-size: 12px; }
+    .remember input { width: 20px; height: 20px; min-height: 20px; }
+    .login-card .submit { min-height: 50px; font-size: 12px; }
+    .google-button { min-height: 48px; font-size: 13px; padding: 10px; }
+    .signup { font-size: 12px; margin-top: 22px; }
+    .field-help { font-size: 11px; }
+    #verification-status { font-size: 11px; }
+    .ps-page-body input,.ps-page-body select,.ps-page-body textarea { font-size: 16px; }
+    .rs-form input,.rs-form select,.rs-form textarea,.rs-extension select { font-size: 16px; }
+    .rs-panel { overflow-wrap: anywhere; }
+    .rs-primary,.rs-danger,.rs-tabs a { min-height: 44px; }
+}
+@media(max-width:370px) { .install-app { grid-template-columns: 36px minmax(0,1fr) auto; gap: 9px; padding: 10px; }.install-app img { width: 36px; height: 36px; }.install-app strong { font-size: 10px; }.install-app button { padding-inline: 10px; }.login-page .login-card { padding-inline: 18px; } }
+@media(display-mode:standalone) { .install-app { display: none; } }
+@media(prefers-reduced-motion:reduce) { .install-guide { scroll-behavior: auto; } }

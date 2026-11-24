@@ -2,10 +2,11 @@
 <html lang="id">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Page Ke2 · Unit &amp; Game · PS Seleraku</title>
     <link rel="stylesheet" href="{{ asset('seleraku-pages.css') }}?v=logo-sync-1">
     <script src="{{ asset('seleraku-pages.js') }}?v=catalog-sync-2" defer></script>
+@include('partials.pwa-head')
 </head>
 <body class="ps-page-body" data-reservation-url="{{ route('reservations.create') }}">
 @include('partials.ps-navbar', ['activePage' => 'page-ke2'])

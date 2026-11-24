@@ -80,3 +80,11 @@ Koneksi Google memiliki batas waktu; kegagalan dibedakan menjadi sesi, koneksi, 
 Kartu konsol, tarif per jam/harian, pilihan sewa di beranda, menu kedai, gambar, deskripsi dan game memakai catalog_items. Ubah melalui /admin/catalog-items; muat ulang website untuk melihat perubahan. Menonaktifkan Tampilkan di website juga menutup reservasi baru untuk item tersebut.
 Stok konsol adalah kapasitas total. Label tersedia menghitung sesi berjalan/dijeda dan reservasi terkonfirmasi untuk 1 jam (lounge) atau 24 jam (harian) ke depan; formulir memeriksa rentang jadwal pilihan pengguna. Katalog tidak lagi menampilkan unit VIP, maintenance atau jam selesai contoh.
 Migrasi mempertahankan harga dan stok lama, menambahkan metadata konsol, dan memasukkan menu yang sebelumnya hanya ada di halaman. Menu baru memiliki stok awal nol; admin perlu mengisi stok nyata. Pengelolaan katalog ini tidak mengubah pencatatan pesanan F&B lokal menjadi pemrosesan pesanan server.
+
+
+## Aplikasi web dan mobile
+
+Halaman /login dan /register menyediakan tombol Pasang. Android memakai beforeinstallprompt jika browser menawarkannya; jika belum tersedia, tombol membuka panduan menu browser. iPhone/iPad memakai panduan Safari → Bagikan → Tambah ke Layar Utama. Hasilnya aplikasi web terpasang (PWA), bukan berkas APK/IPA atau publikasi Play Store/App Store.
+Manifest dan metadata disertakan pada seluruh halaman pelanggan. Ikon persegi tersedia untuk Android, maskable dan Apple. Tampilan mobile memakai safe area, kolom minimal 16px untuk mencegah zoom fokus iOS, serta target sentuh lebih besar.
+Service worker hanya menyimpan halaman offline dan ikon publik. Tidak menyimpan halaman akun, respons API, token, callback Google, atau transaksi reservasi. Saat offline, pengguna diminta terhubung kembali; reservasi tidak dikirim atau diantrekan secara offline.
+Pengujian tambahan: node --test tests/Browser/pwa.test.cjs. Pengujian instalasi pada perangkat Android/iPhone fisik tetap perlu dilakukan di domain HTTPS produksi.
