@@ -4,8 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Home Page · PS Seleraku</title>
-    <link rel="stylesheet" href="{{ asset('seleraku-pages.css') }}?v=logo-sync-1">
-    <script src="{{ asset('seleraku-pages.js') }}?v=catalog-sync-2" defer></script>
+@include('partials.performance-head', ['authPage'=>false])
+    <link rel="stylesheet" href="{{ \App\Support\SiteAsset::url('seleraku-pages.css') }}?v=logo-sync-1">
+    <script src="{{ \App\Support\SiteAsset::url('seleraku-pages.js') }}?v=catalog-sync-2" defer></script>
 @include('partials.pwa-head')
 </head>
 <body class="ps-page-body" data-reservation-url="{{ route('reservations.create') }}">
@@ -73,7 +74,7 @@
         <div class="ps-container">
             <div class="ps-about-grid">
                 <div class="ps-showcase-card">
-                    <img class="ps-showcase-img" src="{{ asset('hero.png') }}" alt="Setup Konsol PlayStation 5 Premium PS Seleraku">
+                    <img class="ps-showcase-img" src="{{ \App\Support\SiteAsset::url('hero.png') }}" alt="Setup Konsol PlayStation 5 Premium PS Seleraku" decoding="async" loading="lazy">
                     <div class="ps-showcase-glow" aria-hidden="true"></div>
                     <div class="ps-badge-original">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -170,7 +171,7 @@
                 @foreach($packages as $pkg)
                     <article class="ps-plan-card {{ $pkg['featured'] ? 'is-featured' : '' }}">
                         <div class="ps-plan-top">
-                            <img class="ps-plan-img" src="{{ asset($pkg['image']) }}" alt="{{ $pkg['name'] }}">
+                            <img class="ps-plan-img" src="{{ \App\Support\SiteAsset::url($pkg['image']) }}" alt="{{ $pkg['name'] }}" decoding="async" loading="lazy">
                             <span class="ps-plan-pill {{ $pkg['pillClass'] }}">{{ $pkg['pill'] }}</span>
                             @if($pkg['ribbon'])
                                 <span class="ps-ribbon">{{ $pkg['ribbon'] }}</span>

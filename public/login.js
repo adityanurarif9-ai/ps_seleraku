@@ -8,6 +8,35 @@ const retry = document.querySelector('#verification-retry');
 const widget = document.querySelector('#turnstile-widget');
 let ready = !widget;
 let verificationTimer;
+let verificationRequested = false;
+let widgetRendered = false;
+const startButton = document.querySelector('#verification-start');
+function startVerification() {
+    if (!widget || verificationRequested) return;
+    verificationRequested = true;
+    if (startButton) startButton.hidden = true;
+    showVerification('Menyiapkan verifikasi keamanan…', false);
+    clearTimeout(verificationTimer);
+    verificationTimer = setTimeout(() => {
+        if (!ready) showVerification('Verifikasi belum merespons. Coba ulangi verifikasi.', false, true);
+    }, 20000);
+    const script = document.createElement('script');
+    script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onTurnstileLoad&render=explicit';
+    script.async = true;
+    script.id = 'turnstile-api';
+    script.onerror = () => {
+        clearTimeout(verificationTimer);
+        verificationRequested = false;
+        script.remove();
+        showVerification('Verifikasi gagal dimuat. Periksa koneksi lalu coba lagi.', false, true);
+    };
+    document.head.append(script);
+}
+startButton?.addEventListener('click', startVerification);
+if (widget) {
+    form.addEventListener('focusin', startVerification, { once: true });
+    form.addEventListener('input', startVerification, { once: true });
+}
 
 function showVerification(message, verified, canRetry = false) {
     ready = verified;
@@ -41,7 +70,8 @@ window.onTurnstileExpired = () => {
     showVerification('Verifikasi kedaluwarsa. Verifikasi ulang untuk melanjutkan.', false, true);
 };
 window.onTurnstileLoad = () => {
-    if (!widget) return;
+    if (!widget || widgetRendered) return;
+    widgetRendered = true;
     window.turnstile.render(widget, {
         sitekey: widget.dataset.sitekey,
         theme: 'light',
@@ -54,24 +84,21 @@ window.onTurnstileLoad = () => {
     });
 };
 
-if (widget) {
-    showVerification('Menyiapkan verifikasi Cloudflare…', false);
-    verificationTimer = setTimeout(() => {
-        if (!ready) showVerification('Cloudflare belum merespons. Coba ulangi verifikasi.', false, true);
-    }, 20000);
-}
 retry?.addEventListener('click', () => {
     if (window.turnstile) {
         showVerification('Memverifikasi ulang…', false);
         window.turnstile.reset();
     } else {
-        location.reload();
+        verificationRequested = false;
+        document.querySelector('#turnstile-api')?.remove();
+        startVerification();
     }
 });
 form.addEventListener('submit', event => {
     const token = form.querySelector('[name="cf-turnstile-response"]');
     if (widget && (!ready || !token?.value)) {
         event.preventDefault();
+        startVerification();
         showVerification('Selesaikan verifikasi Cloudflare terlebih dahulu.', false, true);
         return;
     }

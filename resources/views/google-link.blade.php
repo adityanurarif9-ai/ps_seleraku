@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#0a0d25">
     <title>Hubungkan Google · PS Seleraku</title>
-    <link rel="stylesheet" href="{{ asset('login.css') }}?v=mobile-app-1">
-    <script src="{{ asset('login.js') }}?v=auth-2" defer></script>
+@include('partials.performance-head', ['authPage'=>true])
+    <link rel="stylesheet" href="{{ \App\Support\SiteAsset::url('login.css') }}?v=performance-1">
+    <script src="{{ \App\Support\SiteAsset::url('login.js') }}?v=performance-1" defer></script>
 
 @include('partials.pwa-head')
 </head>
@@ -16,7 +17,7 @@
         <section class="intro" aria-labelledby="intro-title">
             <div class="intro-content">
                 <a class="brand" href="{{ route('login') }}" aria-label="PS Seleraku">
-                    <img src="{{ asset('logo-ps-seleraku-transparent.png') }}" alt="PS SELERAKU — Rental Konsol" width="2172" height="724">
+                    <img src="{{ \App\Support\SiteAsset::url('logo-ps-seleraku-transparent.png') }}" alt="PS SELERAKU — Rental Konsol" width="2172" height="724" decoding="async">
                 </a>
                 <h1 id="intro-title">ELEVATE YOUR <br> <span>GAMING</span> <br> EXPERIENCE</h1>
                 <p>Buat jadwal mainmu, pesan konsol favorit, dan pantau waktu rental dalam satu akun.</p>

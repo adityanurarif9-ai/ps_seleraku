@@ -11,6 +11,11 @@ use Illuminate\Validation\ValidationException;
 
 class SessionController extends Controller
 {
+    public function landing()
+    {
+        return Auth::check() ? redirect()->route('home-page') : view('login');
+    }
+
     public function store(Request $request)
     {
         $request->merge([

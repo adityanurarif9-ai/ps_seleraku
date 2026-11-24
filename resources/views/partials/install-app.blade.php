@@ -1,10 +1,10 @@
 <aside class="install-app" data-install-promotion aria-label="Pasang PS Seleraku">
-    <img src="{{ asset('icons/brand-v2-192.png') }}" alt="" width="44" height="44">
+    <img src="{{ \App\Support\SiteAsset::url('icons/brand-v2-192.png') }}" alt="" width="44" height="44" decoding="async">
     <div><strong>PS Seleraku di ponselmu</strong><p>Akses cepat dari layar utama.</p></div>
     <button type="button" data-install-app>Pasang</button>
 </aside>
 <dialog class="install-guide" id="install-guide" aria-labelledby="install-guide-title">
-    <div class="install-guide-top"><img src="{{ asset('icons/brand-v2-192.png') }}" alt="" width="52" height="52"><button type="button" data-close-install aria-label="Tutup panduan pemasangan">×</button></div>
+    <div class="install-guide-top"><img src="{{ \App\Support\SiteAsset::url('icons/brand-v2-192.png') }}" alt="" width="52" height="52" decoding="async"><button type="button" data-close-install aria-label="Tutup panduan pemasangan">×</button></div>
     <h2 id="install-guide-title">Pasang PS Seleraku</h2>
     <p data-install-intro>Buka langsung dari layar utama, tanpa mengetik alamat website lagi.</p>
     <ol data-install-steps></ol>

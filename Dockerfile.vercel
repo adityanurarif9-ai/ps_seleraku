@@ -10,7 +10,8 @@ RUN composer install --no-dev --no-scripts --no-interaction --no-progress --pref
 COPY . .
 RUN composer dump-autoload --no-dev --classmap-authoritative --no-scripts \
     && php artisan package:discover --ansi \
-    && php artisan filament:assets
+    && php artisan filament:assets \
+    && php artisan view:cache
 
 FROM base AS runtime
 COPY --from=dependencies /app /app
@@ -18,5 +19,6 @@ COPY Caddyfile /etc/caddy/Caddyfile
 RUN mkdir -p /app/storage/framework/cache/data /app/storage/framework/sessions /app/storage/framework/views /app/storage/logs \
     && chmod -R 775 /app/storage /app/bootstrap/cache
 ENV PORT=80
+RUN frankenphp validate --config /etc/caddy/Caddyfile
 EXPOSE 80
-CMD ["frankenphp", "run", "--config", "/etc/caddy/Caddyfile"]
+CMD ["sh", "/app/scripts/start-production.sh"]

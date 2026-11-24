@@ -10,7 +10,7 @@
             <!-- Kolom 1: Identitas Brand & Kontak -->
             <div class="ps-footer-col ps-footer-brand-col">
                 <a class="ps-footer-logo-lockup" href="{{ route('home-page') }}" aria-label="PS Seleraku Beranda">
-                    <img src="{{ asset('logo-ps-seleraku-transparent.png') }}" alt="PS SELERAKU — Rental Konsol" class="ps-footer-brand-img" width="2172" height="724">
+                    <img src="{{ \App\Support\SiteAsset::url('logo-ps-seleraku-transparent.png') }}" alt="PS SELERAKU — Rental Konsol" class="ps-footer-brand-img" width="2172" height="724" decoding="async">
                 </a>
 
                 <p class="ps-footer-desc">

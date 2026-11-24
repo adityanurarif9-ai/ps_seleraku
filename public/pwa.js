@@ -53,9 +53,11 @@
 
     if ('serviceWorker' in navigator && window.isSecureContext) {
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/sw.js', { scope: '/', updateViaCache: 'none' }).catch(() => {
+            const registerWorker = () => navigator.serviceWorker.register('/sw.js', { scope: '/', updateViaCache: 'none' }).catch(() => {
                 // Login and reservations continue to work if installation is unavailable.
             });
+            if ('requestIdleCallback' in window) window.requestIdleCallback(registerWorker, { timeout: 3000 });
+            else window.setTimeout(registerWorker, 1200);
         });
     }
 })();

@@ -20,7 +20,7 @@ class ExampleTest extends TestCase
 
     public function test_protected_routes_require_login(): void
     {
-        $this->get('/')->assertRedirect(route('login'));
+        $this->get('/')->assertOk()->assertSee('MASUK AKUN');
         $this->get('/home-page')->assertRedirect(route('login'));
         $this->get('/page-ke2')->assertRedirect(route('login'));
         $this->get('/sewa-harian')->assertRedirect(route('login'));

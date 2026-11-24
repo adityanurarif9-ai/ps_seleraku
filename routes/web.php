@@ -7,6 +7,7 @@ use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Route;
 
 Route::redirect('/login/admin', '/admin/login');
+Route::get('/', [SessionController::class, 'landing']);
 
 Route::middleware('guest')->group(function () {
     Route::get('/auth/google', [GoogleLoginController::class, 'redirect'])->name('google.redirect');
@@ -20,7 +21,6 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::redirect('/', '/home-page');
 
     Route::view('/home-page', 'home-page')->name('home-page');
     Route::view('/home page', 'home-page');

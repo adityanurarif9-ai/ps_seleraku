@@ -92,3 +92,21 @@ Pengujian tambahan: node --test tests/Browser/pwa.test.cjs. Pengujian instalasi 
 
 Ikon versi brand-v2 memakai gambar stik dan wordmark dari logo asli website dengan susunan persegi. Manifest, ikon Apple dan cache statis memiliki versi baru agar pemasangan baru memakai identitas yang sama. Perangkat yang menyimpan ikon lama mungkin perlu memasang ulang aplikasi.
 Loading awal menampilkan logo pada pembukaan pertama aplikasi standalone per sesi. Navigasi internal dan formulir yang lolos validasi menampilkan indikator proses; tombol kembali/pageshow dan timeout memulihkan indikator agar tidak tertahan. Tidak ada penundaan minimum buatan; preferensi reduced-motion dihormati.
+
+
+## Optimasi performa
+
+Halaman / langsung menampilkan login untuk tamu agar tidak ada redirect awal. Font Poppins Latin dimuat dari /fonts dengan font-display:swap; lisensi ada di public/fonts/Poppins-OFL.txt. Banner login memiliki ukuran mobile/desktop dan preload sesuai layar. Logo serta gambar katalog memakai WebP, sementara gambar sumber tetap tersedia.
+CSS/JS produksi memakai file minifikasi dengan hash isi di /optimized. Aset tersebut dapat dicache lama; HTML akun, CSRF, status rental, dan respons API tetap privat serta tidak dicache CDN. Service worker tetap hanya menyimpan halaman offline dan ikon publik.
+Verifikasi Turnstile mulai dimuat ketika pengguna memfokuskan/mengisi formulir atau menekan Mulai verifikasi. Tombol masuk tetap menunggu token sah, dan server selalu memvalidasinya. Tidak ada pengecualian untuk Lighthouse atau user-agent tertentu.
+Vercel menjalankan PHP di sin1, dekat database TiDB Singapore. Container mengompilasi Blade saat build dan menyimpan konfigurasi/rute setelah environment produksi tersedia saat startup. Jangan commit konfigurasi runtime yang berisi secret.
+Setelah mengubah CSS, JavaScript atau gambar sumber, jalankan kembali build aset sebelum commit:
+
+~~~powershell
+npm install --prefix "$env:TEMP\ps-performance-tools" --no-save --no-package-lock --no-audit --no-fund sharp@0.35.5 esbuild@0.28.2
+node scripts/build-public-assets.cjs
+php artisan test
+node --test tests/Browser/*.test.cjs
+~~~
+
+PS_ASSET_TOOL_ROOT dapat menunjuk direktori node_modules lain. Dependency alat ini tidak diperlukan di container PHP produksi. Tes memeriksa hash sumber agar perubahan tidak tertinggal dari bundle; helper juga kembali ke berkas sumber jika hash tidak sesuai.

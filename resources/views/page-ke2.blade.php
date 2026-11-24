@@ -4,8 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Page Ke2 · Unit &amp; Game · PS Seleraku</title>
-    <link rel="stylesheet" href="{{ asset('seleraku-pages.css') }}?v=logo-sync-1">
-    <script src="{{ asset('seleraku-pages.js') }}?v=catalog-sync-2" defer></script>
+@include('partials.performance-head', ['authPage'=>false])
+    <link rel="stylesheet" href="{{ \App\Support\SiteAsset::url('seleraku-pages.css') }}?v=logo-sync-1">
+    <script src="{{ \App\Support\SiteAsset::url('seleraku-pages.js') }}?v=catalog-sync-2" defer></script>
 @include('partials.pwa-head')
 </head>
 <body class="ps-page-body" data-reservation-url="{{ route('reservations.create') }}">
@@ -116,7 +117,7 @@
                         </div>
 
                         <div class="ps-thumb-box">
-                            <img src="{{ asset($unit['image']) }}" alt="{{ $unit['name'] }}">
+                            <img src="{{ \App\Support\SiteAsset::url($unit['image']) }}" alt="{{ $unit['name'] }}" decoding="async" loading="lazy">
                             @if($unit['note'])
                                 <span class="ps-thumb-note {{ $unit['noteType'] === 'time' ? 'is-red' : '' }}">
                                     @if($unit['noteType'] === 'time')
@@ -190,7 +191,7 @@
                         data-search="{{ strtolower($unit['platformKey'].' '.$unit['code'].' '.$unit['platformLabel'].' '.$unit['name'].' '.$unit['spec'].' '.implode(' ', $unit['allGames'])) }}"
                     >
                         <div class="ps-pro-banner">
-                            <img src="{{ asset($unit['image']) }}" alt="{{ $unit['name'] }}">
+                            <img src="{{ \App\Support\SiteAsset::url($unit['image']) }}" alt="{{ $unit['name'] }}" decoding="async" loading="lazy">
                         </div>
 
                         <div class="ps-pro-body">
