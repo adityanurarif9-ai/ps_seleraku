@@ -9,6 +9,7 @@
 @include('partials.pwa-head')
 </head>
 <body class="ps-page-body" data-reservation-url="{{ route('reservations.create') }}">
+@include('partials.pwa-loading')
 @include('partials.ps-navbar', ['activePage' => 'home-page'])
 
 <main>

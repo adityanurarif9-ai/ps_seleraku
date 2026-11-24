@@ -11,6 +11,7 @@
 @include('partials.pwa-head')
 </head>
 <body>
+@include('partials.pwa-loading')
     <main class="login-page">
         <section class="intro" aria-labelledby="intro-title">
             <div class="intro-content">

@@ -13,7 +13,7 @@ class PwaTest extends TestCase
     public function test_login_and_registration_offer_installation_and_iphone_metadata(): void
     {
         foreach (['/login', '/register'] as $url) {
-            $this->get($url)->assertOk()->assertSee('manifest.webmanifest')->assertSee('apple-mobile-web-app-capable')->assertSee('data-install-app', false)->assertSee('viewport-fit=cover')->assertSee('pwa.js');
+            $this->get($url)->assertOk()->assertSee('manifest.webmanifest')->assertSee('apple-mobile-web-app-capable')->assertSee('data-install-app', false)->assertSee('viewport-fit=cover')->assertSee('pwa.js')->assertSee('loading.js')->assertSee('app-splash');
         }
     }
 
@@ -35,7 +35,7 @@ class PwaTest extends TestCase
             $info = getimagesize(public_path(ltrim($icon['src'], '/')));
             $this->assertSame($icon['sizes'], $info[0].'x'.$info[1]);
         }
-        $info = getimagesize(public_path('icons/apple-touch-icon.png'));
+        $info = getimagesize(public_path('icons/brand-v2-apple.png'));
         $this->assertSame(180, $info[0]);
     }
 }

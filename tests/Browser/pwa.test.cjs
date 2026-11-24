@@ -37,8 +37,8 @@ function worker(failNetwork=false){
  return {events,calls,deleted,dispatch};
 }
 test('worker precaches only public offline page and icons and preserves unrelated caches',async()=>{
- const w=worker();let p;w.events.install({waitUntil:value=>p=value});await p;assert.deepEqual(w.calls[0],['precache','/offline.html','/icons/app-192.png','/icons/app-512.png']);
- w.events.activate({waitUntil:value=>p=value});await p;assert.deepEqual(w.deleted,['ps-seleraku-static-v0']);
+ const w=worker();let p;w.events.install({waitUntil:value=>p=value});await p;assert.deepEqual(w.calls[0],['precache','/offline.html','/icons/brand-v2-192.png','/icons/brand-v2-512.png']);
+ w.events.activate({waitUntil:value=>p=value});await p;assert.deepEqual(w.deleted,['ps-seleraku-static-v0','ps-seleraku-static-v1']);
 });
 test('worker never intercepts POST, OAuth, admin, API polling or external requests',()=>{
  const w=worker();for(const args of [['https://ps.test/reservasi','POST'],['https://ps.test/auth/google/callback'],['https://ps.test/admin'],['https://ps.test/reservasi/1/status','GET','cors'],['https://accounts.google.com']])assert.equal(w.dispatch(...args),undefined);

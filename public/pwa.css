@@ -55,3 +55,15 @@
 @media(max-width:370px) { .install-app { grid-template-columns: 36px minmax(0,1fr) auto; gap: 9px; padding: 10px; }.install-app img { width: 36px; height: 36px; }.install-app strong { font-size: 10px; }.install-app button { padding-inline: 10px; }.login-page .login-card { padding-inline: 18px; } }
 @media(display-mode:standalone) { .install-app { display: none; } }
 @media(prefers-reduced-motion:reduce) { .install-guide { scroll-behavior: auto; } }
+.app-splash { display: none; position: fixed; inset: 0; z-index: 10000; align-items: center; justify-items: center; padding: 32px; background: #0a0d25; color: #b9cbe6; text-align: center; }
+.app-booting .app-splash { display: grid; }
+.app-splash img { display: block; width: min(290px,76vw); height: auto; margin: 0 auto 32px; }
+.app-splash p { font: 12px/1.8 Poppins,Arial,sans-serif; margin: 16px 0 0; }
+.app-splash-spinner { display: block; width: 24px; height: 24px; margin: auto; border: 2px solid #2d3c59; border-top-color: #80a9ed; border-radius: 50%; animation: ps-loading-spin .8s linear infinite; }
+.page-loading { position: fixed; inset: 0 0 auto; height: 3px; z-index: 10001; overflow: hidden; background: #1b2c4a; pointer-events: none; }
+.page-loading::after { content: ''; display: block; width: 40%; height: 100%; background: #8eb5f7; animation: ps-loading-progress 1.1s ease-in-out infinite; }
+button[data-loading="true"] { display: inline-flex; align-items: center; justify-content: center; gap: 9px; }
+button[data-loading="true"]::before { content: ''; width: 13px; height: 13px; flex-shrink: 0; border: 2px solid #ffffff60; border-top-color: currentColor; border-radius: 50%; animation: ps-loading-spin .8s linear infinite; }
+@keyframes ps-loading-spin { to { transform: rotate(360deg); } }
+@keyframes ps-loading-progress { from { transform: translateX(-110%); } to { transform: translateX(360%); } }
+@media(prefers-reduced-motion:reduce) { .app-splash-spinner,button[data-loading="true"]::before,.page-loading::after { animation: none; }.page-loading::after { width: 100%; } }

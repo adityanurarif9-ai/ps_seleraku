@@ -88,3 +88,7 @@ Halaman /login dan /register menyediakan tombol Pasang. Android memakai beforein
 Manifest dan metadata disertakan pada seluruh halaman pelanggan. Ikon persegi tersedia untuk Android, maskable dan Apple. Tampilan mobile memakai safe area, kolom minimal 16px untuk mencegah zoom fokus iOS, serta target sentuh lebih besar.
 Service worker hanya menyimpan halaman offline dan ikon publik. Tidak menyimpan halaman akun, respons API, token, callback Google, atau transaksi reservasi. Saat offline, pengguna diminta terhubung kembali; reservasi tidak dikirim atau diantrekan secara offline.
 Pengujian tambahan: node --test tests/Browser/pwa.test.cjs. Pengujian instalasi pada perangkat Android/iPhone fisik tetap perlu dilakukan di domain HTTPS produksi.
+
+
+Ikon versi brand-v2 memakai gambar stik dan wordmark dari logo asli website dengan susunan persegi. Manifest, ikon Apple dan cache statis memiliki versi baru agar pemasangan baru memakai identitas yang sama. Perangkat yang menyimpan ikon lama mungkin perlu memasang ulang aplikasi.
+Loading awal menampilkan logo pada pembukaan pertama aplikasi standalone per sesi. Navigasi internal dan formulir yang lolos validasi menampilkan indikator proses; tombol kembali/pageshow dan timeout memulihkan indikator agar tidak tertahan. Tidak ada penundaan minimum buatan; preferensi reduced-motion dihormati.
