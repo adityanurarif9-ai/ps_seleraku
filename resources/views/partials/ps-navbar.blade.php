@@ -8,18 +8,14 @@
             <nav class="ps-nav-links" aria-label="Navigasi Utama">
                 <a class="ps-nav-link {{ $activePage === 'rentals' ? 'is-active' : '' }}" href="{{ route('reservations.index') }}">RENTAL SAYA</a>
                 <a class="ps-nav-link {{ $activePage === 'home-page' ? 'is-active' : '' }}" href="{{ route('home-page') }}">BERANDA</a>
-                <a class="ps-nav-link" href="{{ route('home-page') }}#tentang">TENTANG</a>
-                <a class="ps-nav-link" href="{{ route('home-page') }}#paket">PAKET</a>
-                <a class="ps-nav-link {{ $activePage === 'page-ke2' ? 'is-active' : '' }}" href="{{ route('page-ke2') }}">GAME</a>
-                <a class="ps-nav-link" href="{{ route('home-page') }}#cara-sewa">CARA SEWA</a>
-                <a class="ps-nav-link" href="#kontak">KONTAK</a>
+                <a class="ps-nav-link {{ $activePage === 'tentang' ? 'is-active' : '' }}" href="{{ route('tentang') }}">TENTANG</a>
+                <a class="ps-nav-link" href="{{ route('sewa-harian') }}">SEWA HARIAN</a>
+                <a class="ps-nav-link {{ $activePage === 'page-ke2' ? 'is-active' : '' }}" href="{{ route('page-ke2') }}">KONSOL &amp; GAME</a>
+                <a class="ps-nav-link {{ $activePage === 'cara-sewa' ? 'is-active' : '' }}" href="{{ route('cara-sewa') }}">CARA SEWA</a>
+                <a class="ps-nav-link {{ $activePage === 'kontak' ? 'is-active' : '' }}" href="{{ route('kontak') }}">KONTAK</a>
             </nav>
 
-            @if($activePage === 'home-page')
-                <a class="ps-nav-cta" href="{{ route('reservations.create') }}">PESAN SEKARANG</a>
-            @else
-                <button class="ps-nav-cta" type="button" data-open-booking data-item-id="ps5-vip-01" data-title="Reservasi Unit PlayStation" data-subtitle="Pilih unit, layanan, durasi, jadwal, dan game favorit Anda.">PESAN SEKARANG</button>
-            @endif
+            <a class="ps-nav-cta" href="{{ route('reservations.create') }}">PESAN SEKARANG</a>
 
             <div class="ps-account-wrap">
                 <button id="ps-account-btn" class="ps-avatar-btn" type="button" aria-label="Menu Akun" aria-expanded="false" aria-controls="ps-account-menu">
@@ -36,8 +32,8 @@
                             <strong>{{ auth()->user()?->name }}</strong>
                             <span>{{ auth()->user()?->email }}</span>
                         </div>
-                        <a class="ps-dropdown-item" href="{{ route('home-page') }}">Home Page <span>→</span></a>
-                        <a class="ps-dropdown-item" href="{{ route('page-ke2') }}">Unit PS (Page Ke2) <span>→</span></a>
+                        <a class="ps-dropdown-item" href="{{ route('home-page') }}">Beranda <span>→</span></a>
+                        <a class="ps-dropdown-item" href="{{ route('page-ke2') }}">Konsol &amp; Game <span>→</span></a>
                         <a class="ps-dropdown-item" href="{{ route('sewa-harian') }}">Sewa Harian (Bawa Pulang) <span>→</span></a>
                         <a class="ps-dropdown-item" href="{{ route('menu-fnb') }}">Menu F&amp;B Lounge <span>→</span></a>
                         @if(auth()->user()?->is_admin)
@@ -66,10 +62,10 @@
     <div id="ps-mobile-drawer" class="ps-mobile-drawer">
         <a class="ps-nav-link" href="{{ route('reservations.index') }}">RENTAL SAYA</a>
         <a class="ps-nav-link {{ $activePage === 'home-page' ? 'is-active' : '' }}" href="{{ route('home-page') }}">BERANDA</a>
-        <a class="ps-nav-link" href="{{ route('home-page') }}#tentang">TENTANG</a>
-        <a class="ps-nav-link" href="{{ route('home-page') }}#paket">PAKET</a>
-        <a class="ps-nav-link {{ $activePage === 'page-ke2' ? 'is-active' : '' }}" href="{{ route('page-ke2') }}">GAME</a>
-        <a class="ps-nav-link" href="{{ route('home-page') }}#cara-sewa">CARA SEWA</a>
-        <a class="ps-nav-link" href="#kontak">KONTAK</a>
+        <a class="ps-nav-link {{ $activePage === 'tentang' ? 'is-active' : '' }}" href="{{ route('tentang') }}">TENTANG</a>
+        <a class="ps-nav-link" href="{{ route('sewa-harian') }}">SEWA HARIAN</a>
+        <a class="ps-nav-link {{ $activePage === 'page-ke2' ? 'is-active' : '' }}" href="{{ route('page-ke2') }}">KONSOL &amp; GAME</a>
+        <a class="ps-nav-link {{ $activePage === 'cara-sewa' ? 'is-active' : '' }}" href="{{ route('cara-sewa') }}">CARA SEWA</a>
+        <a class="ps-nav-link {{ $activePage === 'kontak' ? 'is-active' : '' }}" href="{{ route('kontak') }}">KONTAK</a>
     </div>
 </header>

@@ -65,19 +65,19 @@ class ExampleTest extends TestCase
 
         $this->get(route('home-page'))
             ->assertOk()
-            ->assertSee('Home Page')
-            ->assertSee('Unit PS (Page Ke2)')
+            ->assertSee('Beranda')
+            ->assertSee('Konsol &amp; Game', false)
             ->assertDontSee('Panel Admin')
-            ->assertSee('KENALAN DENGAN')
-            ->assertSee('PILIHAN PAKET RENTAL TERBAIK')
+            ->assertSee(route('tentang'))
+            ->assertSee('Pilihan sewa harian.')
             ->assertSee('SEWA PLAYSTATION 4')
             ->assertSee('SEWA PLAYSTATION 5')
             ->assertSee('SEWA PLAYSTATION 3')
             ->assertSee('SEWA NINTENDO SWITCH')
-            ->assertSee('Operasional: Buka 24 Jam Non-Stop')
-            ->assertSee('Follow kami di')
-            ->assertSee('Temukan Lokasi Kami')
-            ->assertSee('Lihat di Google Maps');
+            ->assertSee('Jam operasional akan diinformasikan pengelola.')
+            ->assertSee('Jelajahi')
+            ->assertSee('Kunjungi kami')
+            ->assertSee(route('kontak'));
 
         $this->get('/home page')->assertOk();
 
@@ -88,9 +88,9 @@ class ExampleTest extends TestCase
             ->assertSee('Nintendo Switch')
             ->assertSee('PlayStation 5')
             ->assertSee('PlayStation 4')
-            ->assertSee('Follow kami di')
-            ->assertSee('Temukan Lokasi Kami')
-            ->assertSee('Lihat di Google Maps');
+            ->assertSee('Jelajahi')
+            ->assertSee('Kunjungi kami')
+            ->assertSee(route('kontak'));
 
         $this->get('/page ke2')->assertOk();
 
@@ -100,7 +100,7 @@ class ExampleTest extends TestCase
             ->assertSee('Rp 150.000')
             ->assertSee('Nintendo Switch')
             ->assertSee('Sewa Harian')
-            ->assertSee('Follow kami di');
+            ->assertSee('Jelajahi');
 
         $this->get(route('menu-fnb'))
             ->assertOk()

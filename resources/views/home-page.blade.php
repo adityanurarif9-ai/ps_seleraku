@@ -1,223 +1,111 @@
-<!doctype html>
-<html lang="id">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <title>Home Page · PS Seleraku</title>
-@include('partials.performance-head', ['authPage'=>false])
-    <link rel="stylesheet" href="{{ \App\Support\SiteAsset::url('seleraku-pages.css') }}?v=logo-sync-1">
-    <script src="{{ \App\Support\SiteAsset::url('seleraku-pages.js') }}?v=catalog-sync-2" defer></script>
-@include('partials.pwa-head')
-</head>
-<body class="ps-page-body" data-reservation-url="{{ route('reservations.create') }}">
-@include('partials.pwa-loading')
-@include('partials.ps-navbar', ['activePage' => 'home-page'])
-
-<main>
-    <!-- Hero Section -->
-    <section class="ps-hero-home">
-        <div class="ps-hero-inner">
-            <div class="ps-hero-actions">
-                <button
-                    type="button"
-                    class="ps-btn-dark"
-                    data-open-booking
-                    data-item-id="paket-ps5-nextgen"
-                    data-title="Pesan Konsol Sekarang"
-                    data-subtitle="Pilih paket atau unit favorit Anda — siap antar cepat atau main di tempat."
-                >
-                    PESAN SEKARANG &rarr;
-                </button>
-                <a class="ps-btn-gold" href="#paket">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/>
-                        <circle cx="15" cy="13" r="1"/><circle cx="18" cy="11" r="1"/>
-                        <rect x="2" y="6" width="20" height="12" rx="6"/>
-                    </svg>
-                    LIHAT PAKET
-                </a>
-            </div>
-
-            <h1 class="ps-hero-title ps-welcome-title"><span>Selamat datang di</span><strong>PS Seleraku<span class="ps-title-dot">.</span></strong></h1>
-            <p class="ps-welcome-copy">Pilih konsol favoritmu, ajak teman, dan nikmati waktu main bersama.<br class="ps-desktop-break"> Dari satu pertandingan sampai petualangan yang belum selesai.</p>
-            <div class="ps-console-lineup" aria-label="Pilihan konsol">
-                <a href="{{ route('page-ke2') }}#unit-catalog" class="ps-lineup-item"><span class="ps-lineup-number">01</span><span><small>PLAYSTATION</small><strong>PS4</strong></span><span aria-hidden="true">↗</span></a>
-                <a href="{{ route('page-ke2') }}#unit-catalog" class="ps-lineup-item"><span class="ps-lineup-number">02</span><span><small>PLAYSTATION</small><strong>PS5</strong></span><span aria-hidden="true">↗</span></a>
-                <a href="{{ route('page-ke2') }}#unit-catalog" class="ps-lineup-item"><span class="ps-lineup-number">03</span><span><small>NINTENDO</small><strong>Switch</strong></span><span aria-hidden="true">↗</span></a>
-            </div>
-            <div class="ps-hero-pill">
-                <span class="ps-dot-red" aria-hidden="true"></span>
-                PILIH KONSOL, AJAK TEMAN MAIN
-            </div>
-
-            <div class="ps-hero-divider" aria-hidden="true"></div>
-
-            <div class="ps-stats-grid">
-                <div class="ps-stat-card">
-                    <div class="ps-stat-val">500<span class="ps-stat-plus-pink">+</span></div>
-                    <div class="ps-stat-label">PELANGGAN PUAS</div>
-                </div>
-                <div class="ps-stat-card">
-                    <div class="ps-stat-val">50<span class="ps-stat-plus-gold">+</span></div>
-                    <div class="ps-stat-label">GAME TERSEDIA</div>
-                </div>
-                <div class="ps-stat-card">
-                    <div class="ps-stat-val"><span class="ps-stat-star">&#9733;</span>5.0</div>
-                    <div class="ps-stat-label">RATING KEPUASAN</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Tentang Kami / Cara Sewa Section -->
-    <section id="tentang" class="ps-section-about">
-        <div class="ps-container">
-            <div class="ps-about-grid">
-                <div class="ps-showcase-card">
-                    <img class="ps-showcase-img" src="{{ \App\Support\SiteAsset::url('hero.png') }}" alt="Setup Konsol PlayStation 5 Premium PS Seleraku" decoding="async" loading="lazy">
-                    <div class="ps-showcase-glow" aria-hidden="true"></div>
-                    <div class="ps-badge-original">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <path d="M12 2l2.9 2.9 4.1-.5.5 4.1L22 12l-2.5 3.5-.5 4.1-4.1-.5L12 22l-2.9-2.9-4.1.5-.5-4.1L2 12l2.5-3.5.5-4.1 4.1.5L12 2z"/>
-                            <path d="M9 12l2 2 4-4"/>
-                        </svg>
-                        UNIT PREMIUM ORIGINAL
-                    </div>
-
-                    <div class="ps-showcase-bottom">
-                        <div>
-                            <h3>LAYANAN ANTAR-JEMPUT EXPRESS</h3>
-                            <p>Teknisi profesional siap pasang rapi langsung di tempat Anda</p>
-                        </div>
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0;">
-                            <rect x="1" y="3" width="15" height="13" rx="2"/>
-                            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
-                            <circle cx="5.5" cy="18.5" r="2.5"/>
-                            <circle cx="18.5" cy="18.5" r="2.5"/>
-                        </svg>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="ps-eyebrow">TENTANG KAMI</div>
-                    <h2 class="ps-section-heading">
-                        KENALAN DENGAN <span>PS<br>SELERAKU</span>
-                    </h2>
-                    <p class="ps-about-copy">
-                        PS SELERAKU hadir untuk memberikan pengalaman bermain PlayStation yang menyenangkan, berkelas, nyaman, dan terjangkau. Kami menyediakan opsi konsol PS4 dan PS5 terbaik dalam kondisi prima untuk menemani momen seru Anda bersama sahabat, keluarga, hingga agenda turnamen komunitas.
-                    </p>
-
-                    <div id="cara-sewa" class="ps-feature-grid">
-                        <article class="ps-feature-box">
-                            <div class="ps-feature-icon ps-icon-sky" aria-hidden="true">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M9 3h6v3H9z"/><path d="M7 6h10l1 13a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L7 6z"/>
-                                    <path d="M12 10v5M9.5 12.5h5"/>
-                                </svg>
-                            </div>
-                            <h3>UNIT TERAWAT &amp; HIGIENIS</h3>
-                            <p>Selalu dibersihkan dan disterilisasi sebelum dikirim ke pelanggan.</p>
-                        </article>
-
-                        <article class="ps-feature-box">
-                            <div class="ps-feature-icon ps-icon-purple" aria-hidden="true">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <rect x="2" y="6" width="20" height="12" rx="6"/>
-                                    <line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/>
-                                    <circle cx="15" cy="13" r="1"/><circle cx="18" cy="11" r="1"/>
-                                </svg>
-                            </div>
-                            <h3>STIK BEBAS DRIFT</h3>
-                            <p>DualSense &amp; DualShock original responsif tanpa kendala drifting.</p>
-                        </article>
-
-                        <article class="ps-feature-box">
-                            <div class="ps-feature-icon ps-icon-sky" aria-hidden="true">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>
-                                    <path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>
-                                </svg>
-                            </div>
-                            <h3>PEMASANGAN CEPAT</h3>
-                            <p>Teknisi profesional kami bantu setup langsung sampai siap main.</p>
-                        </article>
-
-                        <article class="ps-feature-box">
-                            <div class="ps-feature-icon ps-icon-purple" aria-hidden="true">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M19.439 7.85c-.049.322.059.648.289.878l1.568 1.568c.47.47.706 1.087.706 1.704s-.235 1.233-.706 1.704l-1.611 1.611a.98.98 0 0 1-.837.276c-.47-.07-.802-.48-.968-.925a2.501 2.501 0 1 0-3.214 3.214c.446.166.855.497.925.968a.979.979 0 0 1-.276.837l-1.61 1.61a2.404 2.404 0 0 1-1.705.707 2.402 2.402 0 0 1-1.704-.706l-1.568-1.568a1.026 1.026 0 0 0-.877-.29c-.493.074-.84.504-1.02.968a2.5 2.5 0 1 1-3.237-3.237c.464-.18.894-.527.967-1.02a1.026 1.026 0 0 0-.289-.877l-1.568-1.568A2.402 2.402 0 0 1 1.998 12c0-.617.236-1.234.706-1.704L4.23 8.77c.24-.24.581-.353.917-.303.515.077.877.528 1.073 1.01a2.5 2.5 0 1 0 3.259-3.259c-.482-.196-.933-.558-1.01-1.073-.05-.336.062-.676.303-.917l1.525-1.525A2.402 2.402 0 0 1 12 2c.617 0 1.234.236 1.704.706l1.568 1.568c.23.23.556.338.877.29.493-.074.84-.504 1.02-.968a2.5 2.5 0 1 1 3.237 3.237c-.464.18-.894.527-.967 1.02Z"/>
-                                </svg>
-                            </div>
-                            <h3>BEBAS REQUEST GAME</h3>
-                            <p>Daftar judul favorit dapat diunduh sebelum pengantaran unit.</p>
-                        </article>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pricing & Bundle Section -->
-    <section id="paket" class="ps-section-pricing">
-        <div class="ps-container">
-            <div class="ps-pricing-header">
-                <div class="ps-eyebrow-center">PRICING &amp; BUNDLE</div>
-                <h2 class="ps-section-heading" style="margin-bottom:10px;">PILIHAN PAKET RENTAL TERBAIK</h2>
-                <p>Pilih konsol impian Anda dengan paket harian, weekend, maupun mingguan bergaransi resmi.</p>
-            </div>
-
-
-            <div class="ps-pricing-grid">
-                @foreach($packages as $pkg)
-                    <article class="ps-plan-card {{ $pkg['featured'] ? 'is-featured' : '' }}">
-                        <div class="ps-plan-top">
-                            <img class="ps-plan-img" src="{{ \App\Support\SiteAsset::url($pkg['image']) }}" alt="{{ $pkg['name'] }}" decoding="async" loading="lazy">
-                            <span class="ps-plan-pill {{ $pkg['pillClass'] }}">{{ $pkg['pill'] }}</span>
-                            @if($pkg['ribbon'])
-                                <span class="ps-ribbon">{{ $pkg['ribbon'] }}</span>
-                            @endif
-                        </div>
-
-                        <div class="ps-plan-body">
-                            <h3>{{ $pkg['name'] }}</h3>
-                            <p class="ps-plan-desc">{{ $pkg['desc'] }}</p>
-
-                            <div class="ps-plan-price">
-                                <strong>{{ $pkg['price'] }}</strong>
-                                <span>{{ $pkg['unit'] }}</span>
-                            </div>
-
-                            <ul class="ps-plan-list">
-                                @foreach($pkg['features'] as $feat)
-                                    <li>
-                                        <svg class="ps-check-ico" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                            <circle cx="12" cy="12" r="10"/>
-                                            <path d="m9 12 2 2 4-4"/>
-                                        </svg>
-                                        <span>{{ $feat }}</span>
-                                    </li>
-                                @endforeach
-                            </ul>
-
-                            <button
-                                type="button"
-                                class="ps-btn-plan {{ $pkg['btnClass'] }}"
-                                data-open-booking
-                                data-item-id="{{ $pkg['id'] }}"
-                                data-title="Pesan {{ $pkg['name'] }}"
-                                data-subtitle="{{ $pkg['desc'] }}"
-                            >
-                                PILIH PAKET
-                            </button>
-                        </div>
-                    </article>
-                @endforeach
-            </div>
-        </div>
-    </section>
-</main>
-
-@include('partials.ps-footer')
-@include('partials.ps-modals')
-</body>
-</html>
+@extends('site.layout', ['activePage'=>'home-page'])
+@section('title', 'Beranda')
+@section('content')
+<section class="web-home-hero">
+<div class="web-wrap web-hero-grid">
+<div>
+    <span class="web-eyebrow">PILIH KONSOL. AJAK TEMAN MAIN.</span>
+    <h1>{{ $site['hero_title'] }}</h1>
+<p class="web-lead">{{ $site['hero_description'] }}</p>
+    <div class="web-actions">
+<a class="web-button" href="{{ route('reservations.create') }}">Buat reservasi <span>↗</span>
+</a>
+<a class="web-button web-button-outline" href="{{ route('page-ke2') }}">Lihat konsol</a>
+</div>
+    <div class="web-hero-meta">
+<span>PlayStation &amp; Nintendo</span>
+<span>Jadwal sesuai pilihanmu</span>
+</div>
+</div>
+<div class="web-hero-art">
+<img src="{{ \App\Support\SiteAsset::url('hero.png') }}" alt="Konsol dan stik PlayStation untuk waktu bermain bersama" width="720" height="720" fetchpriority="high" decoding="async">
+<div class="web-art-caption">
+<span>Waktunya main bareng.</span>
+<small>Cek jadwal, pesan, lalu nikmati sesimu.</small>
+</div>
+</div>
+</div>
+</section>
+<section class="web-section web-wrap">
+<div class="web-section-top">
+<div>
+<span class="web-eyebrow">PILIHAN MAINMU</span>
+<h2>Konsol favorit, jadwal yang pas.</h2>
+</div>
+<a class="web-text-link" href="{{ route('page-ke2') }}">Semua konsol &amp; game ↗</a>
+</div>
+<div class="web-console-grid">@forelse(array_merge($proUnits, $classicUnits) as $unit)<article class="web-console-card">
+<a href="{{ route('reservations.create') }}">
+<img src="{{ \App\Support\SiteAsset::url($unit['image']) }}" alt="{{ $unit['name'] }}" width="460" height="300" loading="lazy" decoding="async">
+</a>
+<div class="web-console-info">
+<span class="web-availability">{{ $unit['statusLabel'] }}</span>
+<h3>{{ $unit['name'] }}</h3>
+<p>
+<strong>{{ $unit['rateText'] }}</strong> / jam</p>
+<a class="web-text-link" href="{{ route('reservations.create') }}">Pilih jadwal ↗</a>
+</div>
+</article>@empty<p>Pengelola sedang menyiapkan pilihan konsol.</p>@endforelse</div>
+</section>
+<section class="web-soft">
+<div class="web-wrap web-section web-feature-grid">
+<div>
+<span class="web-eyebrow">DARI RENCANA JADI MABAR</span>
+<h2>Pesan dulu.<br>Main lebih tenang.</h2>
+<p>Cukup satu akun untuk mengatur rencana main, melihat konfirmasi, dan memantau sisa waktu.</p>
+<a class="web-text-link" href="{{ route('cara-sewa') }}">Pelajari cara sewa ↗</a>
+</div>
+<ol class="web-step-list">
+<li>
+<span>01</span>
+<div>
+<h3>Pilih konsol dan jadwal</h3>
+<p>Tentukan tanggal dan durasi. Perkiraan biaya tampil sebelum reservasi dikirim.</p>
+</div>
+</li>
+<li>
+<span>02</span>
+<div>
+<h3>Tunggu konfirmasi pengelola</h3>
+<p>Pantau pesanan melalui halaman Rental Saya.</p>
+</div>
+</li>
+<li>
+<span>03</span>
+<div>
+<h3>Nikmati waktu bermain</h3>
+<p>Lihat sisa waktu dan ajukan tambahan waktu dari akunmu.</p>
+</div>
+</li>
+</ol>
+</div>
+</section>
+<section class="web-wrap web-section">
+<div class="web-section-top">
+<div>
+<span class="web-eyebrow">BAWA SERUNYA KE RUMAH</span>
+<h2>Pilihan sewa harian.</h2>
+</div>
+<a class="web-text-link" href="{{ route('sewa-harian') }}">Lihat semua paket ↗</a>
+</div>
+<div class="web-package-grid">@forelse($packages as $pkg)<article class="web-package">
+<small>24 JAM</small>
+<h3>{{ $pkg['name'] }}</h3>
+<p>{{ $pkg['desc'] }}</p>
+<strong>{{ $pkg['price'] }} <small>/ 24 jam</small>
+</strong>
+<a class="web-text-link" href="{{ route('reservations.create') }}">Cek jadwal ↗</a>
+</article>@empty<p>Belum ada paket harian yang ditampilkan.</p>@endforelse</div>
+</section>
+<section class="web-wrap web-section web-about-strip">
+<div>
+<span class="web-eyebrow">KENALAN LEBIH DEKAT</span>
+<h2>{{ $site['about_title'] }}</h2>
+<p>{{ \Illuminate\Support\Str::limit($site['about_body'], 220) }}</p>
+</div>
+<div class="web-actions">
+<a class="web-button" href="{{ route('tentang') }}">Tentang kami ↗</a>
+<a class="web-text-link" href="{{ route('kontak') }}">Hubungi pengelola</a>
+</div>
+</section>
+@endsection

@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\CatalogItem;
+use App\Models\SiteContent;
 use Illuminate\Support\Str;
 
 class SeloAssistant
@@ -57,8 +58,16 @@ class SeloAssistant
         } elseif ($has('/\b(install|instal|aplikasi|iphone|android|pasang)\b/')) {
             $reply = 'Di halaman login, ketuk Pasang aplikasi. Di Android gunakan Chrome dan ikuti petunjuk instalasi. Di iPhone buka Safari, ketuk Bagikan, lalu Tambah ke Layar Utama. Website dapat dipasang sebagai aplikasi web, tanpa file APK.';
             $links = [['label' => 'Buka halaman login', 'url' => route('login')]];
-        } elseif ($has('/\b(alamat|lokasi|buka|tutup|bayar|pembayaran|refund|telepon|whatsapp|kontak)\b/')) {
-            $reply = 'Untuk memastikan lokasi, jam buka, metode pembayaran, atau pengembalian dana, hubungi pengelola PS Seleraku. Aku belum memiliki informasi terverifikasi tentang hal itu.';
+        } elseif ($has('/\b(alamat|lokasi|buka|tutup|operasional|bayar|pembayaran|refund|telepon|whatsapp|kontak|email)\b/')) {
+            $site = SiteContent::values();
+            $parts = array_filter([
+                $site['address'] ? 'Alamat: '.$site['address'] : null,
+                $site['opening_hours'] ? 'Jam operasional: '.$site['opening_hours'] : null,
+                $site['whatsapp'] ? 'WhatsApp: '.$site['whatsapp'] : null,
+                $site['contact_email'] ? 'Email: '.$site['contact_email'] : null,
+            ]);
+            $reply = $parts ? implode("\n", $parts)."\nUntuk pembayaran atau pengembalian dana, konfirmasikan langsung ke pengelola." : 'Pengelola belum menambahkan informasi kontak dan jam buka. Aku belum memiliki informasi terverifikasi tentang hal itu.';
+            $links = [['label' => 'Kontak pengelola', 'url' => route('kontak')]];
         } else {
             $reply = 'Hai, aku Selo, asisten info PS Seleraku. Aku bisa bantu cek tarif konsol, pilihan game, cara reservasi, sisa waktu, dan cara memasang aplikasi. Coba tanya “Berapa tarif PS5?” atau pilih pertanyaan di bawah.';
         }

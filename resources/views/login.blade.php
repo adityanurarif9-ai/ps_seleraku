@@ -63,6 +63,7 @@
                 @else
                     <button class="google-button" type="button" data-open-dialog="google-help"><span class="google-icon" aria-hidden="true">G</span> Masuk dengan Google</button>
                 @endif
+                <p class="signup"><a href="{{ route('tentang') }}">Tentang PS Seleraku</a> · <a href="{{ route('kontak') }}">Kontak</a></p>
                 <p class="signup">Belum punya akun? <a href="{{ route('register') }}">Daftar di sini</a></p>
                 @if(config('app.demo_accounts'))
                     <details class="demo" open>

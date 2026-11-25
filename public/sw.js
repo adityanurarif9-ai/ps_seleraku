@@ -10,7 +10,7 @@ self.addEventListener('fetch', event => {
     const url = new URL(event.request.url);
     if (event.request.method !== 'GET' || url.origin !== self.location.origin) return;
     // Account pages, API responses, timers and form submissions are never cached.
-    if (event.request.mode === 'navigate' && /^\/(login|register|home-page|page-ke2|sewa-harian|menu-fnb|rental-saya|reservasi(?:\/.*)?)\/?$/.test(url.pathname)) {
+    if (event.request.mode === 'navigate' && /^\/(login|register|home-page|tentang|cara-sewa|kontak|page-ke2|sewa-harian|menu-fnb|rental-saya|reservasi(?:\/.*)?)\/?$/.test(url.pathname)) {
         event.respondWith(fetch(event.request).catch(() => caches.match(OFFLINE).then(response => response || Response.error())));
     } else if ([OFFLINE, '/icons/brand-v2-192.png', '/icons/brand-v2-512.png'].includes(url.pathname)) {
         event.respondWith(caches.match(url.pathname).then(response => response || fetch(event.request)));

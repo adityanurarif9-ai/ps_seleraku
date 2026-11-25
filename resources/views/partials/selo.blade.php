@@ -1,6 +1,6 @@
 <div class="selo" data-selo data-endpoint="{{ route('selo.answer') }}" data-token="{{ csrf_token() }}" data-css="{{ \App\Support\SiteAsset::url('selo.css') }}">
     <button class="selo-launch" type="button" aria-label="Tanya Selo, buka asisten PS Seleraku" aria-controls="selo-panel" aria-expanded="false">
-        <span class="selo-launch-label"><span class="selo-greeting">Mau main apa hari ini?</span><strong>Tanya Selo <span aria-hidden="true">↗</span></strong></span>
+        <span class="selo-launch-label"><span class="selo-greeting" aria-hidden="true">Mau main apa hari ini?</span><strong>Tanya Selo <span aria-hidden="true">↗</span></strong></span>
         <span class="selo-avatar"><img src="{{ \App\Support\SiteAsset::url('selo.webp') }}" width="72" height="78" alt="" decoding="async"><span class="selo-avatar-close" aria-hidden="true">×</span></span>
     </button>
     <section id="selo-panel" class="selo-panel" role="dialog" aria-modal="false" aria-labelledby="selo-title" hidden>

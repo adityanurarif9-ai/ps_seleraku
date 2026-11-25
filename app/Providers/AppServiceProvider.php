@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\SiteContent;
 use App\Services\WebsiteCatalog;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
@@ -22,6 +23,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        View::composer(['site.*', 'home-page', 'partials.ps-footer'], function ($view) {
+            $view->with('site', SiteContent::values());
+        });
         View::composer(['home-page', 'page-ke2', 'sewa-harian', 'menu-fnb'], function ($view) {
             $view->with(app(WebsiteCatalog::class)->data());
         });

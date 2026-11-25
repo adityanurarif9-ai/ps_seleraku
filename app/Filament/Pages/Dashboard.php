@@ -28,6 +28,7 @@ class Dashboard extends BaseDashboard
             Action::make('reservations')->label('Reservasi pengguna')->url(RentalReservationResource::getUrl()),
             Action::make('sessions')->label('Atur waktu main')->url(PlaySessionResource::getUrl()),
             Action::make('catalog')->label('Kelola katalog')->url(CatalogItemResource::getUrl()),
+            Action::make('content')->label('Isi website')->url(WebsiteSettings::getUrl()),
             Action::make('website')->label('Lihat website')->color('gray')->url(route('home-page')),
         ];
     }

@@ -37,7 +37,7 @@ class AdminPanelProvider extends PanelProvider
             ->renderHook(PanelsRenderHook::AUTH_LOGIN_FORM_AFTER, fn () => view('filament.admin-login-note'), scopes: AdminLogin::class)
             ->homeUrl(fn () => Dashboard::getUrl())
             ->colors(['primary' => Color::Blue])
-            ->pages([Dashboard::class])
+            ->pages([Dashboard::class, \App\Filament\Pages\WebsiteSettings::class])
             ->widgets([CatalogOverview::class, LowStockItems::class])
             ->resources([CatalogItemResource::class, PlaySessionResource::class, RentalReservationResource::class, RentalExtensionRequestResource::class])
             ->middleware(['web', DisableBladeIconComponents::class, DispatchServingFilamentEvent::class])

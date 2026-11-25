@@ -30,7 +30,7 @@ const hash = value => crypto.createHash('sha256').update(value).digest('hex');
     };
     files['selo.webp'] = await image('selo.webp', 'selo-160', 160, 84);
     const scripts = ['selo.js', 'login.js', 'pwa.js', 'loading.js', 'rentals.js', 'seleraku-pages.js'];
-    const styles = ['selo.css', 'login.css', 'pwa.css', 'rentals.css', 'seleraku-pages.css'];
+    const styles = ['site.css', 'selo.css', 'login.css', 'pwa.css', 'rentals.css', 'seleraku-pages.css'];
     for (const name of [...scripts, ...styles]) {
         let source = fs.readFileSync('public/' + name, 'utf8').replace(/\r\n/g, '\n');
         source_hashes[name] = hash(source);
