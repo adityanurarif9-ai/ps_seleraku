@@ -1,0 +1,27 @@
+/* Selo's full interface loads only when the visitor opens it. */
+.selo-panel{position:absolute;right:0;bottom:84px;width:360px;height:min(550px,calc(100dvh - 125px));display:flex;flex-direction:column;background:#fff;color:#172033;border:1px solid #dce4ee;border-radius:20px;box-shadow:0 16px 60px #101c3c29;overflow:hidden;text-align:left}
+.selo-panel[hidden]{display:none!important}
+.selo-header{display:flex;align-items:center;gap:10px;flex-shrink:0;padding:16px;background:#edf3fc;border-bottom:1px solid #dce4ee}
+.selo-header img{object-fit:contain;background:#fff;border-radius:12px;flex-shrink:0}
+.selo-header h2{font:700 16px/1.4 Poppins,Arial,sans-serif;letter-spacing:-.02em;margin:0;color:#173c71}
+.selo-header p{font:400 11px/1.5 Poppins,Arial,sans-serif;margin:3px 0 0;color:#52637c}
+.selo-close{margin-left:auto;width:44px;height:44px;border:0;border-radius:10px;background:transparent;color:#284c85;font:400 27px/1 Arial;cursor:pointer}
+.selo-close:hover{background:#dce7f8}
+.selo-log{flex:1;overflow-y:auto;overscroll-behavior:contain;min-height:70px;padding:16px;display:flex;flex-direction:column;gap:12px;scrollbar-width:thin}
+.selo-message{font:400 12px/1.8 Poppins,Arial,sans-serif;letter-spacing:normal;margin:0;max-width:94%;padding:11px 13px;border-radius:14px;white-space:pre-line;overflow-wrap:anywhere;flex-shrink:0}
+.selo-bot{background:#f0f4fa;color:#263b58;align-self:flex-start;border-bottom-left-radius:4px}
+.selo-user{background:#284c85;color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
+.selo-link{display:block;margin-top:8px;color:#174d97;font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.selo-suggestions{display:flex;gap:6px;padding:5px 14px 10px;flex-wrap:wrap;flex-shrink:0}
+.selo-suggestions button{border:1px solid #ccd9ea;background:#fff;border-radius:20px;padding:9px 10px;min-height:40px;color:#284c85;font:500 10px/1.4 Poppins,Arial,sans-serif;cursor:pointer}
+.selo-suggestions button:hover{background:#edf3fc}
+.selo-form{display:flex;align-items:center;gap:8px;margin:0 14px 8px;border:1px solid #bccbe0;border-radius:12px;padding:5px;flex-shrink:0}
+.selo-form input{width:100%;min-width:0;border:0;background:transparent;color:#172033;padding:9px;font:400 16px/1.5 Poppins,Arial,sans-serif;min-height:44px}
+.selo-form input::placeholder{color:#66758a}
+.selo-form button{width:44px;height:44px;border:0;border-radius:9px;flex-shrink:0;background:#284c85;color:#fff;font:400 24px/1 Arial;cursor:pointer}
+.selo-form button:disabled,.selo-suggestions button:disabled{opacity:.6;cursor:wait}
+.selo-note{font:400 9px/1.5 Poppins,Arial,sans-serif!important;margin:0 12px 12px!important;color:#59677c!important;text-align:center}
+.selo :focus-visible{outline:3px solid #6891cf;outline-offset:2px}
+.selo-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:480px){.selo-panel{position:fixed;left:12px;right:12px;bottom:max(98px,calc(env(safe-area-inset-bottom,0px) + 88px));width:auto;height:min(540px,calc(100dvh - 120px));border-radius:18px}.selo-message{font-size:12px}.selo-suggestions button{min-height:44px}}
+@media(max-height:520px){.selo-panel{bottom:12px;right:84px;height:calc(100dvh - 24px);max-width:calc(100vw - 108px);left:auto}.selo-header{padding:8px 12px}.selo-suggestions{display:none}}

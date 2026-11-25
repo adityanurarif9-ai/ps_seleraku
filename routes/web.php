@@ -6,6 +6,8 @@ use App\Http\Controllers\RentalReservationController;
 use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Route;
 
+Route::post('/selo/chat', \App\Http\Controllers\SeloController::class)->middleware('throttle:30,1,selo-')->name('selo.answer');
+
 Route::redirect('/login/admin', '/admin/login');
 Route::get('/', [SessionController::class, 'landing']);
 
