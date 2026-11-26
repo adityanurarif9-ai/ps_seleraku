@@ -109,7 +109,7 @@ class ExampleTest extends TestCase
             ->assertSee('Kentang Goreng Truffle Crinkle')
             ->assertSee('Kopi Susu Gula Aren Barista')
             ->assertSee('Peralatan Higienis & Controller Friendly')
-            ->assertSee('Panggil Kru Lounge');
+            ->assertSee('Hubungi pengelola')->assertSee(route('kontak'))->assertSee('Tambah ke keranjang');
 
         $this->get('/admin/catalog-items')->assertRedirect(url('/admin/login'));
 

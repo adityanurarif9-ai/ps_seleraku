@@ -45,6 +45,7 @@
 <strong>{{ $unit['rateText'] }}</strong> {{ __('/ jam') }}</p>
 <a class="web-text-link" href="{{ route('reservations.create') }}">{{ __('Pilih jadwal ↗') }}</a>
 </div>
+@include('partials.cart-add', ['cartItemId'=>(int) str_replace('catalog-','',$unit['id']), 'cartDisabled'=>$unit['stock']<1])
 </article>@empty<p>{{ __('Pengelola sedang menyiapkan pilihan konsol.') }}</p>@endforelse</div>
 </section>
 <section class="web-soft">

@@ -750,18 +750,7 @@ var psTr = window.psT || (value => value);
         const fnbEmptyEl = document.querySelector('#fnb-empty');
         const fnbResetBtn = document.querySelector('#fnb-reset-filters');
 
-        const fnbOrderBar = document.querySelector('#fnb-order-bar');
-        const fnbOrderCountEl = document.querySelector('#fnb-order-count');
-        const fnbOrderSummaryEl = document.querySelector('#fnb-order-summary');
-        const fnbOrderPreviewEl = document.querySelector('#fnb-order-items-preview');
-        const fnbOrderTotalEl = document.querySelector('#fnb-order-total');
-        const fnbTableSelect = document.querySelector('#fnb-table-select');
-        const fnbOrderClearBtn = document.querySelector('#fnb-order-clear');
-        const fnbOrderSubmitBtn = document.querySelector('#fnb-order-submit');
-        const fnbCallCrewBtn = document.querySelector('#fnb-call-crew-btn');
-
         let activeFnbCategory = 'all';
-        const fnbCart = new Map();
 
         const applyFnbFilters = () => {
             const q = (fnbSearch?.value || '').trim().toLowerCase();
@@ -790,49 +779,6 @@ var psTr = window.psT || (value => value);
             }
         };
 
-        const syncFnbCartUI = () => {
-            let totalItems = 0;
-            let totalAmount = 0;
-            const summaryLines = [];
-
-            fnbCards.forEach((card) => {
-                const id = card.dataset.fnbId || '';
-                const name = card.dataset.fnbName || 'Menu';
-                const price = Number(card.dataset.fnbPrice || 0);
-                const qty = fnbCart.get(id) || 0;
-
-                const addBtn = card.querySelector(`[data-fnb-add="${id}"]`);
-                const stepper = card.querySelector(`[data-fnb-stepper="${id}"]`);
-                const qtyEl = card.querySelector(`[data-fnb-qty="${id}"]`);
-
-                if (addBtn) addBtn.hidden = qty > 0;
-                if (stepper) stepper.hidden = qty === 0;
-                if (qtyEl) qtyEl.textContent = String(qty);
-
-                if (qty > 0) {
-                    totalItems += qty;
-                    totalAmount += qty * price;
-                    summaryLines.push(`${qty}x ${name}`);
-                }
-            });
-
-            if (fnbOrderBar) {
-                fnbOrderBar.hidden = totalItems === 0;
-            }
-            if (fnbOrderCountEl) {
-                fnbOrderCountEl.textContent = `${totalItems} Item`;
-            }
-            if (fnbOrderSummaryEl) {
-                fnbOrderSummaryEl.textContent = `${totalItems} Menu Dipilih untuk Diantar ke Meja`;
-            }
-            if (fnbOrderPreviewEl) {
-                fnbOrderPreviewEl.textContent = summaryLines.join(' • ');
-            }
-            if (fnbOrderTotalEl) {
-                fnbOrderTotalEl.textContent = formatRp(totalAmount);
-            }
-        };
-
         fnbCatButtons.forEach((btn) => {
             btn.addEventListener('click', () => {
                 activeFnbCategory = btn.dataset.fnbFilter || 'all';
@@ -858,72 +804,6 @@ var psTr = window.psT || (value => value);
             applyFnbFilters();
         });
 
-        fnbCards.forEach((card) => {
-            const id = card.dataset.fnbId || '';
-            card.querySelector(`[data-fnb-add="${id}"]`)?.addEventListener('click', () => {
-                if (Number(card.querySelector('[data-stock]')?.dataset.stock || 0) < 1) return;
-                fnbCart.set(id, 1);
-                syncFnbCartUI();
-            });
-            card.querySelector(`[data-fnb-inc="${id}"]`)?.addEventListener('click', () => {
-                const next = Math.min(Number(card.querySelector('[data-stock]')?.dataset.stock || 0), 20, (fnbCart.get(id) || 0) + 1);
-                fnbCart.set(id, next);
-                syncFnbCartUI();
-            });
-            card.querySelector(`[data-fnb-dec="${id}"]`)?.addEventListener('click', () => {
-                const next = Math.max(0, (fnbCart.get(id) || 0) - 1);
-                if (next === 0) fnbCart.delete(id);
-                else fnbCart.set(id, next);
-                syncFnbCartUI();
-            });
-        });
-
-        fnbOrderClearBtn?.addEventListener('click', () => {
-            fnbCart.clear();
-            syncFnbCartUI();
-        });
-
-        fnbOrderSubmitBtn?.addEventListener('click', () => {
-            if (fnbCart.size === 0) return;
-            const tableName = fnbTableSelect?.value || 'Sofa Lounge Utama';
-            let total = 0;
-            const orderedItems = [];
-
-            fnbCards.forEach((card) => {
-                const id = card.dataset.fnbId || '';
-                const qty = fnbCart.get(id) || 0;
-                if (qty > 0) {
-                    const price = Number(card.dataset.fnbPrice || 0);
-                    total += qty * price;
-                    orderedItems.push(`${qty}x ${card.dataset.fnbName || id}`);
-                }
-            });
-
-            const existing = JSON.parse(localStorage.getItem('ps_seleraku_fnb_orders') || '[]');
-            existing.unshift({
-                table: tableName,
-                items: orderedItems,
-                total: formatRp(total),
-                createdAt: new Date().toISOString(),
-            });
-            localStorage.setItem('ps_seleraku_fnb_orders', JSON.stringify(existing.slice(0, 10)));
-
-            fnbCart.clear();
-            syncFnbCartUI();
-            showToast(
-                'Pesanan F&B Dikirim ke Dapur!',
-                `${orderedItems.join(', ')} -> Diantar ke ${tableName} • Total ${formatRp(total)}`
-            );
-        });
-
-        fnbCallCrewBtn?.addEventListener('click', () => {
-            showToast(
-                'Kru Lounge Segera Hadir!',
-                'Permintaan bantuan waiter Anda telah diteruskan. Kru kami segera menuju meja Anda.'
-            );
-        });
-
         applyFnbFilters();
-        syncFnbCartUI();
     }
 })();

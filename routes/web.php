@@ -38,6 +38,11 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
 
+    Route::get('/keranjang', [\App\Http\Controllers\CartController::class, 'index'])->name('cart.index');
+    Route::post('/keranjang', [\App\Http\Controllers\CartController::class, 'store'])->middleware('throttle:60,1,cart-')->name('cart.store');
+    Route::patch('/keranjang/{item}', [\App\Http\Controllers\CartController::class, 'update'])->name('cart.update');
+    Route::delete('/keranjang/{item}', [\App\Http\Controllers\CartController::class, 'destroy'])->name('cart.destroy');
+
     Route::view('/home-page', 'home-page')->name('home-page');
     Route::view('/home page', 'home-page');
 

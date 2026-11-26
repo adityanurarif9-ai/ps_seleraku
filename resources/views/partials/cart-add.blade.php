@@ -1,0 +1,1 @@
+<form method="post" action="{{ route('cart.store') }}" class="cart-add-form">@csrf<input type="hidden" name="catalog_item_id" value="{{ $cartItemId }}"><input type="hidden" name="mode" value="{{ $cartMode ?? 'lounge' }}"><button type="submit" class="cart-add-button" @disabled($cartDisabled ?? false)>{{ __('Tambah ke keranjang') }}</button></form>

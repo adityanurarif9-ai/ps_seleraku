@@ -122,22 +122,7 @@
                                         <strong class="ps-fnb-price-val">{{ $item['priceText'] }}</strong>
                                     </div>
 
-                                    <div class="ps-fnb-action-slot">
-                                        <button
-                                            type="button"
-                                            class="ps-fnb-add-btn"
-                                            data-fnb-add="{{ $item['id'] }}" data-stock="{{ $item['stock'] }}" @disabled($item['stock']===0)
-                                            aria-label="Tambah {{ $item['name'] }}"
-                                        >
-                                            {{ $item['stock'] > 0 ? '+ Tambah' : 'Habis' }}
-                                        </button>
-
-                                        <div class="ps-fnb-stepper" data-fnb-stepper="{{ $item['id'] }}" hidden>
-                                            <button type="button" class="ps-fnb-step-btn is-minus" data-fnb-dec="{{ $item['id'] }}" aria-label="Kurangi {{ $item['name'] }}">&minus;</button>
-                                            <span class="ps-fnb-step-qty" data-fnb-qty="{{ $item['id'] }}">0</span>
-                                            <button type="button" class="ps-fnb-step-btn is-plus" data-fnb-inc="{{ $item['id'] }}" aria-label="Tambah porsi {{ $item['name'] }}">+</button>
-                                        </div>
-                                    </div>
+                                    @include('partials.cart-add', ['cartItemId'=>(int) str_replace('menu-','',$item['id']), 'cartDisabled'=>$item['stock']<1])
                                 </div>
                             </div>
                         </article>
@@ -147,30 +132,6 @@
                         <h3>{{ __('Menu Tidak Ditemukan') }}</h3>
                         <p>{{ __('Tidak ada camilan atau minuman yang cocok dengan filter atau kata kunci Anda.') }}</p>
                         <button type="button" id="fnb-reset-filters" class="ps-btn-primary">{{ __('Tampilkan Semua Menu') }}</button>
-                    </div>
-                </div>
-
-                <!-- LIVE TABLE ORDER SUMMARY BAR (APPEARS WHEN ITEMS > 0) -->
-                <div id="fnb-order-bar" class="ps-fnb-order-bar" hidden>
-                    <div class="ps-fnb-order-info">
-                        <span class="ps-fnb-order-badge" id="fnb-order-count">{{ __('0 Item') }}</span>
-                        <div>
-                            <strong id="fnb-order-summary">{{ __('Belum ada item dipilih') }}</strong>
-                            <small id="fnb-order-items-preview">{{ __('Tambahkan camilan atau minuman untuk diantar ke meja.') }}</small>
-                        </div>
-                    </div>
-
-                    <div class="ps-fnb-order-actions">
-                        <select id="fnb-table-select" class="ps-fnb-table-select" aria-label="{{ __('Pilih Meja atau Station VIP') }}">
-                            <option value="VIP-01 (PS5 Disc Ultra)">Meja VIP-01 (PS5 Ultra)</option>
-                            <option value="VIP-03 (Party Room)">Meja VIP-03 (Party Room)</option>
-                            <option value="REG-02 (PS5 Slim)">Station REG-02 (PS5 Slim)</option>
-                            <option value="REG-04 (PS4 Pro)">Station REG-04 (PS4 Pro)</option>
-                            <option value="Sofa Lounge Utama">Sofa Lounge Utama</option>
-                        </select>
-                        <strong class="ps-fnb-order-total" id="fnb-order-total">Rp 0</strong>
-                        <button type="button" id="fnb-order-clear" class="ps-fnb-reset-btn">{{ __('Kosongkan') }}</button>
-                        <button type="button" id="fnb-order-submit" class="ps-fnb-submit-btn">{{ __('Kirim ke Meja →') }}</button>
                     </div>
                 </div>
 
@@ -193,14 +154,7 @@
 
                     <div class="ps-fnb-hygiene-right">
                         <span>{{ __('Butuh bantuan waiter?') }}</span>
-                        <button type="button" id="fnb-call-crew-btn" class="ps-fnb-crew-btn">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                                <path d="M3 18v-6a9 9 0 0 1 18 0v6"/>
-                                <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z"/>
-                                <path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>
-                            </svg>
-                            <span>{{ __('Panggil Kru Lounge') }}</span>
-                        </button>
+                        <a href="{{ route('kontak') }}" class="ps-fnb-crew-btn">{{ __('Hubungi pengelola') }}</a>
                     </div>
                 </div>
             </div>

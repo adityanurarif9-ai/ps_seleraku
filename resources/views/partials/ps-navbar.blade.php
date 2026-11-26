@@ -5,7 +5,6 @@
         </a>
 
         <div class="ps-nav-right">
-            @include('partials.language-switch')
             <nav class="ps-nav-links" aria-label="{{ __('Navigasi Utama') }}">
                 <a class="ps-nav-link {{ $activePage === 'rentals' ? 'is-active' : '' }}" href="{{ route('reservations.index') }}">{{ __('RENTAL SAYA') }}</a>
                 <a class="ps-nav-link {{ $activePage === 'home-page' ? 'is-active' : '' }}" href="{{ route('home-page') }}">{{ __('BERANDA') }}</a>
@@ -18,6 +17,11 @@
 
             <a class="ps-nav-cta" href="{{ route('reservations.create') }}">{{ __('PESAN SEKARANG') }}</a>
 
+            <a class="ps-cart-link" href="{{ route('cart.index') }}" aria-label="{{ __('Keranjang') }}">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3h2l3 12h10l3-9H6"/><circle cx="10" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>
+                @if(count(session('shopping_cart', [])))<span class="ps-cart-count">{{ min(99,collect(session('shopping_cart', []))->sum('quantity')) }}</span>@endif
+            </a>
+            @include('partials.language-switch')
             <div class="ps-account-wrap">
                 <button id="ps-account-btn" class="ps-avatar-btn" type="button" aria-label="{{ __('Menu Akun') }}" aria-expanded="false" aria-controls="ps-account-menu">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
