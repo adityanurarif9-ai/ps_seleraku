@@ -1,4 +1,4 @@
-<meta name="description" content="Reservasi konsol PlayStation dan Nintendo di PS Seleraku. Pilih jadwal, lihat ketersediaan, dan pantau waktu rental dari akunmu.">
+<meta name="description" content="{{ __('Reservasi konsol PlayStation dan Nintendo di PS Seleraku. Pilih jadwal, lihat ketersediaan, dan pantau waktu rental dari akunmu.') }}">
 @if($authPage ?? false)
 <style>{!! \App\Support\SiteAsset::styles('fonts/poppins-v24.css') !!}{!! \App\Support\SiteAsset::styles('login.css') !!}{!! \App\Support\SiteAsset::styles('pwa.css') !!}</style>
 @foreach([400, 600, 700, 800] as $weight)

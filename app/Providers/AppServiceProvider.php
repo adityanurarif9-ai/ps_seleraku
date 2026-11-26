@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         View::composer(['site.*', 'home-page', 'partials.ps-footer'], function ($view) {
-            $view->with('site', SiteContent::values());
+            $view->with('site', SiteContent::localizedValues());
         });
         View::composer(['home-page', 'page-ke2', 'sewa-harian', 'menu-fnb'], function ($view) {
             $view->with(app(WebsiteCatalog::class)->data());

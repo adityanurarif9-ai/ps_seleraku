@@ -1,3 +1,4 @@
+var psTr = window.psT || (value => value);
 (() => {
     const money = new Intl.NumberFormat('id-ID');
     const formatRp = (val) => 'Rp ' + money.format(Math.max(0, Number(val) || 0));
@@ -597,7 +598,7 @@
             if (detailTitle) detailTitle.textContent = btn.dataset.name || 'Detail Unit';
             if (detailMeta) detailMeta.textContent = `${btn.dataset.code || ''} • ${btn.dataset.platform || ''} • ${btn.dataset.statusLabel || ''}`;
             if (detailSpecs) detailSpecs.textContent = btn.dataset.specs || '';
-            if (detailRate) detailRate.textContent = `${formatRp(btn.dataset.rate || 0)} / jam`;
+            if (detailRate) detailRate.textContent = `${formatRp(btn.dataset.rate || 0)} / ${window.psLocale === 'en' ? 'hour' : 'jam'}`;
             if (detailGames) {
                 detailGames.replaceChildren(...games.map(g => { const tag=document.createElement('span'); tag.className='ps-detail-tag'; tag.textContent=g; return tag; }));
             }
@@ -699,7 +700,7 @@
             });
 
             if (countEl) {
-                countEl.textContent = `Menampilkan ${visibleCount} Unit Konsol (${readyCount} Siap Pakai)`;
+                countEl.textContent = (window.psLocale === 'en' ? `${visibleCount} consoles (${readyCount} available)` : `Menampilkan ${visibleCount} Unit Konsol (${readyCount} Siap Pakai)`);
             }
             if (emptyEl) {
                 emptyEl.hidden = visibleCount > 0;
@@ -782,7 +783,7 @@
             });
 
             if (fnbCountEl) {
-                fnbCountEl.textContent = `${visibleCount} Pilihan Tersedia`;
+                fnbCountEl.textContent = (window.psLocale === 'en' ? `${visibleCount} items available` : `${visibleCount} Pilihan Tersedia`);
             }
             if (fnbEmptyEl) {
                 fnbEmptyEl.hidden = visibleCount > 0;

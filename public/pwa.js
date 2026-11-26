@@ -1,3 +1,4 @@
+var psTr = window.psT || (value => value);
 (() => {
     const promotions = [...document.querySelectorAll('[data-install-promotion]')];
     const installButtons = [...document.querySelectorAll('[data-install-app]')];
@@ -12,7 +13,7 @@
     window.addEventListener('beforeinstallprompt', event => {
         event.preventDefault();
         deferredPrompt = event;
-        installButtons.forEach(button => { button.textContent = 'Pasang aplikasi'; });
+        installButtons.forEach(button => { button.textContent = psTr('Pasang aplikasi'); });
     });
     window.addEventListener('appinstalled', () => {
         deferredPrompt = null;
@@ -30,7 +31,7 @@
                 ? ['Buka website ini di Chrome pada Android.', 'Ketuk menu tiga titik di pojok browser.', 'Pilih Instal aplikasi atau Tambahkan ke layar utama, lalu ikuti konfirmasinya.']
                 : ['Buka website ini di Chrome, Edge, atau Safari yang mendukung instalasi.', 'Cari ikon instal di bilah alamat atau pilihan instal aplikasi pada menu browser.'];
         const list = dialog.querySelector('[data-install-steps]');
-        list.replaceChildren(...steps.map(text => { const li = document.createElement('li'); li.textContent = text; return li; }));
+        list.replaceChildren(...steps.map(text => { const li = document.createElement('li'); li.textContent = psTr(text); return li; }));
         if (!dialog.open) dialog.showModal();
     };
     installButtons.forEach(button => button.addEventListener('click', async () => {
@@ -41,7 +42,7 @@
         try {
             await prompt.prompt();
             const choice = await prompt.userChoice;
-            if (choice.outcome !== 'accepted') button.textContent = 'Cara memasang';
+            if (choice.outcome !== 'accepted') button.textContent = psTr('Cara memasang');
             else promotions.forEach(element => { element.hidden = true; });
         } catch {
             showGuide();

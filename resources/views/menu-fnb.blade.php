@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Menu Camilan &amp; Minuman Barista — PS SELERAKU</title>
+    <title>{{ __('Menu Camilan & Minuman Barista — PS SELERAKU') }}</title>
 @include('partials.performance-head', ['authPage'=>false])
 
 
@@ -21,16 +21,16 @@
         <section class="ps-hero-page2 ps-hero-food" aria-label="Hero Lounge F&B PS Seleraku">
             <div class="ps-hero-inner">
                 <h1 class="ps-hero-title">
-                    TEMAN <span class="ps-text-ps4">NGEMIL</span> &amp; <span class="ps-text-ps5">MABAR</span>
+                    {{ __('TEMAN') }} <span class="ps-text-ps4">{{ __('NGEMIL') }}</span> &amp; <span class="ps-text-ps5">{{ __('MABAR') }}</span>
                 </h1>
                 <p class="ps-hero-subtitle">
-                    Temukan makanan, camilan, dan minuman favorit untuk menemani sesi mainmu.
+                    {{ __('Temukan makanan, camilan, dan minuman favorit untuk menemani sesi mainmu.') }}
                 </p>
             </div>
         </section>
 
         <!-- LOUNGE F&B CATALOG (DESKTOP - 4) -->
-        <section id="fnb-catalog" class="ps-fnb-section" aria-label="Menu Camilan dan Minuman Barista">
+        <section id="fnb-catalog" class="ps-fnb-section" aria-label="{{ __('Menu Camilan dan Minuman Barista') }}">
             <div class="ps-container">
                 <div class="ps-fnb-header">
                     <div class="ps-fnb-header-left">
@@ -38,9 +38,9 @@
                             <span class="ps-fnb-pill-badge">LOUNGE REFRESHMENT</span>
                             <span class="ps-fnb-eyebrow">CONCIERGE F&amp;B DELIVERY</span>
                         </div>
-                        <h2 class="ps-fnb-title">Menu Camilan &amp; Minuman Barista</h2>
+                        <h2 class="ps-fnb-title">{{ __('Menu Camilan & Minuman Barista') }}</h2>
                         <p class="ps-fnb-subtitle">
-                            Pesan langsung dari sofa VIP konsol Anda tanpa menjeda aksi seru mabar. Diantar hangat langsung ke meja.
+                            {{ __('Pesan langsung dari sofa VIP konsol Anda tanpa menjeda aksi seru mabar. Diantar hangat langsung ke meja.') }}
                         </p>
                     </div>
 
@@ -52,39 +52,39 @@
                         <input
                             id="fnb-search"
                             type="search"
-                            placeholder="Cari makanan, snack gurih, kopi, atau es..."
-                            aria-label="Cari makanan, snack gurih, kopi, atau minuman"
+                            placeholder="{{ __('Cari makanan, snack gurih, kopi, atau es...') }}"
+                            aria-label="{{ __('Cari makanan, snack gurih, kopi, atau minuman') }}"
                         >
-                        <button id="fnb-search-clear" type="button" class="ps-fnb-clear-btn" aria-label="Hapus pencarian menu" hidden>&times;</button>
+                        <button id="fnb-search-clear" type="button" class="ps-fnb-clear-btn" aria-label="{{ __('Hapus pencarian menu') }}" hidden>&times;</button>
                     </div>
                 </div>
 
                 <!-- CATEGORY FILTER PILLS -->
-                <div class="ps-fnb-filters" role="group" aria-label="Kategori Menu Lounge">
-                    <button type="button" class="ps-fnb-cat-btn is-active" data-fnb-filter="all">Semua Menu</button>
-                    <button type="button" class="ps-fnb-cat-btn" data-fnb-filter="makanan-berat">Makanan Berat</button>
-                    <button type="button" class="ps-fnb-cat-btn" data-fnb-filter="camilan">Camilan &amp; Gorengan</button>
-                    <button type="button" class="ps-fnb-cat-btn" data-fnb-filter="minuman">Minuman Dingin &amp; Kopi</button>
+                <div class="ps-fnb-filters" role="group" aria-label="{{ __('Kategori Menu Lounge') }}">
+                    <button type="button" class="ps-fnb-cat-btn is-active" data-fnb-filter="all">{{ __('Semua Menu') }}</button>
+                    <button type="button" class="ps-fnb-cat-btn" data-fnb-filter="makanan-berat">{{ __('Makanan Berat') }}</button>
+                    <button type="button" class="ps-fnb-cat-btn" data-fnb-filter="camilan">{{ __('Camilan & Gorengan') }}</button>
+                    <button type="button" class="ps-fnb-cat-btn" data-fnb-filter="minuman">{{ __('Minuman Dingin & Kopi') }}</button>
                     <button type="button" class="ps-fnb-cat-btn is-combo" data-fnb-filter="combo">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f43f5e" stroke-width="2.2" aria-hidden="true">
                             <path d="M12 2L14.8 8.5L22 9.3L16.5 14L18.2 21L12 17.3L5.8 21L7.5 14L2 9.3L9.2 8.5L12 2Z"/>
                         </svg>
-                        <span>Paket Combo Mabar</span>
+                        <span>{{ __('Paket Combo Mabar') }}</span>
                     </button>
                 </div>
 
                 <!-- SUB-BAR COUNT & KITCHEN INFO -->
                 <div class="ps-fnb-subbar">
                     <div class="ps-fnb-subbar-left">
-                        <h3>Katalog Pilihan Meja VIP</h3>
-                        <span id="fnb-count" class="ps-fnb-count-badge">{{ count($fnbItems) }} pilihan menu</span>
+                        <h3>{{ __('Katalog Pilihan Meja VIP') }}</h3>
+                        <span id="fnb-count" class="ps-fnb-count-badge">{{ count($fnbItems) }} {{ __('pilihan menu') }}</span>
                     </div>
                     <div class="ps-fnb-subbar-right">
                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.2" aria-hidden="true">
                             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                             <path d="m9 12 2 2 4-4"/>
                         </svg>
-                        <span>Dapur Lounge Higienis &amp; Freshly Cooked</span>
+                        <span>{{ __('Dapur Lounge Higienis & Freshly Cooked') }}</span>
                     </div>
                 </div>
 
@@ -114,11 +114,11 @@
 
                             <div class="ps-fnb-body">
                                 <h3 class="ps-fnb-card-title">{{ $item['name'] }}</h3>
-                                <p class="ps-fnb-card-desc">{{ $item['desc'] }}</p><p class="ps-fnb-card-desc">Stok: {{ $item['stock'] }}</p>
+                                <p class="ps-fnb-card-desc">{{ $item['desc'] }}</p><p class="ps-fnb-card-desc">{{ __('Stok:') }} {{ $item['stock'] }}</p>
 
                                 <div class="ps-fnb-card-foot">
                                     <div>
-                                        <span class="ps-fnb-price-label">HARGA</span>
+                                        <span class="ps-fnb-price-label">{{ __('HARGA') }}</span>
                                         <strong class="ps-fnb-price-val">{{ $item['priceText'] }}</strong>
                                     </div>
 
@@ -144,24 +144,24 @@
                     @endforeach
 
                     <div id="fnb-empty" class="ps-empty-state" @if(count($fnbItems)>0) hidden @endif>
-                        <h3>Menu Tidak Ditemukan</h3>
-                        <p>Tidak ada camilan atau minuman yang cocok dengan filter atau kata kunci Anda.</p>
-                        <button type="button" id="fnb-reset-filters" class="ps-btn-primary">Tampilkan Semua Menu</button>
+                        <h3>{{ __('Menu Tidak Ditemukan') }}</h3>
+                        <p>{{ __('Tidak ada camilan atau minuman yang cocok dengan filter atau kata kunci Anda.') }}</p>
+                        <button type="button" id="fnb-reset-filters" class="ps-btn-primary">{{ __('Tampilkan Semua Menu') }}</button>
                     </div>
                 </div>
 
                 <!-- LIVE TABLE ORDER SUMMARY BAR (APPEARS WHEN ITEMS > 0) -->
                 <div id="fnb-order-bar" class="ps-fnb-order-bar" hidden>
                     <div class="ps-fnb-order-info">
-                        <span class="ps-fnb-order-badge" id="fnb-order-count">0 Item</span>
+                        <span class="ps-fnb-order-badge" id="fnb-order-count">{{ __('0 Item') }}</span>
                         <div>
-                            <strong id="fnb-order-summary">Belum ada item dipilih</strong>
-                            <small id="fnb-order-items-preview">Tambahkan camilan atau minuman untuk diantar ke meja.</small>
+                            <strong id="fnb-order-summary">{{ __('Belum ada item dipilih') }}</strong>
+                            <small id="fnb-order-items-preview">{{ __('Tambahkan camilan atau minuman untuk diantar ke meja.') }}</small>
                         </div>
                     </div>
 
                     <div class="ps-fnb-order-actions">
-                        <select id="fnb-table-select" class="ps-fnb-table-select" aria-label="Pilih Meja atau Station VIP">
+                        <select id="fnb-table-select" class="ps-fnb-table-select" aria-label="{{ __('Pilih Meja atau Station VIP') }}">
                             <option value="VIP-01 (PS5 Disc Ultra)">Meja VIP-01 (PS5 Ultra)</option>
                             <option value="VIP-03 (Party Room)">Meja VIP-03 (Party Room)</option>
                             <option value="REG-02 (PS5 Slim)">Station REG-02 (PS5 Slim)</option>
@@ -169,8 +169,8 @@
                             <option value="Sofa Lounge Utama">Sofa Lounge Utama</option>
                         </select>
                         <strong class="ps-fnb-order-total" id="fnb-order-total">Rp 0</strong>
-                        <button type="button" id="fnb-order-clear" class="ps-fnb-reset-btn">Kosongkan</button>
-                        <button type="button" id="fnb-order-submit" class="ps-fnb-submit-btn">Kirim ke Meja &rarr;</button>
+                        <button type="button" id="fnb-order-clear" class="ps-fnb-reset-btn">{{ __('Kosongkan') }}</button>
+                        <button type="button" id="fnb-order-submit" class="ps-fnb-submit-btn">{{ __('Kirim ke Meja →') }}</button>
                     </div>
                 </div>
 
@@ -186,20 +186,20 @@
                             </svg>
                         </div>
                         <div>
-                            <h4>Peralatan Higienis &amp; Controller Friendly</h4>
-                            <p>Setiap pesanan camilan dilengkapi tissue basah pembersih stik controller antibakteri &amp; sendok garpu higienis.</p>
+                            <h4>{{ __('Peralatan Higienis & Controller Friendly') }}</h4>
+                            <p>{{ __('Setiap pesanan camilan dilengkapi tissue basah pembersih stik controller antibakteri & sendok garpu higienis.') }}</p>
                         </div>
                     </div>
 
                     <div class="ps-fnb-hygiene-right">
-                        <span>Butuh bantuan waiter?</span>
+                        <span>{{ __('Butuh bantuan waiter?') }}</span>
                         <button type="button" id="fnb-call-crew-btn" class="ps-fnb-crew-btn">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                                 <path d="M3 18v-6a9 9 0 0 1 18 0v6"/>
                                 <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z"/>
                                 <path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>
                             </svg>
-                            <span>Panggil Kru Lounge</span>
+                            <span>{{ __('Panggil Kru Lounge') }}</span>
                         </button>
                     </div>
                 </div>

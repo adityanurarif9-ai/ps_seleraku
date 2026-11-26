@@ -1,3 +1,4 @@
+var psTr = window.psT || (value => value);
 const form = document.querySelector('.login-form');
 const password = document.querySelector('#password');
 const toggle = document.querySelector('.password-toggle');
@@ -15,10 +16,10 @@ function startVerification() {
     if (!widget || verificationRequested) return;
     verificationRequested = true;
     if (startButton) startButton.hidden = true;
-    showVerification('Menyiapkan verifikasi keamanan…', false);
+    showVerification(psTr('Menyiapkan verifikasi keamanan…'), false);
     clearTimeout(verificationTimer);
     verificationTimer = setTimeout(() => {
-        if (!ready) showVerification('Verifikasi belum merespons. Coba ulangi verifikasi.', false, true);
+        if (!ready) showVerification(psTr('Verifikasi belum merespons. Coba ulangi verifikasi.'), false, true);
     }, 20000);
     const script = document.createElement('script');
     script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onTurnstileLoad&render=explicit';
@@ -28,7 +29,7 @@ function startVerification() {
         clearTimeout(verificationTimer);
         verificationRequested = false;
         script.remove();
-        showVerification('Verifikasi gagal dimuat. Periksa koneksi lalu coba lagi.', false, true);
+        showVerification(psTr('Verifikasi gagal dimuat. Periksa koneksi lalu coba lagi.'), false, true);
     };
     document.head.append(script);
 }
@@ -47,12 +48,12 @@ function showVerification(message, verified, canRetry = false) {
 
 window.onTurnstileSuccess = () => {
     clearTimeout(verificationTimer);
-    showVerification('Verifikasi berhasil. Kamu bisa melanjutkan.', true);
+    showVerification(psTr('Verifikasi berhasil. Kamu bisa melanjutkan.'), true);
 };
 window.onTurnstileError = (errorCode) => {
     clearTimeout(verificationTimer);
     const code = String(errorCode ?? '');
-    let message = 'Verifikasi Cloudflare gagal. Periksa koneksi dan coba lagi.';
+    let message = psTr('Verifikasi Cloudflare gagal. Periksa koneksi dan coba lagi.');
     if (code === '110200') {
         message = 'Alamat situs ini belum diizinkan. Tambahkan ' + location.hostname + ' di Hostname Management widget Cloudflare, lalu simpan.';
     } else if (['110100', '110110', '400020', '400070'].includes(code)) {
@@ -67,7 +68,7 @@ window.onTurnstileError = (errorCode) => {
     return true;
 };
 window.onTurnstileExpired = () => {
-    showVerification('Verifikasi kedaluwarsa. Verifikasi ulang untuk melanjutkan.', false, true);
+    showVerification(psTr('Verifikasi kedaluwarsa. Verifikasi ulang untuk melanjutkan.'), false, true);
 };
 window.onTurnstileLoad = () => {
     if (!widget || widgetRendered) return;
@@ -103,7 +104,7 @@ form.addEventListener('submit', event => {
         return;
     }
     submit.disabled = true;
-    submit.textContent = 'MEMPROSES…';
+    submit.textContent = psTr('MEMPROSES…');
 });
 window.addEventListener('pageshow', event => {
     if (!event.persisted) return;
@@ -119,7 +120,7 @@ toggle?.addEventListener('click', () => {
     const visible = password.type === 'password';
     password.type = visible ? 'text' : 'password';
     toggle.setAttribute('aria-pressed', String(visible));
-    toggle.setAttribute('aria-label', visible ? 'Sembunyikan kata sandi' : 'Tampilkan kata sandi');
+    toggle.setAttribute('aria-label', visible ? psTr('Sembunyikan kata sandi') : psTr('Tampilkan kata sandi'));
 });
 document.querySelectorAll('[data-login]').forEach(button => {
     button.addEventListener('click', () => {

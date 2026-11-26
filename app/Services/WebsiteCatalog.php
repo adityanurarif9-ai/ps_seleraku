@@ -28,7 +28,7 @@ class WebsiteCatalog
             $available = $free > 0;
             $platform = $item->platformKey();
             $status = $available ? 'available' : ($item->stock === 0 ? 'maintenance' : 'in-use');
-            $label = $available ? $free.' dari '.$item->stock.' unit tersedia' : ($item->stock === 0 ? 'Belum tersedia' : 'Penuh untuk 1 jam ke depan');
+            $label = $available ? __(':free dari :total unit tersedia', ['free'=>$free, 'total'=>$item->stock]) : ($item->stock === 0 ? 'Belum tersedia' : 'Penuh untuk 1 jam ke depan');
             $id = 'catalog-'.$item->id;
             $desc = $item->description ?? 'Pilih jadwal dan durasi pada formulir reservasi.';
             $games = $item->games ?? [];
@@ -40,11 +40,20 @@ class WebsiteCatalog
             }
             if ($item->daily_price !== null) {
                 $dailyFree = app(RentalAvailability::class)->available($item, now(), now()->addDay());
-                $dailyUnits[] = ['itemId' => $id, 'tag' => $item->name, 'platformKey' => $platform, 'statusKey' => $dailyFree > 0 ? 'available' : 'in-use', 'statusLabel' => $dailyFree > 0 ? $dailyFree.' unit tersedia' : 'Pilih jadwal lain', 'statusClass' => $dailyFree > 0 ? 'is-available' : 'is-rented', 'rate' => $item->daily_price, 'rateText' => $money($item->daily_price), 'image' => $item->image(), 'imgBadge' => null, 'overlayNote' => null, 'name' => $item->name, 'desc' => $desc, 'chips' => array_slice($games, 0, 2), 'ctaText' => 'Pilih jadwal harian', 'ctaIcon' => 'bag', 'defaultSchedule' => 'now', 'searchText' => strtolower($item->name.' '.$desc.' '.implode(' ', $games))];
-                $packages[] = ['id' => 'paket-catalog-'.$item->id, 'image' => $item->image(), 'pill' => 'SEWA HARIAN', 'pillClass' => '', 'featured' => false, 'ribbon' => null, 'name' => 'SEWA '.mb_strtoupper($item->name), 'desc' => $desc, 'price' => $money($item->daily_price), 'rawPrice' => $item->daily_price, 'unit' => '/ 24 jam', 'unitType' => 'Hari', 'btnClass' => '', 'features' => ['Tarif harian dari katalog admin', $item->stock.' unit total', 'Jadwal dikonfirmasi pengelola', 'Pantau status di Rental Saya']];
+                $dailyUnits[] = ['itemId' => $id, 'tag' => $item->name, 'platformKey' => $platform, 'statusKey' => $dailyFree > 0 ? 'available' : 'in-use', 'statusLabel' => $dailyFree > 0 ? __(':count unit tersedia', ['count'=>$dailyFree]) : 'Pilih jadwal lain', 'statusClass' => $dailyFree > 0 ? 'is-available' : 'is-rented', 'rate' => $item->daily_price, 'rateText' => $money($item->daily_price), 'image' => $item->image(), 'imgBadge' => null, 'overlayNote' => null, 'name' => $item->name, 'desc' => $desc, 'chips' => array_slice($games, 0, 2), 'ctaText' => 'Pilih jadwal harian', 'ctaIcon' => 'bag', 'defaultSchedule' => 'now', 'searchText' => strtolower($item->name.' '.$desc.' '.implode(' ', $games))];
+                $packages[] = ['id' => 'paket-catalog-'.$item->id, 'image' => $item->image(), 'pill' => 'SEWA HARIAN', 'pillClass' => '', 'featured' => false, 'ribbon' => null, 'name' => __('SEWA').' '.mb_strtoupper($item->name), 'desc' => $desc, 'price' => $money($item->daily_price), 'rawPrice' => $item->daily_price, 'unit' => '/ 24 jam', 'unitType' => 'Hari', 'btnClass' => '', 'features' => ['Tarif harian dari katalog admin', $item->stock.' unit total', 'Jadwal dikonfirmasi pengelola', 'Pantau status di Rental Saya']];
             }
         }
 
+        foreach ([&$classicUnits, &$proUnits, &$dailyUnits, &$packages, &$fnbItems] as &$group) {
+            foreach ($group as &$entry) {
+                foreach (['statusLabel', 'btnText', 'ctaText', 'gamesHeading', 'badge', 'pill', 'unitType', 'unit', 'note'] as $key) {
+                    if (isset($entry[$key])) $entry[$key] = __($entry[$key]);
+                }
+            }
+            unset($entry);
+        }
+        unset($group);
         return compact('classicUnits', 'proUnits', 'dailyUnits', 'packages', 'fnbItems');
     }
 }

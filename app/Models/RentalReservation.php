@@ -40,13 +40,13 @@ class RentalReservation extends Model
     public function statusLabel(): string
     {
         if ($this->status === 'playing' && $this->playSession?->displayStatus() === 'expired') {
-            return 'Waktu habis';
+            return __('Waktu habis');
         }
         if ($this->status === 'playing' && $this->playSession?->status === 'paused') {
-            return 'Sedang dijeda';
+            return __('Sedang dijeda');
         }
 
-        return self::LABELS[$this->status] ?? $this->status;
+        return __(self::LABELS[$this->status] ?? $this->status);
     }
 
     public function reference(): string

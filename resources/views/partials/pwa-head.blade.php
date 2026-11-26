@@ -1,3 +1,8 @@
+<script>
+window.psLocale = @json(app()->getLocale());
+window.psT = (function (messages) { return function (text) { return messages[text] || text; }; })(@json(app()->getLocale() === 'en' ? json_decode(file_get_contents(lang_path('browser-en.json')), true) : (object) []));
+</script>
+<style>.ps-language{display:inline-flex;align-items:center;justify-content:center;gap:1px;padding:3px;background:#f1f4f9;border:1px solid #dce3ee;border-radius:7px;flex-shrink:0;margin:0;font-family:inherit}.ps-language button{font:600 11px Poppins,sans-serif;padding:8px 7px;min-height:34px;min-width:29px;border:0;border-radius:4px;background:transparent;color:#526078;cursor:pointer}.ps-language button[aria-pressed=true]{background:#fff;color:#244fc4;box-shadow:0 1px 4px #14254612}.ps-language span{color:#6a768c;font-size:11px}.ps-language button:focus-visible{outline:2px solid #2456d8;outline-offset:2px}.ps-language-auth{position:absolute;top:16px;right:20px;z-index:25}@media(max-width:600px){.ps-language-auth{top:10px;right:12px}.ps-nav-right{gap:7px}.ps-language button{padding:5px;min-width:26px;min-height:34px}.ps-nav-brand-img{max-width:130px;object-fit:contain}}</style>
 @if(auth()->check() || request()->routeIs('tentang', 'cara-sewa', 'kontak'))
 <link rel="stylesheet" href="{{ \App\Support\SiteAsset::url('site.css') }}">
 <link rel="stylesheet" href="{{ \App\Support\SiteAsset::url('reference.css') }}">

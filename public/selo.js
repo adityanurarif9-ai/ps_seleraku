@@ -1,3 +1,4 @@
+var psTr = window.psT || (value => value);
 (() => {
     const widget = document.querySelector('[data-selo]');
     if (!widget) return;
@@ -75,7 +76,7 @@
         const pending = message('', 'bot');
         pending.classList.add('selo-typing');
         const label = document.createElement('span');
-        label.className = 'selo-sr'; label.textContent = 'Selo sedang mencari info…';
+        label.className = 'selo-sr'; label.textContent = psTr('Selo sedang mencari info…');
         pending.append(label);
         for (let i = 0; i < 3; i++) {
             const dot = document.createElement('i'); dot.setAttribute('aria-hidden', 'true'); pending.append(dot);
@@ -97,7 +98,7 @@
                 const a = document.createElement('a'); a.href = url.href; a.textContent = item.label; a.className = 'selo-link'; pending.append(a);
             }
         } catch (error) {
-            pending.textContent = error.message === '429' ? 'Pertanyaannya terlalu cepat. Tunggu sebentar, lalu coba lagi.' : error.message === '419' ? 'Sesi halaman sudah berakhir. Muat ulang halaman untuk melanjutkan chat.' : 'Info belum berhasil dimuat. Periksa koneksimu lalu kirim ulang pertanyaan.';
+            pending.textContent = error.message === '429' ? psTr('Pertanyaannya terlalu cepat. Tunggu sebentar, lalu coba lagi.') : error.message === '419' ? psTr('Sesi halaman sudah berakhir. Muat ulang halaman untuk melanjutkan chat.') : psTr('Info belum berhasil dimuat. Periksa koneksimu lalu kirim ulang pertanyaan.');
             input.value = text;
         } finally {
             clearTimeout(timer); pending.classList.remove('selo-typing');

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Sewa Harian (Bawa Pulang) — PS SELERAKU</title>
+    <title>{{ __('Sewa Harian (Bawa Pulang) — PS SELERAKU') }}</title>
 @include('partials.performance-head', ['authPage'=>false])
 
 
@@ -24,33 +24,33 @@
                     RENTAL <span class="ps-text-ps4">PS4</span> &amp; <span class="ps-text-ps5">PS5</span>
                 </h1>
                 <p class="ps-hero-subtitle">
-                    Bawa keseruan main ke rumah. Pilih konsol, tanggal mulai, dan durasi sewa harian sesuai rencanamu.
+                    {{ __('Bawa keseruan main ke rumah. Pilih konsol, tanggal mulai, dan durasi sewa harian sesuai rencanamu.') }}
                 </p>
             </div>
         </section>
 
         <!-- KATALOG SEWA HARIAN (DESKTOP - 3) -->
-        <section id="daily-catalog" class="ps-catalog-section ps-daily-section" aria-label="Katalog Sewa Harian Konsol">
+        <section id="daily-catalog" class="ps-catalog-section ps-daily-section" aria-label="{{ __('Katalog Sewa Harian Konsol') }}">
             <div class="ps-container">
                 <div class="ps-daily-head">
                     <div>
                         <h2 class="ps-daily-title">
-                            <span>PILIH PLAYSTATION</span>
-                            FAVORITMU.
+                            <span>{{ __('PILIH PLAYSTATION') }}</span>
+                            {{ __('FAVORITMU.') }}
                         </h2>
                         <p class="ps-daily-sub">
-                            Main bersama teman atau keluarga di rumah. Lihat pilihan konsol dan tarif harian, lalu cek jadwal yang tersedia.
+                            {{ __('Main bersama teman atau keluarga di rumah. Lihat pilihan konsol dan tarif harian, lalu cek jadwal yang tersedia.') }}
                         </p>
                     </div>
 
-                    <nav class="ps-mode-switcher" aria-label="Mode Tarif Sewa">
+                    <nav class="ps-mode-switcher" aria-label="{{ __('Mode Tarif Sewa') }}">
                         <a href="{{ route('page-ke2') }}" class="ps-mode-tab">
-                            <span>Main di Lounge</span>
-                            <small>Per Jam</small>
+                            <span>{{ __('Main di Lounge') }}</span>
+                            <small>{{ __('Per Jam') }}</small>
                         </a>
                         <a href="{{ route('sewa-harian') }}" class="ps-mode-tab is-active" aria-current="page">
-                            <span>Sewa Harian</span>
-                            <small>Bawa Pulang</small>
+                            <span>{{ __('Sewa Harian') }}</span>
+                            <small>{{ __('Bawa Pulang') }}</small>
                         </a>
                     </nav>
                 </div>
@@ -66,14 +66,14 @@
                             <input
                                 id="p2-search"
                                 type="search"
-                                placeholder="Cari konsol PlayStation atau judul game..."
+                                placeholder="{{ __('Cari konsol PlayStation atau judul game...') }}"
                                 aria-label="Cari konsol PlayStation atau judul game"
                             >
-                            <button id="p2-search-clear" type="button" class="ps-daily-clear-btn" aria-label="Hapus pencarian" hidden>&times;</button>
+                            <button id="p2-search-clear" type="button" class="ps-daily-clear-btn" aria-label="{{ __('Hapus pencarian') }}" hidden>&times;</button>
                         </div>
 
-                        <div class="ps-daily-platform-tabs" role="group" aria-label="Filter Platform">
-                            <button type="button" class="ps-daily-plat-btn is-active" data-platform-filter="all">Semua</button>
+                        <div class="ps-daily-platform-tabs" role="group" aria-label="{{ __('Filter Platform') }}">
+                            <button type="button" class="ps-daily-plat-btn is-active" data-platform-filter="all">{{ __('Semua') }}</button>
                             <button type="button" class="ps-daily-plat-btn" data-platform-filter="ps5">PlayStation 5</button>
                             <button type="button" class="ps-daily-plat-btn" data-platform-filter="ps4">PlayStation 4</button>
                             <button type="button" class="ps-daily-plat-btn" data-platform-filter="ps3">PlayStation 3</button>
@@ -81,17 +81,17 @@
                         </div>
 
                         <div class="ps-daily-selects">
-                            <select id="p2-price" data-price-mode="daily" class="ps-daily-select" aria-label="Filter Tarif Harian">
-                                <option value="all">Semua Tarif</option>
-                                <option value="budget">Hemat (&le; Rp 60rb/hari)</option>
-                                <option value="mid">Menengah (Rp 90rb–120rb)</option>
-                                <option value="vip">Premium (&ge; Rp 150rb/hari)</option>
+                            <select id="p2-price" data-price-mode="daily" class="ps-daily-select" aria-label="{{ __('Filter Tarif Harian') }}">
+                                <option value="all">{{ __('Semua Tarif') }}</option>
+                                <option value="budget">{{ __('Hemat (≤ Rp 60rb/hari)') }}</option>
+                                <option value="mid">{{ __('Menengah (Rp 90rb–120rb)') }}</option>
+                                <option value="vip">{{ __('Premium (≥ Rp 150rb/hari)') }}</option>
                             </select>
 
-                            <select id="p2-status" class="ps-daily-select" aria-label="Filter Status Unit">
-                                <option value="all">Semua Status</option>
-                                <option value="available">Tersedia</option>
-                                <option value="in-use">Sedang Disewa</option>
+                            <select id="p2-status" class="ps-daily-select" aria-label="{{ __('Filter Status Unit') }}">
+                                <option value="all">{{ __('Semua Status') }}</option>
+                                <option value="available">{{ __('Tersedia') }}</option>
+                                <option value="in-use">{{ __('Sedang Disewa') }}</option>
                                 <option value="maintenance">Maintenance</option>
                             </select>
                         </div>
@@ -105,12 +105,12 @@
                                 <rect x="3" y="14" width="7" height="7" rx="1"/>
                                 <rect x="14" y="14" width="7" height="7" rx="1"/>
                             </svg>
-                            <span id="p2-count">Ketersediaan untuk 24 jam ke depan · Muat ulang untuk memperbarui</span>
+                            <span id="p2-count">{{ __('Ketersediaan untuk 24 jam ke depan · Muat ulang untuk memperbarui') }}</span>
                         </div>
-                        <div class="ps-daily-legend" aria-label="Legenda Status Unit">
-                            <span><i class="ps-dot-indicator is-green"></i> Hijau: Siap Main</span>
-                            <span><i class="ps-dot-indicator is-red"></i> Merah: Sedang Disewa</span>
-                            <span><i class="ps-dot-indicator is-slate"></i> Pilih jadwal untuk memastikan unit</span>
+                        <div class="ps-daily-legend" aria-label="{{ __('Legenda Status Unit') }}">
+                            <span><i class="ps-dot-indicator is-green"></i> {{ __('Hijau: Siap Main') }}</span>
+                            <span><i class="ps-dot-indicator is-red"></i> {{ __('Merah: Sedang Disewa') }}</span>
+                            <span><i class="ps-dot-indicator is-slate"></i> {{ __('Pilih jadwal untuk memastikan unit') }}</span>
                         </div>
                     </div>
                 </div>
@@ -159,8 +159,8 @@
 
                             <div class="ps-daily-card-foot">
                                 <div class="ps-daily-price-row">
-                                    <span class="ps-daily-price-label">Tarif Sewa</span>
-                                    <strong class="ps-daily-price-val">{{ $unit['rateText'] }} <small>/ hari</small></strong>
+                                    <span class="ps-daily-price-label">{{ __('Tarif Sewa') }}</span>
+                                    <strong class="ps-daily-price-val">{{ $unit['rateText'] }} <small>{{ __('/ hari') }}</small></strong>
                                 </div>
 
                                 <button
@@ -197,9 +197,9 @@
                     @endforeach
 
                     <div id="p2-empty" class="ps-empty-state" @if(count($dailyUnits)>0) hidden @endif>
-                        <h3>Tidak Ada Unit Harian yang Cocok</h3>
-                        <p>Coba ubah kata kunci pencarian atau reset filter untuk melihat kembali semua unit sewa harian.</p>
-                        <button type="button" id="p2-reset-filters" class="ps-btn-primary">Reset Semua Filter</button>
+                        <h3>{{ __('Tidak Ada Unit Harian yang Cocok') }}</h3>
+                        <p>{{ __('Coba ubah kata kunci pencarian atau reset filter untuk melihat kembali semua unit sewa harian.') }}</p>
+                        <button type="button" id="p2-reset-filters" class="ps-btn-primary">{{ __('Reset Semua Filter') }}</button>
                     </div>
                 </div>
             </div>

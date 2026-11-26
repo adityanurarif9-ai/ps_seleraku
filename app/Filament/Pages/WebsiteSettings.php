@@ -50,6 +50,14 @@ class WebsiteSettings extends Page
                 TextInput::make('contact_email')->label('Email kontak')->email()->maxLength(255),
                 TextInput::make('opening_hours')->label('Jam operasional')->maxLength(200),
             ]),
+            Section::make('English content')->description('Opsional. Isi terjemahan Inggris untuk teks usaha yang kamu ubah. Kolom kosong memakai teks asli, kecuali teks bawaan yang sudah diterjemahkan.')->schema([
+                TextInput::make('hero_title_en')->label('English home title')->maxLength(120),
+                Textarea::make('hero_description_en')->label('English home description')->maxLength(600),
+                TextInput::make('about_title_en')->label('English about title')->maxLength(120),
+                Textarea::make('about_body_en')->label('English business description')->maxLength(3000),
+                TextInput::make('opening_hours_en')->label('English opening hours')->maxLength(200),
+                Textarea::make('rental_terms_en')->label('English rental terms')->maxLength(3000),
+            ]),
             Section::make('Ketentuan sewa')->schema([Textarea::make('rental_terms')->label('Ketentuan pelanggan')->required()->rows(5)->maxLength(3000)]),
         ])->statePath('data');
     }

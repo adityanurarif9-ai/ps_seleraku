@@ -20,6 +20,7 @@ class SiteContent extends Model
             'hero_description' => 'Pilih konsol favoritmu, ajak teman, dan nikmati waktu main bersama. Pesan jadwalmu sebelum datang dan pantau rental dari akunmu.',
             'about_title' => 'Tempat bertemunya cerita dan permainan.',
             'about_body' => 'PS Seleraku membantu kamu memilih konsol dan merencanakan waktu bermain. Lihat pilihan game, cek tarif, lalu kirim reservasi. Pengelola akan mengonfirmasi jadwal dan menyiapkan sesi bermainmu.',
+            'hero_title_en' => '', 'hero_description_en' => '', 'about_title_en' => '', 'about_body_en' => '', 'rental_terms_en' => '', 'opening_hours_en' => '',
             'address' => '', 'whatsapp' => '', 'contact_email' => '', 'opening_hours' => '',
             'rental_terms' => 'Reservasi menunggu konfirmasi pengelola. Datang sesuai jadwal yang telah dikonfirmasi. Penambahan waktu mengikuti ketersediaan unit dan persetujuan admin.',
         ];
@@ -28,6 +29,17 @@ class SiteContent extends Model
     public static function values(): array
     {
         return array_replace(static::defaults(), static::find(1)?->data ?? []);
+    }
+
+    public static function localizedValues(): array
+    {
+        $values = static::values();
+        if (app()->getLocale() === 'en') {
+            foreach (['hero_title', 'hero_description', 'about_title', 'about_body', 'rental_terms', 'opening_hours'] as $field) {
+                $values[$field] = $values[$field.'_en'] ?: __($values[$field]);
+            }
+        }
+        return $values;
     }
 
     public static function whatsappUrl(?string $number): ?string

@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="id">
+<html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#0a0d25">
-    <title>Masuk · PS Seleraku</title>
+    <title>{{ __('Masuk · PS Seleraku') }}</title>
 @include('partials.performance-head', ['authPage'=>true])
     <script src="{{ \App\Support\SiteAsset::url('login.js') }}?v=performance-1" defer></script>
 @include('partials.pwa-head', ['authPage'=>true])
@@ -18,15 +18,15 @@
                     <img srcset="{{ asset(config('performance-assets.brand.small')) }} 320w, {{ \App\Support\SiteAsset::url('logo-ps-seleraku-transparent.png') }} 640w" sizes="(max-width: 700px) 158px, 248px" src="{{ \App\Support\SiteAsset::url('logo-ps-seleraku-transparent.png') }}" alt="PS SELERAKU — Rental Konsol" width="2172" height="724" decoding="async">
                 </a>
                 <h1 id="intro-title">ELEVATE YOUR <br> <span>GAMING</span> <br> EXPERIENCE</h1>
-                <p>Masuk ke akunmu sekarang dan nikmati pengalaman rental PlayStation terbaik dengan fasilitas higienis prima, dan harga kompetitif.</p>
+                <p>{{ __('Masuk ke akunmu sekarang dan nikmati pengalaman rental PlayStation terbaik dengan fasilitas higienis prima, dan harga kompetitif.') }}</p>
             </div>
         </section>
         <section class="form-side" aria-labelledby="login-title">
             <div class="auth-stack">
             @include('partials.install-app')
             <div class="login-card">
-                <h2 id="login-title">MASUK AKUN</h2>
-                <p class="subtitle">Lanjutkan untuk mulai merental PS favoritmu</p>
+                <h2 id="login-title">{{ __('MASUK AKUN') }}</h2>
+                <p class="subtitle">{{ __('Lanjutkan untuk mulai merental PS favoritmu') }}</p>
                 @if(session('session_notice'))
                     <p class="notice" role="status">{{ session('session_notice') }}</p>
                 @endif
@@ -36,41 +36,41 @@
                 <form action="{{ route('login') }}" method="post" class="login-form">
                     @csrf
                     <label for="email">EMAIL</label>
-                    <input id="email" type="email" name="email" value="{{ old('email') }}" placeholder="Masukkan email anda" autocomplete="username" maxlength="255" required>
+                    <input id="email" type="email" name="email" value="{{ old('email') }}" placeholder="{{ __('Masukkan email anda') }}" autocomplete="username" maxlength="255" required>
                     <div class="password-label">
-                        <label for="password">PASSWORD</label>
-                        <button type="button" class="text-button" data-open-dialog="password-help">LUPA PASSWORD?</button>
+                        <label for="password">{{ __('PASSWORD') }}</label>
+                        <button type="button" class="text-button" data-open-dialog="password-help">{{ __('LUPA PASSWORD?') }}</button>
                     </div>
                     <div class="password-field">
                         <input id="password" type="password" name="password" placeholder="••••••••" autocomplete="current-password" maxlength="255" required>
-                        <button type="button" class="password-toggle" aria-controls="password" aria-pressed="false" aria-label="Tampilkan kata sandi"><span class="eye" aria-hidden="true"></span></button>
+                        <button type="button" class="password-toggle" aria-controls="password" aria-pressed="false" aria-label="{{ __('Tampilkan kata sandi') }}"><span class="eye" aria-hidden="true"></span></button>
                     </div>
-                    <label class="remember"><input type="checkbox" name="remember" value="1" @checked(old('remember'))><span>Ingat saya di perangkat ini</span></label>
+                    <label class="remember"><input type="checkbox" name="remember" value="1" @checked(old('remember'))><span>{{ __('Ingat saya di perangkat ini') }}</span></label>
                     @if(config('services.turnstile.site_key'))
                         <div class="verification">
                             <div id="turnstile-widget" data-sitekey="{{ config('services.turnstile.site_key') }}"></div>
-                            <p id="verification-status" role="status">Isi formulir untuk memulai verifikasi keamanan.</p>
-                            <button type="button" class="text-button" id="verification-start">Mulai verifikasi</button>
-                            <button type="button" class="text-button" id="verification-retry" hidden>Coba verifikasi lagi</button>
-                            <noscript>Aktifkan JavaScript untuk memverifikasi Cloudflare.</noscript>
+                            <p id="verification-status" role="status">{{ __('Isi formulir untuk memulai verifikasi keamanan.') }}</p>
+                            <button type="button" class="text-button" id="verification-start">{{ __('Mulai verifikasi') }}</button>
+                            <button type="button" class="text-button" id="verification-retry" hidden>{{ __('Coba verifikasi lagi') }}</button>
+                            <noscript>{{ __('Aktifkan JavaScript untuk memverifikasi Cloudflare.') }}</noscript>
                         </div>
                     @endif
-                    <button type="submit" class="submit" @disabled(config('services.turnstile.site_key'))>MASUK SEKARANG</button>
+                    <button type="submit" class="submit" @disabled(config('services.turnstile.site_key'))>{{ __('MASUK SEKARANG') }}</button>
                 </form>
-                <div class="divider"><span>ATAU</span></div>
+                <div class="divider"><span>{{ __('ATAU') }}</span></div>
                 @if(config('services.google.client_id') && config('services.google.client_secret'))
-                    <a class="google-button" href="{{ route('google.redirect') }}"><span class="google-icon" aria-hidden="true">G</span> Masuk dengan Google</a>
+                    <a class="google-button" href="{{ route('google.redirect') }}"><span class="google-icon" aria-hidden="true">G</span> {{ __('Masuk dengan Google') }}</a>
                 @else
-                    <button class="google-button" type="button" data-open-dialog="google-help"><span class="google-icon" aria-hidden="true">G</span> Masuk dengan Google</button>
+                    <button class="google-button" type="button" data-open-dialog="google-help"><span class="google-icon" aria-hidden="true">G</span> {{ __('Masuk dengan Google') }}</button>
                 @endif
-                <p class="signup"><a href="{{ route('tentang') }}">Tentang PS Seleraku</a> · <a href="{{ route('kontak') }}">Kontak</a></p>
-                <p class="signup">Belum punya akun? <a href="{{ route('register') }}">Daftar di sini</a></p>
+                <p class="signup"><a href="{{ route('tentang') }}">{{ __('Tentang PS Seleraku') }}</a> · <a href="{{ route('kontak') }}">{{ __('Kontak') }}</a></p>
+                <p class="signup">{{ __('Belum punya akun?') }} <a href="{{ route('register') }}">{{ __('Daftar di sini') }}</a></p>
                 @if(config('app.demo_accounts'))
                     <details class="demo" open>
-                        <summary>Coba akun demo</summary>
+                        <summary>{{ __('Coba akun demo') }}</summary>
                         <div class="demo-buttons">
-                            <button type="button" data-login="pemain" data-password="Mabar!2026">Akun pemain <span aria-hidden="true">↗</span></button>
-                            <button type="button" data-login="admin" data-password="Seleraku!2026">Akun admin <span aria-hidden="true">↗</span></button>
+                            <button type="button" data-login="pemain" data-password="Mabar!2026">{{ __('Akun pemain') }} <span aria-hidden="true">↗</span></button>
+                            <button type="button" data-login="admin" data-password="Seleraku!2026">{{ __('Akun admin') }} <span aria-hidden="true">↗</span></button>
                         </div>
                     </details>
                 @endif
@@ -79,14 +79,14 @@
         </section>
     </main>
     <dialog id="password-help">
-        <h2>Lupa kata sandi?</h2>
-        <p>Untuk akun lokal, hubungi admin PS Seleraku agar dibantu mengakses akun. Jika mendaftar dengan Google, gunakan tombol Masuk dengan Google.</p>
-        <button type="button" class="submit" data-close-dialog>KEMBALI KE LOGIN</button>
+        <h2>{{ __('Lupa kata sandi?') }}</h2>
+        <p>{{ __('Untuk akun lokal, hubungi admin PS Seleraku agar dibantu mengakses akun. Jika mendaftar dengan Google, gunakan tombol Masuk dengan Google.') }}</p>
+        <button type="button" class="submit" data-close-dialog>{{ __('KEMBALI KE LOGIN') }}</button>
     </dialog>
     <dialog id="google-help">
-        <h2>Login Google belum aktif</h2>
-        <p>Admin perlu menghubungkan PS Seleraku ke Google terlebih dahulu. Untuk mencoba website sekarang, pilih <strong>Akun pemain</strong> atau <strong>Akun admin</strong> di bagian akun demo, lalu tekan <strong>Masuk Sekarang</strong>.</p>
-        <button type="button" class="submit" data-close-dialog>KEMBALI KE LOGIN</button>
+        <h2>{{ __('Login Google belum aktif') }}</h2>
+        <p>Admin perlu menghubungkan PS Seleraku ke Google terlebih dahulu. Untuk mencoba website sekarang, pilih <strong>{{ __('Akun pemain') }}</strong> {{ __('atau') }} <strong>{{ __('Akun admin') }}</strong> di bagian akun demo, lalu tekan <strong>{{ __('Masuk Sekarang') }}</strong>.</p>
+        <button type="button" class="submit" data-close-dialog>{{ __('KEMBALI KE LOGIN') }}</button>
     </dialog>
 </body>
 </html>

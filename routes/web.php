@@ -6,6 +6,16 @@ use App\Http\Controllers\RentalReservationController;
 use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Route;
 
+Route::post('/language', function (\Illuminate\Http\Request $request) {
+    $data = $request->validate(['locale' => ['required', \Illuminate\Validation\Rule::in(['id', 'en'])]]);
+    $request->session()->put('locale', $data['locale']);
+    $previous = url()->previous();
+    $target = parse_url($previous, PHP_URL_SCHEME) === parse_url(url('/'), PHP_URL_SCHEME)
+        && parse_url($previous, PHP_URL_HOST) === parse_url(url('/'), PHP_URL_HOST)
+        && parse_url($previous, PHP_URL_PORT) === parse_url(url('/'), PHP_URL_PORT) ? $previous : route('login');
+    return redirect()->to($target, 303)->header('Cache-Control', 'no-store, private');
+})->middleware('throttle:30,1,language-')->name('language.update');
+
 Route::post('/selo/chat', \App\Http\Controllers\SeloController::class)->middleware('throttle:30,1,selo-')->name('selo.answer');
 
 Route::view('/tentang', 'site.about')->name('tentang');

@@ -46,7 +46,7 @@ class RentalReservationController extends Controller
     {
         $r = $manager->create($request->only(['catalog_item_id', 'mode', 'duration', 'starts_at', 'notes']));
 
-        return redirect()->route('reservations.show', $r)->with('success', 'Reservasi tersimpan. Tunggu konfirmasi admin sebelum datang.');
+        return redirect()->route('reservations.show', $r)->with('success', __('Reservasi tersimpan. Tunggu konfirmasi admin sebelum datang.'));
     }
 
     public function show(RentalReservation $reservation)

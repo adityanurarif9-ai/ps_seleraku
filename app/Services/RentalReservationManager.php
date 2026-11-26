@@ -23,18 +23,18 @@ class RentalReservationManager
         $data = validator($data, ['catalog_item_id' => 'required|integer|exists:catalog_items,id', 'mode' => 'required|in:lounge,daily', 'duration' => 'required|integer|min:1|max:480', 'starts_at' => 'required|date_format:Y-m-d\TH:i', 'notes' => 'nullable|string|max:500'])->validate();
         $start = CarbonImmutable::createFromFormat('!Y-m-d\TH:i', $data['starts_at'], 'Asia/Jakarta')->utc();
         if ($start < now()->subMinute() || $start > now()->addDays(30)) {
-            throw ValidationException::withMessages(['starts_at' => 'Pilih jadwal mulai sekarang sampai 30 hari ke depan (WIB).']);
+            throw ValidationException::withMessages(['starts_at' => __('Pilih jadwal mulai sekarang sampai 30 hari ke depan (WIB).')]);
         }
         if ($start < now()) {
             $start = CarbonImmutable::now();
         }
         $minutes = $data['mode'] === 'daily' ? (int) $data['duration'] * 1440 : (int) $data['duration'];
         if (($data['mode'] === 'daily' && $data['duration'] > 7) || ($data['mode'] === 'lounge' && ! in_array($minutes, [30, 60, 90, 120, 180, 240, 360, 480]))) {
-            throw ValidationException::withMessages(['duration' => 'Pilih durasi yang tersedia. Harian maksimal 7 hari.']);
+            throw ValidationException::withMessages(['duration' => __('Pilih durasi yang tersedia. Harian maksimal 7 hari.')]);
         }
         $item = CatalogItem::findOrFail($data['catalog_item_id']);
         if (! $item->is_visible || $item->category !== 'Konsol' || ($data['mode'] === 'daily' && $item->daily_price === null)) {
-            throw ValidationException::withMessages(['catalog_item_id' => 'Konsol atau tarif untuk mode sewa ini belum tersedia.']);
+            throw ValidationException::withMessages(['catalog_item_id' => __('Konsol atau tarif untuk mode sewa ini belum tersedia.')]);
         }
         $rate = $data['mode'] === 'daily' ? $item->daily_price : $item->price;
 

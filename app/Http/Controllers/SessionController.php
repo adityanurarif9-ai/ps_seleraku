@@ -34,7 +34,7 @@ class SessionController extends Controller
         app(TurnstileVerification::class)->validate($request);
 
         if (! Auth::attempt($credentials, $request->boolean('remember'))) {
-            throw ValidationException::withMessages(['email' => 'Email atau kata sandi salah.']);
+            throw ValidationException::withMessages(['email' => __('Email atau kata sandi salah.')]);
         }
 
         $request->session()->regenerate();
@@ -44,9 +44,11 @@ class SessionController extends Controller
 
     public function destroy(Request $request)
     {
+        $locale = $request->session()->get('locale', 'id');
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+        $request->session()->put('locale', $locale);
 
         return redirect()->route('login');
     }
