@@ -8,10 +8,12 @@ use App\Services\PlaySessionManager;
 use App\Services\RentalReservationManager;
 use Filament\Actions\Action;
 use Filament\Forms\Components\Textarea;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Validation\ValidationException;
 
 class RentalReservationResource extends Resource
 {
@@ -35,11 +37,22 @@ class RentalReservationResource extends Resource
         ])->filters([SelectFilter::make('status')->label('Status')->options(RentalReservation::LABELS)])
             ->recordActions([
                 Action::make('detail')->label('Detail')->url(fn (RentalReservation $record) => route('reservations.show', $record)),
-                Action::make('confirm')->label('Konfirmasi')->color('success')->requiresConfirmation()->visible(fn (RentalReservation $record) => $record->status === 'pending')->action(fn (RentalReservation $record) => app(RentalReservationManager::class)->adminAction($record, 'confirm')),
-                Action::make('start')->label('Mulai sesi')->visible(fn (RentalReservation $record) => $record->status === 'confirmed')->requiresConfirmation()->action(fn (RentalReservation $record) => app(RentalReservationManager::class)->adminAction($record, 'start')),
-                Action::make('reject')->label('Tolak')->color('danger')->visible(fn (RentalReservation $record) => in_array($record->status, ['pending', 'confirmed']))->schema([Textarea::make('reason')->label('Alasan')->required()->maxLength(500)])->action(fn (RentalReservation $record, array $data) => app(RentalReservationManager::class)->adminAction($record, 'reject', $data['reason'])),
+                Action::make('confirm')->label('Konfirmasi')->color('success')->requiresConfirmation()->visible(fn (RentalReservation $record) => $record->status === 'pending')->action(fn (RentalReservation $record) => self::perform($record, 'confirm')),
+                Action::make('start')->label('Mulai sesi')->modalDescription(fn (RentalReservation $record) => 'Jadwal: '.$record->starts_at->timezone('Asia/Jakarta')->format('d M Y H:i').' WIB. Paling awal 15 menit sebelum jadwal.')->visible(fn (RentalReservation $record) => $record->status === 'confirmed')->requiresConfirmation()->action(fn (RentalReservation $record) => self::perform($record, 'start')),
+                Action::make('startNow')->label('Mulai sekarang')->color('warning')->visible(fn (RentalReservation $record) => $record->status === 'confirmed')->requiresConfirmation()->modalDescription('Waktu mulai diubah menjadi sekarang dan durasi tetap utuh. Sistem memeriksa ketersediaan unit sebelum memulai.')->action(fn (RentalReservation $record) => self::perform($record, 'start_now')),
+                Action::make('reject')->label('Tolak')->color('danger')->visible(fn (RentalReservation $record) => in_array($record->status, ['pending', 'confirmed']))->schema([Textarea::make('reason')->label('Alasan')->required()->maxLength(500)])->action(fn (RentalReservation $record, array $data) => self::perform($record, 'reject', $data['reason'])),
                 Action::make('finish')->label('Akhiri sesi')->color('danger')->requiresConfirmation()->visible(fn (RentalReservation $record) => $record->status === 'playing')->action(fn (RentalReservation $record) => app(PlaySessionManager::class)->change($record->playSession, 'finish')),
             ])->emptyStateHeading('Belum ada permintaan reservasi')->emptyStateDescription('Reservasi yang dikirim pengguna akan muncul di sini.');
+    }
+
+    public static function perform(RentalReservation $record, string $action, ?string $note = null): void
+    {
+        try {
+            app(RentalReservationManager::class)->adminAction($record, $action, $note);
+            Notification::make()->title(in_array($action, ['start', 'start_now']) ? 'Sesi berhasil dimulai' : 'Reservasi diperbarui')->success()->send();
+        } catch (ValidationException $e) {
+            Notification::make()->title('Reservasi belum dapat diproses')->body(collect($e->errors())->flatten()->first())->danger()->persistent()->send();
+        }
     }
 
     public static function getPages(): array

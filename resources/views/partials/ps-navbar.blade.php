@@ -11,7 +11,8 @@
                 <a class="ps-nav-link {{ $activePage === 'tentang' ? 'is-active' : '' }}" href="{{ route('tentang') }}">{{ __('TENTANG') }}</a>
                 <a class="ps-nav-link {{ $activePage === 'sewa-harian' ? 'is-active' : '' }}" href="{{ route('sewa-harian') }}">{{ __('SEWA HARIAN') }}</a>
                 <a class="ps-nav-link {{ $activePage === 'page-ke2' ? 'is-active' : '' }}" href="{{ route('page-ke2') }}">{{ __('KONSOL & GAME') }}</a>
-                <a class="ps-nav-link {{ $activePage === 'cara-sewa' ? 'is-active' : '' }}" href="{{ route('cara-sewa') }}">{{ __('CARA SEWA') }}</a>
+                <a class="ps-nav-link {{ $activePage === 'menu-fnb' ? 'is-active' : '' }}" href="{{ route('menu-fnb') }}">{{ __('MAKANAN & MINUMAN') }}</a>
+<a class="ps-nav-link {{ $activePage === 'cara-sewa' ? 'is-active' : '' }}" href="{{ route('cara-sewa') }}">{{ __('CARA SEWA') }}</a>
                 <a class="ps-nav-link {{ $activePage === 'kontak' ? 'is-active' : '' }}" href="{{ route('kontak') }}">{{ __('KONTAK') }}</a>
             </nav>
 
@@ -31,6 +32,7 @@
                 </button>
                 <div id="ps-account-menu" class="ps-account-dropdown" hidden>
                     @auth
+                        <a class="ps-dropdown-item" href="{{ route('food-orders.index') }}">{{ __('Pesanan Makanan') }}</a>
                         <a class="ps-dropdown-item" href="{{ route('reservations.index') }}">{{ __('Rental Saya') }} <span>→</span></a>
                         <a class="ps-dropdown-item" href="{{ route('reservations.create') }}">{{ __('Reservasi Baru') }} <span>↗</span></a>
                         <div class="ps-account-meta">
@@ -70,7 +72,8 @@
         <a class="ps-nav-link {{ $activePage === 'tentang' ? 'is-active' : '' }}" href="{{ route('tentang') }}">{{ __('TENTANG') }}</a>
         <a class="ps-nav-link" href="{{ route('sewa-harian') }}">{{ __('SEWA HARIAN') }}</a>
         <a class="ps-nav-link {{ $activePage === 'page-ke2' ? 'is-active' : '' }}" href="{{ route('page-ke2') }}">{{ __('KONSOL & GAME') }}</a>
-        <a class="ps-nav-link {{ $activePage === 'cara-sewa' ? 'is-active' : '' }}" href="{{ route('cara-sewa') }}">{{ __('CARA SEWA') }}</a>
+        <a class="ps-nav-link {{ $activePage === 'menu-fnb' ? 'is-active' : '' }}" href="{{ route('menu-fnb') }}">{{ __('MAKANAN & MINUMAN') }}</a>
+<a class="ps-nav-link {{ $activePage === 'cara-sewa' ? 'is-active' : '' }}" href="{{ route('cara-sewa') }}">{{ __('CARA SEWA') }}</a>
         <a class="ps-nav-link {{ $activePage === 'kontak' ? 'is-active' : '' }}" href="{{ route('kontak') }}">{{ __('KONTAK') }}</a>
     </div>
 </header>

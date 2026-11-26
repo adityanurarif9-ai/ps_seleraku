@@ -58,7 +58,10 @@ class RentalReservationManager
             }
             unset($q['item']);
 
-            return RentalReservation::create($q + ['user_id' => auth()->id(), 'catalog_item_id' => $item->id, 'status' => 'pending']);
+            $reservation = RentalReservation::create($q + ['user_id' => auth()->id(), 'catalog_item_id' => $item->id, 'status' => 'pending']);
+            app(AdminAlerts::class)->send('Reservasi baru', $reservation->reference().' • '.auth()->user()->name, url('/admin/rental-reservations'));
+
+            return $reservation;
         }, 3);
     }
 
@@ -84,14 +87,15 @@ class RentalReservationManager
                 }
                 $r->status = 'rejected';
                 $r->admin_note = mb_substr($note ?? 'Jadwal belum dapat dipenuhi.', 0, 500);
-            } elseif ($action === 'start') {
+            } elseif (in_array($action, ['start', 'start_now'])) {
                 if ($r->status === 'playing') {
                     return $r;
                 }
-                if ($r->status !== 'confirmed' || $r->ends_at <= now() || $r->starts_at > now()->addMinutes(15)) {
-                    throw ValidationException::withMessages(['reservation' => 'Mulai setelah dikonfirmasi, paling awal 15 menit sebelum jadwal. Pesanan yang sudah lewat perlu dijadwalkan ulang.']);
+                if ($r->status !== 'confirmed' || ($action === 'start' && ($r->ends_at <= now() || $r->starts_at > now()->addMinutes(15)))) {
+                    throw ValidationException::withMessages(['reservation' => 'Jadwal belum sesuai untuk mulai sesi. Gunakan Mulai sekarang untuk mengubah waktu mulai; unit tetap diperiksa agar tidak bentrok.']);
                 }
                 $session = app(PlaySessionManager::class)->start(['catalog_item_id' => $item->id, 'customer_name' => $r->user->name, 'minutes' => $r->duration_minutes], $r);
+                $r->starts_at = $session->created_at;
                 $r->play_session_id = $session->id;
                 $r->status = 'playing';
                 $r->ends_at = $session->ends_at;
@@ -131,7 +135,10 @@ class RentalReservationManager
                 throw ValidationException::withMessages(['minutes' => 'Permintaan sebelumnya masih menunggu admin.']);
             }
 
-            return $r->extensions()->create(['minutes' => $minutes, 'status' => 'pending']);
+            $extension = $r->extensions()->create(['minutes' => $minutes, 'status' => 'pending']);
+            app(AdminAlerts::class)->send('Permintaan tambah waktu', $r->reference().' • '.$minutes.' menit', url('/admin/rental-extension-requests'));
+
+            return $extension;
         });
     }
 

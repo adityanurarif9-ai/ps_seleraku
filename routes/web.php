@@ -1,22 +1,28 @@
 <?php
 
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\FoodOrderController;
 use App\Http\Controllers\GoogleLoginController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\RentalReservationController;
+use App\Http\Controllers\SeloController;
 use App\Http\Controllers\SessionController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Validation\Rule;
 
-Route::post('/language', function (\Illuminate\Http\Request $request) {
-    $data = $request->validate(['locale' => ['required', \Illuminate\Validation\Rule::in(['id', 'en'])]]);
+Route::post('/language', function (Request $request) {
+    $data = $request->validate(['locale' => ['required', Rule::in(['id', 'en'])]]);
     $request->session()->put('locale', $data['locale']);
     $previous = url()->previous();
     $target = parse_url($previous, PHP_URL_SCHEME) === parse_url(url('/'), PHP_URL_SCHEME)
         && parse_url($previous, PHP_URL_HOST) === parse_url(url('/'), PHP_URL_HOST)
         && parse_url($previous, PHP_URL_PORT) === parse_url(url('/'), PHP_URL_PORT) ? $previous : route('login');
+
     return redirect()->to($target, 303)->header('Cache-Control', 'no-store, private');
 })->middleware('throttle:30,1,language-')->name('language.update');
 
-Route::post('/selo/chat', \App\Http\Controllers\SeloController::class)->middleware('throttle:30,1,selo-')->name('selo.answer');
+Route::post('/selo/chat', SeloController::class)->middleware('throttle:30,1,selo-')->name('selo.answer');
 
 Route::view('/tentang', 'site.about')->name('tentang');
 Route::view('/cara-sewa', 'site.how-to')->name('cara-sewa');
@@ -37,11 +43,14 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+    Route::get('/pesanan-makanan', [FoodOrderController::class, 'index'])->name('food-orders.index');
+    Route::post('/pesanan-makanan', [FoodOrderController::class, 'store'])->middleware('throttle:10,1,food-order-')->name('food-orders.store');
+    Route::post('/pesanan-makanan/{order}/batal', [FoodOrderController::class, 'cancel'])->name('food-orders.cancel');
 
-    Route::get('/keranjang', [\App\Http\Controllers\CartController::class, 'index'])->name('cart.index');
-    Route::post('/keranjang', [\App\Http\Controllers\CartController::class, 'store'])->middleware('throttle:60,1,cart-')->name('cart.store');
-    Route::patch('/keranjang/{item}', [\App\Http\Controllers\CartController::class, 'update'])->name('cart.update');
-    Route::delete('/keranjang/{item}', [\App\Http\Controllers\CartController::class, 'destroy'])->name('cart.destroy');
+    Route::get('/keranjang', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/keranjang', [CartController::class, 'store'])->middleware('throttle:60,1,cart-')->name('cart.store');
+    Route::patch('/keranjang/{item}', [CartController::class, 'update'])->name('cart.update');
+    Route::delete('/keranjang/{item}', [CartController::class, 'destroy'])->name('cart.destroy');
 
     Route::view('/home-page', 'home-page')->name('home-page');
     Route::view('/home page', 'home-page');

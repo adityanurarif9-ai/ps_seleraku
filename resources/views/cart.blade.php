@@ -2,7 +2,7 @@
 @section('title', __('Keranjang'))
 @section('content')
 <section class="web-wrap web-section cart-page">
-<div class="web-section-top"><div><span class="web-eyebrow">{{ __('PILIHANMU') }}</span><h1>{{ __('Keranjang') }}</h1><p>{{ __('Pilih jadwal untuk reservasi konsol. Konfirmasi pesanan menu melalui pengelola.') }}</p></div><a class="web-text-link" href="{{ route('page-ke2') }}">{{ __('Lanjut pilih konsol') }}</a></div>
+<div class="web-section-top"><div><span class="web-eyebrow">{{ __('PILIHANMU') }}</span><h1>{{ __('Keranjang') }}</h1><p>{{ __('Pilih jadwal konsol atau kirim pesanan makanan ke kedai.') }}</p></div><a class="web-text-link" href="{{ route('page-ke2') }}">{{ __('Lanjut pilih konsol') }}</a></div>
 @if(session('cart_notice'))<p class="cart-notice" role="status">{{ session('cart_notice') }}</p>@endif
 @if($errors->any())<div class="cart-error" role="alert">{{ $errors->first() }}</div>@endif
 @if($lines->isEmpty())
@@ -22,7 +22,7 @@
 <form action="{{ route('cart.destroy',$item) }}" method="post">@csrf @method('DELETE')<button class="cart-remove" type="submit">{{ __('Hapus') }}</button></form>
 </div></div></article>
 @endforeach
-</div><aside class="cart-summary"><h2>{{ __('Rencana mainmu') }}</h2><p>{{ __('Biaya rental dihitung setelah kamu memilih jadwal dan durasi.') }}</p><dl><div><dt>{{ __('Pilihan konsol') }}</dt><dd>{{ $lines->where('item.category','Konsol')->count() }}</dd></div><div><dt>{{ __('Jumlah menu') }}</dt><dd>{{ $lines->filter(fn($l)=>$l['item']->category!=='Konsol')->sum('quantity') }}</dd></div><div><dt>{{ __('Subtotal menu') }}</dt><dd>Rp{{ number_format($foodTotal,0,',','.') }}</dd></div></dl><a class="web-button" href="{{ route('kontak') }}">{{ __('Hubungi pengelola') }}</a><a class="web-text-link" href="{{ route('menu-fnb') }}">{{ __('Tambah menu') }}</a><p class="cart-footnote">{{ __('Isi keranjang belum menjadi pesanan atau pembayaran. Jadwal konsol tetap memerlukan konfirmasi pengelola.') }}</p></aside></div>
+</div><aside class="cart-summary"><h2>{{ __('Rencana mainmu') }}</h2><p>{{ __('Biaya rental dihitung setelah kamu memilih jadwal dan durasi.') }}</p><dl><div><dt>{{ __('Pilihan konsol') }}</dt><dd>{{ $lines->where('item.category','Konsol')->count() }}</dd></div><div><dt>{{ __('Jumlah menu') }}</dt><dd>{{ $lines->filter(fn($l)=>$l['item']->category!=='Konsol')->sum('quantity') }}</dd></div><div><dt>{{ __('Subtotal menu') }}</dt><dd>Rp{{ number_format($foodTotal,0,',','.') }}</dd></div></dl>@if($lines->contains(fn($l)=>$l['item']->category!=='Konsol'))<form method="post" action="{{ route('food-orders.store') }}">@csrf<input type="hidden" name="request_key" value="{{ old('request_key', (string) \Illuminate\Support\Str::uuid()) }}"><label for="food-notes">{{ __('Catatan untuk kedai') }}</label><textarea id="food-notes" name="notes" maxlength="500" rows="2" style="display:block;width:100%;margin:10px 0 18px;padding:10px;border:1px solid #ccd7e6;border-radius:8px;font:inherit">{{ old('notes') }}</textarea><button type="submit" class="web-button">{{ __('Kirim pesanan makanan') }}</button></form>@endif<a class="web-text-link" href="{{ route('menu-fnb') }}">{{ __('Tambah menu') }}</a><p class="cart-footnote">{{ __('Pesanan makanan dikirim setelah menekan tombol di atas. Bayar langsung ke pengelola; reservasi konsol diproses terpisah.') }}</p></aside></div>
 @endif
 </section>
 @endsection

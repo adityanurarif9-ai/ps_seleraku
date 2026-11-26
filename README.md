@@ -110,3 +110,14 @@ node --test tests/Browser/*.test.cjs
 ~~~
 
 PS_ASSET_TOOL_ROOT dapat menunjuk direktori node_modules lain. Dependency alat ini tidak diperlukan di container PHP produksi. Tes memeriksa hash sumber agar perubahan tidak tertinggal dari bundle; helper juga kembali ke berkas sumber jika hash tidak sesuai.
+
+
+## Pesanan kedai dan notifikasi admin
+
+Menu Makanan & Minuman dapat diakses melalui navigasi dan beranda. Pengguna menambahkan menu ke keranjang, mengirim pesanan, lalu melihat status di /pesanan-makanan. Harga dihitung dari katalog server; stok dikunci dan dikurangi secara atomik saat pesanan dikirim. Pembatalan yang masih menunggu atau penolakan admin mengembalikan stok satu kali. Pembayaran dilakukan langsung ke pengelola, bukan checkout QRIS.
+
+Admin memproses pesanan melalui /admin/food-orders: menunggu, sedang disiapkan, siap diambil, selesai. Lonceng notifikasi menyimpan pemberitahuan pesanan kedai, reservasi, dan permintaan tambahan waktu, dengan pembaruan setiap 10 detik. Notifikasi disimpan langsung tanpa queue worker.
+
+Tombol Mulai sesi mengikuti jadwal reservasi (paling awal 15 menit sebelum jadwal). Mulai sekarang memerlukan konfirmasi perubahan jadwal, mempertahankan durasi penuh, dan tetap memeriksa bentrok unit. Pesan penolakan ditampilkan sebagai notifikasi, bukan hilang dalam modal.
+
+Jalankan migrasi sebelum menerbitkan versi ini agar tabel food_orders, food_order_items, dan notifications tersedia. Isi stok makanan nyata melalui katalog admin; sistem tidak mengarang stok yang tersedia.

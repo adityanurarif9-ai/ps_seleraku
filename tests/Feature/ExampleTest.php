@@ -34,7 +34,7 @@ class ExampleTest extends TestCase
         $response = $this->get('/login');
 
         $response->assertStatus(200)
-            ->assertSee('Masuk ke akunmu')
+            ->assertSee('Reservasi konsol.')
             ->assertSee('Akun pemain')
             ->assertSee('Akun admin');
     }
