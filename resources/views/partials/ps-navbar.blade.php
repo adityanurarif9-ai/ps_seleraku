@@ -9,7 +9,7 @@
                 <a class="ps-nav-link {{ $activePage === 'rentals' ? 'is-active' : '' }}" href="{{ route('reservations.index') }}">RENTAL SAYA</a>
                 <a class="ps-nav-link {{ $activePage === 'home-page' ? 'is-active' : '' }}" href="{{ route('home-page') }}">BERANDA</a>
                 <a class="ps-nav-link {{ $activePage === 'tentang' ? 'is-active' : '' }}" href="{{ route('tentang') }}">TENTANG</a>
-                <a class="ps-nav-link" href="{{ route('sewa-harian') }}">SEWA HARIAN</a>
+                <a class="ps-nav-link {{ $activePage === 'sewa-harian' ? 'is-active' : '' }}" href="{{ route('sewa-harian') }}">SEWA HARIAN</a>
                 <a class="ps-nav-link {{ $activePage === 'page-ke2' ? 'is-active' : '' }}" href="{{ route('page-ke2') }}">KONSOL &amp; GAME</a>
                 <a class="ps-nav-link {{ $activePage === 'cara-sewa' ? 'is-active' : '' }}" href="{{ route('cara-sewa') }}">CARA SEWA</a>
                 <a class="ps-nav-link {{ $activePage === 'kontak' ? 'is-active' : '' }}" href="{{ route('kontak') }}">KONTAK</a>

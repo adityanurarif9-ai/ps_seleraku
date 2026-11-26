@@ -1,6 +1,7 @@
 @php($site = $site ?? \App\Models\SiteContent::values())
 <footer id="kontak" class="web-footer">
 <div class="web-wrap">
+<div class="web-footer-invite"><div><small>PS SELERAKU</small><h2>Jadwalkan main.<br>Bawa pulang cerita.</h2></div><a class="web-footer-book" href="{{ route('reservations.create') }}">Buat reservasi</a></div>
 <div class="web-footer-grid">
 <div>
 <a href="{{ route('home-page') }}">
@@ -25,11 +26,12 @@
 </div>
 <div>
 <h3>Kunjungi kami</h3>
-<p class="web-prose">{{ $site['address'] ?: 'Alamat akan diinformasikan pengelola.' }}</p>@if($site['whatsapp'])<a href="{{ \App\Models\SiteContent::whatsappUrl($site['whatsapp']) }}" target="_blank" rel="noopener">WhatsApp ↗</a>@endif @if($site['contact_email'])<a href="mailto:{{ $site['contact_email'] }}">{{ $site['contact_email'] }}</a>@endif</div>
+<p class="web-prose">{{ $site['address'] ?: 'Alamat akan diinformasikan pengelola.' }}</p>
+@if($site['address'])<a class="web-map-link" href="https://www.google.com/maps/search/?api=1&amp;query={{ rawurlencode($site['address']) }}" target="_blank" rel="noopener">Lihat lokasi di peta</a>@endif@if($site['whatsapp'])<a href="{{ \App\Models\SiteContent::whatsappUrl($site['whatsapp']) }}" target="_blank" rel="noopener">WhatsApp ↗</a>@endif @if($site['contact_email'])<a href="mailto:{{ $site['contact_email'] }}">{{ $site['contact_email'] }}</a>@endif</div>
 </div>
 <div class="web-footer-bottom">
 <span>© {{ date('Y') }} PS Seleraku</span>
-<span>Waktu yang pas. Teman yang seru.</span>
+<div class="web-footer-links"><a href="{{ route('cara-sewa') }}">Panduan &amp; ketentuan sewa</a><a href="{{ route('kontak') }}">Hubungi kami</a></div>
 </div>
 </div>
 </footer>

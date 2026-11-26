@@ -18,13 +18,13 @@
 
     <main>
         <!-- HERO BANNER -->
-        <section class="ps-hero-page2" aria-label="Hero Lounge F&B PS Seleraku">
+        <section class="ps-hero-page2 ps-hero-food" aria-label="Hero Lounge F&B PS Seleraku">
             <div class="ps-hero-inner">
                 <h1 class="ps-hero-title">
-                    RENTAL <span class="ps-text-ps4">PS4</span> &amp; <span class="ps-text-ps5">PS5</span>
+                    TEMAN <span class="ps-text-ps4">NGEMIL</span> &amp; <span class="ps-text-ps5">MABAR</span>
                 </h1>
                 <p class="ps-hero-subtitle">
-                    Nikmati pengalaman gaming terbaik tanpa harus membeli. Lengkapi sesi mabar Anda dengan menu camilan renyah dan racikan minuman barista segar yang diantar langsung ke meja konsol.
+                    Temukan makanan, camilan, dan minuman favorit untuk menemani sesi mainmu.
                 </p>
             </div>
         </section>

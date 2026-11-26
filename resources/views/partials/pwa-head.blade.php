@@ -1,5 +1,7 @@
 @if(auth()->check() || request()->routeIs('tentang', 'cara-sewa', 'kontak'))
 <link rel="stylesheet" href="{{ \App\Support\SiteAsset::url('site.css') }}">
+<link rel="stylesheet" href="{{ \App\Support\SiteAsset::url('reference.css') }}">
+<script src="{{ \App\Support\SiteAsset::url('reference.js') }}" defer></script>
 @endif
 <link rel="manifest" href="{{ \App\Support\SiteAsset::url('manifest.webmanifest') }}?v=brand-2">
 <link rel="apple-touch-icon" sizes="180x180" href="{{ \App\Support\SiteAsset::url('icons/brand-v2-apple.png') }}">

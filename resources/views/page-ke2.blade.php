@@ -21,7 +21,7 @@
                 RENTAL <span class="ps-text-ps4">PS4</span> &amp; <span class="ps-text-ps5">PS5</span>
             </h1>
             <p class="ps-hero-subtitle">
-                Nikmati pengalaman gaming terbaik tanpa harus membeli. Mainkan game favoritmu dengan koleksi terlengkap, fasilitas higienis prima, dan harga paling bersahabat.
+                Pilih PlayStation atau Nintendo favoritmu, tentukan jadwal, dan pantau sesi main dari akunmu.
             </p>
         </div>
     </section>
@@ -36,7 +36,7 @@
                         <span class="white">FAVORITMU.</span>
                     </h2>
                     <p class="ps-catalog-desc">
-                        Pilih konsol yang ingin kamu gunakan dan nikmati pengalaman bermain bersama teman dengan perangkat terawat, ruangan ber-AC dingin, display 4K HDR, dan koleksi game terlengkap terinstal siap main.
+                        Temukan konsol untuk sesi main bersama teman. Periksa tarif, pilihan game, dan unit yang tersedia sebelum membuat reservasi.
                     </p>
                 </div>
 

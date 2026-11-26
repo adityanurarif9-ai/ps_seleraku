@@ -146,3 +146,6 @@ button.google-button { width: 100%; cursor: pointer; }
 
 @media(max-width:700px){.intro{background-image:url('login-console.jpg');}}
 .verification{min-height:124px}#verification-status{min-height:34px}#verification-start{min-height:44px;font-size:12px;color:#284c85}
+
+/* Primary action from the supplied login design. */
+.submit{background:#c72761;color:#fff}.submit:hover{background:#aa1f50}

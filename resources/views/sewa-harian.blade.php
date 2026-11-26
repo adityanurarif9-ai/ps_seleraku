@@ -18,13 +18,13 @@
 
     <main>
         <!-- HERO BANNER -->
-        <section class="ps-hero-page2" aria-label="Hero Rental Harian PS Seleraku">
+        <section class="ps-hero-page2 ps-hero-daily" aria-label="Hero Rental Harian PS Seleraku">
             <div class="ps-hero-inner">
                 <h1 class="ps-hero-title">
                     RENTAL <span class="ps-text-ps4">PS4</span> &amp; <span class="ps-text-ps5">PS5</span>
                 </h1>
                 <p class="ps-hero-subtitle">
-                    Nikmati pengalaman gaming terbaik tanpa harus membeli. Bawa pulang konsol favoritmu lengkap dengan stik wireless original, kabel HDMI 4K, dan koleksi game populer siap main.
+                    Bawa keseruan main ke rumah. Pilih konsol, tanggal mulai, dan durasi sewa harian sesuai rencanamu.
                 </p>
             </div>
         </section>
@@ -39,7 +39,7 @@
                             FAVORITMU.
                         </h2>
                         <p class="ps-daily-sub">
-                            Pilih konsol yang ingin kamu sewa harian untuk dimainkan di rumah bersama teman atau keluarga dengan perangkat terawat, higienis, dan koleksi game terlengkap terinstal siap main.
+                            Main bersama teman atau keluarga di rumah. Lihat pilihan konsol dan tarif harian, lalu cek jadwal yang tersedia.
                         </p>
                     </div>
 

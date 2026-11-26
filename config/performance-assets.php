@@ -29,6 +29,9 @@ return json_decode(<<<'JSON'
     "images/ps5-slim.png": "optimized/ps5-slim.18f203597b.webp",
     "images/ps5-ultra.png": "optimized/ps5-ultra.9ed7c102c6.webp",
     "images/ps5-vip.png": "optimized/ps5-vip.85b15f34a6.webp",
+    "images/reference-hero-daily.jpg": "optimized/reference-hero-daily.03882d481e.webp",
+    "images/reference-hero-food.jpg": "optimized/reference-hero-food.c01bcfe25a.webp",
+    "images/reference-hero-units.jpg": "optimized/reference-hero-units.ab0b709968.webp",
     "logo-ps-seleraku-transparent.png": "optimized/brand-logo-640.67f36b71c5.webp",
     "icons/brand-v2-192.png": "optimized/brand-icon-96.d92183b3d8.webp",
     "hero.png": "optimized/hero-1280.c86c82e6a8.webp",
@@ -39,12 +42,14 @@ return json_decode(<<<'JSON'
     "loading.js": "optimized/loading.7d0ea9e8ac.js",
     "rentals.js": "optimized/rentals.a5cef3a857.js",
     "seleraku-pages.js": "optimized/seleraku-pages.9ffba621f3.js",
+    "reference.js": "optimized/reference.99f9c98d76.js",
     "site.css": "optimized/site.82010db371.css",
     "selo.css": "optimized/selo.4633bb8b8d.css",
-    "login.css": "optimized/login.50b91669be.css",
+    "login.css": "optimized/login.e7463d82c4.css",
     "pwa.css": "optimized/pwa.289d921e7e.css",
     "rentals.css": "optimized/rentals.6875374d76.css",
-    "seleraku-pages.css": "optimized/seleraku-pages.ed899a6f20.css"
+    "seleraku-pages.css": "optimized/seleraku-pages.ed899a6f20.css",
+    "reference.css": "optimized/reference.3409a4f2d8.css"
   },
   "source_hashes": {
     "selo.js": "16eb33835be9232bd2067b80ca979250c4005f7cde1cc5d43cdfe1c84fb04546",
@@ -53,12 +58,14 @@ return json_decode(<<<'JSON'
     "loading.js": "a210e6e383a1b76655e273c4e2b4d8a6be27d16ab34103dd6f284201a0929cef",
     "rentals.js": "1d93a8de616a34749af780b8ffc482235ec38410f03d7e35c17bbb55238d88d7",
     "seleraku-pages.js": "e2b62e3330cbc62176b87d45869755974ec97e232779a28fdddccf51d4abf588",
+    "reference.js": "83df6b42542ab13e51790316c0bbba54d873561e71eec0b41c4619af78e88711",
     "site.css": "82010db371dcbae2bd92bb55d5f2899115761f8f4cef6783a5640b52bf2c1a04",
     "selo.css": "fbb1dd9bd7f585ffb5897466b3e95be77d6550a22ac92b354cbde03c77765639",
-    "login.css": "824ce605a2e5e206a333f3bd24ca6bacc129bd65f5b2ec2b0a3188a95c4a3edd",
+    "login.css": "b7331c81c404788feb6a572abcc57f72b59bfbbbc134486108fc8da4bf0b04fd",
     "pwa.css": "70693e1ee2d7b5eb5db80d7f44d773cefa6dffc0f7a1dfbb3e26326ae960efa1",
     "rentals.css": "3ff5c433d0d63a73eea4efcfea940b5fa61024114d15b08a9766289915bf3e90",
-    "seleraku-pages.css": "b29491ff4570452c3eac22dabc149d4af583c29cb64792a50e766160329f192c"
+    "seleraku-pages.css": "b29491ff4570452c3eac22dabc149d4af583c29cb64792a50e766160329f192c",
+    "reference.css": "e6109641af40852d1beb357f06bc2fa855bbae9d6362b0455cd3aed367c8f1ac"
   },
   "login": {
     "desktop": "optimized/login-desktop-1280.5aab67921e.webp",
