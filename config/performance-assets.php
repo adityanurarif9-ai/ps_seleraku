@@ -16,6 +16,7 @@ return json_decode(<<<'JSON'
     "images/fnb-kopi.jpg": "optimized/fnb-kopi.775e83cbaf.webp",
     "images/fnb-nasgor.jpg": "optimized/fnb-nasgor.a1b9204f02.webp",
     "images/gmaps-senopati.png": "optimized/gmaps-senopati.f5eb11b96a.webp",
+    "images/hero-controllers-clean.png": "optimized/hero-controllers-clean.0d72979d02.webp",
     "images/hero-dualsense.jpg": "optimized/hero-dualsense.5f81b97c02.webp",
     "images/nintendo-unit.png": "optimized/nintendo-unit.575f27c9bd.webp",
     "images/paket-mingguan.png": "optimized/paket-mingguan.9e1ec92f22.webp",
@@ -42,14 +43,15 @@ return json_decode(<<<'JSON'
     "loading.js": "optimized/loading.7d0ea9e8ac.js",
     "rentals.js": "optimized/rentals.76aacb0ab1.js",
     "seleraku-pages.js": "optimized/seleraku-pages.a7cbdfdcd4.js",
-    "reference.js": "optimized/reference.8d0ffc3a3c.js",
+    "reference.js": "optimized/reference.99f9c98d76.js",
+    "hero-carousel.js": "optimized/hero-carousel.a91270f5ca.js",
     "site.css": "optimized/site.82010db371.css",
     "selo.css": "optimized/selo.4633bb8b8d.css",
     "login.css": "optimized/login.e7463d82c4.css",
     "pwa.css": "optimized/pwa.289d921e7e.css",
     "rentals.css": "optimized/rentals.6875374d76.css",
     "seleraku-pages.css": "optimized/seleraku-pages.ed899a6f20.css",
-    "reference.css": "optimized/reference.1bdfa4d966.css"
+    "reference.css": "optimized/reference.b542e6ba65.css"
   },
   "source_hashes": {
     "selo.js": "9a05193ba081d3692ef3e545df8fa7c2955338660e09af7bcd7f3176f7968d3f",
@@ -58,14 +60,15 @@ return json_decode(<<<'JSON'
     "loading.js": "a210e6e383a1b76655e273c4e2b4d8a6be27d16ab34103dd6f284201a0929cef",
     "rentals.js": "6ca1e8a49f6d664f7130808861e05490660fcf79b6fba2cd08baa95450e359c6",
     "seleraku-pages.js": "837691759fcedfa19ae4ed25be3b33cb0c20bebda0d3dd8ba5e83d800e40f1f5",
-    "reference.js": "38eb6dc1e48403dee343026950df748feeaf82b3fc9444e8f3e0306371aa50eb",
+    "reference.js": "83df6b42542ab13e51790316c0bbba54d873561e71eec0b41c4619af78e88711",
+    "hero-carousel.js": "ee84b8aa4dbfe99176fe7f8decbc74e63dda09ef6a124dadd61c5e78a49a6983",
     "site.css": "82010db371dcbae2bd92bb55d5f2899115761f8f4cef6783a5640b52bf2c1a04",
     "selo.css": "fbb1dd9bd7f585ffb5897466b3e95be77d6550a22ac92b354cbde03c77765639",
     "login.css": "b7331c81c404788feb6a572abcc57f72b59bfbbbc134486108fc8da4bf0b04fd",
     "pwa.css": "70693e1ee2d7b5eb5db80d7f44d773cefa6dffc0f7a1dfbb3e26326ae960efa1",
     "rentals.css": "3ff5c433d0d63a73eea4efcfea940b5fa61024114d15b08a9766289915bf3e90",
     "seleraku-pages.css": "b29491ff4570452c3eac22dabc149d4af583c29cb64792a50e766160329f192c",
-    "reference.css": "f733ef7216f1124f6299edf503d1c48841531aa3abb50bd8b666a41e2b999534"
+    "reference.css": "caf4d22c8c8cfc4267061bf1b208736b46bfaa8807e86acd864885135c2fa1d7"
   },
   "login": {
     "desktop": "optimized/login-desktop-1280.5aab67921e.webp",

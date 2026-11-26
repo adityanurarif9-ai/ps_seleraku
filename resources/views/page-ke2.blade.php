@@ -15,17 +15,8 @@
 
 <main>
     <!-- Hero Section -->
-    <section class="ps-hero-page2">
-        @include('partials.controller-motion')
-        <div class="ps-hero-inner">
-            <h1 class="ps-hero-title">
-                RENTAL <span class="ps-text-ps4">PS4</span> &amp; <span class="ps-text-ps5">PS5</span>
-            </h1>
-            <p class="ps-hero-subtitle">
-                {{ __('Pilih PlayStation atau Nintendo favoritmu, tentukan jadwal, dan pantau sesi main dari akunmu.') }}
-            </p>
-        </div>
-    </section>
+    @include('partials.hero-carousel')
+
 
     <!-- Unit Catalog & Filter Section -->
     <section id="unit-catalog" class="ps-catalog-section">

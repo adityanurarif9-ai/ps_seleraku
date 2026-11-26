@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        View::composer(['site.*', 'home-page', 'partials.ps-footer'], function ($view) {
+        View::composer(['site.*', 'home-page', 'partials.ps-footer', 'partials.hero-carousel'], function ($view) {
             $view->with('site', SiteContent::localizedValues());
         });
         View::composer(['home-page', 'page-ke2', 'sewa-harian', 'menu-fnb'], function ($view) {

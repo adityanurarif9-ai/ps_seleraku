@@ -1,26 +1,8 @@
 @extends('site.layout', ['activePage'=>'home-page'])
 @section('title', __('Beranda'))
 @section('content')
-<section class="web-home-hero">
-@include('partials.controller-motion')
-<div class="web-wrap web-hero-grid">
-<div>
-    <span class="web-eyebrow">{{ __('PILIH KONSOL. AJAK TEMAN MAIN.') }}</span>
-    <h1>{{ $site['hero_title'] }}</h1>
-<p class="web-lead">{{ $site['hero_description'] }}</p>
-    <div class="web-actions">
-<a class="web-button" href="{{ route('reservations.create') }}">{{ __('Buat reservasi') }} <span>↗</span>
-</a>
-<a class="web-button web-button-outline" href="{{ route('page-ke2') }}">{{ __('Lihat konsol') }}</a>
-</div>
-    <div class="web-hero-meta">
-<span>PlayStation &amp; Nintendo</span>
-<span>{{ __('Jadwal sesuai pilihanmu') }}</span>
-</div>
-</div>
+@include('partials.hero-carousel')
 
-</div>
-</section>
 <section class="web-section web-wrap">
 <div class="web-section-top">
 <div>
