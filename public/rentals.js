@@ -38,7 +38,7 @@ var psTr = window.psT || (value => value);
     document.querySelectorAll('form[data-confirm]').forEach(form => form.addEventListener('submit', event => { if (!confirm(form.dataset.confirm)) event.preventDefault(); }));
     const rental = document.querySelector('#rs-live-rental');
     if (rental) {
-        let left = 0, initial = 0, running = false, anchor = performance.now();
+        let initial = Math.max(0, Number(rental.dataset.initialSeconds) || 0), left = initial, running = rental.dataset.initialRunning === 'true', anchor = performance.now();
         const clock = rental.querySelector('[data-rs-clock]');
         const render = () => { if (running) left = Math.max(0, initial - Math.floor((performance.now() - anchor) / 1000)); clock.textContent = [Math.floor(left/3600),Math.floor(left%3600/60),left%60].map(v => String(v).padStart(2,'0')).join(':'); };
         let loading = false;
@@ -53,7 +53,7 @@ var psTr = window.psT || (value => value);
                 rental.querySelector('[data-rs-price]').textContent = data.price;
                 rental.querySelector('[data-rs-duration]').textContent = data.duration_minutes;
                 rental.querySelector('[data-rs-end]').textContent = data.ends_at;
-                rental.querySelector('[data-rs-hint]').textContent = data.status === 'playing' ? (data.running ? psTr('Timer sedang berjalan.') : psTr('Timer dijeda oleh admin.')) : (data.status === 'completed' ? psTr('Sesi sudah selesai. Terima kasih sudah bermain.') : psTr('Timer muncul setelah admin memulai sesi.'));
+                rental.querySelector('[data-rs-hint]').textContent = data.hint;
                 if (data.status === 'playing' && data.remaining === 0) rental.querySelector('[data-rs-hint]').textContent = psTr('Waktu habis. Hubungi admin untuk menyelesaikan sesi.');
                 const cancelForm = rental.querySelector('[data-rs-cancel]'); if (cancelForm) cancelForm.hidden = !['pending','confirmed'].includes(data.status);
                 const history = rental.querySelector('[data-rs-extensions]');
@@ -72,7 +72,7 @@ var psTr = window.psT || (value => value);
             } catch(error) { rental.querySelector('[data-rs-connection]').textContent = error.message; }
             finally { loading = false; }
         };
-        sync(); const refresh = setInterval(sync, 5000), ticker = setInterval(render, 1000);
+        render(); sync(); const refresh = setInterval(sync, 5000), ticker = setInterval(render, 1000);
         document.addEventListener('visibilitychange', () => { if (!document.hidden) sync(); });
         window.addEventListener('pagehide', () => { clearInterval(refresh); clearInterval(ticker); });
         window.addEventListener('pageshow', event => { if (event.persisted) location.reload(); });

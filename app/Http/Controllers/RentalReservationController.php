@@ -62,7 +62,7 @@ class RentalReservationController extends Controller
         Gate::authorize('view', $reservation);
         $reservation->load(['playSession', 'extensions']);
 
-        return response()->json(['status' => $reservation->status, 'label' => $reservation->statusLabel(), 'remaining' => $reservation->playSession?->remaining() ?? 0, 'running' => $reservation->status === 'playing' && $reservation->playSession?->status === 'running', 'price' => $reservation->priceLabel(), 'duration_minutes' => $reservation->duration_minutes, 'ends_at' => $reservation->ends_at->setTimezone('Asia/Jakarta')->format('d M Y, H:i').' WIB', 'extension_pending' => $reservation->extensions->contains('status', 'pending'), 'extensions' => $reservation->extensions->map(fn ($e) => ['id' => $e->id, 'minutes' => $e->minutes, 'status' => $e->status])->values()])->header('Cache-Control', 'no-store, private');
+        return response()->json(['status' => $reservation->status, 'label' => $reservation->statusLabel(), 'remaining' => $reservation->timerSeconds(), 'running' => $reservation->timerRunning(), 'hint' => $reservation->timerHint(), 'price' => $reservation->priceLabel(), 'duration_minutes' => $reservation->duration_minutes, 'ends_at' => $reservation->ends_at->setTimezone('Asia/Jakarta')->format('d M Y, H:i').' WIB', 'extension_pending' => $reservation->extensions->contains('status', 'pending'), 'extensions' => $reservation->extensions->map(fn ($e) => ['id' => $e->id, 'minutes' => $e->minutes, 'status' => $e->status])->values()])->header('Cache-Control', 'no-store, private');
     }
 
     public function cancel(RentalReservation $reservation, RentalReservationManager $manager)

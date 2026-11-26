@@ -370,11 +370,11 @@
   "Belum terverifikasi": "Not verified yet",
   "Mengirim reservasi…": "Submitting booking…",
   "Status belum dapat diperbarui. Coba muat ulang atau masuk kembali.": "Status could not be updated. Refresh or sign in again.",
-  "Timer sedang berjalan.": "Your timer is running.",
-  "Timer dijeda oleh admin.": "Your timer has been paused by our team.",
+  "Timer sedang berjalan.": "The timer is running.",
+  "Timer dijeda oleh admin.": "The timer has been paused by the admin.",
   "Sesi sudah selesai. Terima kasih sudah bermain.": "Your session has ended. Thanks for playing.",
   "Timer muncul setelah admin memulai sesi.": "The timer appears when our team starts your session.",
-  "Waktu habis. Hubungi admin untuk menyelesaikan sesi.": "Time is up. Please contact the team to finish your session.",
+  "Waktu habis. Hubungi admin untuk menyelesaikan sesi.": "Time is up. Contact the admin to finish your session.",
   "Permintaan tambahan waktu sedang menunggu admin.": "Your extension request is awaiting approval.",
   "Terhubung. Status diperbarui otomatis.": "Connected. Status updates automatically.",
   "Pasang aplikasi": "Install app",
@@ -495,5 +495,8 @@
   "Pilih jadwal konsol atau kirim pesanan makanan ke kedai.": "Choose a console time or send a food order to the kitchen.",
   "Catatan untuk kedai": "Notes for the kitchen",
   "Kirim pesanan makanan": "Send food order",
-  "Pesanan makanan dikirim setelah menekan tombol di atas. Bayar langsung ke pengelola; reservasi konsol diproses terpisah.": "Submit food orders with the button above and pay the staff directly. Console reservations are processed separately."
+  "Pesanan makanan dikirim setelah menekan tombol di atas. Bayar langsung ke pengelola; reservasi konsol diproses terpisah.": "Submit food orders with the button above and pay the staff directly. Console reservations are processed separately.",
+  "Durasi pesananmu. Hitung mundur dimulai setelah reservasi dikonfirmasi dan admin memulai sesi.": "Your booked duration. The countdown starts after confirmation when the admin starts your session.",
+  "Waktu main siap. Hitung mundur dimulai saat admin menekan Mulai sesi atau Mulai sekarang.": "Your play time is ready. The countdown starts when the admin selects Start session or Start now.",
+  "Reservasi tidak aktif. Timer tidak berjalan.": "This reservation is inactive. The timer is not running."
 }

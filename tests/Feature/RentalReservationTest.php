@@ -246,4 +246,27 @@ class RentalReservationTest extends TestCase
         $this->post(route('reservations.store'), $data)->assertSessionHasNoErrors()->assertRedirect();
         $this->assertDatabaseCount('rental_reservations', 1);
     }
+
+    public function test_ninety_minute_clock_previews_full_duration_then_counts_down_only_after_start(): void
+    {
+        $r = $this->reserve(60, 90);
+        $this->get(route('reservations.show', $r))->assertOk()->assertSee('01:30:00');
+        $this->getJson(route('reservations.status', $r))->assertJsonPath('remaining', 5400)->assertJsonPath('running', false);
+        $this->travel(5)->minutes();
+        $this->getJson(route('reservations.status', $r))->assertJsonPath('remaining', 5400)->assertJsonPath('running', false);
+        $this->actingAs($this->admin);
+        $m = app(RentalReservationManager::class);
+        $m->adminAction($r, 'confirm');
+        $this->getJson(route('reservations.status', $r))->assertJsonPath('remaining', 5400)->assertJsonPath('running', false);
+        $r = $m->adminAction($r, 'start_now')->fresh();
+        $this->getJson(route('reservations.status', $r))->assertJsonPath('remaining', 5400)->assertJsonPath('running', true);
+        $this->travel(1)->minutes();
+        $this->getJson(route('reservations.status', $r))->assertJsonPath('remaining', 5340);
+        app(PlaySessionManager::class)->change($r->playSession, 'pause');
+        $this->travel(10)->minutes();
+        $this->getJson(route('reservations.status', $r))->assertJsonPath('remaining', 5340)->assertJsonPath('running', false);
+        $this->get(route('reservations.show', $r))->assertSee('01:29:00');
+        app(PlaySessionManager::class)->change($r->playSession, 'finish');
+        $this->getJson(route('reservations.status', $r))->assertJsonPath('remaining', 0)->assertJsonPath('running', false);
+    }
 }
