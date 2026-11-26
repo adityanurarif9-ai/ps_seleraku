@@ -18,17 +18,17 @@ return json_decode(<<<'JSON'
     "images/gmaps-senopati.png": "optimized/gmaps-senopati.f5eb11b96a.webp",
     "images/hero-controllers-clean.png": "optimized/hero-controllers-clean.0d72979d02.webp",
     "images/hero-dualsense.jpg": "optimized/hero-dualsense.5f81b97c02.webp",
-    "images/nintendo-unit.png": "optimized/nintendo-unit.575f27c9bd.webp",
+    "images/nintendo-unit.png": "optimized/nintendo-unit.c5c744ae2a.webp",
     "images/paket-mingguan.png": "optimized/paket-mingguan.9e1ec92f22.webp",
     "images/paket-ps4.png": "optimized/paket-ps4.0b6bcfaed8.webp",
     "images/paket-ps5.png": "optimized/paket-ps5.d6ff4d3374.webp",
     "images/paket-weekend.png": "optimized/paket-weekend.3278e45fb1.webp",
-    "images/ps3-unit.png": "optimized/ps3-unit.db41986bd1.webp",
+    "images/ps3-unit.png": "optimized/ps3-unit.725b62b5fc.webp",
     "images/ps4-fat.png": "optimized/ps4-fat.3c82c0d107.webp",
-    "images/ps4-pro.png": "optimized/ps4-pro.a17ba150a7.webp",
+    "images/ps4-pro.png": "optimized/ps4-pro.41ee549313.webp",
     "images/ps4-slim.png": "optimized/ps4-slim.3f10bd1cf6.webp",
     "images/ps5-slim.png": "optimized/ps5-slim.18f203597b.webp",
-    "images/ps5-ultra.png": "optimized/ps5-ultra.9ed7c102c6.webp",
+    "images/ps5-ultra.png": "optimized/ps5-ultra.b413693e5a.webp",
     "images/ps5-vip.png": "optimized/ps5-vip.85b15f34a6.webp",
     "images/reference-hero-daily.jpg": "optimized/reference-hero-daily.03882d481e.webp",
     "images/reference-hero-food.jpg": "optimized/reference-hero-food.c01bcfe25a.webp",
@@ -51,7 +51,7 @@ return json_decode(<<<'JSON'
     "pwa.css": "optimized/pwa.289d921e7e.css",
     "rentals.css": "optimized/rentals.6875374d76.css",
     "seleraku-pages.css": "optimized/seleraku-pages.ed899a6f20.css",
-    "reference.css": "optimized/reference.b542e6ba65.css"
+    "reference.css": "optimized/reference.b0902798ce.css"
   },
   "source_hashes": {
     "selo.js": "9a05193ba081d3692ef3e545df8fa7c2955338660e09af7bcd7f3176f7968d3f",
@@ -68,7 +68,7 @@ return json_decode(<<<'JSON'
     "pwa.css": "70693e1ee2d7b5eb5db80d7f44d773cefa6dffc0f7a1dfbb3e26326ae960efa1",
     "rentals.css": "3ff5c433d0d63a73eea4efcfea940b5fa61024114d15b08a9766289915bf3e90",
     "seleraku-pages.css": "b29491ff4570452c3eac22dabc149d4af583c29cb64792a50e766160329f192c",
-    "reference.css": "caf4d22c8c8cfc4267061bf1b208736b46bfaa8807e86acd864885135c2fa1d7"
+    "reference.css": "dba25e51ff20297b51709cf30765b4f3d4e88c495dfb2e72d6b5586761027b61"
   },
   "login": {
     "desktop": "optimized/login-desktop-1280.5aab67921e.webp",
