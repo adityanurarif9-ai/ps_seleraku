@@ -16,6 +16,7 @@
 <main>
     <!-- Hero Section -->
     <section class="ps-hero-page2">
+        @include('partials.controller-motion')
         <div class="ps-hero-inner">
             <h1 class="ps-hero-title">
                 RENTAL <span class="ps-text-ps4">PS4</span> &amp; <span class="ps-text-ps5">PS5</span>

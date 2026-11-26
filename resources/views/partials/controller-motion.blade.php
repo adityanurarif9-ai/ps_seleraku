@@ -1,0 +1,2 @@
+<div class="ps-controller-scene" aria-hidden="true"><div class="ps-controller-stage"><div class="ps-motion-pad ps-motion-pad-white"></div><div class="ps-motion-pad ps-motion-pad-black"></div></div><span class="ps-motion-dust ps-motion-dust-one"></span><span class="ps-motion-dust ps-motion-dust-two"></span></div>
+<button class="controller-motion-toggle" type="button" data-motion-toggle data-pause-label="{{ __('Jeda animasi') }}" data-play-label="{{ __('Putar animasi') }}" aria-pressed="false">{{ __('Jeda animasi') }}</button>

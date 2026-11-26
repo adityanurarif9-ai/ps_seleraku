@@ -2,6 +2,7 @@
 @section('title', __('Beranda'))
 @section('content')
 <section class="web-home-hero">
+@include('partials.controller-motion')
 <div class="web-wrap web-hero-grid">
 <div>
     <span class="web-eyebrow">{{ __('PILIH KONSOL. AJAK TEMAN MAIN.') }}</span>
@@ -17,13 +18,7 @@
 <span>{{ __('Jadwal sesuai pilihanmu') }}</span>
 </div>
 </div>
-<div class="web-hero-art">
-<img src="{{ \App\Support\SiteAsset::url('hero.png') }}" alt="Konsol dan stik PlayStation untuk waktu bermain bersama" width="720" height="720" fetchpriority="high" decoding="async">
-<div class="web-art-caption">
-<span>{{ __('Waktunya main bareng.') }}</span>
-<small>{{ __('Cek jadwal, pesan, lalu nikmati sesimu.') }}</small>
-</div>
-</div>
+
 </div>
 </section>
 <section class="web-section web-wrap">
