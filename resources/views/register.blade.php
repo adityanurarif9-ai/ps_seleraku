@@ -17,7 +17,7 @@
                 <a class="brand" href="{{ route('login') }}" aria-label="PS Seleraku">
                     <img srcset="{{ asset(config('performance-assets.brand.small')) }} 320w, {{ \App\Support\SiteAsset::url('logo-ps-seleraku-transparent.png') }} 640w" sizes="(max-width: 700px) 158px, 248px" src="{{ \App\Support\SiteAsset::url('logo-ps-seleraku-transparent.png') }}" alt="PS SELERAKU — Rental Konsol" width="2172" height="724" decoding="async">
                 </a>
-                <h1 id="intro-title">ELEVATE YOUR <br> <span>GAMING</span> <br> EXPERIENCE</h1>
+                <h1 id="intro-title">{{ __('Reservasi konsol.') }}<br><span>{{ __('Pilih waktu mainmu.') }}</span></h1>
                 <p>{{ __('Buat jadwal mainmu, pesan konsol favorit, dan pantau waktu rental dalam satu akun.') }}</p>
             </div>
         </section>

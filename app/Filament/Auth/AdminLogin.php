@@ -32,7 +32,7 @@ class AdminLogin extends Login
 
     public function getSubheading(): ?string
     {
-        return 'Kelola konsol, menu kedai, dan stok PS Seleraku.';
+        return 'Kelola reservasi, waktu main, konsol, dan menu kedai.';
     }
 
     protected function getEmailFormComponent(): Component

@@ -1,1 +1,1 @@
-<p class="ps-admin-login-note">AREA PENGELOLA PS SELERAKU<br>Gunakan akun admin untuk mengelola katalog dan stok.</p>
+<p class="ps-admin-login-note">Khusus pengelola PS Seleraku.<br>Akun pemain tidak dapat mengakses dashboard admin.</p>

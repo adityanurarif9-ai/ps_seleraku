@@ -17,8 +17,8 @@
                 <a class="brand" href="{{ route('login') }}" aria-label="PS Seleraku">
                     <img srcset="{{ asset(config('performance-assets.brand.small')) }} 320w, {{ \App\Support\SiteAsset::url('logo-ps-seleraku-transparent.png') }} 640w" sizes="(max-width: 700px) 158px, 248px" src="{{ \App\Support\SiteAsset::url('logo-ps-seleraku-transparent.png') }}" alt="PS SELERAKU — Rental Konsol" width="2172" height="724" decoding="async">
                 </a>
-                <h1 id="intro-title">ELEVATE YOUR <br> <span>GAMING</span> <br> EXPERIENCE</h1>
-                <p>{{ __('Masuk ke akunmu sekarang dan nikmati pengalaman rental PlayStation terbaik dengan fasilitas higienis prima, dan harga kompetitif.') }}</p>
+                <h1 id="intro-title">{{ __('Reservasi konsol.') }}<br><span>{{ __('Pilih waktu mainmu.') }}</span></h1>
+                <p>{{ __('Pilih PlayStation atau Nintendo, pesan jadwal sebelum datang, lalu pantau reservasi dan sisa waktu main dari akunmu.') }}</p>
             </div>
         </section>
         <section class="form-side" aria-labelledby="login-title">
@@ -26,7 +26,7 @@
             @include('partials.install-app')
             <div class="login-card">
                 <h2 id="login-title">{{ __('MASUK AKUN') }}</h2>
-                <p class="subtitle">{{ __('Lanjutkan untuk mulai merental PS favoritmu') }}</p>
+                <p class="subtitle">{{ __('Masuk untuk memesan konsol dan melihat rentalmu.') }}</p>
                 @if(session('session_notice'))
                     <p class="notice" role="status">{{ session('session_notice') }}</p>
                 @endif
@@ -65,12 +65,13 @@
                 @endif
                 <p class="signup"><a href="{{ route('tentang') }}">{{ __('Tentang PS Seleraku') }}</a> · <a href="{{ route('kontak') }}">{{ __('Kontak') }}</a></p>
                 <p class="signup">{{ __('Belum punya akun?') }} <a href="{{ route('register') }}">{{ __('Daftar di sini') }}</a></p>
+                <p class="signup admin-entry">{{ __('Mengelola PS Seleraku?') }} <a href="{{ route('filament.admin.auth.login') }}">{{ __('Masuk admin') }}</a></p>
                 @if(config('app.demo_accounts'))
                     <details class="demo" open>
                         <summary>{{ __('Coba akun demo') }}</summary>
                         <div class="demo-buttons">
-                            <button type="button" data-login="pemain" data-password="Mabar!2026">{{ __('Akun pemain') }} <span aria-hidden="true">↗</span></button>
-                            <button type="button" data-login="admin" data-password="Seleraku!2026">{{ __('Akun admin') }} <span aria-hidden="true">↗</span></button>
+                            <button type="button" data-login="pemain" data-password="Mabar!2026">{{ __('Akun pemain') }} <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button>
+                            <button type="button" data-login="admin" data-password="Seleraku!2026">{{ __('Akun admin') }} <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button>
                         </div>
                     </details>
                 @endif
