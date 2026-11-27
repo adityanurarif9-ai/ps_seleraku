@@ -2,6 +2,8 @@
 @section('title', __('Beranda'))
 @section('content')
 @include('partials.hero-carousel')
+<div class="ps-home-canvas">
+@include('partials.console-intro')
 <section class="web-wrap" style="padding-top:24px"><div class="web-actions"><a class="web-button" href="{{ route('menu-fnb') }}">{{ __('Pilih makanan & minuman') }}</a><a class="web-text-link" href="{{ route('food-orders.index') }}">{{ __('Pesanan Makanan') }}</a></div></section>
 
 <section class="web-section web-wrap">
@@ -87,4 +89,5 @@
 <a class="web-text-link" href="{{ route('kontak') }}">{{ __('Hubungi pengelola') }}</a>
 </div>
 </section>
+</div>
 @endsection

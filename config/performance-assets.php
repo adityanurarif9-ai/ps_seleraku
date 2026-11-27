@@ -56,7 +56,7 @@ return json_decode(<<<'JSON'
     "pwa.css": "optimized/pwa.289d921e7e.css",
     "rentals.css": "optimized/rentals.6875374d76.css",
     "seleraku-pages.css": "optimized/seleraku-pages.ed899a6f20.css",
-    "reference.css": "optimized/reference.c01760dd16.css"
+    "reference.css": "optimized/reference.92a5957060.css"
   },
   "source_hashes": {
     "selo.js": "9a05193ba081d3692ef3e545df8fa7c2955338660e09af7bcd7f3176f7968d3f",
@@ -75,7 +75,7 @@ return json_decode(<<<'JSON'
     "pwa.css": "70693e1ee2d7b5eb5db80d7f44d773cefa6dffc0f7a1dfbb3e26326ae960efa1",
     "rentals.css": "3ff5c433d0d63a73eea4efcfea940b5fa61024114d15b08a9766289915bf3e90",
     "seleraku-pages.css": "b29491ff4570452c3eac22dabc149d4af583c29cb64792a50e766160329f192c",
-    "reference.css": "6d7899655c11cb3ad9f055f611751bdf975d164adbd1570548ac83ad189de392"
+    "reference.css": "08f37c3c213f58b3242413c06fee843018249bc932a2626056edc81a641d8fa2"
   },
   "login": {
     "desktop": "optimized/login-desktop-1280.5aab67921e.webp",
