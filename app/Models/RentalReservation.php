@@ -54,6 +54,7 @@ class RentalReservation extends Model
         if (in_array($this->status, ['pending', 'confirmed'])) {
             return max(0, $this->duration_minutes * 60);
         }
+
         return $this->status === 'playing' ? ($this->playSession?->remaining() ?? 0) : 0;
     }
 
@@ -81,5 +82,10 @@ class RentalReservation extends Model
     public function priceLabel(): string
     {
         return 'Rp'.number_format($this->total_price, 0, ',', '.');
+    }
+
+    public function testPayment()
+    {
+        return $this->hasOne(TestPayment::class, 'rental_reservation_id');
     }
 }

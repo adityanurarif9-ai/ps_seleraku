@@ -7,6 +7,7 @@ use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\RentalReservationController;
 use App\Http\Controllers\SeloController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\TestPaymentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Validation\Rule;
@@ -43,6 +44,10 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+    Route::get('/pembayaran/{payment}', [TestPaymentController::class, 'show'])->name('payments.show');
+    Route::post('/pembayaran/reservasi/{reservation}', [TestPaymentController::class, 'reservation'])->name('payments.reservation');
+    Route::post('/pembayaran/kedai/{order}', [TestPaymentController::class, 'food'])->name('payments.food');
+    Route::post('/pembayaran/{payment}/uji', [TestPaymentController::class, 'simulate'])->middleware('throttle:20,1,payment-test-')->name('payments.simulate');
     Route::get('/pesanan-makanan', [FoodOrderController::class, 'index'])->name('food-orders.index');
     Route::post('/pesanan-makanan', [FoodOrderController::class, 'store'])->middleware('throttle:10,1,food-order-')->name('food-orders.store');
     Route::post('/pesanan-makanan/{order}/batal', [FoodOrderController::class, 'cancel'])->name('food-orders.cancel');

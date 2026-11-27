@@ -26,10 +26,15 @@ class RentalReservationResource extends Resource
         return $t->query(RentalReservation::query()->with(['user', 'catalogItem', 'playSession']))->poll('10s')->defaultSort('id', 'desc')->columns([
             TextColumn::make('id')->label('Kode')->formatStateUsing(fn ($state) => 'PS-'.str_pad((string) $state, 6, '0', STR_PAD_LEFT))->sortable(),
             TextColumn::make('user.name')->label('Pelanggan')->searchable(),
+            TextColumn::make('contact_name')->label('Nama penyewa')->toggleable(isToggledHiddenByDefault: true),
+            TextColumn::make('contact_phone')->label('WhatsApp')->toggleable(isToggledHiddenByDefault: true),
             TextColumn::make('catalogItem.name')->label('Konsol'),
             TextColumn::make('mode')->label('Layanan')->formatStateUsing(fn ($state) => $state === 'daily' ? 'Bawa pulang' : 'Main di tempat'),
             TextColumn::make('starts_at')->label('Jadwal WIB')->dateTime('d M Y, H:i')->timezone('Asia/Jakarta')->sortable(),
             TextColumn::make('duration_minutes')->label('Menit'),
+            TextColumn::make('testPayment.status')->label('Pembayaran uji')->formatStateUsing(fn ($state) => match ($state) {
+                'simulated_paid' => 'Simulasi berhasil (bukan lunas)','failed' => 'Simulasi gagal',default => 'Belum dibayar (uji)'
+            })->placeholder('Belum dibayar (uji)')->toggleable(),
             TextColumn::make('total_price')->label('Biaya')->formatStateUsing(fn ($state) => 'Rp'.number_format($state, 0, ',', '.')),
             TextColumn::make('status')->label('Status')->formatStateUsing(fn (RentalReservation $record) => $record->statusLabel())->badge()->color(fn ($state) => match ($state) {
                 'pending' => 'warning','confirmed' => 'info','playing' => 'success','rejected','cancelled' => 'danger',default => 'gray'

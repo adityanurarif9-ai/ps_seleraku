@@ -11,7 +11,8 @@
 @foreach($order->items as $line)<p>{{ $line->quantity }} × {{ $line->name }} <strong>Rp{{ number_format($line->unit_price*$line->quantity,0,',','.') }}</strong></p>@endforeach
 <p class="cart-price">{{ __('Total') }}: Rp{{ number_format($order->total_price,0,',','.') }}</p>
 @if($order->notes)<p>{{ __('Catatan') }}: {{ $order->notes }}</p>@endif
-<p class="cart-footnote">{{ __('Pembayaran dilakukan langsung ke pengelola. Status pesanan bukan bukti pembayaran.') }}</p>
+<p class="cart-footnote">{{ __('Pembayaran digital tersedia dalam mode uji. Hasil simulasi bukan bukti lunas.') }}</p>
+@if(in_array($order->status,['pending','preparing','ready']))<form method="post" action="{{ route('payments.food',$order) }}">@csrf<button class="cart-reserve" type="submit">{{ __('Pembayaran digital (uji)') }}</button></form>@endif
 @if($order->status==='pending')<form action="{{ route('food-orders.cancel',$order) }}" method="post">@csrf<button class="cart-remove" type="submit">{{ __('Batalkan pesanan') }}</button></form>@endif
 </div></article>
 @empty<div class="cart-empty"><h2>{{ __('Belum ada pesanan makanan') }}</h2><p>{{ __('Pilih menu, tambahkan ke keranjang, lalu kirim pesanan.') }}</p></div>@endforelse

@@ -1,0 +1,14 @@
+(() => {
+ const form=document.querySelector('#rs-booking-form');if(!form)return;
+ const mode=form.elements.mode,duration=form.elements.duration,start=form.elements.starts_at,consoleSelect=form.elements.catalog_item_id;
+ const dates=form.querySelector('[data-rs-dates]'),durations=form.querySelector('[data-rs-durations]');
+ const en=document.documentElement.lang==='en';
+ const drawDurations=()=>{durations.replaceChildren(...[...duration.options].map(option=>{const b=document.createElement('button');b.type='button';b.textContent=option.textContent;b.classList.toggle('is-selected',option.value===duration.value);b.setAttribute('aria-pressed',String(option.value===duration.value));b.addEventListener('click',()=>{duration.value=option.value;duration.dispatchEvent(new Event('change',{bubbles:true}));drawDurations()});return b}));form.querySelectorAll('[data-rs-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.rsMode===mode.value)))};
+ const markDates=()=>dates.querySelectorAll('button').forEach(b=>{const selected=b.dataset.date===start.value.slice(0,10);b.classList.toggle('is-selected',selected);b.setAttribute('aria-pressed',String(selected))});
+ const base=new Date(start.min.slice(0,10)+'T00:00:00Z');
+ for(let i=0;i<7;i++){const date=new Date(base.getTime()+i*86400000),iso=date.toISOString().slice(0,10),b=document.createElement('button');b.type='button';b.dataset.date=iso;b.textContent=new Intl.DateTimeFormat(en?'en-GB':'id-ID',{weekday:'short',day:'numeric',month:'short',timeZone:'UTC'}).format(date);b.addEventListener('click',()=>{start.value=iso+'T'+(start.value.split('T')[1]||'10:00');start.dispatchEvent(new Event('change',{bubbles:true}));markDates()});dates.append(b)}
+ form.querySelectorAll('[data-rs-mode]').forEach(b=>b.addEventListener('click',()=>{if(mode.value!==b.dataset.rsMode){mode.value=b.dataset.rsMode;mode.dispatchEvent(new Event('change',{bubbles:true}))}drawDurations()}));
+ const preview=()=>{const o=consoleSelect.selectedOptions[0];if(!o?.dataset.image)return;const img=document.querySelector('#rs-unit-photo');img.src=o.dataset.image;img.alt=o.dataset.name;document.querySelector('#rs-unit-name').textContent=o.dataset.name;document.querySelector('#rs-unit-description').textContent=o.dataset.description||'';let games=[];try{games=JSON.parse(o.dataset.games||'[]')}catch{}document.querySelector('#rs-unit-games').replaceChildren(...games.slice(0,8).map(game=>{const tag=document.createElement('span');tag.textContent=game;return tag}))};
+ mode.addEventListener('change',drawDurations);duration.addEventListener('change',drawDurations);start.addEventListener('change',markDates);consoleSelect.addEventListener('change',preview);
+ drawDurations();markDates();preview();
+})();

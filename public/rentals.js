@@ -40,7 +40,8 @@ var psTr = window.psT || (value => value);
     if (rental) {
         let initial = Math.max(0, Number(rental.dataset.initialSeconds) || 0), left = initial, running = rental.dataset.initialRunning === 'true', anchor = performance.now();
         const clock = rental.querySelector('[data-rs-clock]');
-        const render = () => { if (running) left = Math.max(0, initial - Math.floor((performance.now() - anchor) / 1000)); clock.textContent = [Math.floor(left/3600),Math.floor(left%3600/60),left%60].map(v => String(v).padStart(2,'0')).join(':'); };
+        let currentStatus = rental.dataset.initialStatus, endsAt = rental.dataset.initialEnd;
+        const render = () => { if (running) left = Math.max(0, initial - Math.floor((performance.now() - anchor) / 1000)); clock.textContent = [Math.floor(left/3600),Math.floor(left%3600/60),left%60].map(v => String(v).padStart(2,'0')).join(':'); rental.dispatchEvent?.(new CustomEvent('rental:timer', {detail:{status:currentStatus,remaining:left,running,endsAt}})); };
         let loading = false;
         const sync = async () => {
             if (loading || document.hidden) return; loading = true;
@@ -48,7 +49,7 @@ var psTr = window.psT || (value => value);
                 const response = await fetch(rental.dataset.statusUrl, { credentials: 'same-origin', cache: 'no-store', headers: { Accept: 'application/json' } });
                 if (!response.ok) throw new Error(psTr('Status belum dapat diperbarui. Coba muat ulang atau masuk kembali.'));
                 const data = await response.json();
-                initial = data.remaining; left = initial; running = data.running; anchor = performance.now();
+                currentStatus = data.status; endsAt = data.timer_ends_at; initial = data.remaining; left = initial; running = data.running; anchor = performance.now();
                 rental.querySelector('[data-rs-status]').textContent = data.label;
                 rental.querySelector('[data-rs-price]').textContent = data.price;
                 rental.querySelector('[data-rs-duration]').textContent = data.duration_minutes;

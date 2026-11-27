@@ -34,4 +34,9 @@ class FoodOrder extends Model
     {
         return __(self::LABELS[$this->status] ?? $this->status);
     }
+
+    public function testPayment()
+    {
+        return $this->hasOne(TestPayment::class, 'food_order_id');
+    }
 }

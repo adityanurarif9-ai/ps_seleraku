@@ -45,6 +45,9 @@ class FoodOrderResource extends Resource
             TextColumn::make('user.name')->label('Pelanggan')->searchable(),
             TextColumn::make('items.name')->label('Menu')->state(fn (FoodOrder $record) => $record->items->map(fn ($i) => $i->quantity.' × '.$i->name)->all())->listWithLineBreaks()->wrap(),
             TextColumn::make('notes')->label('Catatan')->wrap(),
+            TextColumn::make('testPayment.status')->label('Pembayaran uji')->formatStateUsing(fn ($state) => match ($state) {
+                'simulated_paid' => 'Simulasi berhasil (bukan lunas)','failed' => 'Simulasi gagal',default => 'Belum dibayar (uji)'
+            })->placeholder('Belum dibayar (uji)')->toggleable(),
             TextColumn::make('total_price')->label('Total')->formatStateUsing(fn ($state) => 'Rp'.number_format($state, 0, ',', '.')),
             TextColumn::make('status')->label('Status')->formatStateUsing(fn (FoodOrder $record) => $record->statusLabel())->badge(),
             TextColumn::make('created_at')->label('Waktu WIB')->dateTime('d M H:i')->timezone('Asia/Jakarta'),

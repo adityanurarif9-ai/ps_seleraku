@@ -20,7 +20,7 @@ class RentalReservationManager
 
     public function quote(array $data): array
     {
-        $data = validator($data, ['catalog_item_id' => 'required|integer|exists:catalog_items,id', 'mode' => 'required|in:lounge,daily', 'duration' => 'required|integer|min:1|max:480', 'starts_at' => 'required|date_format:Y-m-d\TH:i', 'notes' => 'nullable|string|max:500'])->validate();
+        $data = validator($data, ['catalog_item_id' => 'required|integer|exists:catalog_items,id', 'mode' => 'required|in:lounge,daily', 'duration' => 'required|integer|min:1|max:480', 'starts_at' => 'required|date_format:Y-m-d\TH:i', 'notes' => 'nullable|string|max:500', 'contact_name' => 'nullable|string|max:100', 'contact_phone' => ['nullable', 'string', 'max:30', 'regex:/^[0-9+() -]{8,30}$/']])->validate();
         $start = CarbonImmutable::createFromFormat('!Y-m-d\TH:i', $data['starts_at'], 'Asia/Jakarta')->utc();
         if ($start < now()->subMinute() || $start > now()->addDays(30)) {
             throw ValidationException::withMessages(['starts_at' => __('Pilih jadwal mulai sekarang sampai 30 hari ke depan (WIB).')]);
@@ -38,7 +38,7 @@ class RentalReservationManager
         }
         $rate = $data['mode'] === 'daily' ? $item->daily_price : $item->price;
 
-        return ['item' => $item, 'mode' => $data['mode'], 'starts_at' => $start, 'ends_at' => $start->addMinutes($minutes), 'duration_minutes' => $minutes, 'unit_rate' => $rate, 'total_price' => (int) round($rate * $minutes / ($data['mode'] === 'daily' ? 1440 : 60)), 'notes' => $data['notes'] ?? null];
+        return ['item' => $item, 'mode' => $data['mode'], 'starts_at' => $start, 'ends_at' => $start->addMinutes($minutes), 'duration_minutes' => $minutes, 'unit_rate' => $rate, 'total_price' => (int) round($rate * $minutes / ($data['mode'] === 'daily' ? 1440 : 60)), 'notes' => $data['notes'] ?? null, 'contact_name' => $data['contact_name'] ?? auth()->user()?->name, 'contact_phone' => $data['contact_phone'] ?? null];
     }
 
     public function create(array $data): RentalReservation

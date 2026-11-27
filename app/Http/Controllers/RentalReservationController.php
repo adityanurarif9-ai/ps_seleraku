@@ -37,14 +37,18 @@ class RentalReservationController extends Controller
 
     public function availability(Request $request, RentalReservationManager $manager, RentalAvailability $availability)
     {
-        $q = $manager->quote($request->only(['catalog_item_id', 'mode', 'duration', 'starts_at', 'notes']));
+        $q = $manager->quote($request->only(['catalog_item_id', 'mode', 'duration', 'starts_at', 'notes', 'contact_name', 'contact_phone']));
 
         return response()->json(['available' => $availability->available($q['item'], $q['starts_at'], $q['ends_at']), 'total_price' => $q['total_price'], 'ends_at' => $q['ends_at']->setTimezone('Asia/Jakarta')->format('d M Y, H:i').' WIB', 'duration_minutes' => $q['duration_minutes']])->header('Cache-Control', 'no-store, private');
     }
 
     public function store(Request $request, RentalReservationManager $manager)
     {
-        $r = $manager->create($request->only(['catalog_item_id', 'mode', 'duration', 'starts_at', 'notes']));
+        $r = $manager->create($request->only(['catalog_item_id', 'mode', 'duration', 'starts_at', 'notes', 'contact_name', 'contact_phone']));
+
+        if (config('payments.demo_enabled')) {
+            return app(TestPaymentController::class)->reservation($r);
+        }
 
         return redirect()->route('reservations.show', $r)->with('success', __('Reservasi tersimpan. Tunggu konfirmasi admin sebelum datang.'));
     }
@@ -62,7 +66,7 @@ class RentalReservationController extends Controller
         Gate::authorize('view', $reservation);
         $reservation->load(['playSession', 'extensions']);
 
-        return response()->json(['status' => $reservation->status, 'label' => $reservation->statusLabel(), 'remaining' => $reservation->timerSeconds(), 'running' => $reservation->timerRunning(), 'hint' => $reservation->timerHint(), 'price' => $reservation->priceLabel(), 'duration_minutes' => $reservation->duration_minutes, 'ends_at' => $reservation->ends_at->setTimezone('Asia/Jakarta')->format('d M Y, H:i').' WIB', 'extension_pending' => $reservation->extensions->contains('status', 'pending'), 'extensions' => $reservation->extensions->map(fn ($e) => ['id' => $e->id, 'minutes' => $e->minutes, 'status' => $e->status])->values()])->header('Cache-Control', 'no-store, private');
+        return response()->json(['status' => $reservation->status, 'label' => $reservation->statusLabel(), 'remaining' => $reservation->timerSeconds(), 'running' => $reservation->timerRunning(), 'hint' => $reservation->timerHint(), 'timer_ends_at' => $reservation->playSession?->ends_at?->toIso8601String(), 'price' => $reservation->priceLabel(), 'duration_minutes' => $reservation->duration_minutes, 'ends_at' => $reservation->ends_at->setTimezone('Asia/Jakarta')->format('d M Y, H:i').' WIB', 'extension_pending' => $reservation->extensions->contains('status', 'pending'), 'extensions' => $reservation->extensions->map(fn ($e) => ['id' => $e->id, 'minutes' => $e->minutes, 'status' => $e->status])->values()])->header('Cache-Control', 'no-store, private');
     }
 
     public function cancel(RentalReservation $reservation, RentalReservationManager $manager)
