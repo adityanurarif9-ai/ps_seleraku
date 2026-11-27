@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use chillerlan\QRCode\QRCode;
 use Illuminate\Database\Eloquent\Model;
 
 class TestPayment extends Model
@@ -28,6 +29,12 @@ class TestPayment extends Model
     public function reference(): string
     {
         return 'UJI-'.str_pad((string) $this->id, 6, '0', STR_PAD_LEFT);
+    }
+
+    public function demoQr(): string
+    {
+        // Plain text only: deliberately not a QRIS/EMV merchant payment payload.
+        return (new QRCode)->render('PS SELERAKU DEMO | '.$this->reference().' | NO PAYMENT - JANGAN TRANSFER');
     }
 
     public function statusLabel(): string

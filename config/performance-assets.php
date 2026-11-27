@@ -50,13 +50,14 @@ return json_decode(<<<'JSON'
     "hero-carousel.js": "optimized/hero-carousel.a1cfade7d5.js",
     "booking-ui.js": "optimized/booking-ui.5ad043b6ca.js",
     "rental-alert.js": "optimized/rental-alert.36aa5a593e.js",
+    "demo-checkout.js": "optimized/demo-checkout.508bb212d1.js",
     "site.css": "optimized/site.82010db371.css",
     "selo.css": "optimized/selo.4633bb8b8d.css",
     "login.css": "optimized/login.e7463d82c4.css",
     "pwa.css": "optimized/pwa.289d921e7e.css",
     "rentals.css": "optimized/rentals.6875374d76.css",
     "seleraku-pages.css": "optimized/seleraku-pages.ed899a6f20.css",
-    "reference.css": "optimized/reference.92a5957060.css"
+    "reference.css": "optimized/reference.70f07fb09b.css"
   },
   "source_hashes": {
     "selo.js": "9a05193ba081d3692ef3e545df8fa7c2955338660e09af7bcd7f3176f7968d3f",
@@ -69,13 +70,14 @@ return json_decode(<<<'JSON'
     "hero-carousel.js": "be8faa21bc604bf9929e69673325158a28ed2724daf1b716a5e08ff7a0b4ff8b",
     "booking-ui.js": "a360e1bc4f83f3d43ab0c131da2ca3ebb279959fc999b1443679d44ec1ed1b0d",
     "rental-alert.js": "51d4f749f35f175fb740f7b42aee97e7ae4d22acaf6cf96a3fcdf8b0a6a6da2f",
+    "demo-checkout.js": "d1242d2a489c682638ac822a0c17eedf843e7f028949608dec8717c22866584b",
     "site.css": "82010db371dcbae2bd92bb55d5f2899115761f8f4cef6783a5640b52bf2c1a04",
     "selo.css": "fbb1dd9bd7f585ffb5897466b3e95be77d6550a22ac92b354cbde03c77765639",
     "login.css": "b7331c81c404788feb6a572abcc57f72b59bfbbbc134486108fc8da4bf0b04fd",
     "pwa.css": "70693e1ee2d7b5eb5db80d7f44d773cefa6dffc0f7a1dfbb3e26326ae960efa1",
     "rentals.css": "3ff5c433d0d63a73eea4efcfea940b5fa61024114d15b08a9766289915bf3e90",
     "seleraku-pages.css": "b29491ff4570452c3eac22dabc149d4af583c29cb64792a50e766160329f192c",
-    "reference.css": "08f37c3c213f58b3242413c06fee843018249bc932a2626056edc81a641d8fa2"
+    "reference.css": "f047ab694d434c4ef3aefe0a009b5bc2e11c6d3948b4b72355e06188b0bdade7"
   },
   "login": {
     "desktop": "optimized/login-desktop-1280.5aab67921e.webp",

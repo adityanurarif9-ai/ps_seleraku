@@ -63,3 +63,5 @@
         @include('partials.navigation-links')
     </div>
 </header>
+
+@include('partials.mobile-bottom-nav')
