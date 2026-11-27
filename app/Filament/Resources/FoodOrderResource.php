@@ -27,7 +27,7 @@ class FoodOrderResource extends Resource
 
     public static function table(Table $t): Table
     {
-        $actions = [Action::make('receipt')->label('Struk PDF')->url(fn (FoodOrder $record) => route('receipts.food', $record))];
+        $actions = [Action::make('receipt')->label('Struk PDF')->url(fn (FoodOrder $record) => route('receipts.food', $record))->extraAttributes(['download'=>''])];
         foreach (['preparing' => ['Siapkan', ['pending']], 'ready' => ['Siap diambil', ['preparing']], 'completed' => ['Selesai', ['ready']], 'rejected' => ['Tolak', ['pending', 'preparing']]] as $status => [$label,$from]) {
             $actions[] = Action::make($status)->label($label)->color($status === 'rejected' ? 'danger' : 'primary')->requiresConfirmation()
                 ->visible(fn (FoodOrder $record) => in_array($record->status, $from))->action(function (FoodOrder $record) use ($status) {
