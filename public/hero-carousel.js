@@ -3,7 +3,6 @@
         const slides = [...root.querySelectorAll('[data-hero-slide]')];
         const dots = [...root.querySelectorAll('[data-hero-dot]')];
         const track = root.querySelector('[data-hero-track]');
-        const toggle = root.querySelector('[data-hero-autoplay]');
         const status = root.querySelector('[data-hero-status]');
         const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
         if (!track || slides.length < 2) return;
@@ -12,8 +11,6 @@
             clearInterval(timer);
             const stopped = paused || hover || focus || !visible || document.hidden || reduced.matches;
             root.classList.toggle('is-motion-paused', stopped);
-            toggle.setAttribute('aria-pressed', String(paused || reduced.matches));
-            toggle.setAttribute('aria-label', paused || reduced.matches ? toggle.dataset.startLabel : toggle.dataset.stopLabel);
             if (!stopped) timer = setInterval(() => show(current + 1, false), 5000);
         };
         const show = (next, announce = true) => {
@@ -34,7 +31,6 @@
         root.querySelector('[data-hero-prev]')?.addEventListener('click', () => manual(current - 1));
         root.querySelector('[data-hero-next]')?.addEventListener('click', () => manual(current + 1));
         dots.forEach((dot, index) => dot.addEventListener('click', () => manual(index)));
-        toggle.addEventListener('click', () => { paused = !paused; sync(); });
         root.addEventListener('mouseenter', () => { hover = true; sync(); });
         root.addEventListener('mouseleave', () => { hover = false; sync(); });
         root.addEventListener('focusin', () => { focus = true; sync(); });

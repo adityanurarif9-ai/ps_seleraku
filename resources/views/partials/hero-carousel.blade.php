@@ -6,14 +6,14 @@
 @endphp
 <section class="ps-hero-carousel" data-hero-carousel data-interval="5000" role="region" aria-roledescription="carousel" aria-label="{{ __('Sorotan PS Seleraku') }}" data-slide-status="{{ __('Slide :current dari :total') }}">
 <div class="hero-carousel-track" data-hero-track aria-live="off">
-    <article class="hero-carousel-slide hero-slide-main" data-hero-slide aria-label="{{ __('Rental PS4 dan PS5') }}">
+    <article class="hero-carousel-slide hero-slide-main" data-hero-slide aria-label="{{ __('PlayStation dan Nintendo') }}">
         <div class="hero-carousel-inner">
             <div class="hero-carousel-copy"><span class="hero-carousel-eyebrow">{{ __('PILIH KONSOL. AJAK TEMAN MAIN.') }}</span>
                 <h1>{{ $site['hero_title'] }}</h1><p>{{ $site['hero_description'] }}</p>
                 <div class="hero-carousel-actions"><a class="hero-carousel-button" href="{{ route('reservations.create') }}">{{ __('Buat reservasi') }}</a><a class="hero-carousel-link" href="{{ route('page-ke2') }}">{{ __('Lihat konsol') }}</a></div>
                 <span class="hero-carousel-meta">PlayStation &amp; Nintendo · {{ __('Jadwal sesuai pilihanmu') }}</span>
             </div>
-            <div class="hero-dual-art" aria-hidden="true"><div class="hero-controller hero-controller-white"></div><div class="hero-controller hero-controller-black"></div></div>
+            <div class="hero-console-art" aria-hidden="true"><img src="{{ \App\Support\SiteAsset::url('images/hero-console-collection.png') }}" alt="" width="1440" height="1080" decoding="async" fetchpriority="high"></div>
         </div>
     </article>
     <article class="hero-carousel-slide hero-slide-value" data-hero-slide aria-hidden="true" inert aria-label="{{ __('Pilihan main hemat') }}">
@@ -42,7 +42,7 @@
 <button class="hero-carousel-arrow hero-carousel-prev" type="button" data-hero-prev aria-label="{{ __('Banner sebelumnya') }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button>
 <button class="hero-carousel-arrow hero-carousel-next" type="button" data-hero-next aria-label="{{ __('Banner berikutnya') }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
 <div class="hero-carousel-controls"><div class="hero-carousel-dots" role="group" aria-label="{{ __('Pilih banner') }}">@for($i=1;$i<=3;$i++)<button type="button" data-hero-dot="{{ $i-1 }}" aria-label="{{ __('Tampilkan banner :number', ['number'=>$i]) }}" aria-current="{{ $i===1 ? 'true' : 'false' }}"><span></span></button>@endfor</div>
-<button class="hero-carousel-autoplay" type="button" data-hero-autoplay aria-pressed="false" aria-label="{{ __('Hentikan pergantian otomatis') }}" data-stop-label="{{ __('Hentikan pergantian otomatis') }}" data-start-label="{{ __('Mulai pergantian otomatis') }}"><svg class="hero-pause-symbol" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M5 4h3v12H5zm7 0h3v12h-3z"/></svg><svg class="hero-play-symbol" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="m6 3 11 7-11 7z"/></svg></button></div>
+</div>
 <p class="hero-carousel-sr" data-hero-status aria-live="polite" aria-atomic="true"></p>
 </section>
 
