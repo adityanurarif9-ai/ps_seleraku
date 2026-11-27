@@ -3,10 +3,12 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\Pages\ManageRentalReservations;
+use App\Models\RentalIdentity;
 use App\Models\RentalReservation;
 use App\Services\PlaySessionManager;
 use App\Services\RentalReservationManager;
 use Filament\Actions\Action;
+use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Textarea;
 use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
@@ -23,7 +25,9 @@ class RentalReservationResource extends Resource
 
     public static function table(Table $t): Table
     {
-        return $t->query(RentalReservation::query()->with(['user', 'catalogItem', 'playSession']))->poll('10s')->defaultSort('id', 'desc')->columns([
+        RentalIdentity::purgeExpired();
+
+        return $t->query(RentalReservation::query()->with(['user', 'catalogItem', 'playSession', 'identity:id,rental_reservation_id,document_type,expires_at,verified_at']))->poll('10s')->defaultSort('id', 'desc')->columns([
             TextColumn::make('id')->label('Kode')->formatStateUsing(fn ($state) => 'PS-'.str_pad((string) $state, 6, '0', STR_PAD_LEFT))->sortable(),
             TextColumn::make('user.name')->label('Pelanggan')->searchable(),
             TextColumn::make('contact_name')->label('Nama penyewa')->toggleable(isToggledHiddenByDefault: true),
@@ -42,6 +46,16 @@ class RentalReservationResource extends Resource
             }),
         ])->filters([SelectFilter::make('status')->label('Status')->options(RentalReservation::LABELS)])
             ->recordActions([
+                Action::make('identity')->label('Foto identitas')->url(fn (RentalReservation $record) => route('reservations.identity', $record))->openUrlInNewTab()->visible(fn (RentalReservation $record) => $record->identity && $record->identity->expires_at > now()),
+                Action::make('pickupCheck')->label('Periksa jaminan')->visible(fn (RentalReservation $record) => $record->mode === 'daily' && $record->identity && ! $record->identity->verified_at && $record->status === 'confirmed')->schema([
+                    Checkbox::make('original_checked')->label('Identitas asli sesuai dan sudah diperiksa di tempat')->accepted(),
+                    Checkbox::make('guarantee_received')->label('Jaminan sesuai kesepakatan sudah diterima di tempat')->accepted(),
+                ])->action(function (RentalReservation $record) {
+                    $verified = $record->identity()->where('expires_at', '>', now())->update(['verified_at' => now(), 'verified_by' => auth()->id()]);
+                    if ($verified) {
+                        $record->update(['pickup_verified_at' => now()]);
+                    } Notification::make()->title('Persyaratan pengambilan sudah diperiksa')->success()->send();
+                }),
                 Action::make('receipt')->label('Struk PDF')->url(fn (RentalReservation $record) => route('receipts.rental', $record))->extraAttributes(['download' => '']),
                 Action::make('detail')->label('Detail')->url(fn (RentalReservation $record) => route('reservations.show', $record)),
                 Action::make('confirm')->label('Konfirmasi')->color('success')->disabled(fn (RentalReservation $record) => ! $record->paymentReady())->tooltip('Pembayaran demo harus selesai dahulu')->requiresConfirmation()->visible(fn (RentalReservation $record) => $record->status === 'pending')->action(fn (RentalReservation $record) => self::perform($record, 'confirm')),

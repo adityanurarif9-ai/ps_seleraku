@@ -14,7 +14,21 @@ class RentalReservation extends Model
 
     protected function casts(): array
     {
-        return ['unit_number' => 'integer', 'starts_at' => 'immutable_datetime', 'ends_at' => 'immutable_datetime', 'duration_minutes' => 'integer', 'unit_rate' => 'integer', 'total_price' => 'integer'];
+        return ['requires_identity_check' => 'boolean', 'pickup_verified_at' => 'immutable_datetime', 'unit_number' => 'integer', 'starts_at' => 'immutable_datetime', 'ends_at' => 'immutable_datetime', 'duration_minutes' => 'integer', 'unit_rate' => 'integer', 'total_price' => 'integer'];
+    }
+
+    protected static function booted(): void
+    {
+        static::updated(function (self $reservation) {
+            if ($reservation->wasChanged('status') && in_array($reservation->status, ['completed', 'cancelled', 'rejected'])) {
+                $reservation->identity()->delete();
+            }
+        });
+    }
+
+    public function identity()
+    {
+        return $this->hasOne(RentalIdentity::class);
     }
 
     public function user(): BelongsTo

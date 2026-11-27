@@ -22,10 +22,11 @@ window.psT = (function (messages) { return function (text) { return messages[tex
 <script>
 (() => {
     try {
-        const installed = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
-        if (installed && !sessionStorage.getItem('ps-seleraku-booted')) {
+        if (!sessionStorage.getItem('ps-seleraku-welcome-v1')) {
+            sessionStorage.setItem('ps-seleraku-welcome-v1', '1');
+            window.psWelcomeUntil = Date.now() + 3000;
             document.documentElement.classList.add('app-booting');
-            window.setTimeout(() => document.documentElement.classList.remove('app-booting'), 4500);
+            window.setTimeout(() => document.documentElement.classList.remove('app-booting'), 3000);
         }
     } catch (_) {}
 })();

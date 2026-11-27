@@ -78,6 +78,9 @@ class RentalReservationManager
             if (in_array($action, ['confirm', 'start', 'start_now']) && ! $r->paymentReady()) {
                 throw ValidationException::withMessages(['payment' => 'Selesaikan pembayaran demo sebelum konfirmasi atau mulai sesi.']);
             }
+            if (in_array($action, ['start', 'start_now']) && $r->requires_identity_check && ! $r->pickup_verified_at) {
+                throw ValidationException::withMessages(['identity' => 'Periksa identitas asli dan jaminan di tempat melalui Periksa jaminan sebelum menyerahkan unit.']);
+            }
             if ($action === 'confirm' && $r->status === 'confirmed') {
                 return $r;
             }

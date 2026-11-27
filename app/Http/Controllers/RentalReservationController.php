@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\CatalogItem;
 use App\Models\RentalReservation;
 use App\Services\RentalAvailability;
+use App\Services\RentalIdentityUpload;
 use App\Services\RentalReservationManager;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
 class RentalReservationController extends Controller
@@ -44,7 +46,15 @@ class RentalReservationController extends Controller
 
     public function store(Request $request, RentalReservationManager $manager)
     {
-        $r = $manager->create($request->only(['catalog_item_id', 'mode', 'duration', 'starts_at', 'notes', 'contact_name', 'contact_phone', 'unit_number']));
+        $manager->quote($request->only(['catalog_item_id', 'mode', 'duration', 'starts_at', 'notes', 'contact_name', 'contact_phone', 'unit_number']));
+        $upload = app(RentalIdentityUpload::class);
+        $identity = $upload->prepare($request);
+        $r = DB::transaction(function () use ($request, $manager, $upload, $identity) {
+            $reservation = $manager->create($request->only(['catalog_item_id', 'mode', 'duration', 'starts_at', 'notes', 'contact_name', 'contact_phone', 'unit_number']));
+            $upload->attach($reservation, $identity);
+
+            return $reservation;
+        });
 
         if (config('payments.demo_enabled')) {
             return app(TestPaymentController::class)->reservation($r);

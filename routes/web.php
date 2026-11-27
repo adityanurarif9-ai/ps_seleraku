@@ -5,6 +5,7 @@ use App\Http\Controllers\FoodOrderController;
 use App\Http\Controllers\GoogleLoginController;
 use App\Http\Controllers\ReceiptController;
 use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\RentalIdentityController;
 use App\Http\Controllers\RentalReservationController;
 use App\Http\Controllers\SeloController;
 use App\Http\Controllers\SessionController;
@@ -47,6 +48,7 @@ Route::middleware('guest')->group(function () {
 Route::get('/demo-bayar/{payment}', [TestPaymentController::class, 'scan'])->middleware(['signed', 'throttle:60,1,scan-demo-'])->name('payments.scan');
 Route::post('/demo-bayar/{payment}', [TestPaymentController::class, 'scanPay'])->middleware(['signed', 'throttle:20,1,scan-demo-pay-'])->name('payments.scan-pay');
 Route::middleware('auth')->group(function () {
+    Route::get('/reservasi/{reservation}/identitas', [RentalIdentityController::class, 'show'])->middleware('throttle:20,1,identity-')->name('reservations.identity');
     Route::get('/pembayaran/{payment}/status', [TestPaymentController::class, 'status'])->middleware('throttle:120,1,payment-status-')->name('payments.status');
     Route::get('/reservasi/{reservation}/struk.pdf', [ReceiptController::class, 'rental'])->middleware('throttle:20,1,receipt-')->name('receipts.rental');
     Route::get('/pesanan-makanan/{order}/struk.pdf', [ReceiptController::class, 'food'])->middleware('throttle:20,1,receipt-')->name('receipts.food');

@@ -1,6 +1,6 @@
 FROM dunglas/frankenphp:1-php8.4-alpine AS base
 WORKDIR /app
-RUN install-php-extensions pdo_mysql intl zip bcmath mbstring opcache
+RUN install-php-extensions pdo_mysql intl zip bcmath mbstring opcache gd
 RUN cp "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
 FROM base AS dependencies

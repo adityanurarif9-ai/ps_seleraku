@@ -3,7 +3,7 @@
     const bar = document.querySelector('.page-loading');
     let recovery;
     const finish = () => {
-        root.classList.remove('app-booting', 'is-navigating');
+        root.classList.remove('is-navigating');
         if (bar) bar.hidden = true;
         document.querySelectorAll('[data-loading="true"]').forEach(button => {
             delete button.dataset.loading;
@@ -19,10 +19,12 @@
         clearTimeout(recovery);
         recovery = window.setTimeout(finish, 15000);
     };
-    window.addEventListener('pageshow', finish);
+    const endWelcome = () => root.classList.remove('app-booting');
+    const welcomeLeft = Math.max(0, (window.psWelcomeUntil || 0) - Date.now());
+    if (welcomeLeft) window.setTimeout(endWelcome, welcomeLeft); else endWelcome();
+    window.addEventListener('pageshow', (event = {}) => { finish(); if (event.persisted) endWelcome(); });
     window.addEventListener('load', finish, { once: true });
     if (document.readyState === 'complete') finish();
-    else window.setTimeout(() => root.classList.remove('app-booting'), 4500);
 
     document.addEventListener('click', event => {
         if (event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;

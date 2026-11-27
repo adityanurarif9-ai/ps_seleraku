@@ -15,7 +15,9 @@ class CartController extends Controller
         $lines = $cart->lines();
         $foodTotal = $lines->filter(fn ($line) => $line['item']->category !== 'Konsol')->sum(fn ($line) => $line['price'] * $line['quantity']);
 
-        return response()->view('cart', compact('lines', 'foodTotal'))->header('Cache-Control', 'no-store, private');
+        $menuItems = CatalogItem::whereIn('category', ['Makanan', 'Minuman', 'Camilan'])->where('is_visible', true)->where('stock', '>', 0)->orderBy('category')->orderBy('name')->get();
+
+        return response()->view('cart', compact('lines', 'foodTotal', 'menuItems'))->header('Cache-Control', 'no-store, private');
     }
 
     public function store(Request $request, ShoppingCart $cart)

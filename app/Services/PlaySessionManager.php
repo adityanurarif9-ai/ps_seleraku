@@ -21,6 +21,9 @@ class PlaySessionManager
         if ($reservation && ! $reservation->fresh()->paymentReady()) {
             throw ValidationException::withMessages(['payment' => 'Selesaikan pembayaran demo sebelum mulai sesi.']);
         }
+        if ($reservation && $reservation->fresh()->requires_identity_check && ! $reservation->fresh()->pickup_verified_at) {
+            throw ValidationException::withMessages(['identity' => 'Periksa identitas asli dan jaminan di tempat sebelum mulai sesi.']);
+        }
         $data = validator($data, ['catalog_item_id' => 'required|integer', 'unit_number' => 'nullable|integer|min:1', 'customer_name' => 'required|string|max:100', 'minutes' => 'required|integer|min:1|max:'.($reservation ? 10080 : 1440)])->validate();
 
         return DB::transaction(function () use ($data, $reservation) {
