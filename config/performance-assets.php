@@ -45,14 +45,14 @@ return json_decode(<<<'JSON'
     "rentals.js": "optimized/rentals.92fc904c9b.js",
     "seleraku-pages.js": "optimized/seleraku-pages.a7cbdfdcd4.js",
     "reference.js": "optimized/reference.99305da8f1.js",
-    "hero-carousel.js": "optimized/hero-carousel.94aa18a342.js",
+    "hero-carousel.js": "optimized/hero-carousel.a1cfade7d5.js",
     "site.css": "optimized/site.82010db371.css",
     "selo.css": "optimized/selo.4633bb8b8d.css",
     "login.css": "optimized/login.e7463d82c4.css",
     "pwa.css": "optimized/pwa.289d921e7e.css",
     "rentals.css": "optimized/rentals.6875374d76.css",
     "seleraku-pages.css": "optimized/seleraku-pages.ed899a6f20.css",
-    "reference.css": "optimized/reference.39da3f4b0f.css"
+    "reference.css": "optimized/reference.c59ebd00ab.css"
   },
   "source_hashes": {
     "selo.js": "9a05193ba081d3692ef3e545df8fa7c2955338660e09af7bcd7f3176f7968d3f",
@@ -62,14 +62,14 @@ return json_decode(<<<'JSON'
     "rentals.js": "78fbdaea498cb036780341c6cf45bcac064c5480efebd0f4b85fd792f9a64f57",
     "seleraku-pages.js": "837691759fcedfa19ae4ed25be3b33cb0c20bebda0d3dd8ba5e83d800e40f1f5",
     "reference.js": "259a95fcf33d60b04783cb27dc813f71acddcc2b4161c6e082dd47ae89fd1f59",
-    "hero-carousel.js": "4b96bdd3d3e77d706a15c7a04052f695015ce0ef22c8be8a550a8dcd7f89a828",
+    "hero-carousel.js": "be8faa21bc604bf9929e69673325158a28ed2724daf1b716a5e08ff7a0b4ff8b",
     "site.css": "82010db371dcbae2bd92bb55d5f2899115761f8f4cef6783a5640b52bf2c1a04",
     "selo.css": "fbb1dd9bd7f585ffb5897466b3e95be77d6550a22ac92b354cbde03c77765639",
     "login.css": "b7331c81c404788feb6a572abcc57f72b59bfbbbc134486108fc8da4bf0b04fd",
     "pwa.css": "70693e1ee2d7b5eb5db80d7f44d773cefa6dffc0f7a1dfbb3e26326ae960efa1",
     "rentals.css": "3ff5c433d0d63a73eea4efcfea940b5fa61024114d15b08a9766289915bf3e90",
     "seleraku-pages.css": "b29491ff4570452c3eac22dabc149d4af583c29cb64792a50e766160329f192c",
-    "reference.css": "aff6f9cea0c3431a845d2409c9a4931d5cb37893b2b99e5de6b88027522069cd"
+    "reference.css": "add8de0b6c0eaa90da05faa2581e1b6dc0020596e350f990b5d0493cc72beac0"
   },
   "login": {
     "desktop": "optimized/login-desktop-1280.5aab67921e.webp",

@@ -10,7 +10,7 @@
         const sync = () => {
             clearInterval(timer);
             const stopped = paused || hover || focus || !visible || document.hidden || reduced.matches;
-            root.classList.toggle('is-motion-paused', stopped);
+            root.classList.toggle('is-motion-paused', !visible || document.hidden || reduced.matches);
             if (!stopped) timer = setInterval(() => show(current + 1, false), 5000);
         };
         const show = (next, announce = true) => {

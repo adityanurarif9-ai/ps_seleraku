@@ -13,7 +13,7 @@
                 <div class="hero-carousel-actions"><a class="hero-carousel-button" href="{{ route('reservations.create') }}">{{ __('Buat reservasi') }}</a><a class="hero-carousel-link" href="{{ route('page-ke2') }}">{{ __('Lihat konsol') }}</a></div>
                 <span class="hero-carousel-meta">PlayStation &amp; Nintendo · {{ __('Jadwal sesuai pilihanmu') }}</span>
             </div>
-            <div class="hero-console-art" aria-hidden="true"><img src="{{ \App\Support\SiteAsset::url('images/hero-console-collection.png') }}" alt="" width="1440" height="1080" decoding="async" fetchpriority="high"></div>
+            <div class="hero-console-art" aria-hidden="true"><img src="{{ \App\Support\SiteAsset::url('images/hero-console-collection.png') }}" alt="" width="1440" height="1080" decoding="async" fetchpriority="high"><div class="hero-platform-line"><span>PS3</span><span>PS4</span><span>PS5</span><span>NINTENDO SWITCH</span></div></div>
         </div>
     </article>
     <article class="hero-carousel-slide hero-slide-value" data-hero-slide aria-hidden="true" inert aria-label="{{ __('Pilihan main hemat') }}">
@@ -24,18 +24,18 @@
                 @if($featured)<div class="hero-carousel-price"><strong>{{ $featured['rateText'] }}</strong><span>{{ __('/ jam') }}</span></div>@endif
                 <div class="hero-carousel-actions"><a class="hero-carousel-button" href="{{ $promoUrl }}">{{ __('Pilih jadwal main') }}</a><a class="hero-carousel-link" href="{{ route('page-ke2') }}">{{ __('Lihat pilihan game') }}</a></div>
             </div>
-            <div class="hero-promo-art"><span class="hero-art-orbit" aria-hidden="true"></span><div class="hero-product-frame"><img src="{{ \App\Support\SiteAsset::url($featured['image'] ?? 'images/ps3-unit.png') }}" alt="{{ $featured['name'] ?? 'PlayStation' }}" width="620" height="420" decoding="async" loading="lazy"></div><span class="hero-art-caption">{{ __('Pilih game. Ajak teman. Mulai main.') }}</span></div>
+            <div class="hero-promo-art"><span class="hero-art-orbit" aria-hidden="true"></span><span class="hero-hardware-type" aria-hidden="true">{{ strtoupper($featured['platformKey'] ?? 'PLAY') }}</span><div class="hero-product-frame"><img src="{{ \App\Support\SiteAsset::url($featured['image'] ?? 'images/ps3-unit.png') }}" alt="{{ $featured['name'] ?? 'PlayStation' }}" width="620" height="420" decoding="async" loading="lazy"></div><span class="hero-art-caption">{{ __('Pilih game. Ajak teman. Mulai main.') }}</span></div>
         </div>
     </article>
     <article class="hero-carousel-slide hero-slide-daily" data-hero-slide aria-hidden="true" inert aria-label="{{ __('Sewa harian di rumah') }}">
         <div class="hero-carousel-inner">
-            <div class="hero-carousel-copy"><span class="hero-carousel-eyebrow">{{ __('BAWA SERUNYA KE RUMAH') }}</span>
-                <h2>{{ __('Mabar di rumah.') }}<br><span>{{ __('Waktunya lebih leluasa.') }}</span></h2>
+            <div class="hero-carousel-copy"><span class="hero-promo-pill">{{ __('SEWA HARIAN') }}</span>
+                <h2>{{ __('Mabar di rumah.') }}<br><span>{{ __('Satu hari penuh.') }}</span></h2>
                 <p>{{ __('Bawa pulang konsol favorit untuk bermain bersama teman atau keluarga. Pilih tanggal dan durasi yang pas.') }}</p>
                 @if($daily)<div class="hero-carousel-price"><strong>{{ $daily['rateText'] }}</strong><span>{{ __('/ 24 jam') }}</span></div>@endif
                 <div class="hero-carousel-actions"><a class="hero-carousel-button" href="{{ $dailyUrl }}">{{ __('Cek sewa harian') }}</a><a class="hero-carousel-link" href="{{ route('cara-sewa') }}">{{ __('Cara sewa') }}</a></div>
             </div>
-            <div class="hero-daily-art"><div class="hero-daily-photo"><img src="{{ \App\Support\SiteAsset::url($daily['image'] ?? 'hero.png') }}" alt="{{ $daily['name'] ?? __('Sewa Harian') }}" width="620" height="420" loading="lazy" decoding="async"></div><div class="hero-daily-stamp"><strong>24</strong><span>{{ __('JAM MAIN') }}</span></div></div>
+            <div class="hero-daily-art"><span class="hero-daily-number" aria-hidden="true">24</span><div class="hero-daily-photo"><img src="{{ \App\Support\SiteAsset::url($daily['image'] ?? 'hero.png') }}" alt="{{ $daily['name'] ?? __('Sewa Harian') }}" width="620" height="420" loading="lazy" decoding="async"></div><div class="hero-daily-stamp"><strong>24</strong><span>{{ __('JAM MAIN') }}</span></div><div class="hero-takehome-steps"><span><b>01</b>{{ __('Pilih tanggal') }}</span><span><b>02</b>{{ __('Ambil konsol') }}</span><span><b>03</b>{{ __('Main di rumah') }}</span></div></div>
         </div>
     </article>
 </div>
