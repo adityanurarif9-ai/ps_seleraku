@@ -15,6 +15,9 @@ class TestPaymentController extends Controller
     public function show(TestPayment $payment)
     {
         abort_unless($payment->user_id === auth()->id(), 403);
+        if ($payment->status === 'simulated_paid') {
+            return redirect($this->nextUrl($payment), 303)->header('Cache-Control', 'no-store, private');
+        }
         $scanUrl = $payment->demoScanUrl();
         $record = $payment->rentalReservation ?? $payment->foodOrder;
         $active = $record && ! in_array($record->status, ['cancelled', 'rejected', 'completed']);
@@ -32,6 +35,9 @@ class TestPaymentController extends Controller
     public function scan(Request $request, TestPayment $payment)
     {
         abort_unless(config('payments.demo_enabled'), 404);
+        if ($payment->status === 'simulated_paid' && auth()->id() === $payment->user_id) {
+            return redirect($this->nextUrl($payment), 303)->header('Cache-Control', 'no-store, private');
+        }
         $record = $payment->rentalReservation ?? $payment->foodOrder;
         $active = $record && ! in_array($record->status, ['cancelled', 'rejected', 'completed']);
 
@@ -45,7 +51,9 @@ class TestPaymentController extends Controller
         // GET never changes state, and a session CSRF token is still required for POST.
         $this->complete($payment, 'qris', 'success');
 
-        return redirect($request->fullUrl(), 303);
+        return auth()->id() === $payment->user_id
+            ? redirect($this->nextUrl($payment), 303)->with('success', __('Pembayaran demo berhasil. Timer dan status pesananmu ada di bawah.'))
+            : redirect($request->fullUrl(), 303);
     }
 
     public function reservation(RentalReservation $reservation)

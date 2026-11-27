@@ -88,8 +88,8 @@ class RentalReservation extends Model
     public function timerHint(): string
     {
         return match ($this->status) {
-            'pending' => __('Durasi pesananmu. Hitung mundur dimulai setelah reservasi dikonfirmasi dan admin memulai sesi.'),
-            'confirmed' => __('Waktu main siap. Hitung mundur dimulai saat admin menekan Mulai sesi atau Mulai sekarang.'),
+            'pending' => $this->paymentReady() ? __('Pembayaran demo selesai. Tunggu admin mengonfirmasi dan memulai sesi. Durasi belum berkurang.') : __('Bayar demo dahulu. Durasi belum berkurang dan baru dihitung saat admin memulai sesi.'),
+            'confirmed' => __('Reservasi disetujui. Saat kamu siap bermain, admin akan memulai sesi dan hitung mundur berjalan otomatis.'),
             'playing' => $this->timerSeconds() === 0 ? __('Waktu habis. Hubungi admin untuk menyelesaikan sesi.') : ($this->timerRunning() ? __('Timer sedang berjalan.') : __('Timer dijeda oleh admin.')),
             'completed' => __('Sesi sudah selesai. Terima kasih sudah bermain.'),
             default => __('Reservasi tidak aktif. Timer tidak berjalan.'),

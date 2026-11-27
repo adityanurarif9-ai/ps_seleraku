@@ -44,7 +44,7 @@ return json_decode(<<<'JSON'
     "login.js": "optimized/login.271cc3ce98.js",
     "pwa.js": "optimized/pwa.a3ac762f0f.js",
     "loading.js": "optimized/loading.7e28f9620b.js",
-    "rentals.js": "optimized/rentals.24b533568a.js",
+    "rentals.js": "optimized/rentals.8777940051.js",
     "seleraku-pages.js": "optimized/seleraku-pages.c42bffddf6.js",
     "reference.js": "optimized/reference.99305da8f1.js",
     "hero-carousel.js": "optimized/hero-carousel.a1cfade7d5.js",
@@ -57,7 +57,7 @@ return json_decode(<<<'JSON'
     "pwa.css": "optimized/pwa.2f6c04ce88.css",
     "rentals.css": "optimized/rentals.6875374d76.css",
     "seleraku-pages.css": "optimized/seleraku-pages.ed899a6f20.css",
-    "reference.css": "optimized/reference.392fd2068c.css",
+    "reference.css": "optimized/reference.52aa4a70da.css",
     "console-pattern.css": "optimized/console-pattern.3f10ba99af.css"
   },
   "source_hashes": {
@@ -65,7 +65,7 @@ return json_decode(<<<'JSON'
     "login.js": "f7d7e0f374d3d5de111a1fe8aca16c625e29885537186fc9e7cb094880b1eac2",
     "pwa.js": "1bb4182764edc7937b2d5fa750d97f060a3ab01cae9e37fda522a72e764ff21e",
     "loading.js": "ad9d68cba024974aacf9ce75c2cb387ceb8309388ca4773fa63dc1ad32977e18",
-    "rentals.js": "a93e4a05cca3b646cc20834ffac7c014bbed949fd3bcb4ae264c0d5269fdc669",
+    "rentals.js": "07dbf9bafcd51be365a7fd564258ef13abdcde8ad3fce7acd7c5fc8e66191ffa",
     "seleraku-pages.js": "866f9409a66b073b066bc74893fa999dec3041d79a15743c4c31250a807fe508",
     "reference.js": "259a95fcf33d60b04783cb27dc813f71acddcc2b4161c6e082dd47ae89fd1f59",
     "hero-carousel.js": "be8faa21bc604bf9929e69673325158a28ed2724daf1b716a5e08ff7a0b4ff8b",
@@ -78,7 +78,7 @@ return json_decode(<<<'JSON'
     "pwa.css": "6ca664d8ade92c2853e37b4daad052ed507aa8b0f7dab16838473b1688719eb6",
     "rentals.css": "3ff5c433d0d63a73eea4efcfea940b5fa61024114d15b08a9766289915bf3e90",
     "seleraku-pages.css": "b29491ff4570452c3eac22dabc149d4af583c29cb64792a50e766160329f192c",
-    "reference.css": "f2e4eb33fc36dda00e93a8bdd19a6db2027960cde4212bf98872efa71b8af5a9",
+    "reference.css": "81ac28dab840bbc11c4e58f02ab00326f9481693a833d4971d1adc4b4f765854",
     "console-pattern.css": "8bd4acb70fe6f8387311ea8b9ad2e94de073efbce558259db8bc2ee72129b6cc"
   },
   "login": {

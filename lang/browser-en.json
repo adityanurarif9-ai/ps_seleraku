@@ -208,5 +208,15 @@
   "Setujui penggunaan foto untuk pemeriksaan sewa.": "Allow the photo to be used for the rental check.",
   "Konfirmasi bahwa kamu akan membawa identitas asli dan jaminan ke tempat.": "Confirm that you will bring your original identity document and guarantee to the shop.",
   "Ukuran foto terlalu besar. Gunakan foto yang lebih kecil.": "The image is too large. Use a smaller image.",
-  "Foto tidak dapat dibaca. Gunakan JPG, PNG, atau WebP.": "The image cannot be read. Use JPG, PNG, or WebP."
+  "Foto tidak dapat dibaca. Gunakan JPG, PNG, atau WebP.": "The image cannot be read. Use JPG, PNG, or WebP.",
+  "TIMER RENTAL": "RENTAL TIMER",
+  "Durasi yang kamu pesan": "Your booked duration",
+  "Sisa waktu sewa": "Rental time remaining",
+  "Lihat timer & pesanan": "View timer & booking",
+  "Lihat pesanan makanan": "View food order",
+  "Gunakan akun pemesan untuk melihat detail. Jika belum masuk, kamu akan diarahkan ke login.": "Use the account that made the booking to see the details. You will be asked to sign in if needed.",
+  "Pembayaran demo berhasil. Timer dan status pesananmu ada di bawah.": "Demo payment successful. Your timer and booking status are below.",
+  "Pembayaran demo selesai. Tunggu admin mengonfirmasi dan memulai sesi. Durasi belum berkurang.": "Demo payment is complete. Wait for the admin to confirm and start your session. Your booked duration has not started counting down.",
+  "Bayar demo dahulu. Durasi belum berkurang dan baru dihitung saat admin memulai sesi.": "Complete the demo payment first. Your duration starts counting down only when the admin starts your session.",
+  "Reservasi disetujui. Saat kamu siap bermain, admin akan memulai sesi dan hitung mundur berjalan otomatis.": "Your booking is approved. When you are ready to play, the admin will start the session and the countdown will begin automatically."
 }
