@@ -7,10 +7,11 @@ class SiteAsset
     // Inline only repository-owned styles; never fetch a URL or user supplied path.
     public static function styles(string $name): string
     {
-        if (! in_array($name, ['login.css', 'pwa.css', 'fonts/poppins-v24.css'], true)) {
+        if (! in_array($name, ['login.css', 'pwa.css', 'fonts/poppins-v24.css', 'console-pattern.css'], true)) {
             throw new \InvalidArgumentException('Unknown critical stylesheet');
         }
         $relative = ltrim(parse_url(static::url($name), PHP_URL_PATH), '/');
+
         return file_get_contents(public_path($relative));
     }
 

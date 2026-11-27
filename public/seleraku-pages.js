@@ -550,8 +550,10 @@ var psTr = window.psT || (value => value);
     const openBookingModal = ({ itemId = '', serviceId = '' } = {}) => {
         const target = new URL(document.body.dataset.reservationUrl || '/reservasi/baru', location.origin);
         const key = String(itemId).toLowerCase();
-        const catalogId = key.match(/^(?:paket-)?catalog-(\d+)$/)?.[1];
+        const catalogId = key.match(/^(?:paket-)?catalog-(\d+)(?:-unit-\d+)?$/)?.[1];
         if (catalogId) target.searchParams.set('catalog_item_id', catalogId);
+        const unitNumber = key.match(/-unit-(\d+)$/)?.[1];
+        if(unitNumber) target.searchParams.set('unit_number',unitNumber);
         const platform = key.includes('nintendo') ? 'nintendo' : key.includes('ps3') ? 'ps3' : key.includes('ps4') ? 'ps4' : key.includes('ps5') ? 'ps5' : '';
         if (platform) target.searchParams.set('platform', platform);
         if (location.pathname.includes('sewa') || key.startsWith('paket-') || serviceId === 'express') target.searchParams.set('mode', 'daily');

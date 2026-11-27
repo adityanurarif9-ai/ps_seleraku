@@ -170,7 +170,7 @@
                                 </button>
                             </div>
                         </div>
-                        @include('partials.cart-add', ['cartItemId'=>(int) str_replace('catalog-','',$unit['id']), 'cartDisabled'=>$unit['stock']<1])
+                        @include('partials.cart-add', ['cartItemId'=>(int) str_replace('catalog-','',$unit['id']), 'cartDisabled'=>$unit['stock']<1, 'cartUnitNumber'=>$unit['unitNumber']])
                     </article>
                 @endforeach
 
@@ -239,7 +239,7 @@
                                 </button>
                             </div>
                         </div>
-                        @include('partials.cart-add', ['cartItemId'=>(int) str_replace('catalog-','',$unit['id'])])
+                        @include('partials.cart-add', ['cartItemId'=>(int) str_replace('catalog-','',$unit['id']), 'cartUnitNumber'=>$unit['unitNumber']])
                     </article>
                 @endforeach
 

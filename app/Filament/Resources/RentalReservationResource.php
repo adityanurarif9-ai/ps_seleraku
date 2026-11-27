@@ -29,6 +29,7 @@ class RentalReservationResource extends Resource
             TextColumn::make('contact_name')->label('Nama penyewa')->toggleable(isToggledHiddenByDefault: true),
             TextColumn::make('contact_phone')->label('WhatsApp')->toggleable(isToggledHiddenByDefault: true),
             TextColumn::make('catalogItem.name')->label('Konsol'),
+            TextColumn::make('unit_number')->label('Unit')->formatStateUsing(fn ($state) => str_pad((string) $state, 2, '0', STR_PAD_LEFT))->placeholder('Otomatis'),
             TextColumn::make('mode')->label('Layanan')->formatStateUsing(fn ($state) => $state === 'daily' ? 'Bawa pulang' : 'Main di tempat'),
             TextColumn::make('starts_at')->label('Jadwal WIB')->dateTime('d M Y, H:i')->timezone('Asia/Jakarta')->sortable(),
             TextColumn::make('duration_minutes')->label('Menit'),

@@ -13,6 +13,7 @@ use App\Filament\Resources\RentalReservationResource;
 use App\Filament\Widgets\CatalogOverview;
 use App\Filament\Widgets\LowStockItems;
 use App\Http\Middleware\AuthenticateAdmin;
+use App\Support\SiteAsset;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Panel;
@@ -38,6 +39,7 @@ class AdminPanelProvider extends PanelProvider
             ->brandLogoHeight('3rem')
             ->font('Poppins')
             ->renderHook(PanelsRenderHook::HEAD_END, fn () => new HtmlString('<link rel="stylesheet" href="'.asset('admin.css').'?v='.filemtime(public_path('admin.css')).'">'))
+            ->renderHook(PanelsRenderHook::HEAD_END, fn () => new HtmlString('<link rel="stylesheet" href="'.SiteAsset::url('console-pattern.css').'">'))
             ->renderHook(PanelsRenderHook::AUTH_LOGIN_FORM_AFTER, fn () => view('filament.admin-login-note'), scopes: AdminLogin::class)
             ->homeUrl(fn () => Dashboard::getUrl())
             ->colors(['primary' => Color::Blue])

@@ -37,7 +37,7 @@ class CatalogItemResource extends Resource
             Select::make('category')->label('Kategori')->options(CatalogItem::CATEGORIES)->required()->live(),
             TextInput::make('price')->label(fn (Get $get) => $get('category') === 'Konsol' ? 'Tarif per jam' : 'Harga per item')->integer()->minValue(0)->maxValue(100000000)->prefix('Rp')->required(),
             TextInput::make('daily_price')->label('Tarif harian / 24 jam')->integer()->minValue(0)->maxValue(100000000)->prefix('Rp')->helperText('Kosongkan jika konsol tidak tersedia untuk sewa harian.')->visible(fn (Get $get) => $get('category') === 'Konsol'),
-            TextInput::make('stock')->label('Stok / total unit')->integer()->minValue(0)->maxValue(100000)->required()->helperText('Untuk konsol: total kapasitas. Website menghitung unit bebas dari sesi dan reservasi.'),
+            TextInput::make('stock')->label('Stok / total unit')->integer()->minValue(0)->maxValue(100000)->required()->helperText('Untuk konsol: jumlah perangkat bernomor 01, 02, dan seterusnya. Jangan turunkan jumlah jika unit terakhir masih digunakan.'),
             Toggle::make('is_visible')->label('Tampilkan di website')->default(true),
             Select::make('platform')->label('Platform konsol')->options(['ps5' => 'PlayStation 5', 'ps4' => 'PlayStation 4', 'ps3' => 'PlayStation 3', 'nintendo' => 'Nintendo', 'other' => 'Lainnya'])->visible(fn (Get $get) => $get('category') === 'Konsol')->required(fn (Get $get) => $get('category') === 'Konsol'),
             Textarea::make('description')->label('Deskripsi / spesifikasi')->rows(3)->maxLength(2000),

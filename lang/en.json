@@ -595,5 +595,10 @@
   "Centang persetujuan simulasi terlebih dahulu.": "Please acknowledge that this is a simulation first.",
   "Memproses simulasi…": "Processing simulation…",
   "Kode demo disalin. Jangan dipakai untuk transfer sungguhan.": "Demo code copied. Do not use it for a real transfer.",
-  "Salin kode demo yang tertera secara manual.": "Copy the displayed demo code manually."
+  "Salin kode demo yang tertera secara manual.": "Copy the displayed demo code manually.",
+  "Nomor unit": "Unit number",
+  "Pilih otomatis unit yang bebas": "Automatically choose a free unit",
+  "Setiap nomor adalah satu perangkat. Jadwal diperiksa untuk unit yang kamu pilih.": "Each number identifies one console. Availability is checked for the unit you choose.",
+  "Unit :number tersedia": "Unit :number available",
+  "Unit :number — periksa jadwal lain": "Unit :number — check other times"
 }

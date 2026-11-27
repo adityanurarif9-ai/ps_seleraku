@@ -37,14 +37,14 @@ class RentalReservationController extends Controller
 
     public function availability(Request $request, RentalReservationManager $manager, RentalAvailability $availability)
     {
-        $q = $manager->quote($request->only(['catalog_item_id', 'mode', 'duration', 'starts_at', 'notes', 'contact_name', 'contact_phone']));
+        $q = $manager->quote($request->only(['catalog_item_id', 'mode', 'duration', 'starts_at', 'notes', 'contact_name', 'contact_phone', 'unit_number']));
 
-        return response()->json(['available' => $availability->available($q['item'], $q['starts_at'], $q['ends_at']), 'total_price' => $q['total_price'], 'ends_at' => $q['ends_at']->setTimezone('Asia/Jakarta')->format('d M Y, H:i').' WIB', 'duration_minutes' => $q['duration_minutes']])->header('Cache-Control', 'no-store, private');
+        return response()->json(['available' => $availability->available($q['item'], $q['starts_at'], $q['ends_at'], null, null, $q['unit_number']), 'total_price' => $q['total_price'], 'ends_at' => $q['ends_at']->setTimezone('Asia/Jakarta')->format('d M Y, H:i').' WIB', 'duration_minutes' => $q['duration_minutes']])->header('Cache-Control', 'no-store, private');
     }
 
     public function store(Request $request, RentalReservationManager $manager)
     {
-        $r = $manager->create($request->only(['catalog_item_id', 'mode', 'duration', 'starts_at', 'notes', 'contact_name', 'contact_phone']));
+        $r = $manager->create($request->only(['catalog_item_id', 'mode', 'duration', 'starts_at', 'notes', 'contact_name', 'contact_phone', 'unit_number']));
 
         if (config('payments.demo_enabled')) {
             return app(TestPaymentController::class)->reservation($r);

@@ -15,7 +15,7 @@
 <a class="web-text-link" href="{{ route('page-ke2') }}">{{ __('Semua konsol & game ↗') }}</a>
 </div>
 <div class="web-console-grid">@forelse(array_merge($proUnits, $classicUnits) as $unit)<article class="web-console-card">
-<a href="{{ route('reservations.create') }}">
+<a href="{{ route('reservations.create',['catalog_item_id'=>(int)str_replace('catalog-','',$unit['id']),'unit_number'=>$unit['unitNumber']]) }}">
 <img src="{{ \App\Support\SiteAsset::url($unit['image']) }}" alt="{{ $unit['name'] }}" width="460" height="300" loading="lazy" decoding="async">
 </a>
 <div class="web-console-info">
@@ -23,9 +23,9 @@
 <h3>{{ $unit['name'] }}</h3>
 <p>
 <strong>{{ $unit['rateText'] }}</strong> {{ __('/ jam') }}</p>
-<a class="web-text-link" href="{{ route('reservations.create') }}">{{ __('Pilih jadwal ↗') }}</a>
+<a class="web-text-link" href="{{ route('reservations.create',['catalog_item_id'=>(int)str_replace('catalog-','',$unit['id']),'unit_number'=>$unit['unitNumber']]) }}">{{ __('Pilih jadwal ↗') }}</a>
 </div>
-@include('partials.cart-add', ['cartItemId'=>(int) str_replace('catalog-','',$unit['id']), 'cartDisabled'=>$unit['stock']<1])
+@include('partials.cart-add', ['cartItemId'=>(int) str_replace('catalog-','',$unit['id']), 'cartDisabled'=>$unit['stock']<1, 'cartUnitNumber'=>$unit['unitNumber']])
 </article>@empty<p>{{ __('Pengelola sedang menyiapkan pilihan konsol.') }}</p>@endforelse</div>
 </section>
 <section class="web-soft">
@@ -75,7 +75,7 @@
 <p>{{ $pkg['desc'] }}</p>
 <strong>{{ $pkg['price'] }} <small>{{ __('/ 24 jam') }}</small>
 </strong>
-<a class="web-text-link" href="{{ route('reservations.create') }}">{{ __('Cek jadwal ↗') }}</a>
+<a class="web-text-link" href="{{ route('reservations.create',['catalog_item_id'=>(int)str_replace('paket-catalog-','',$pkg['id']),'unit_number'=>$pkg['unitNumber'],'mode'=>'daily']) }}">{{ __('Cek jadwal ↗') }}</a>
 </article>@empty<p>{{ __('Belum ada paket harian yang ditampilkan.') }}</p>@endforelse</div>
 </section>
 <section class="web-wrap web-section web-about-strip">

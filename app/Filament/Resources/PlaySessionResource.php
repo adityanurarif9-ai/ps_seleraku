@@ -11,6 +11,7 @@ use Filament\Actions\CreateAction;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
@@ -28,7 +29,16 @@ class PlaySessionResource extends Resource
     {
         return $schema->components([
             TextInput::make('customer_name')->label('Nama pemain / kelompok')->required()->maxLength(100),
-            Select::make('catalog_item_id')->label('Konsol')->options(fn () => CatalogItem::where('category', 'Konsol')->where('stock', '>', 0)->pluck('name', 'id'))->required()->searchable(),
+            Select::make('catalog_item_id')->label('Konsol')->options(fn () => CatalogItem::where('category', 'Konsol')->where('stock', '>', 0)->pluck('name', 'id'))->required()->searchable()->live(),
+            Select::make('unit_number')->label('Nomor unit')->options(function (Get $get) {
+                $stock = CatalogItem::find($get('catalog_item_id'))?->stock ?? 0;
+                $options = [];
+                for ($n = 1; $n <= $stock; $n++) {
+                    $options[$n] = 'Unit '.str_pad((string) $n, 2, '0', STR_PAD_LEFT);
+                }
+
+                return $options;
+            })->placeholder('Pilih otomatis unit yang bebas'),
             TextInput::make('minutes')->label('Durasi (menit)')->numeric()->integer()->minValue(1)->maxValue(1440)->default(60)->required(),
         ]);
     }
@@ -38,6 +48,7 @@ class PlaySessionResource extends Resource
         return $table->poll('5s')->defaultSort('id', 'desc')->columns([
             TextColumn::make('customer_name')->label('Pemain')->searchable(),
             TextColumn::make('catalogItem.name')->label('Konsol'),
+            TextColumn::make('unit_number')->label('Unit')->formatStateUsing(fn ($state) => str_pad((string) $state, 2, '0', STR_PAD_LEFT))->placeholder('Belum ditentukan'),
             TextColumn::make('status')->label('Status')->formatStateUsing(fn (PlaySession $record) => match ($record->displayStatus()) {
                 'running' => 'Berjalan','paused' => 'Dijeda','expired' => 'Waktu habis',default => 'Selesai'
             })->badge()->color(fn (PlaySession $record) => match ($record->displayStatus()) {

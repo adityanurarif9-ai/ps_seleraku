@@ -12,7 +12,7 @@ class PlaySession extends Model
 
     protected function casts(): array
     {
-        return ['ends_at' => 'immutable_datetime', 'finished_at' => 'immutable_datetime', 'total_seconds' => 'integer', 'remaining_seconds' => 'integer', 'hourly_rate' => 'integer'];
+        return ['unit_number' => 'integer', 'ends_at' => 'immutable_datetime', 'finished_at' => 'immutable_datetime', 'total_seconds' => 'integer', 'remaining_seconds' => 'integer', 'hourly_rate' => 'integer'];
     }
 
     public function catalogItem(): BelongsTo

@@ -24,7 +24,7 @@ class FoodOrderManager
             if (FoodOrder::where('user_id', auth()->id())->whereIn('status', ['pending', 'preparing', 'ready'])->count() >= 5) {
                 throw ValidationException::withMessages(['order' => __('Maksimal 5 pesanan makanan aktif.')]);
             }
-            $items = CatalogItem::whereIn('id', array_keys($cart))->orderBy('id')->lockForUpdate()->get();
+            $items = CatalogItem::whereIn('id', array_map(fn ($key) => (int) $key, array_keys($cart)))->orderBy('id')->lockForUpdate()->get();
             $lines = [];
             $total = 0;
             foreach ($items as $item) {

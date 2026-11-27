@@ -14,7 +14,7 @@ class RentalReservation extends Model
 
     protected function casts(): array
     {
-        return ['starts_at' => 'immutable_datetime', 'ends_at' => 'immutable_datetime', 'duration_minutes' => 'integer', 'unit_rate' => 'integer', 'total_price' => 'integer'];
+        return ['unit_number' => 'integer', 'starts_at' => 'immutable_datetime', 'ends_at' => 'immutable_datetime', 'duration_minutes' => 'integer', 'unit_rate' => 'integer', 'total_price' => 'integer'];
     }
 
     public function user(): BelongsTo

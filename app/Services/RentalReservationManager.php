@@ -20,7 +20,7 @@ class RentalReservationManager
 
     public function quote(array $data): array
     {
-        $data = validator($data, ['catalog_item_id' => 'required|integer|exists:catalog_items,id', 'mode' => 'required|in:lounge,daily', 'duration' => 'required|integer|min:1|max:480', 'starts_at' => 'required|date_format:Y-m-d\TH:i', 'notes' => 'nullable|string|max:500', 'contact_name' => 'nullable|string|max:100', 'contact_phone' => ['nullable', 'string', 'max:30', 'regex:/^[0-9+() -]{8,30}$/']])->validate();
+        $data = validator($data, ['catalog_item_id' => 'required|integer|exists:catalog_items,id', 'mode' => 'required|in:lounge,daily', 'duration' => 'required|integer|min:1|max:480', 'starts_at' => 'required|date_format:Y-m-d\TH:i', 'unit_number' => 'nullable|integer|min:1', 'notes' => 'nullable|string|max:500', 'contact_name' => 'nullable|string|max:100', 'contact_phone' => ['nullable', 'string', 'max:30', 'regex:/^[0-9+() -]{8,30}$/']])->validate();
         $start = CarbonImmutable::createFromFormat('!Y-m-d\TH:i', $data['starts_at'], 'Asia/Jakarta')->utc();
         if ($start < now()->subMinute() || $start > now()->addDays(30)) {
             throw ValidationException::withMessages(['starts_at' => __('Pilih jadwal mulai sekarang sampai 30 hari ke depan (WIB).')]);
@@ -36,9 +36,12 @@ class RentalReservationManager
         if (! $item->is_visible || $item->category !== 'Konsol' || ($data['mode'] === 'daily' && $item->daily_price === null)) {
             throw ValidationException::withMessages(['catalog_item_id' => __('Konsol atau tarif untuk mode sewa ini belum tersedia.')]);
         }
+        if (isset($data['unit_number']) && $data['unit_number'] > $item->stock) {
+            throw ValidationException::withMessages(['unit_number' => 'Nomor unit tidak tersedia untuk konsol ini.']);
+        }
         $rate = $data['mode'] === 'daily' ? $item->daily_price : $item->price;
 
-        return ['item' => $item, 'mode' => $data['mode'], 'starts_at' => $start, 'ends_at' => $start->addMinutes($minutes), 'duration_minutes' => $minutes, 'unit_rate' => $rate, 'total_price' => (int) round($rate * $minutes / ($data['mode'] === 'daily' ? 1440 : 60)), 'notes' => $data['notes'] ?? null, 'contact_name' => $data['contact_name'] ?? auth()->user()?->name, 'contact_phone' => $data['contact_phone'] ?? null];
+        return ['unit_number' => isset($data['unit_number']) ? (int) $data['unit_number'] : null, 'item' => $item, 'mode' => $data['mode'], 'starts_at' => $start, 'ends_at' => $start->addMinutes($minutes), 'duration_minutes' => $minutes, 'unit_rate' => $rate, 'total_price' => (int) round($rate * $minutes / ($data['mode'] === 'daily' ? 1440 : 60)), 'notes' => $data['notes'] ?? null, 'contact_name' => $data['contact_name'] ?? auth()->user()?->name, 'contact_phone' => $data['contact_phone'] ?? null];
     }
 
     public function create(array $data): RentalReservation
@@ -48,8 +51,8 @@ class RentalReservationManager
         return DB::transaction(function () use ($data) {
             $q = $this->quote($data);
             $item = CatalogItem::lockForUpdate()->findOrFail($q['item']->id);
-            $this->availability->ensure($item, $q['starts_at'], $q['ends_at']);
-            $duplicate = RentalReservation::where('user_id', auth()->id())->where('catalog_item_id', $item->id)->where('starts_at', $q['starts_at'])->where('duration_minutes', $q['duration_minutes'])->where('mode', $q['mode'])->where('status', 'pending')->first();
+            $this->availability->ensure($item, $q['starts_at'], $q['ends_at'], null, null, $q['unit_number']);
+            $duplicate = RentalReservation::where('user_id', auth()->id())->where('catalog_item_id', $item->id)->where('starts_at', $q['starts_at'])->where('duration_minutes', $q['duration_minutes'])->where('mode', $q['mode'])->where('unit_number', $q['unit_number'])->where('status', 'pending')->first();
             if ($duplicate) {
                 return $duplicate;
             }
@@ -79,7 +82,8 @@ class RentalReservationManager
                 if ($r->status !== 'pending' || $r->ends_at <= now()) {
                     throw ValidationException::withMessages(['reservation' => 'Pesanan tidak dapat dikonfirmasi. Periksa status dan jadwalnya.']);
                 }
-                $this->availability->ensure($item, $r->starts_at, $r->ends_at, $r->id);
+                $r->unit_number ??= $this->availability->chooseUnit($item, $r->starts_at, $r->ends_at, $r->id);
+                $this->availability->ensure($item, $r->starts_at, $r->ends_at, $r->id, null, $r->unit_number);
                 $r->status = 'confirmed';
             } elseif ($action === 'reject') {
                 if (! in_array($r->status, ['pending', 'confirmed'])) {
@@ -97,6 +101,7 @@ class RentalReservationManager
                 $session = app(PlaySessionManager::class)->start(['catalog_item_id' => $item->id, 'customer_name' => $r->user->name, 'minutes' => $r->duration_minutes], $r);
                 $r->starts_at = $session->created_at;
                 $r->play_session_id = $session->id;
+                $r->unit_number = $session->unit_number;
                 $r->status = 'playing';
                 $r->ends_at = $session->ends_at;
             } else {

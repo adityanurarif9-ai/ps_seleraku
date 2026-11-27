@@ -44,11 +44,11 @@ return json_decode(<<<'JSON'
     "login.js": "optimized/login.271cc3ce98.js",
     "pwa.js": "optimized/pwa.a3ac762f0f.js",
     "loading.js": "optimized/loading.7d0ea9e8ac.js",
-    "rentals.js": "optimized/rentals.62a03f2d03.js",
-    "seleraku-pages.js": "optimized/seleraku-pages.a7cbdfdcd4.js",
+    "rentals.js": "optimized/rentals.24b533568a.js",
+    "seleraku-pages.js": "optimized/seleraku-pages.c42bffddf6.js",
     "reference.js": "optimized/reference.99305da8f1.js",
     "hero-carousel.js": "optimized/hero-carousel.a1cfade7d5.js",
-    "booking-ui.js": "optimized/booking-ui.5ad043b6ca.js",
+    "booking-ui.js": "optimized/booking-ui.df33d812f9.js",
     "rental-alert.js": "optimized/rental-alert.36aa5a593e.js",
     "demo-checkout.js": "optimized/demo-checkout.508bb212d1.js",
     "site.css": "optimized/site.82010db371.css",
@@ -57,18 +57,19 @@ return json_decode(<<<'JSON'
     "pwa.css": "optimized/pwa.289d921e7e.css",
     "rentals.css": "optimized/rentals.6875374d76.css",
     "seleraku-pages.css": "optimized/seleraku-pages.ed899a6f20.css",
-    "reference.css": "optimized/reference.70f07fb09b.css"
+    "reference.css": "optimized/reference.70f07fb09b.css",
+    "console-pattern.css": "optimized/console-pattern.3f10ba99af.css"
   },
   "source_hashes": {
     "selo.js": "9a05193ba081d3692ef3e545df8fa7c2955338660e09af7bcd7f3176f7968d3f",
     "login.js": "f7d7e0f374d3d5de111a1fe8aca16c625e29885537186fc9e7cb094880b1eac2",
     "pwa.js": "1bb4182764edc7937b2d5fa750d97f060a3ab01cae9e37fda522a72e764ff21e",
     "loading.js": "a210e6e383a1b76655e273c4e2b4d8a6be27d16ab34103dd6f284201a0929cef",
-    "rentals.js": "0a0708f3630d65171494d3795f2ee6e0edce17bb9fbecaf03dee3c8cfbcca296",
-    "seleraku-pages.js": "837691759fcedfa19ae4ed25be3b33cb0c20bebda0d3dd8ba5e83d800e40f1f5",
+    "rentals.js": "a93e4a05cca3b646cc20834ffac7c014bbed949fd3bcb4ae264c0d5269fdc669",
+    "seleraku-pages.js": "866f9409a66b073b066bc74893fa999dec3041d79a15743c4c31250a807fe508",
     "reference.js": "259a95fcf33d60b04783cb27dc813f71acddcc2b4161c6e082dd47ae89fd1f59",
     "hero-carousel.js": "be8faa21bc604bf9929e69673325158a28ed2724daf1b716a5e08ff7a0b4ff8b",
-    "booking-ui.js": "a360e1bc4f83f3d43ab0c131da2ca3ebb279959fc999b1443679d44ec1ed1b0d",
+    "booking-ui.js": "b016c1c007480a7ecc4fc3a6437f7058e690b104c46ceb3121f53d9b91ebdbba",
     "rental-alert.js": "51d4f749f35f175fb740f7b42aee97e7ae4d22acaf6cf96a3fcdf8b0a6a6da2f",
     "demo-checkout.js": "d1242d2a489c682638ac822a0c17eedf843e7f028949608dec8717c22866584b",
     "site.css": "82010db371dcbae2bd92bb55d5f2899115761f8f4cef6783a5640b52bf2c1a04",
@@ -77,7 +78,8 @@ return json_decode(<<<'JSON'
     "pwa.css": "70693e1ee2d7b5eb5db80d7f44d773cefa6dffc0f7a1dfbb3e26326ae960efa1",
     "rentals.css": "3ff5c433d0d63a73eea4efcfea940b5fa61024114d15b08a9766289915bf3e90",
     "seleraku-pages.css": "b29491ff4570452c3eac22dabc149d4af583c29cb64792a50e766160329f192c",
-    "reference.css": "f047ab694d434c4ef3aefe0a009b5bc2e11c6d3948b4b72355e06188b0bdade7"
+    "reference.css": "f047ab694d434c4ef3aefe0a009b5bc2e11c6d3948b4b72355e06188b0bdade7",
+    "console-pattern.css": "8bd4acb70fe6f8387311ea8b9ad2e94de073efbce558259db8bc2ee72129b6cc"
   },
   "login": {
     "desktop": "optimized/login-desktop-1280.5aab67921e.webp",

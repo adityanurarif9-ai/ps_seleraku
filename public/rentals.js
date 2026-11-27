@@ -12,7 +12,7 @@ var psTr = window.psT || (value => value);
             controller?.abort(); controller = new AbortController();
             button.disabled = true;
             const params = new URLSearchParams();
-            ['catalog_item_id','mode','duration','starts_at'].forEach(name => params.set(name, form.elements[name].value));
+            ['catalog_item_id','mode','duration','starts_at','unit_number'].forEach(name => params.set(name, form.elements[name].value));
             if (!params.get('catalog_item_id') || !params.get('starts_at')) { message.textContent = psTr('Pilih konsol dan jadwal terlebih dahulu.'); return; }
             message.textContent = psTr('Memeriksa jadwal…');
             try {
@@ -31,7 +31,7 @@ var psTr = window.psT || (value => value);
             duration.replaceChildren(...values.map(value => { const o = document.createElement('option'); o.value = value; o.textContent = value + (mode.value === 'daily' ? (window.psLocale === 'en' ? ' days' : ' hari') : (window.psLocale === 'en' ? ' minutes' : ' menit')); return o; }));
             duration.value = mode.value === 'daily' ? '1' : '60'; check();
         });
-        ['catalog_item_id','duration','starts_at'].forEach(name => form.elements[name].addEventListener('change', check));
+        ['catalog_item_id','duration','starts_at','unit_number'].forEach(name => form.elements[name].addEventListener('change', check));
         form.addEventListener('submit', () => { button.disabled = true; button.textContent = psTr('Mengirim reservasi…'); });
         check();
     }

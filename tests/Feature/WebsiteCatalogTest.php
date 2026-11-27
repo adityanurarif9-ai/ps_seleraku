@@ -62,7 +62,7 @@ class WebsiteCatalogTest extends TestCase
         $admin = User::factory()->create(['is_admin' => true]);
         PlaySession::create(['catalog_item_id' => $item->id, 'created_by' => $admin->id, 'customer_name' => 'Aktif', 'status' => 'running', 'total_seconds' => 3600, 'remaining_seconds' => 3600, 'hourly_rate' => 17000, 'ends_at' => now()->addHour()]);
         $this->actingAs(User::factory()->create());
-        $this->get('/page-ke2')->assertOk()->assertSee('1 dari 2 unit tersedia')->assertDontSee('Estimasi selesai pk 16:30');
+        $this->get('/page-ke2')->assertOk()->assertSee('Unit 01')->assertSee('Unit 02')->assertSee('periksa jadwal lain')->assertDontSee('Estimasi selesai pk 16:30');
         $this->assertSame(1, app(RentalAvailability::class)->available($item, now(), now()->addHour()));
     }
 }

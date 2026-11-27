@@ -18,17 +18,19 @@ class PlaySessionManager
     public function start(array $data, ?RentalReservation $reservation = null): PlaySession
     {
         $this->authorize();
-        $data = validator($data, ['catalog_item_id' => 'required|integer', 'customer_name' => 'required|string|max:100', 'minutes' => 'required|integer|min:1|max:'.($reservation ? 10080 : 1440)])->validate();
+        $data = validator($data, ['catalog_item_id' => 'required|integer', 'unit_number' => 'nullable|integer|min:1', 'customer_name' => 'required|string|max:100', 'minutes' => 'required|integer|min:1|max:'.($reservation ? 10080 : 1440)])->validate();
 
         return DB::transaction(function () use ($data, $reservation) {
             $item = CatalogItem::lockForUpdate()->findOrFail($data['catalog_item_id']);
             if ($item->category !== 'Konsol') {
                 throw ValidationException::withMessages(['catalog_item_id' => 'Pilih item kategori Konsol.']);
             }
-            app(RentalAvailability::class)->ensure($item, now(), now()->addMinutes((int) $data['minutes']), $reservation?->id);
+            $unitNumber = $reservation?->unit_number ?? ($data['unit_number'] ?? null);
+            $unitNumber ??= app(RentalAvailability::class)->chooseUnit($item, now(), now()->addMinutes((int) $data['minutes']), $reservation?->id);
+            app(RentalAvailability::class)->ensure($item, now(), now()->addMinutes((int) $data['minutes']), $reservation?->id, null, (int) $unitNumber);
             $seconds = $data['minutes'] * 60;
 
-            return PlaySession::create(['catalog_item_id' => $item->id, 'created_by' => auth()->id(), 'customer_name' => trim($data['customer_name']), 'total_seconds' => $seconds, 'remaining_seconds' => $seconds, 'hourly_rate' => $item->price, 'status' => 'running', 'ends_at' => now()->addSeconds($seconds)]);
+            return PlaySession::create(['unit_number' => (int) $unitNumber, 'catalog_item_id' => $item->id, 'created_by' => auth()->id(), 'customer_name' => trim($data['customer_name']), 'total_seconds' => $seconds, 'remaining_seconds' => $seconds, 'hourly_rate' => $item->price, 'status' => 'running', 'ends_at' => now()->addSeconds($seconds)]);
         });
     }
 
@@ -55,14 +57,14 @@ class PlaySessionManager
                 $s->status = 'paused';
                 $s->ends_at = null;
             } elseif ($action === 'resume' && $s->status === 'paused') {
-                app(RentalAvailability::class)->ensure($item, now(), now()->addSeconds($remaining), null, $s->id);
+                app(RentalAvailability::class)->ensure($item, now(), now()->addSeconds($remaining), null, $s->id, $s->unit_number);
                 $s->status = 'running';
                 $s->ends_at = now()->addSeconds($remaining);
             } elseif ($action === 'extend') {
                 if ($minutes < 1 || $minutes > 1440 || $s->total_seconds + $minutes * 60 > 604800) {
                     throw ValidationException::withMessages(['minutes' => 'Tambahan waktu 1?1440 menit, total maksimal 7 hari.']);
                 }
-                app(RentalAvailability::class)->ensure($item, now(), now()->addSeconds($remaining + $minutes * 60), null, $s->id);
+                app(RentalAvailability::class)->ensure($item, now(), now()->addSeconds($remaining + $minutes * 60), null, $s->id, $s->unit_number);
                 $s->total_seconds += $minutes * 60;
                 $s->remaining_seconds = $remaining + $minutes * 60;
                 if ($s->status === 'running') {

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Validation\ValidationException;
 
 class CatalogItem extends Model
 {
@@ -32,6 +33,20 @@ class CatalogItem extends Model
         return $this->image_path ?: match ($this->platformKey()) {
             'ps5' => 'images/ps5-ultra.png','ps4' => 'images/ps4-pro.png','ps3' => 'images/ps3-unit.png','nintendo' => 'images/nintendo-unit.png',default => $this->category === 'Minuman' ? 'images/fnb-esteh.jpg' : 'images/fnb-kentang.jpg'
         };
+    }
+
+    protected static function booted(): void
+    {
+        static::updating(function (self $item) {
+            if ($item->category !== 'Konsol' || ! $item->isDirty('stock') || $item->stock >= $item->getOriginal('stock')) {
+                return;
+            }
+            $reserved = RentalReservation::where('catalog_item_id', $item->id)->where('unit_number', '>', $item->stock)->whereIn('status', ['confirmed', 'playing'])->exists();
+            $playing = PlaySession::where('catalog_item_id', $item->id)->where('unit_number', '>', $item->stock)->whereIn('status', ['running', 'paused'])->exists();
+            if ($reserved || $playing) {
+                throw ValidationException::withMessages(['stock' => 'Unit bernomor terakhir masih memiliki reservasi atau sesi. Selesaikan dahulu sebelum mengurangi jumlah perangkat.']);
+            }
+        });
     }
 
     protected function casts(): array

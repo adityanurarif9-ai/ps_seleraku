@@ -2,10 +2,10 @@
     $featured = collect($classicUnits)->firstWhere('platformKey', 'ps3') ?? collect(array_merge($classicUnits, $proUnits))->first();
     $daily = collect($dailyUnits)->firstWhere('platformKey', 'ps5') ?? collect($dailyUnits)->first();
     $heroCutouts = ['images/ps3-unit.png'=>'images/hero-ps3-cutout.png', 'images/ps5-ultra.png'=>'images/hero-ps5-cutout.png'];
-    $featuredImage = $heroCutouts[$featured['image'] ?? 'images/ps3-unit.png'] ?? $featured['image'];
-    $dailyImage = $heroCutouts[$daily['image'] ?? 'images/ps5-ultra.png'] ?? $daily['image'];
-    $promoUrl = $featured ? route('reservations.create', ['catalog_item_id'=>(int)str_replace('catalog-','',$featured['id'])]) : route('page-ke2');
-    $dailyUrl = $daily ? route('reservations.create', ['catalog_item_id'=>(int)str_replace('catalog-','',$daily['itemId']), 'mode'=>'daily']) : route('sewa-harian');
+    $featuredImage = $heroCutouts[$featured['image'] ?? 'images/ps3-unit.png'] ?? ($featured['image'] ?? 'images/hero-ps3-cutout.png');
+    $dailyImage = $heroCutouts[$daily['image'] ?? 'images/ps5-ultra.png'] ?? ($daily['image'] ?? 'images/hero-ps5-cutout.png');
+    $promoUrl = $featured ? route('reservations.create', ['catalog_item_id'=>(int)str_replace('catalog-','',$featured['id']),'unit_number'=>$featured['unitNumber']]) : route('page-ke2');
+    $dailyUrl = $daily ? route('reservations.create', ['catalog_item_id'=>(int)str_replace('catalog-','',$daily['itemId']), 'mode'=>'daily','unit_number'=>$daily['unitNumber']]) : route('sewa-harian');
 @endphp
 <section class="ps-hero-carousel" data-hero-carousel data-interval="5000" role="region" aria-roledescription="carousel" aria-label="{{ __('Sorotan PS Seleraku') }}" data-slide-status="{{ __('Slide :current dari :total') }}">
 <div class="hero-carousel-track" data-hero-track aria-live="off">

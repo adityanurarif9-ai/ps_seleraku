@@ -193,7 +193,7 @@
                                     <span>{{ $unit['ctaText'] }}</span>
                                 </button>
                             </div>
-                            @include('partials.cart-add', ['cartItemId'=>(int) str_replace('catalog-','',$unit['itemId']), 'cartMode'=>'daily', 'cartDisabled'=>$unit['stock']<1])
+                            @include('partials.cart-add', ['cartItemId'=>(int) str_replace('catalog-','',$unit['itemId']), 'cartMode'=>'daily', 'cartDisabled'=>$unit['stock']<1, 'cartUnitNumber'=>$unit['unitNumber']])
                         </article>
                     @endforeach
 
