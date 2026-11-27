@@ -6,14 +6,7 @@
 
         <div class="ps-nav-right">
             <nav class="ps-nav-links" aria-label="{{ __('Navigasi Utama') }}">
-                <a class="ps-nav-link {{ $activePage === 'rentals' ? 'is-active' : '' }}" href="{{ route('reservations.index') }}">{{ __('RENTAL SAYA') }}</a>
-                <a class="ps-nav-link {{ $activePage === 'home-page' ? 'is-active' : '' }}" href="{{ route('home-page') }}">{{ __('BERANDA') }}</a>
-                <a class="ps-nav-link {{ $activePage === 'tentang' ? 'is-active' : '' }}" href="{{ route('tentang') }}">{{ __('TENTANG') }}</a>
-                <a class="ps-nav-link {{ $activePage === 'sewa-harian' ? 'is-active' : '' }}" href="{{ route('sewa-harian') }}">{{ __('SEWA HARIAN') }}</a>
-                <a class="ps-nav-link {{ $activePage === 'page-ke2' ? 'is-active' : '' }}" href="{{ route('page-ke2') }}">{{ __('KONSOL & GAME') }}</a>
-                <a class="ps-nav-link {{ $activePage === 'menu-fnb' ? 'is-active' : '' }}" href="{{ route('menu-fnb') }}">{{ __('MAKANAN & MINUMAN') }}</a>
-<a class="ps-nav-link {{ $activePage === 'cara-sewa' ? 'is-active' : '' }}" href="{{ route('cara-sewa') }}">{{ __('CARA SEWA') }}</a>
-                <a class="ps-nav-link {{ $activePage === 'kontak' ? 'is-active' : '' }}" href="{{ route('kontak') }}">{{ __('KONTAK') }}</a>
+                @include('partials.navigation-links')
             </nav>
 
             <a class="ps-nav-cta" href="{{ route('reservations.create') }}">{{ __('PESAN SEKARANG') }}</a>
@@ -67,13 +60,6 @@
     </div>
 
     <div id="ps-mobile-drawer" class="ps-mobile-drawer">
-        <a class="ps-nav-link" href="{{ route('reservations.index') }}">{{ __('RENTAL SAYA') }}</a>
-        <a class="ps-nav-link {{ $activePage === 'home-page' ? 'is-active' : '' }}" href="{{ route('home-page') }}">{{ __('BERANDA') }}</a>
-        <a class="ps-nav-link {{ $activePage === 'tentang' ? 'is-active' : '' }}" href="{{ route('tentang') }}">{{ __('TENTANG') }}</a>
-        <a class="ps-nav-link" href="{{ route('sewa-harian') }}">{{ __('SEWA HARIAN') }}</a>
-        <a class="ps-nav-link {{ $activePage === 'page-ke2' ? 'is-active' : '' }}" href="{{ route('page-ke2') }}">{{ __('KONSOL & GAME') }}</a>
-        <a class="ps-nav-link {{ $activePage === 'menu-fnb' ? 'is-active' : '' }}" href="{{ route('menu-fnb') }}">{{ __('MAKANAN & MINUMAN') }}</a>
-<a class="ps-nav-link {{ $activePage === 'cara-sewa' ? 'is-active' : '' }}" href="{{ route('cara-sewa') }}">{{ __('CARA SEWA') }}</a>
-        <a class="ps-nav-link {{ $activePage === 'kontak' ? 'is-active' : '' }}" href="{{ route('kontak') }}">{{ __('KONTAK') }}</a>
+        @include('partials.navigation-links')
     </div>
 </header>

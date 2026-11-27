@@ -421,7 +421,7 @@
   "Tambahan waktu diproses setelah admin mengecek jadwal unit dan menyetujuinya.": "Extensions are processed after our team checks availability and approves your request.",
   "Alamat belum ditambahkan pengelola.": "The team has not added an address yet.",
   "Jam operasional belum ditambahkan pengelola.": "The team has not added opening hours yet.",
-  "SEWA": "RENT",
+  "SEWA": "RENTALS",
   "Keranjang": "Cart",
   "PILIHANMU": "YOUR PICKS",
   "Pilih jadwal untuk reservasi konsol. Konfirmasi pesanan menu melalui pengelola.": "Choose a time to book your console. Confirm food and drink orders with the team.",
@@ -498,5 +498,8 @@
   "Pesanan makanan dikirim setelah menekan tombol di atas. Bayar langsung ke pengelola; reservasi konsol diproses terpisah.": "Submit food orders with the button above and pay the staff directly. Console reservations are processed separately.",
   "Durasi pesananmu. Hitung mundur dimulai setelah reservasi dikonfirmasi dan admin memulai sesi.": "Your booked duration. The countdown starts after confirmation when the admin starts your session.",
   "Waktu main siap. Hitung mundur dimulai saat admin menekan Mulai sesi atau Mulai sekarang.": "Your play time is ready. The countdown starts when the admin selects Start session or Start now.",
-  "Reservasi tidak aktif. Timer tidak berjalan.": "This reservation is inactive. The timer is not running."
+  "Reservasi tidak aktif. Timer tidak berjalan.": "This reservation is inactive. The timer is not running.",
+  "KEDAI": "FOOD & DRINKS",
+  "INFORMASI": "INFORMATION",
+  "Makanan & Minuman": "Food & Drinks"
 }

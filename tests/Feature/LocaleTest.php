@@ -44,7 +44,7 @@ class LocaleTest extends TestCase
     {
         SiteContent::create(['id'=>1,'data'=>['hero_title'=>'Judul asli', 'hero_title_en'=>'Our gaming lounge']]);
         $this->actingAs(User::factory()->create())->withSession(['locale'=>'en']);
-        $this->get('/home-page')->assertOk()->assertSee('Our gaming lounge')->assertSee('MY RENTALS');
+        $this->get('/home-page')->assertOk()->assertSee('Our gaming lounge')->assertSee('My Rentals');
         $this->postJson('/selo/chat',['message'=>'How do I book?'])->assertOk()->assertJsonPath('links.0.label','Book a session')->assertJsonPath('reply',fn ($reply)=>str_contains($reply,'Track confirmation in My Rentals'));
         $this->assertSame('Judul asli',SiteContent::values()['hero_title']);
         $this->withSession(['locale'=>'id'])->get('/home-page')->assertSee('Judul asli');
