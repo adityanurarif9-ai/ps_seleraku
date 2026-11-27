@@ -3,6 +3,7 @@
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\FoodOrderController;
 use App\Http\Controllers\GoogleLoginController;
+use App\Http\Controllers\ReceiptController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\RentalReservationController;
 use App\Http\Controllers\SeloController;
@@ -44,6 +45,8 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+    Route::get('/reservasi/{reservation}/struk.pdf', [ReceiptController::class, 'rental'])->middleware('throttle:20,1,receipt-')->name('receipts.rental');
+    Route::get('/pesanan-makanan/{order}/struk.pdf', [ReceiptController::class, 'food'])->middleware('throttle:20,1,receipt-')->name('receipts.food');
     Route::get('/pembayaran/{payment}', [TestPaymentController::class, 'show'])->name('payments.show');
     Route::post('/pembayaran/reservasi/{reservation}', [TestPaymentController::class, 'reservation'])->name('payments.reservation');
     Route::post('/pembayaran/kedai/{order}', [TestPaymentController::class, 'food'])->name('payments.food');

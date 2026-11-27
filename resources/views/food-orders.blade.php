@@ -9,7 +9,7 @@
 @forelse($orders as $order)
 <article class="cart-line"><div class="cart-line-body"><span class="cart-type">{{ $order->reference() }} · {{ $order->created_at->timezone('Asia/Jakarta')->format('d M Y, H:i') }} WIB</span><h2>{{ $order->statusLabel() }}</h2>
 @foreach($order->items as $line)<p>{{ $line->quantity }} × {{ $line->name }} <strong>Rp{{ number_format($line->unit_price*$line->quantity,0,',','.') }}</strong></p>@endforeach
-<p class="cart-price">{{ __('Total') }}: Rp{{ number_format($order->total_price,0,',','.') }}</p>
+<a class="web-text-link receipt-download" href="{{ route('receipts.food',$order) }}" data-no-loading download>{{ __('Unduh struk PDF') }} ↓</a><p class="cart-price">{{ __('Total') }}: Rp{{ number_format($order->total_price,0,',','.') }}</p>
 @if($order->notes)<p>{{ __('Catatan') }}: {{ $order->notes }}</p>@endif
 <p class="cart-footnote">{{ __('Pembayaran digital tersedia dalam mode uji. Hasil simulasi bukan bukti lunas.') }}</p>
 @if(in_array($order->status,['pending','preparing','ready']))<form method="post" action="{{ route('payments.food',$order) }}">@csrf<button class="cart-reserve" type="submit">{{ __('Pembayaran digital (uji)') }}</button></form>@endif

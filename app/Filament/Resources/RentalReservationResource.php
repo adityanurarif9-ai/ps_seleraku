@@ -42,6 +42,7 @@ class RentalReservationResource extends Resource
             }),
         ])->filters([SelectFilter::make('status')->label('Status')->options(RentalReservation::LABELS)])
             ->recordActions([
+                Action::make('receipt')->label('Struk PDF')->url(fn (RentalReservation $record) => route('receipts.rental', $record)),
                 Action::make('detail')->label('Detail')->url(fn (RentalReservation $record) => route('reservations.show', $record)),
                 Action::make('confirm')->label('Konfirmasi')->color('success')->requiresConfirmation()->visible(fn (RentalReservation $record) => $record->status === 'pending')->action(fn (RentalReservation $record) => self::perform($record, 'confirm')),
                 Action::make('start')->label('Mulai sesi')->modalDescription(fn (RentalReservation $record) => 'Jadwal: '.$record->starts_at->timezone('Asia/Jakarta')->format('d M Y H:i').' WIB. Paling awal 15 menit sebelum jadwal.')->visible(fn (RentalReservation $record) => $record->status === 'confirmed')->requiresConfirmation()->action(fn (RentalReservation $record) => self::perform($record, 'start')),

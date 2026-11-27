@@ -27,6 +27,7 @@
 <div>
 <h3>{{ __('Kunjungi kami') }}</h3>
 <p class="web-prose">{{ $site['address'] ?: __('Alamat akan diinformasikan pengelola.') }}</p>
+<div class="web-footer-map"><iframe title="{{ __('Peta patokan SMK Telkom Purwokerto') }}" src="https://maps.google.com/maps?q=SMK%20Telkom%20Purwokerto&amp;z=15&amp;output=embed" width="320" height="160" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe><a href="https://www.google.com/maps/search/?api=1&amp;query=SMK%20Telkom%20Purwokerto" target="_blank" rel="noopener noreferrer">{{ __('Buka Google Maps') }} ↗</a><small>{{ __('Patokan area: SMK Telkom Purwokerto. Bukan alamat toko.') }}</small></div>
 @if($site['address'])<a class="web-map-link" href="https://www.google.com/maps/search/?api=1&amp;query={{ rawurlencode($site['address']) }}" target="_blank" rel="noopener">{{ __('Lihat lokasi di peta') }}</a>@endif@if($site['whatsapp'])<a href="{{ \App\Models\SiteContent::whatsappUrl($site['whatsapp']) }}" target="_blank" rel="noopener">WhatsApp ↗</a>@endif @if($site['contact_email'])<a href="mailto:{{ $site['contact_email'] }}">{{ $site['contact_email'] }}</a>@endif</div>
 </div>
 <div class="web-footer-bottom">

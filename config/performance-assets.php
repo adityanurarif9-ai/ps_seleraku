@@ -57,7 +57,7 @@ return json_decode(<<<'JSON'
     "pwa.css": "optimized/pwa.289d921e7e.css",
     "rentals.css": "optimized/rentals.6875374d76.css",
     "seleraku-pages.css": "optimized/seleraku-pages.ed899a6f20.css",
-    "reference.css": "optimized/reference.70f07fb09b.css",
+    "reference.css": "optimized/reference.c92ab8d8d3.css",
     "console-pattern.css": "optimized/console-pattern.3f10ba99af.css"
   },
   "source_hashes": {
@@ -78,7 +78,7 @@ return json_decode(<<<'JSON'
     "pwa.css": "70693e1ee2d7b5eb5db80d7f44d773cefa6dffc0f7a1dfbb3e26326ae960efa1",
     "rentals.css": "3ff5c433d0d63a73eea4efcfea940b5fa61024114d15b08a9766289915bf3e90",
     "seleraku-pages.css": "b29491ff4570452c3eac22dabc149d4af583c29cb64792a50e766160329f192c",
-    "reference.css": "f047ab694d434c4ef3aefe0a009b5bc2e11c6d3948b4b72355e06188b0bdade7",
+    "reference.css": "e7909cb56621ff3fefb47cc1818921f97821a480731b7675d6c6cd4ba42e2ee0",
     "console-pattern.css": "8bd4acb70fe6f8387311ea8b9ad2e94de073efbce558259db8bc2ee72129b6cc"
   },
   "login": {
