@@ -1,6 +1,9 @@
 @php
     $featured = collect($classicUnits)->firstWhere('platformKey', 'ps3') ?? collect(array_merge($classicUnits, $proUnits))->first();
     $daily = collect($dailyUnits)->firstWhere('platformKey', 'ps5') ?? collect($dailyUnits)->first();
+    $heroCutouts = ['images/ps3-unit.png'=>'images/hero-ps3-cutout.png', 'images/ps5-ultra.png'=>'images/hero-ps5-cutout.png'];
+    $featuredImage = $heroCutouts[$featured['image'] ?? 'images/ps3-unit.png'] ?? $featured['image'];
+    $dailyImage = $heroCutouts[$daily['image'] ?? 'images/ps5-ultra.png'] ?? $daily['image'];
     $promoUrl = $featured ? route('reservations.create', ['catalog_item_id'=>(int)str_replace('catalog-','',$featured['id'])]) : route('page-ke2');
     $dailyUrl = $daily ? route('reservations.create', ['catalog_item_id'=>(int)str_replace('catalog-','',$daily['itemId']), 'mode'=>'daily']) : route('sewa-harian');
 @endphp
@@ -24,7 +27,7 @@
                 @if($featured)<div class="hero-carousel-price"><strong>{{ $featured['rateText'] }}</strong><span>{{ __('/ jam') }}</span></div>@endif
                 <div class="hero-carousel-actions"><a class="hero-carousel-button" href="{{ $promoUrl }}">{{ __('Pilih jadwal main') }}</a><a class="hero-carousel-link" href="{{ route('page-ke2') }}">{{ __('Lihat pilihan game') }}</a></div>
             </div>
-            <div class="hero-promo-art"><span class="hero-art-orbit" aria-hidden="true"></span><span class="hero-hardware-type" aria-hidden="true">{{ strtoupper($featured['platformKey'] ?? 'PLAY') }}</span><div class="hero-product-frame"><img src="{{ \App\Support\SiteAsset::url($featured['image'] ?? 'images/ps3-unit.png') }}" alt="{{ $featured['name'] ?? 'PlayStation' }}" width="620" height="420" decoding="async" loading="lazy"></div><span class="hero-art-caption">{{ __('Pilih game. Ajak teman. Mulai main.') }}</span></div>
+            <div class="hero-promo-art"><span class="hero-art-orbit" aria-hidden="true"></span><span class="hero-hardware-type" aria-hidden="true">{{ strtoupper($featured['platformKey'] ?? 'PLAY') }}</span><div class="hero-product-frame"><img src="{{ \App\Support\SiteAsset::url($featuredImage) }}" alt="{{ $featured['name'] ?? 'PlayStation' }}" width="620" height="420" decoding="async" loading="lazy"></div><span class="hero-art-caption">{{ __('Pilih game. Ajak teman. Mulai main.') }}</span></div>
         </div>
     </article>
     <article class="hero-carousel-slide hero-slide-daily" data-hero-slide aria-hidden="true" inert aria-label="{{ __('Sewa harian di rumah') }}">
@@ -35,7 +38,7 @@
                 @if($daily)<div class="hero-carousel-price"><strong>{{ $daily['rateText'] }}</strong><span>{{ __('/ 24 jam') }}</span></div>@endif
                 <div class="hero-carousel-actions"><a class="hero-carousel-button" href="{{ $dailyUrl }}">{{ __('Cek sewa harian') }}</a><a class="hero-carousel-link" href="{{ route('cara-sewa') }}">{{ __('Cara sewa') }}</a></div>
             </div>
-            <div class="hero-daily-art"><span class="hero-daily-number" aria-hidden="true">24</span><div class="hero-daily-photo"><img src="{{ \App\Support\SiteAsset::url($daily['image'] ?? 'hero.png') }}" alt="{{ $daily['name'] ?? __('Sewa Harian') }}" width="620" height="420" loading="lazy" decoding="async"></div><div class="hero-daily-stamp"><strong>24</strong><span>{{ __('JAM MAIN') }}</span></div><div class="hero-takehome-steps"><span><b>01</b>{{ __('Pilih tanggal') }}</span><span><b>02</b>{{ __('Ambil konsol') }}</span><span><b>03</b>{{ __('Main di rumah') }}</span></div></div>
+            <div class="hero-daily-art"><span class="hero-daily-number" aria-hidden="true">24</span><div class="hero-daily-photo"><img src="{{ \App\Support\SiteAsset::url($dailyImage) }}" alt="{{ $daily['name'] ?? __('Sewa Harian') }}" width="620" height="420" loading="lazy" decoding="async"></div><div class="hero-daily-stamp"><strong>24</strong><span>{{ __('JAM MAIN') }}</span></div><div class="hero-takehome-steps"><span><b>01</b>{{ __('Pilih tanggal') }}</span><span><b>02</b>{{ __('Ambil konsol') }}</span><span><b>03</b>{{ __('Main di rumah') }}</span></div></div>
         </div>
     </article>
 </div>
