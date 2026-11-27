@@ -24,6 +24,10 @@ class FoodOrderController extends Controller
         }
         session()->put('shopping_cart', $cart);
 
+        if (config('payments.demo_enabled')) {
+            return app(TestPaymentController::class)->food($order);
+        }
+
         return redirect()->route('food-orders.index', status: 303)->with('order_notice', __('Pesanan terkirim. Tunggu konfirmasi pengelola.'));
     }
 

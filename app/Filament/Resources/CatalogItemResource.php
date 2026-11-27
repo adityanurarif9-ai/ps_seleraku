@@ -34,7 +34,7 @@ class CatalogItemResource extends Resource
                 ->required()
                 ->maxLength(100)
                 ->unique(ignoreRecord: true, modifyRuleUsing: fn (Unique $rule, Get $get) => $rule->where('category', $get('category'))),
-            Select::make('category')->label('Kategori')->options(CatalogItem::CATEGORIES)->required()->live(),
+            Select::make('category')->label('Kategori')->options(CatalogItem::CATEGORIES)->default('Makanan')->required()->live(),
             TextInput::make('price')->label(fn (Get $get) => $get('category') === 'Konsol' ? 'Tarif per jam' : 'Harga per item')->integer()->minValue(0)->maxValue(100000000)->prefix('Rp')->required(),
             TextInput::make('daily_price')->label('Tarif harian / 24 jam')->integer()->minValue(0)->maxValue(100000000)->prefix('Rp')->helperText('Kosongkan jika konsol tidak tersedia untuk sewa harian.')->visible(fn (Get $get) => $get('category') === 'Konsol'),
             TextInput::make('stock')->label('Stok / total unit')->integer()->minValue(0)->maxValue(100000)->required()->helperText('Untuk konsol: jumlah perangkat bernomor 01, 02, dan seterusnya. Jangan turunkan jumlah jika unit terakhir masih digunakan.'),
@@ -58,7 +58,7 @@ class CatalogItemResource extends Resource
                 TextColumn::make('is_visible')->label('Website')->formatStateUsing(fn ($state) => $state ? 'Tampil' : 'Disembunyikan')->badge(),
             ])
             ->filters([SelectFilter::make('category')->label('Kategori')->options(CatalogItem::CATEGORIES)])
-            ->headerActions([CreateAction::make()->label('Tambah item')])
+            ->headerActions([CreateAction::make()->label('Tambah makanan / minuman'), CreateAction::make('addConsole')->label('Tambah konsol')->fillForm(['category' => 'Konsol', 'stock' => 1, 'is_visible' => true])])
             ->recordActions([EditAction::make()->label('Edit'), DeleteAction::make()->label('Hapus')]);
     }
 

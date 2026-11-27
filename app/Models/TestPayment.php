@@ -4,6 +4,7 @@ namespace App\Models;
 
 use chillerlan\QRCode\QRCode;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\URL;
 
 class TestPayment extends Model
 {
@@ -31,10 +32,15 @@ class TestPayment extends Model
         return 'UJI-'.str_pad((string) $this->id, 6, '0', STR_PAD_LEFT);
     }
 
-    public function demoQr(): string
+    public function demoScanUrl(): string
     {
-        // Plain text only: deliberately not a QRIS/EMV merchant payment payload.
-        return (new QRCode)->render('PS SELERAKU DEMO | '.$this->reference().' | NO PAYMENT - JANGAN TRANSFER');
+        return URL::temporarySignedRoute('payments.scan', now()->addMinutes(30), ['payment' => $this->id]);
+    }
+
+    public function demoQr(?string $scanUrl = null): string
+    {
+        // Opens a short-lived demo page; never an EMV/QRIS payment payload.
+        return (new QRCode)->render($scanUrl ?? $this->demoScanUrl());
     }
 
     public function statusLabel(): string

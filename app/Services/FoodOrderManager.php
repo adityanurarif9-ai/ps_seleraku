@@ -65,6 +65,9 @@ class FoodOrderManager
             $ids = $order->items()->pluck('catalog_item_id');
             CatalogItem::whereIn('id', $ids)->orderBy('id')->lockForUpdate()->get();
             $o = FoodOrder::lockForUpdate()->findOrFail($order->id);
+            if (in_array($status, ['preparing', 'ready', 'completed']) && ! $o->paymentReady()) {
+                throw ValidationException::withMessages(['payment' => 'Selesaikan pembayaran demo sebelum pesanan diproses.']);
+            }
             if ($o->status === $status) {
                 return;
             }

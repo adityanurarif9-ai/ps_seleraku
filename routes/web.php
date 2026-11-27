@@ -44,7 +44,10 @@ Route::middleware('guest')->group(function () {
     Route::post('/login', [SessionController::class, 'store'])->middleware('throttle:10,1,login-');
 });
 
+Route::get('/demo-bayar/{payment}', [TestPaymentController::class, 'scan'])->middleware(['signed', 'throttle:60,1,scan-demo-'])->name('payments.scan');
+Route::post('/demo-bayar/{payment}', [TestPaymentController::class, 'scanPay'])->middleware(['signed', 'throttle:20,1,scan-demo-pay-'])->name('payments.scan-pay');
 Route::middleware('auth')->group(function () {
+    Route::get('/pembayaran/{payment}/status', [TestPaymentController::class, 'status'])->middleware('throttle:120,1,payment-status-')->name('payments.status');
     Route::get('/reservasi/{reservation}/struk.pdf', [ReceiptController::class, 'rental'])->middleware('throttle:20,1,receipt-')->name('receipts.rental');
     Route::get('/pesanan-makanan/{order}/struk.pdf', [ReceiptController::class, 'food'])->middleware('throttle:20,1,receipt-')->name('receipts.food');
     Route::get('/pembayaran/{payment}', [TestPaymentController::class, 'show'])->name('payments.show');

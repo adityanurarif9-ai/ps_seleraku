@@ -35,7 +35,7 @@ class LocaleTest extends TestCase
         $this->getJson('/reservasi/ketersediaan?'.http_build_query($payload))->assertOk()->assertJsonPath('total_price', 15000)->assertJsonPath('available', 2);
         $this->post('/reservasi', $payload)->assertSessionHasNoErrors()->assertRedirect();
         $r = RentalReservation::firstOrFail();
-        $this->get('/reservasi/'.$r->id)->assertOk()->assertSee('Awaiting confirmation')->assertSee('Catatan asli pelanggan')->assertSee('Cancel booking');
+        $this->get('/reservasi/'.$r->id)->assertOk()->assertSee('Awaiting demo payment')->assertSee('Catatan asli pelanggan')->assertSee('Cancel booking');
         $this->assertSame('Konsol', $item->fresh()->category);
         $this->assertSame(15000, $r->total_price);
     }

@@ -37,8 +37,16 @@ class RentalReservation extends Model
         return $this->hasMany(RentalExtensionRequest::class);
     }
 
+    public function paymentReady(): bool
+    {
+        return ! config('payments.demo_enabled') || $this->testPayment?->status === 'simulated_paid';
+    }
+
     public function statusLabel(): string
     {
+        if ($this->status === 'pending' && ! $this->paymentReady()) {
+            return __('Menunggu pembayaran demo');
+        }
         if ($this->status === 'playing' && $this->playSession?->displayStatus() === 'expired') {
             return __('Waktu habis');
         }

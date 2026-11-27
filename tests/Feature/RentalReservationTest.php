@@ -29,6 +29,7 @@ class RentalReservationTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+        config(['payments.demo_enabled' => false]);
         $this->freezeTime();
         $this->player = User::factory()->create(['is_admin' => false]);
         $this->admin = User::factory()->create(['is_admin' => true]);

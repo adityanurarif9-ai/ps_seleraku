@@ -16,6 +16,12 @@ class NumberedUnitsTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        config(['payments.demo_enabled' => false]);
+    }
+
     private function setupItem(): CatalogItem
     {
         $this->travelTo(now()->startOfMinute());
@@ -121,7 +127,7 @@ class NumberedUnitsTest extends TestCase
         $data = $this->data($i, 1);
         unset($data['unit_number']);
         $b = $m->create($data);
-        $m->adminAction($b,'confirm');
-        $this->assertSame(2,$b->fresh()->unit_number);
+        $m->adminAction($b, 'confirm');
+        $this->assertSame(2, $b->fresh()->unit_number);
     }
 }

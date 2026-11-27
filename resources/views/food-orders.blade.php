@@ -5,6 +5,7 @@
 <div class="web-section-top"><div><span class="web-eyebrow">{{ __('KEDAI PS SELERAKU') }}</span><h1>{{ __('Pesanan Makanan') }}</h1><p>{{ __('Pesananmu tersimpan di sini. Muat ulang untuk melihat status terbaru dari pengelola.') }}</p></div><a class="web-button" href="{{ route('menu-fnb') }}">{{ __('Pilih makanan & minuman') }}</a></div>
 @if(session('order_notice'))<p class="cart-notice" role="status">{{ session('order_notice') }}</p>@endif
 @if($errors->any())<p class="cart-error" role="alert">{{ $errors->first() }}</p>@endif
+@if(session('success'))<p class="cart-notice" role="status">{{ session('success') }}</p>@endif
 <div class="cart-lines">
 @forelse($orders as $order)
 <article class="cart-line"><div class="cart-line-body"><span class="cart-type">{{ $order->reference() }} · {{ $order->created_at->timezone('Asia/Jakarta')->format('d M Y, H:i') }} WIB</span><h2>{{ $order->statusLabel() }}</h2>

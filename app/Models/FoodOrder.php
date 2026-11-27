@@ -30,8 +30,17 @@ class FoodOrder extends Model
         return 'KD-'.str_pad((string) $this->id, 6, '0', STR_PAD_LEFT);
     }
 
+    public function paymentReady(): bool
+    {
+        return ! config('payments.demo_enabled') || $this->testPayment?->status === 'simulated_paid';
+    }
+
     public function statusLabel(): string
     {
+        if ($this->status === 'pending' && ! $this->paymentReady()) {
+            return __('Menunggu pembayaran demo');
+        }
+
         return __(self::LABELS[$this->status] ?? $this->status);
     }
 

@@ -19,6 +19,12 @@ class FoodOrderTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        config(['payments.demo_enabled' => false]);
+    }
+
     private function food(int $stock = 3): CatalogItem
     {
         return CatalogItem::create(['name' => 'Nasi Goreng '.Str::random(5), 'category' => 'Makanan', 'price' => 15000, 'stock' => $stock]);
@@ -144,7 +150,7 @@ class FoodOrderTest extends TestCase
         $original = $r->starts_at->toISOString();
         app(PlaySessionManager::class)->start(['catalog_item_id' => $console->id, 'customer_name' => 'Walk-in', 'minutes' => 60]);
         Livewire::test(ManageRentalReservations::class)->callTableAction('startNow', $r)->assertNotified('Reservasi belum dapat diproses');
-        $this->assertSame('confirmed',$r->fresh()->status);
-        $this->assertSame($original,$r->fresh()->starts_at->toISOString());
+        $this->assertSame('confirmed', $r->fresh()->status);
+        $this->assertSame($original, $r->fresh()->starts_at->toISOString());
     }
 }

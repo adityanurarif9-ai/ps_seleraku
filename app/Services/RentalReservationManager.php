@@ -75,6 +75,9 @@ class RentalReservationManager
         return DB::transaction(function () use ($record, $action, $note) {
             $item = CatalogItem::lockForUpdate()->findOrFail($record->catalog_item_id);
             $r = RentalReservation::lockForUpdate()->findOrFail($record->id);
+            if (in_array($action, ['confirm', 'start', 'start_now']) && ! $r->paymentReady()) {
+                throw ValidationException::withMessages(['payment' => 'Selesaikan pembayaran demo sebelum konfirmasi atau mulai sesi.']);
+            }
             if ($action === 'confirm' && $r->status === 'confirmed') {
                 return $r;
             }
