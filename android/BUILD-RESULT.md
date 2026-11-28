@@ -20,7 +20,7 @@ apksigner verify: PASS (v2)
 Sertifikat APK cocok dengan website/assetlinks.json.
 String asset_statements pada APK telah diperiksa sebagai JSON dengan tanda kutip utuh.
 
-Tidak ada HP/emulator online untuk uji runtime. APK belum diklaim teruji pada perangkat fisik.
-Full screen TWA memerlukan assetlinks.json di domain dengan sidik jari sertifikat release yang sama.
+APK berhasil dipasang pada emulator MuMu Android 15 / API 35 (adb install: Success). Pemeriksaan visual emulator melalui alat UI tidak merespons; tampilan saat peluncuran belum dikonfirmasi. Belum diuji di HP fisik.
+Domain assetlinks.json telah aktif (HTTPS 200 application/json). Google Digital Asset Links API mengembalikan linked=true untuk package dan sertifikat release APK ini.
 Mode debug dapat memiliki bilah alamat karena sertifikatnya berbeda.
 Pembayaran tetap simulasi; tidak ada kredensial backend di APK.
