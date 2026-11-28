@@ -686,5 +686,13 @@
   "Pembayaran demo berhasil. Timer dan status pesananmu ada di bawah.": "Demo payment successful. Your timer and booking status are below.",
   "Pembayaran demo selesai. Tunggu admin mengonfirmasi dan memulai sesi. Durasi belum berkurang.": "Demo payment is complete. Wait for the admin to confirm and start your session. Your booked duration has not started counting down.",
   "Bayar demo dahulu. Durasi belum berkurang dan baru dihitung saat admin memulai sesi.": "Complete the demo payment first. Your duration starts counting down only when the admin starts your session.",
-  "Reservasi disetujui. Saat kamu siap bermain, admin akan memulai sesi dan hitung mundur berjalan otomatis.": "Your booking is approved. When you are ready to play, the admin will start the session and the countdown will begin automatically."
+  "Reservasi disetujui. Saat kamu siap bermain, admin akan memulai sesi dan hitung mundur berjalan otomatis.": "Your booking is approved. When you are ready to play, the admin will start the session and the countdown will begin automatically.",
+  "QR demo tidak berlaku": "This demo QR is no longer valid",
+  "Tautan mungkin sudah kedaluwarsa atau tidak tersalin lengkap. Pesananmu tidak berubah dan belum dianggap dibayar.": "The link may have expired or been copied incompletely. Your order is unchanged and has not been marked as paid.",
+  "Minta pemesan membuka halaman pembayaran di perangkat asal.": "Ask the person who booked to open checkout on the original device.",
+  "Muat ulang halaman pembayaran untuk membuat QR baru.": "Reload checkout to generate a new QR.",
+  "Pindai QR baru dengan kamera HP, lalu buka di browser.": "Scan the new QR with your phone camera and open it in a browser.",
+  "Kembali ke Rental Saya": "Back to My Rentals",
+  "QR berlaku 30 menit. Muat ulang halaman ini jika QR kedaluwarsa.": "The QR is valid for 30 minutes. Reload this page if it expires.",
+  "Muat ulang QR": "Refresh QR"
 }
