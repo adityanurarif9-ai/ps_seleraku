@@ -1,0 +1,14 @@
+[
+  {
+    "target": {
+      "package_name": "site.flexboxstudio.psseleraku",
+      "namespace": "android_app",
+      "sha256_cert_fingerprints": [
+        "A8:15:C9:9B:C1:C1:C9:06:E3:8B:DB:61:39:65:02:BF:50:D3:94:E3:F2:65:33:28:27:74:9A:45:60:48:7D:66"
+      ]
+    },
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ]
+  }
+]

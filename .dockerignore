@@ -14,3 +14,5 @@ storage/framework/cache/data/*
 bootstrap/cache/*.php
 public/hot
 public/designs
+
+android
